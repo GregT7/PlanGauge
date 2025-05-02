@@ -65,14 +65,14 @@
 - FR-1.6: The API request indicator shall disappear once the status has transitioned to a conclusive state: failure or success
 - FR-1.8: The application shall display a temporary status indicator if any issues occur when setting up the prediction model
 
-## 8. Stats for Manual Predictions
+## 8. Stats & Manual Predictions
 - FR 1.X: The application shall include a separate stats page for viewing
 - FR 1.a: The stats page shall include a region for statistics grouped by class and assignment type
 - FR 1.A: The grouped assignment region shall include a way to filter data by class
 - FR 1.c: The stats page shall include the previous time sums grouped by week including predicted time vs actual time spent
 - FR 1.d: The stats page shall include a region showing estimated time saved
 
-## 9. Security & Safety
+## 9. Safety & Security
 - FR 4.5: The application shall employ a short cooldown on the submission button immediately after activation to prevent excessive API calls
 - FR 4.5: The application shall use hidden environment files stored locally to access private Notion API keys and MongoDB Atlas keys
 - FR 3.5: The data on the MongoDB atlas database shall be stored in a uniform format to prevent calculation and handling errors
