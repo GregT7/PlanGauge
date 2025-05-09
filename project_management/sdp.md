@@ -20,17 +20,21 @@
 
 ## Milestones & Backlogs
 ### MVS
-| No | Milestone               | Backlog                            | Description                                                                |
-|----|-------------------------|-------------------------------------|----------------------------------------------------------------------------|
-| 1  | Initial Setup           | Setup Environment                   | Initialize project, install dependencies, connect to Notion and MongoDB    |
-| 2  | Planning Core UI        | Data Entry Table                    | Editable Notion-style table for manual input                               |
-|    |                         | Task-Time Estimation                | Auto-fill estimated time based on class/type                               |
-|    |                         | Settings Toggle                     | Toggle between predicted and manual time                                   |
-| 3  | ML Model Integration    | Basic Prediction Model              | Load and use a local model for predictions                                 |
-|    |                         | Submit to Notion                    | Send planned data to Notion                                                |
-|    |                         | Status Indicator & Feedback         | Visual feedback for Notion submission status                               |
-| 4  | Planning Feedback View  | Daily Stat Cards                    | Cards showing status & summaries                                           |
-|    |                         | Overall Plan Status                 | Color-coded summary of plan quality                                        |
+| No | Milestone               | Backlog                          | Description                                                                 |
+|----|-------------------------|-----------------------------------|-----------------------------------------------------------------------------|
+| 1  | Initial Setup           | Project Setup                     | Initialize Git, install dependencies, basic folder structure               |
+|    |                         | Intro to Scrum                    | Learn agile basics and team workflow                                       |
+| 2  | Planning Core UI        | UI/UX Foundation                  | Set up the basic design system, layout, and visual components              |
+|    |                         | Data Entry Table                  | Implement a dynamic Notion-style table for planning                        |
+|    |                         | Settings Toggle                   | Toggle for manual vs. ML-based task durations                              |
+| 3  | ML Model Integration    | Time Estimation Autofill          | Auto-fill time predictions based on task type                              |
+|    |                         | Task Duration Prediction Model    | Set up and connect the ML model                                            |
+| 4  | Core App Infrastructure | Notion API Integration            | Set up communication to send data to Notion                                |
+|    |                         | Backend Integration               | Connect frontend with backend and services                                 |
+|    |                         | Database Setup & Integration      | MongoDB setup for storing data and predictions                             |
+| 5  | Planning Feedback View  | Stat Card System                  | Visual feedback on daily status (cards)                                    |
+|    |                         | Feedback System                   | Overall plan feedback and visual status (color-coded summaries)            |
+
 
 ### Extras
 | No | Milestone                  | Backlog                          | Description                                                                  |
