@@ -37,18 +37,14 @@
 
 
 ### Extras
-| No | Milestone                  | Backlog                          | Description                                                                  |
-|----|----------------------------|-----------------------------------|------------------------------------------------------------------------------|
-| 1  | UX Polish                  | Animated Color Transitions        | Visual polish with smooth animations                                         |
-|    |                            | Hover Effects & Transitions       | Subtle feedback for UI interactions                                          |
-|    |                            | Full Dark Mode Support            | Match system theme and dark UI toggle                                        |
-|    |                            | Responsive Horizontal Layout      | Optimize layout for wide screens                                             |
-| 2  | Advanced Stats & History   | Stats Page with Filters           | Historical overview of past plans                                            |
-|    |                            | Weekly Time Comparisons           | Weekly breakdowns to see consistency or changes                              |
-|    |                            | Tooltip Showing Past Metrics      | Hover info showing avg/previous time per task                                |
-| 3  | Smarter ML Integration     | Auto Model Retraining             | Retrain the prediction model on new data                                     |
-|    |                            | Stat Card Weight Settings         | Let users adjust how different stats affect plan status                      |
-| 4  | Robust Syncing             | Column Restriction Sync           | Enforce data integrity with Notion column constraints                        |
+| No | Milestone              | Backlog                    | Description                                                       |
+|----|------------------------|----------------------------|-------------------------------------------------------------------|
+| 1  | Environment Setup      | Docker Setup & Integration | Containerize the app for easier local development and deployment  |
+| 2  | Convenience & Polish   | Tooltip                    | Add hover-over tips to guide the user                             |
+|    |                        | Convenience Features       | Minor UX improvements (e.g., better defaults, shortcuts)          |
+| 3  | Extended UI Control    | Settings Page              | Page for additional app configurations and preferences            |
+| 4  | Data Insights          | Stats Page                 | Aggregate visualization page for metrics and trends               |
+
 
 
 
