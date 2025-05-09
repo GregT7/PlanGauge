@@ -5,6 +5,8 @@
   * School: ~ 60 mins per week until the final semester is over
   * Post-graduation: to be determined...
 * Project Management
+  * Stand Up
+    * 
   * Meeting Mins
     * School: brief description of what was accomplished for the week - 1 or 2 sentences, (report: yes (limited), presentation: no)
     * Post-graduation: Mimics SWE's meeting minutes structure with presentations as an added task (report: yes, presentation: yes)
@@ -28,6 +30,14 @@
 * Sprint Planning and Execution
   * Duration: To be determined...
   * Contents: Goals, Backlog, Definition of Done (DoD), Review, Retrospective
+
+
+## Scrum Plan & Milestones
+| No | Milestone     | Backlog       | Description           |
+| -- | ------------- | ------------- | --------------------- |
+
+
+
 
 
 ## Timeline
