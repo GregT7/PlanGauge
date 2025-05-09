@@ -1,7 +1,7 @@
 # Minimum Viable Specification (MVS)
 
 ## Goal
-Build a simple, local web app that allows a user to enter weekly tasks, get a predicted time estimate for each task, and receive visual feedback on the realism of their plan.
+- Build a simple, local web app that allows a user to enter weekly tasks, get a predicted time estimate for each task, and receive visual feedback on the realism of their plan.
 ---
 
 ## Core Features
