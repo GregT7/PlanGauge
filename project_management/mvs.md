@@ -1,15 +1,16 @@
 # Minimum Viable Specification (MVS)
 
 #### Goal
-Build a simple, local web app that allows a user to enter weekly tasks, get a predicted time estimate for each task, and receive visual feedback on the realism of their plan.
+- Build a simple, local web app that allows a user to enter weekly tasks, get a predicted time estimate for each task, and receive visual feedback on the realism of their plan.
 ---
 
 ## Core Features
 1. Task Table (Notion-like input)
 * Basic table to add/edit/delete tasks with the following fields:
-  * Class
-  * Assignment Type (homework, quiz, exam, project)
-  * Name
+  * Task Name
+  * Category (Health, Career, School)
+  * Due (date)
+  * Start (date)
   * Estimated Time (auto-filled by model)
 * (From R-6.10 to R-6.12)
 
