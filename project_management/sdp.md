@@ -18,24 +18,33 @@
   * Contents: Goals, Backlog, Definition of Done (DoD), Review, Retrospective
 
 
-## Scrum Plan & Milestones
-| No | Milestone                     | Backlog                       | Description                                                      |
-|----|-------------------------------|-------------------------------|------------------------------------------------------------------|
-| 1  | Project Initialization        | Project Setup                 | Set up the initial project structure and environment             |
-|    |                               | Docker Setup & Integration    | Containerize the application using Docker                        |
-|    |                               | Intro to Scrum                | Introduce Scrum methodology to the team                          |
-| 2  | Foundational UI/UX            | UI/UX Foundation              | Establish core layout, theme, and design components              |
-|    |                               | Stat Card System              | Create reusable components for displaying stats                  |
-| 3  | Core Pages & Navigation       | Stats Page                    | Develop the page for visualizing user statistics                 |
-|    |                               | Settings Page                 | Create a page for configuring preferences and app behavior       |
-| 4  | Backend & Infrastructure      | Database Setup & Integration  | Set up and connect the app to a database                         |
-|    |                               | Backend Integration           | Connect frontend components to backend APIs                      |
-| 5  | External Integrations         | Notion API Integration        | Connect to the Notion API to read/write planning data            |
-| 6  | Intelligent Features          | Task Duration Prediction Model| Build a machine learning model to estimate task durations        |
-| 7  | User Feedback and Refinement  | Feedback System               | Implement a system for collecting and displaying user feedback   |
-| 8  | UI Polish and Extras          | Tooltip                       | Implement contextual tooltips for user guidance                  |
-|    |                               | Convenience Features          | Add minor features to improve usability and user experience      |
+## Milestones & Backlogs
+### MVS
+| No | Milestone               | Backlog                            | Description                                                                |
+|----|-------------------------|-------------------------------------|----------------------------------------------------------------------------|
+| 1  | Initial Setup           | Setup Environment                   | Initialize project, install dependencies, connect to Notion and MongoDB    |
+| 2  | Planning Core UI        | Data Entry Table                    | Editable Notion-style table for manual input                               |
+|    |                         | Task-Time Estimation                | Auto-fill estimated time based on class/type                               |
+|    |                         | Settings Toggle                     | Toggle between predicted and manual time                                   |
+| 3  | ML Model Integration    | Basic Prediction Model              | Load and use a local model for predictions                                 |
+|    |                         | Submit to Notion                    | Send planned data to Notion                                                |
+|    |                         | Status Indicator & Feedback         | Visual feedback for Notion submission status                               |
+| 4  | Planning Feedback View  | Daily Stat Cards                    | Cards showing status & summaries                                           |
+|    |                         | Overall Plan Status                 | Color-coded summary of plan quality                                        |
 
+### Extras
+| No | Milestone                  | Backlog                          | Description                                                                  |
+|----|----------------------------|-----------------------------------|------------------------------------------------------------------------------|
+| 1  | UX Polish                  | Animated Color Transitions        | Visual polish with smooth animations                                         |
+|    |                            | Hover Effects & Transitions       | Subtle feedback for UI interactions                                          |
+|    |                            | Full Dark Mode Support            | Match system theme and dark UI toggle                                        |
+|    |                            | Responsive Horizontal Layout      | Optimize layout for wide screens                                             |
+| 2  | Advanced Stats & History   | Stats Page with Filters           | Historical overview of past plans                                            |
+|    |                            | Weekly Time Comparisons           | Weekly breakdowns to see consistency or changes                              |
+|    |                            | Tooltip Showing Past Metrics      | Hover info showing avg/previous time per task                                |
+| 3  | Smarter ML Integration     | Auto Model Retraining             | Retrain the prediction model on new data                                     |
+|    |                            | Stat Card Weight Settings         | Let users adjust how different stats affect plan status                      |
+| 4  | Robust Syncing             | Column Restriction Sync           | Enforce data integrity with Notion column constraints                        |
 
 
 
