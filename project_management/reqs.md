@@ -4,8 +4,8 @@
 - R-1.10: The application shall incorporate 'stat cards' for each day of the week based on the date tasks are intending to be worked on
 - R-1.11: The application shall include the following metrics on each stat card: category time ranges, duration sum, status
 - R-1.12: The time ranges of the stat cards shall be based on either predictions from a trained prediction model or manual input
-- R-1.13: The time ranges of the stat cards shall be specific to each unique day of the week
-- R-1.14: The contents and coloring of each stat card is based on individual categorization
+- R-1.13: The time ranges of the stat cards shall be specific to the corresponding day
+- R-1.14: The contents and coloring of each stat card is based on its status
 - R-1.20: The application shall categorize the overall plan using the summed time duration and status count of the cards
 - R-1.21: The time ranges for the overall plan shall be based on either predictions from a trained statistical model or manual input
 - R-1.22: The application shall offer three different plan statuses: 'poor', 'moderate', or 'good'
