@@ -4,21 +4,7 @@
 * Work Schedule
   * School: ~ 60 mins per week until the final semester is over
   * Post-graduation: to be determined...
-* Project Management
-  * Stand Up
-    * 
-  * Meeting Mins
-    * School: brief description of what was accomplished for the week - 1 or 2 sentences, (report: yes (limited), presentation: no)
-    * Post-graduation: Mimics SWE's meeting minutes structure with presentations as an added task (report: yes, presentation: yes)
-    * Types: two different forms of documentation during post-graduation: report + presentation
-      * Report: .md document created for my own purposes that summarizes what was accomplished, what needs to be done, presentation discussions, and more
-        * Frequency: to be determined... (at least once a week)
-        * Administrivia: time, location, date, meeting number
-        * Notes: description of what was accomplished over the week, new ideas for improving things, what worked vs what didn't work, presentation discussions, anything important related to the project
-        * Action Items: potential next tasks or steps to take
-      * Presentation: PowerPoint presentation given to parents updating them on progress to gain feedback on my work and facilitate communication
-        * Frequency: to be determined... (at least once a week)
-        * Structure: to be determined...
+
 
 
 ## SDLC
@@ -33,8 +19,23 @@
 
 
 ## Scrum Plan & Milestones
-| No | Milestone     | Backlog       | Description           |
-| -- | ------------- | ------------- | --------------------- |
+| No | Milestone                     | Backlog                       | Description                                                      |
+|----|-------------------------------|-------------------------------|------------------------------------------------------------------|
+| 1  | Project Initialization        | Project Setup                 | Set up the initial project structure and environment             |
+|    |                               | Docker Setup & Integration    | Containerize the application using Docker                        |
+|    |                               | Intro to Scrum                | Introduce Scrum methodology to the team                          |
+| 2  | Foundational UI/UX            | UI/UX Foundation              | Establish core layout, theme, and design components              |
+|    |                               | Stat Card System              | Create reusable components for displaying stats                  |
+| 3  | Core Pages & Navigation       | Stats Page                    | Develop the page for visualizing user statistics                 |
+|    |                               | Settings Page                 | Create a page for configuring preferences and app behavior       |
+| 4  | Backend & Infrastructure      | Database Setup & Integration  | Set up and connect the app to a database                         |
+|    |                               | Backend Integration           | Connect frontend components to backend APIs                      |
+| 5  | External Integrations         | Notion API Integration        | Connect to the Notion API to read/write planning data            |
+| 6  | Intelligent Features          | Task Duration Prediction Model| Build a machine learning model to estimate task durations        |
+| 7  | User Feedback and Refinement  | Feedback System               | Implement a system for collecting and displaying user feedback   |
+| 8  | UI Polish and Extras          | Tooltip                       | Implement contextual tooltips for user guidance                  |
+|    |                               | Convenience Features          | Add minor features to improve usability and user experience      |
+
 
 
 
