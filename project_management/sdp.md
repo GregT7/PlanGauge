@@ -6,7 +6,7 @@
 ## SDLC
 * Agile Methodology: Water-Scrum-Fall (Implemented AFTER graduation)
 * Project Management Platform: Notion
-* Work Schedule: 3 hours per day, 7 days a week
+* Work Schedule: 3 hours per day, 6 days a week
 * Testing: Incremental unit testing, integration testing, and End-to-End tests will be used to ensure the functionality and quality of the project during each sprint.
 * Project Management: MSV, Software Development Plan (timeline, milestones, extras, backlogs, methodology), Project Overview Proposal (tech stack), will be created up front and provide the backbone for development. However, these living documents will be updated frequently to reflect the status of the project with each sprint.
 * Ending Documentation: Design specifications and requirement specifications will be synthesized based on the final state of the project
