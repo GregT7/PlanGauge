@@ -6,18 +6,18 @@
 
 ## Core Features
 1. Task Table (Notion-like input)
-  * Basic table to add/edit/delete tasks with the following fields:
-    * Task Name
-    * Category (Health, Career, School)
-    * Due (date)
-    * Start (date)
-    * Estimated Time (auto-filled by model)
-  * (From R-6.10 to R-6.12)
+    * Basic table to add/edit/delete tasks with the following fields:
+      * Task Name
+      * Category (Health, Career, School)
+      * Due (date)
+      * Start (date)
+      * Estimated Time (auto-filled by model)
+    * (From R-6.10 to R-6.12)
 
 2. Time Prediction
-  * Local model to estimate task duration based on class and assignment type.
-  * Basic threshold for using model (only course-related work: homework, quiz, exam, project).
-  * (From R-2.10 to R-2.14)
+    * Local model to estimate task duration based on class and assignment type.
+    * Basic threshold for using model (only course-related work: homework, quiz, exam, project).
+    * (From R-2.10 to R-2.14)
 
 3. Stat Cards by Day
     * Display a card per day with:
