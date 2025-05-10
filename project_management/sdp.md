@@ -1,17 +1,15 @@
 # Software Development Plan
 
 ## Administrative
-* Work Schedule
-  * School: ~ 60 mins per week until the final semester is over
-  * Post-graduation: to be determined...
-
 
 
 ## SDLC
 * Agile Methodology: Water-Scrum-Fall (Implemented AFTER graduation)
 * Project Management Platform: Notion
+* Work Schedule: 3 hours per day, 7 days a week
 * Testing: Incremental unit testing, integration testing, and End-to-End tests will be used to ensure the functionality and quality of the project during each sprint.
-* Project Management: MSV, Software Development Plan, Project Overview Proposal, Tech Stack/Architecture, Milestones, and Timeline will be created up front and provide the backbone for development. However, these living documents will be updated frequently to reflect the status of the project with each sprint.
+* Project Management: MSV, Software Development Plan (timeline, milestones, extras, backlogs, methodology), Project Overview Proposal (tech stack), will be created up front and provide the backbone for development. However, these living documents will be updated frequently to reflect the status of the project with each sprint.
+* Ending Documentation: Design specifications and requirement specifications will be synthesized based on the final state of the project
 * User Stories: User stories will be collected from the perspective of me as the user and me as the developer
 * Sprint Planning and Execution
   * Duration: To be determined...
@@ -46,15 +44,4 @@
 | 4  | Data Insights          | Stats Page                 | Aggregate visualization page for metrics and trends               |
 
 
-
-
-
-
 ## Timeline
-| Deliverable       | Date |
-| -----------       | ---- |
-| MVS               |  x/x |
-| Milestones        |  x/x |
-| Requirement Specs |  x/x |
-| Design Specs      |  x/x |
-| Gantt Chart       |  x/x |
