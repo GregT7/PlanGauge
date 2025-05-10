@@ -6,6 +6,7 @@
 
 ## Core Features
 1. Task Table (Notion-like input)
+* test123
   * Basic table to add/edit/delete tasks with the following fields:
     * Task Name
     * Category (Health, Career, School)
