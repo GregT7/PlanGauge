@@ -4,7 +4,7 @@
 
 
 ## SDLC
-* Agile Methodology: Water-Scrum-Fall (Implemented AFTER graduation)
+* Agile Methodology: Solo-scrum (made up)
 * Project Management Platform: Notion
 * Work Schedule: 3 hours per day, 6 days a week
 * Testing: Incremental unit testing, integration testing, and End-to-End tests will be used to ensure the functionality and quality of the project during each sprint.
@@ -12,8 +12,11 @@
 * Ending Documentation: Design specifications and requirement specifications will be synthesized based on the final state of the project
 * User Stories: User stories will be collected from the perspective of me as the user and me as the developer
 * Sprint Planning and Execution
-  * Duration: To be determined...
-  * Contents: Goals, Backlog, Definition of Done (DoD), Review, Retrospective
+  * Duration: Roughly 1 week
+  * Contents: Goals, Backlog, Definition of Done (DoD), Retrospective
+* Documentation Plan
+  * Project management will be handled using Notion including sprint details, standup, retrospectives, and more
+  * At the conclusion of the sprint, all content will be formatted and uploaded to GitHub for employers to see my work ethic and process
 
 
 ## Milestones & Backlogs
