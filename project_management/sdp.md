@@ -20,20 +20,25 @@
 
 ## Milestones & Backlogs
 ### MVS
-| No | Milestone               | Backlog                          | Description                                                                 |
-|----|-------------------------|-----------------------------------|-----------------------------------------------------------------------------|
-| 1  | Initial Setup           | Project Setup                     | Initialize Git, install dependencies, basic folder structure               |
-|    |                         | Intro to Scrum                    | Learn agile basics and team workflow                                       |
-| 2  | Planning Core UI        | UI/UX Foundation                  | Set up the basic design system, layout, and visual components              |
-|    |                         | Data Entry Table                  | Implement a dynamic Notion-style table for planning                        |
-|    |                         | Settings Toggle                   | Toggle for manual vs. ML-based task durations                              |
-| 3  | ML Model Integration    | Time Estimation Autofill          | Auto-fill time predictions based on task type                              |
-|    |                         | Task Duration Prediction Model    | Set up and connect the ML model                                            |
-| 4  | Core App Infrastructure | Notion API Integration            | Set up communication to send data to Notion                                |
-|    |                         | Backend Integration               | Connect frontend with backend and services                                 |
-|    |                         | Database Setup & Integration      | MongoDB setup for storing data and predictions                             |
-| 5  | Planning Feedback View  | Stat Card System                  | Visual feedback on daily status (cards)                                    |
-|    |                         | Feedback System                   | Overall plan feedback and visual status (color-coded summaries)            |
+| No | Milestone                           | Backlog                          | Description                                                                 |
+|----|-------------------------------------|----------------------------------|-----------------------------------------------------------------------------|
+| 1  | 🛠️ Core Project Initialization     |                                  | Establish foundational structure, UI/UX, and solo-Scrum setup.              |
+|    |                                     | Project Setup                    | Set up the initial project environment and tooling.                         |
+|    |                                     | UI/UX Foundation                 | Design the basic interface layout and visual design principles.             |
+|    |                                     | Intro to Solo-scrum             | Implement lightweight Scrum practices for solo development.                 |
+| 2  | 📋 Data Management Features         |                                  | Provide user capabilities for data input, estimation, and customization.    |
+|    |                                     | Data Entry Table                 | Build UI components for structured data input.                              |
+|    |                                     | Time Estimation Autofill         | Add logic to predict and autofill time values based on inputs.              |
+|    |                                     | Settings Toggle                  | Allow users to toggle configuration options via the UI.                     |
+| 3  | 🔌 API & Logic Integration          |                                  | Enable external connectivity and predictive task modeling.                  |
+|    |                                     | Notion API Integration           | Connect the app to Notion’s API for data exchange.                          |
+|    |                                     | Task Duration Prediction Model   | Implement a model to estimate task durations from past data.                |
+|    |                                     | Database Setup & Integration     | Create and link the backend database to store application data.             |
+| 4  | ⚙️ System Integration & Features   |                                  | Complete backend connections and user feedback features.                    |
+|    |                                     | Backend Integration              | Integrate the frontend with backend endpoints.                              |
+|    |                                     | Stat Card System                 | Build visual cards to display task-related stats.                           |
+|    |                                     | Feedback System                  | Implement UI to collect and manage user feedback.                           |
+
 
 
 ### Extras
