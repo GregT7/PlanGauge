@@ -1,8 +1,5 @@
 # Software Development Plan
 
-## Administrative
-
-
 ## SDLC
 * Agile Methodology: Solo-scrum (made up)
 * Project Management Platform: Notion
@@ -39,8 +36,6 @@
 |    |                                     | Stat Card System                 | Build visual cards to display task-related stats.                           |
 |    |                                     | Feedback System                  | Implement UI to collect and manage user feedback.                           |
 
-
-
 ### Extras
 | No | Milestone              | Backlog                    | Description                                                       |
 |----|------------------------|----------------------------|-------------------------------------------------------------------|
@@ -50,6 +45,8 @@
 | 3  | Extended UI Control    | Settings Page              | Page for additional app configurations and preferences            |
 | 4  | Data Insights          | Stats Page                 | Aggregate visualization page for metrics and trends               |
 
+
+## Testing
 
 ## Timeline
 | Sprint | Week # | Milestone                         | Tasks                                                                 |
