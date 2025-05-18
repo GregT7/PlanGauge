@@ -1,2 +1,2 @@
-# task-duration-predictor
+# PlanGauge
 
