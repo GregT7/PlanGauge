@@ -6,8 +6,9 @@ Standup Process Defined
 4. Fill out problems & blockers slide
 5. Fill out pending problems section: review sprint's unfinished to-do list items in previous days, previous stand up documents, and retrospectives if early in sprint cycle
 6. Fill out next steps: decide to complete a reasonable number of tasks based on pending action items and the timeline
-7. Notion: Create standup page in the standup tracker
-8. Notion: Fill out notes section detailing any feedback discussed
-9. Notion: fill out key decisions section
-10. Notion: copy and paste action items
-11. Create to-do items for the action items inside the corresponding sprint page found inside the sprint dashboard page
+7. Give presentation
+8. Notion: Create standup page in the standup tracker
+9. Notion: Fill out notes section detailing any feedback discussed
+10. Notion: fill out key decisions section
+11. Notion: copy and paste action items
+12. Create to-do items for the action items inside the corresponding sprint page found inside the sprint dashboard page

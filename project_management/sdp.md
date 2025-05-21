@@ -49,9 +49,4 @@
 ## Testing
 
 ## Timeline
-| Sprint | Week # | Milestone                         | Tasks                                                                 |
-|--------|--------|-----------------------------------|-----------------------------------------------------------------------|
-| 1      | Week 1 | 🔧 Project Initialization          | Project Setup, UI/UX Foundation, Intro to Scrum                      |
-| 2      | Week 2 | 🧾 Core Input & Display            | Data Entry Table, Settings Toggle, Time Estimation Autofill          |
-| 3      | Week 3 | 🔗 Integration + Intelligence      | Notion API Integration, Task Duration Prediction Model, DB Setup     |
-| 4      | Week 4 | 📊 Results + Feedback              | Stat Card System, Feedback System, Backend Integration               |
+
