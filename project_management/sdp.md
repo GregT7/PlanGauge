@@ -50,7 +50,7 @@
 
 ## Timeline
 ### Overall Timeline
-![Image](https://github.com/user-attachments/assets/81fdb588-1d34-4dc7-ba1b-f8af707758ec)
+![Image](https://github.com/user-attachments/assets/a95f710a-11ef-4cbb-94f9-9f239571fcbe)
 
 ### Immediate sprints 2-3
-![Image](https://github.com/user-attachments/assets/a95f710a-11ef-4cbb-94f9-9f239571fcbe)
+![Image](https://github.com/user-attachments/assets/81fdb588-1d34-4dc7-ba1b-f8af707758ec)
