@@ -14,10 +14,9 @@
       * Estimated Time (auto-filled by model)
     * (From R-6.10 to R-6.12)
 
-2. Time Prediction
-    * Local model to estimate task duration based on class and assignment type.
-    * Basic threshold for using model (only course-related work: homework, quiz, exam, project).
-    * (From R-2.10 to R-2.14)
+2. Feasibility Estimation
+    * Use keyword association to create basic estimation model of task duration
+    * Use average and standard deviations to roughly categorize feasibility
 
 3. Stat Cards by Day
     * Display a card per day with:
@@ -27,7 +26,7 @@
     * (From R-1.10 to R-1.14, R-1.22 to R-1.23)
 
 4. Plan Summary
-    * Overall plan rating based on all stat cards.
+    * Overall plan rating based on all stat cards + time sum relative to historical performance
     * Color-coded summary (red/yellow/green) shown at the top or bottom.
     * (From R-1.20, R-1.30 to R-1.31)
 
