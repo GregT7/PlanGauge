@@ -34,7 +34,7 @@
 
 ## 💡 Proposed Solutions
 
-- Limit YouTube video/twitch content to **4 hours per day**  
+- Limit YouTube video/twitch content to **3 hours per day**  
   - Use stopwatch every time I watch entertainment (podcasts count while driving)  
 
 ---
