@@ -58,10 +58,8 @@
 
 ## 📘 Codecademy Progress Overview
 
-![React Course Completion Bar](b.png)
-
+![Image](https://github.com/user-attachments/assets/143926ea-c606-42a8-9004-4f51fb0907be)
 ---
 
 ## 📚 Module Completion Checklist
-
-![React Course Modules](a.png)
+![Image](https://github.com/user-attachments/assets/cbdb4d71-ec8e-43f7-8d2e-f5e3150b89c9)
