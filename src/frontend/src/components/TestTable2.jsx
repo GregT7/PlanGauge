@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext  } from 'react';
+import { TaskContext } from "./TaskContext";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import CalendarPopup from "@/components/CalendarPopup";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
 
 import {
   Table,
@@ -15,7 +19,7 @@ import {
 
 const initial_tasks = [
   {
-    task_id: 1,
+    id: 1,
     name: 'Plan Tool p58',
     category: 'Career',
     due_date: '06/03/2025',
@@ -23,7 +27,7 @@ const initial_tasks = [
     time_estimation: "90",
   },
   {
-    task_id: 2,
+    id: 2,
     name: 'Update CV p6',
     category: 'career',
     due_date: '06/25/2025',
@@ -31,7 +35,7 @@ const initial_tasks = [
     time_estimation: "45",
   },
   {
-    task_id: 3,
+    id: 3,
     name: 'Plan Japan trip p2',
     category: 'life',
     due_date: '07/06/2025',
@@ -40,8 +44,32 @@ const initial_tasks = [
   },
 ];
 
+const CalendarPopup = ({ date, onChange, isOpen, onOpenChange }) => {
+  return (
+    <Popover open={isOpen} onOpenChange={onOpenChange}>
+      <PopoverTrigger asChild>
+        <button className="w-full text-left bg-transparent outline-none text-sm text-white/80">
+          {date ? format(new Date(date), "MM/dd/yyyy") : "\u00A0"}
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar
+          mode="single"
+          selected={date ? new Date(date) : undefined}
+          onSelect={(selected) => {
+            if (selected) {
+              onChange(format(selected, "MM/dd/yyyy"));
+              onOpenChange(false); // Close popover
+            }
+          }}
+        />
+      </PopoverContent>
+    </Popover>
+  );
+};
+
 function TestTable2() {
-  const [tasks, setTasks] = useState(initial_tasks);
+  const {tasks, setTasks} = useContext(TaskContext);
   const [selectedTaskIds, setSelectedTaskIds] = useState(new Set());
   const [openPopover, setOpenPopover] = useState({});
 
@@ -54,7 +82,7 @@ function TestTable2() {
 
   const handleAddTask = () => {
     const newTask = {
-      task_id: Date.now(),
+      id: Date.now(),
       name: '',
       category: '',
       due_date: '',
@@ -64,13 +92,13 @@ function TestTable2() {
     setTasks([...tasks, newTask]);
   };
 
-  const toggleSelection = (task_id) => {
+  const toggleSelection = (id) => {
     setSelectedTaskIds((prev) => {
       const next = new Set(prev);
-      if (next.has(task_id)) {
-        next.delete(task_id);
+      if (next.has(id)) {
+        next.delete(id);
       } else {
-        next.add(task_id);
+        next.add(id);
       }
       return next;
     });
@@ -80,7 +108,7 @@ function TestTable2() {
     const handleKeyDown = (e) => {
       if ((e.key === 'Delete' || e.key === 'Backspace') && selectedTaskIds.size > 0) {
         e.preventDefault();
-        setTasks((prev) => prev.filter((task) => !selectedTaskIds.has(task.task_id)));
+        setTasks((prev) => prev.filter((task) => !selectedTaskIds.has(task.id)));
         setSelectedTaskIds(new Set());
       }
     };
@@ -88,10 +116,10 @@ function TestTable2() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedTaskIds]);
 
-  const updateTaskField = (task_id, field, value) => {
+  const updateTaskField = (id, field, value) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.task_id === task_id ? { ...task, [field]: value } : task
+        task.id === id ? { ...task, [field]: value } : task
       )
     );
   };
@@ -112,10 +140,10 @@ function TestTable2() {
 
         <TableBody>
           {tasks.map((task) => {
-            const isSelected = selectedTaskIds.has(task.task_id);
+            const isSelected = selectedTaskIds.has(task.id);
             return (
               <TableRow
-                key={task.task_id}
+                key={task.id}
                 className={cn(
                   "transition-colors group",
                   isSelected ? "bg-blue-500/20" : "hover:bg-muted"
@@ -131,7 +159,7 @@ function TestTable2() {
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
                     <Checkbox
                       checked={isSelected}
-                      onCheckedChange={() => toggleSelection(task.task_id)}
+                      onCheckedChange={() => toggleSelection(task.id)}
                     />
                   </div>
                 </td>
@@ -140,7 +168,7 @@ function TestTable2() {
                   <input
                     type="text"
                     value={task.name}
-                    onChange={(e) => updateTaskField(task.task_id, 'name', e.target.value)}
+                    onChange={(e) => updateTaskField(task.id, 'name', e.target.value)}
                     className="w-full bg-transparent outline-none"
                   />
                 </TableCell>
@@ -149,7 +177,7 @@ function TestTable2() {
                   <input
                     type="text"
                     value={task.category}
-                    onChange={(e) => updateTaskField(task.task_id, 'category', e.target.value)}
+                    onChange={(e) => updateTaskField(task.id, 'category', e.target.value)}
                     className="w-full bg-transparent outline-none"
                   />
                 </TableCell>
@@ -157,18 +185,18 @@ function TestTable2() {
                 <TableCell className="w-[15%] px-4 py-2 text-left border border-gray-500">
                   <CalendarPopup
                     date={task.due_date}
-                    onChange={(val) => updateTaskField(task.task_id, "due_date", val)}
-                    isOpen={openPopover[`${task.task_id}-due_date`] || false}
-                    onOpenChange={(isOpen) => setPopoverOpen(task.task_id, "due_date", isOpen)}
+                    onChange={(val) => updateTaskField(task.id, "due_date", val)}
+                    isOpen={openPopover[`${task.id}-due_date`] || false}
+                    onOpenChange={(isOpen) => setPopoverOpen(task.id, "due_date", isOpen)}
                   />
                 </TableCell>
 
                 <TableCell className="w-[15%] px-4 py-2 text-left border border-gray-500">
                   <CalendarPopup
                     date={task.start_date}
-                    onChange={(val) => updateTaskField(task.task_id, "start_date", val)}
-                    isOpen={openPopover[`${task.task_id}-start_date`] || false}
-                    onOpenChange={(isOpen) => setPopoverOpen(task.task_id, "start_date", isOpen)}
+                    onChange={(val) => updateTaskField(task.id, "start_date", val)}
+                    isOpen={openPopover[`${task.id}-start_date`] || false}
+                    onOpenChange={(isOpen) => setPopoverOpen(task.id, "start_date", isOpen)}
                   />
                 </TableCell>
 
@@ -176,7 +204,7 @@ function TestTable2() {
                   <input
                     type="number"
                     value={task.time_estimation}
-                    onChange={(e) => updateTaskField(task.task_id, 'time_estimation', e.target.value)}
+                    onChange={(e) => updateTaskField(task.id, 'time_estimation', e.target.value)}
                     className="w-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
                 </TableCell>
