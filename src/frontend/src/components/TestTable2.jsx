@@ -2,7 +2,7 @@ import { useEffect, useState, useContext  } from 'react';
 import { TaskContext } from "./TaskContext";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import CalendarPopup from "@/components/CalendarPopup";
+
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";

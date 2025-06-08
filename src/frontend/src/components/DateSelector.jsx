@@ -8,20 +8,18 @@ import { TableCell } from "./ui/table";
 
 import { format } from "date-fns";
 import { useContext  } from "react";
-import { TaskContext } from "./TaskContext";
+import { TaskContext } from "../contexts/TaskContext";
 
 
 
-const DateSelector = ({task, onSelect, field}) => {
+const DateSelector = ({task, onSelect, field, className=""}) => {
   const {tasks} = useContext(TaskContext);
 
-
-  
   return (
-    <TableCell className="h-10">
+    <TableCell className={className}>
       <Popover>
-        <PopoverTrigger className="hover:bg-amber-600 w-full h-full text-left">
-          <span className="px-4 py-2">{task[field] ? format(task[field], "yyyy-MM-dd") : "\u00A0"}</span> 
+        <PopoverTrigger className="w-full h-full text-left cursor-pointer"> {/* hover:bg-amber-600 */ }
+          <span className="px-2 py-2 wrap-normal">{task[field] ? format(task[field], "MMMM d, yyyy") : "\u00A0"}</span> 
         </PopoverTrigger>
         <PopoverContent>
         <Calendar

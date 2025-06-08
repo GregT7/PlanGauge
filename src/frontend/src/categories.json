@@ -1,0 +1,11 @@
+{
+    "Career": "bg-amber-600",
+    "Chore": "bg-yellow-600",
+    "Errand": "bg-lime-600",
+    "Therapy": "bg-green-600",
+    "Finance": "bg-emerald-600",
+    "Life": "bg-teal-600",
+    "Social": "bg-cyan-600",
+    "Health": "bg-indigo-600",
+    "Productivity": "bg-fuchsia-600"
+}

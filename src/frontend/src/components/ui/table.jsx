@@ -49,7 +49,7 @@ function TableFooter({
   return (
     <tfoot
       data-slot="table-footer"
-      className={cn("bg-muted/50 font-medium", className)}
+      className={cn("font-medium", className)}
       // className={cn("bg-muted/50 border-t font-medium [&>tr]:last:border-b-0", className)}
       {...props} />
   );
@@ -94,7 +94,7 @@ function TableCell({
     <td
       data-slot="table-cell"
       className={cn(
-        "align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        "h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
         className
       )}
       {...props} />

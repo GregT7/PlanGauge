@@ -1,5 +1,6 @@
 
-import * as React from "react"
+import * as React from "react";
+import categories from "../categories";
 import { TableCell } from "./ui/table";
 import {
   DropdownMenu,
@@ -11,22 +12,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useContext  } from "react";
-import { TaskContext } from "./TaskContext";
+import { TaskContext } from "../contexts/TaskContext";
 
 
 
-const CategorySelector = ({task, onChange}) => {
-  const [position, setPosition] = React.useState("bottom")
+const CategorySelector = ({task, onChange, className=""}) => {
   const {tasks} = useContext(TaskContext);
   return (
-    <TableCell>
-        <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-            <span>{task.category}</span>
+    <TableCell className={className}>
+        <DropdownMenu >
+        <DropdownMenuTrigger className="cursor-pointer w-full h-full text-left">
+            <span className={`cursor-pointer ${categories[task.category]} px-1.5 py-0.5 rounded-sm`}>{task.category}</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
             <DropdownMenuRadioGroup value={task.category} onValueChange={onChange}>
-            {/* <DropdownMenuRadioGroup value={position} onValueChange={setPosition}> */}
             <DropdownMenuRadioItem value="Career">Career</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="Chore">Chore</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="Errand">Errand</DropdownMenuRadioItem>

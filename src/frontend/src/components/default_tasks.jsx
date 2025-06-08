@@ -5,7 +5,8 @@ export default [
     category: 'Career',
     due_date: Date(2025, 6, 3),
     start_date: Date(2025, 6, 1),
-    time_estimation: "90",
+    time_estimation: 90,
+    selected: false
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ export default [
     category: 'Career',
     due_date: Date(2025, 6, 25),
     start_date: Date(2025, 6, 22),
-    time_estimation: "45",
+    time_estimation: 45,
+    selected: false
   },
   {
     id: 3,
@@ -21,6 +23,7 @@ export default [
     category: 'Life',
     due_date: Date(2025, 7, 6),
     start_date: Date(2025, 6, 30),
-    time_estimation: "90",
+    time_estimation: 90,
+    selected: false
   },
 ];
