@@ -1,12 +1,19 @@
 # Introduction to Solo-scrum
 
-## Intro
+## 📝 Task Overview
+* Sprint: Sprint 1 and 2
+* Dates: May 16 - May 25 (2025)
+* Status: Completed
+* Priority: Empty
+* Story Points: 4
 * Dependencies: Project setup - content and formatting of GitHub uploads needs to be planned before uploading
-* Task Description: Learn how to implement core aspects of scrum into my workflow to prepare me for the rest of the project. Additionally, document and upload content to GitHub
 * Expected Outcome: Be familiar with hosting standup sessions with parents, writing the definition of done for sprints, adapting to feedback, using Notion to manage the development process, modifying approach and implementation after retrospectives, and managing backlog development
 
-## Work
-### Subtasks
+---
+
+## 🔧 Work
+
+### ✅ Subtasks
 1. Define definition of done for all backlog items in sprint 1
 2. Define goal for sprint 1
 3. Complete first standup with Mom + Dad, documenting things on Notion
@@ -19,7 +26,7 @@
 10. Give presentation to parents (and Dr. Raymer if possible)
 11. Complete major sprint feedback for sprint 1 in sprint dashboard in Notion
 
-### Definition of Done
+### 📘 Definition of Done
 - at least 4 standups are completed and documented in Notion
 - all backlog items for sprint 1 on Notion are fully defined including the following properties: Dependencies, Task Description, Subtasks, Definition of Done, and Expected Outcome
 - the first spring is fully defined including the following properties: objective, milestones, sprint major feedback summary, sprint retrospective summary
