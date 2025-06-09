@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import default_tasks from "../components/default_tasks";
+import default_tasks from "../../public/default_tasks";
 
 export const TaskContext = createContext(undefined);
 

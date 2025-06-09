@@ -3,8 +3,9 @@ import { TaskContext } from "../contexts/TaskContext";
 import RowSelector from "./RowSelector";
 import CategorySelector from "./CategorySelector";
 import DateSelector from './DateSelector';
-
- 
+import NameInput from "./NameInput";
+import TimeInput from "./TimeInput";
+import CustomFooter from "./CustomFooter";
 import {
   Table,
   TableBody,
@@ -14,9 +15,6 @@ import {
   TableRow,
   TableFooter
 } from "@/components/ui/table";
-
-
-
 
 
 function TaskTable() {
@@ -84,54 +82,27 @@ function TaskTable() {
       <TableBody>
         {tasks.map((task) => (
           <TableRow key={task.id}>
-            <RowSelector 
-            selected={task.selected}
-            onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}
-            className="group"
-            />
-            <TableCell className={`border border-stone-600 ${applyHoverSelectStyles(task)}`}>
-              <input 
-                type="text" 
-                value={task.name} 
-                onChange={(e) => {updateTaskField(task.id, "name", e.target.value)}}
-                className="outline-none w-full h-full bg-transparent text-left px-2"
-              />
-            </TableCell>
+            <RowSelector selected={task.selected}
+            onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}/>
+            
+            <NameInput task={task} updateTaskField={updateTaskField}
+            className={`border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
            
             <CategorySelector task={task} onChange={(val) => {updateTaskField(task.id, "category", val)}} 
             className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
+
             <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "due_date", val) } field={"due_date"}
             className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
+
             <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "start_date", val) } field={"start_date"}
             className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-            <TableCell className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`}>
-                  <input
-                    type="number"
-                    value={task.time_estimation === 0 ? '' : task.time_estimation}
-                    onChange={(e) => updateTaskField(task.id, 'time_estimation', Number(e.target.value))}
-                    onWheel={(event) => event.currentTarget.blur()}
-                    className="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  />
-            </TableCell>
+
+            <TimeInput task={task} updateTaskField={updateTaskField}
+            className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell/>
-          <TableCell colSpan={5} className="h-10 border border-stone-600">
-            <button className="text-left hover:bg-stone-800 w-full h-full px-2" onClick={handleAddTask}>+ New Page</button>
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell colSpan={5}/>
-          <TableCell className="text-right">
-            <span className="text-stone-400 px-2">SUM</span>
-            <span className="">{calcSum}</span>
-          </TableCell>
-
-        </TableRow>
-      </TableFooter>
+      <CustomFooter handleAddTask={handleAddTask} calcSum={calcSum}/>
 
     </Table>
     

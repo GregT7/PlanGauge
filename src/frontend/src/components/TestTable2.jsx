@@ -44,6 +44,25 @@ const initial_tasks = [
   },
 ];
 
+const RowSelector = ({ selected, onCheckedChange }) => {
+    const selectedStyle = {
+        cell: "bg-blue-500/20",
+        checkbox: 'visible'
+    }
+
+    const unselectedStyle = {
+        cell: "bg-transparent",
+        checkbox: "invisible group-hover:visible"
+    }
+
+
+  return (
+    <TableCell>
+      <Checkbox checked={selected} onCheckedChange={onCheckedChange}/>
+    </TableCell>
+  );
+};
+
 const CalendarPopup = ({ date, onChange, isOpen, onOpenChange }) => {
   return (
     <Popover open={isOpen} onOpenChange={onOpenChange}>

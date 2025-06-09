@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Button } from "@/components/ui/button"
+
+
 import TaskContextProvider from "../src/contexts/TaskContext";
 import { ThemeProvider } from './components/ui/ThemeProvider'
 // import TestTable2 from "./components/TestTable2"
