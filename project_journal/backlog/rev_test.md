@@ -8,8 +8,8 @@
 * Dependencies:
   * Data Entry Table - need to have at least one component of the project written before something can be tested or have code be reviewed
 * Task Description: Complete some integration and unit testing of react code for data entry table in addition to leveraging ChatGPT for my first time code review. A brief report will be generated documenting the code review.
-* Expected Outcome: I have learned the basics of code review and unit/integration testing while the data table component is verified to work in most cases
-    * 
+* Expected Outcome: I have learned the basics of code review and unit/integration testing and verified the data table's functionality
+
 ---
 
 ## 🔧 Work
