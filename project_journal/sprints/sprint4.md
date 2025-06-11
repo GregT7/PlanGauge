@@ -3,7 +3,7 @@
 ## 📝 Overview
 * Dates: June 9 - June 16 (2025)
 * Status: In Progress
-* Backlog Progress: 0 item / 3 items (33%)
+* Backlog Progress: 0 item / 3 items (0%)
 * Backlogs Assigned:
     * Intro to Code Reviews & Testing
     * Documentation Catchup
@@ -26,7 +26,7 @@
         1. PR is well defined/documented
         2. Suggested revisions and analysis is saved to a document
         3. Fixes and refactoring is successfully performed
-	4. The pull request is reviewed and merged
+	    4. The pull request is reviewed and merged
 
 --- 
 
