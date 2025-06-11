@@ -17,21 +17,14 @@
 ## 🔧 Work
 
 ### ✅ Subtasks
-1. JSX
---- 2 Lessons, 1 Article, 1 Project, 1 Quiz
-2. React Components
---- 2 Lessons, 1 Article, 1 Project, 1 Quiz
-3. Components Interacting
---- 2 Lessons, 1 Informational, 1 Project, 1 Quiz
-4. Hooks
---- 2 Lessons, 1 Project, 1 Quiz
-5. React Programming Patterns
---- 1 Lesson, 1 Project, 1 Quiz
-6. React Styles
---- 1 Lesson, 1 Project, 1 Quiz
-7. React Forms
---- 1 Lesson, 1 Article, 1 Project, 1 Quiz
+1. JSX --- 2 Lessons, 1 Article, 1 Project, 1 Quiz
+2. React Components --- 2 Lessons, 1 Article, 1 Project, 1 Quiz
+3. Components Interacting --- 2 Lessons, 1 Informational, 1 Project, 1 Quiz
+4. Hooks --- 2 Lessons, 1 Project, 1 Quiz
+5. React Programming Patterns --- 1 Lesson, 1 Project, 1 Quiz
+6. React Styles --- 1 Lesson, 1 Project, 1 Quiz
+7. React Forms --- 1 Lesson, 1 Article, 1 Project, 1 Quiz
 
 ### 📘 Definition of Done
-- The course is successfully 100% completed, include screenshots of:
------- percentage completion on website or of certificate (if available)
+* The course is successfully 100% completed, include screenshots of:
+   * percentage completion on website or of certificate (if available)
