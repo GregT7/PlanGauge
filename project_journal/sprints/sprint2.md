@@ -1,4 +1,4 @@
-# Sprint 2
+# Sprint 2 - Basic Frontend
 
 ## 📝 Overview
 * Dates: May 19 - May 29 (2025)
