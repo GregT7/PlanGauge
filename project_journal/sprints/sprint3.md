@@ -26,5 +26,5 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: 
-* Retrospective Notes: 
+* Major Feedback: Recommended to incrementally test code as you go each sprint. Always include two timelines in standups: one for the overall project, and one for the current sprint. Also, label sprints in the overall project timeline and add a marker indicating the current date on each timeline. Get more consistent at standups and writing code for project.
+* Retrospective Notes: Sprint 3 marked a significant turning point as I began independently writing and testing my own React components with minimal external assistance. Completing the React course helped solidify foundational knowledge, which I applied to build a functional data entry table and implement the Context API. While I made tangible technical progress, I struggled with maintaining consistent standups, staying focused daily, and translating feedback into actionable improvements—particularly as the project became more code-heavy. The entertainment management plan, though initially effective, lost impact toward the end of the sprint and wasn’t directly tied to this project’s progress. External factors like planning for my Japan trip also divided my attention. Moving forward, I’ll restructure my reward system to be project-specific, adopt asynchronous standups when necessary, and improve communication by tailoring updates to my audience. Sprint 4 will focus on reinforcing coding consistency, streamlining project workflows, and sustaining momentum through focused execution.
