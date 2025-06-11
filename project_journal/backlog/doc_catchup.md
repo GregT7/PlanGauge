@@ -16,39 +16,39 @@
 
 ### ✅ Subtasks
 1. complete documentation (Notion)
-* Sprint Dashboard
-  * sprint 2
-  * sprint 3
-  * sprint 4
-* Backlog
-  * Intro to react
-  * Data Entry Table
-  * Documentation Catchup
-  * Intro to Code Reviews & Testing
-  * Stat Card System
-* Finish Sprint 3
-  * Retrospective: Sprint 3
-  * Standups: Sprint 3
+    1. Sprint Dashboard
+        1. sprint 2
+        2. sprint 3
+        3. sprint 4
+    2. Backlog
+        1. Intro to react
+        2. Data Entry Table
+        3. Documentation Catchup
+        4. Intro to Code Reviews & Testing
+        5. Stat Card System
+    3. Finish Sprint 3
+        1. Retrospective: Sprint 3
+        2. Standups: Sprint 3
 2. Update
-* MVS
-* Timeline updates
-  * rough timeline (add to sdp and sprint 4's assets folder)
-  * sprint 4's timeline
+    1. MVS
+    2. Timeline updates
+        1. rough timeline (add to sdp and sprint 4's assets folder)
+        2. sprint 4's timeline
 3. Reformat
-* standups .md files
-  * sprint 1
-  * sprint 2
-* retrospectives
-  * sprint 1
-  * sprint 2
-* backlog
-  * project_setup.md
-  * solo_scrum.md
-  * ui_ux_foundation.md
-* sprints (create new assets folder to better organize files)
-  * sprint 1
-  * sprint 2
-  * sprint 3
+    1. standups .md files
+        1. sprint 1
+        2. sprint 2
+    2. retrospectives
+        1. sprint 1
+        2. sprint 2
+    3. backlog
+        1. project_setup.md
+        2. solo_scrum.md
+        3. ui_ux_foundation.md
+    4. sprints (create new assets folder to better organize files)
+        1. sprint 1
+        2. sprint 2
+        3. sprint 3
 
 ### 📘 Definition of Done
 - MVS has clearly defined requirements for each core feature, non-functional feature, and safety basics section
