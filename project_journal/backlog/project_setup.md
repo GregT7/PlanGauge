@@ -1,7 +1,7 @@
 # Project Setup
 
 ## 📝 Task Overview
-* Sprint: Sprint 1
+* Sprint: 1
 * Dates: March 3rd - May 18 (2025)
 * Status: Completed
 * Story Points: 7

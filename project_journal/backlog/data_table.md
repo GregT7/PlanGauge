@@ -1,7 +1,7 @@
 # Data Entry Table
 
 ## 📝 Task Overview
-* Sprint: Sprint 3
+* Sprint: 3
 * Dates: June 1 - June 7 (2025)
 * Status: Completed
 * Story Points: 6

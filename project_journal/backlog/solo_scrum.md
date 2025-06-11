@@ -1,7 +1,7 @@
 # Introduction to Solo-scrum
 
 ## 📝 Task Overview
-* Sprint: Sprint 1 and 2
+* Sprint: 1, 2
 * Dates: May 16 - May 25 (2025)
 * Status: Completed
 * Story Points: 4

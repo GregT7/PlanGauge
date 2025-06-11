@@ -1,7 +1,7 @@
 # Intro to React
 
 ## 📝 Task Overview
-* Sprint: Sprint 2, 3
+* Sprint: 2, 3
 * Dates: May 23 - May 30 (2025)
 * Status: Completed
 * Story Points: 5

@@ -1,7 +1,7 @@
 # UI/UX Foundation
 
 ## 📝 Task Overview
-* Sprint: Sprint 1, 2, 3
+* Sprint: 1, 2, 3
 * Dates: May 16 - June 1 (2025)
 * Status: Completed
 * Story Points: 7
