@@ -19,17 +19,17 @@
 
 #### Contents
 * Planned Agenda:
-1. Discuss Progress
-    1. Almost finished a working model of the data entry table but it was all mostly done with ChatGPT and didn't have a strong grasp on the concepts used
-    2. Completed the React course + the two initial backlog items by passing the quizzes (Introduction to Scrum, UI/UX Foundation)
-2. Discuss issues
-    1. ChatGPT reliance
-    2. Working on things outside of the timeline order due to laziness
-    3. Impulsive/Unfocused work – starting adding new features
-3. Show DataTable implementation using ChatGPT assistance
-4. Solutions
-    1. Redo table implementation without any chatgpt assistance
-    2. Start using documentation for Tailwind CSS and Shadcn/UI
+    1. Discuss Progress
+        1. Almost finished a working model of the data entry table but it was all mostly done with ChatGPT and didn't have a strong grasp on the concepts used
+        2. Completed the React course + the two initial backlog items by passing the quizzes (Introduction to Scrum, UI/UX Foundation)
+    2. Discuss issues
+        1. ChatGPT reliance
+        2. Working on things outside of the timeline order due to laziness
+        3. Impulsive/Unfocused work – starting adding new features
+    3. Show DataTable implementation using ChatGPT assistance
+    4. Solutions
+        1. Redo table implementation without any chatgpt assistance
+        2. Start using documentation for Tailwind CSS and Shadcn/UI
 
 * Discussion Notes:
     1. Timeline
