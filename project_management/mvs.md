@@ -1,54 +1,59 @@
-# Minimum Viable Specification (MVS)
+# 🧩 Minimum Viable Specification (MVS) – Weekly Planning Assistant
 
-## Goal
-- Build a simple, local web app that allows a user to enter weekly tasks, get a predicted time estimate for each task, and receive visual feedback on the realism of their plan.
+## 🎯 Goal
+Build a local web application that enables users to input weekly tasks, assess feasibility based on personal work history, and receive visual feedback that helps plan realistic and achievable schedules.
+
 ---
 
-## Core Features
-1. Task Table (Notion-like input)
-    * Basic table to add/edit/delete tasks with the following fields:
-      * Task Name
-      * Category (Health, Career, School)
-      * Due (date)
-      * Start (date)
-      * Estimated Time (auto-filled by model)
-    * (From R-6.10 to R-6.12)
+## 🔑 Core Features
 
-2. Feasibility Estimation
-    * Use keyword association to create basic estimation model of task duration
-    * Use average and standard deviations to roughly categorize feasibility
+### 1. Task Entry Table
+- Provide a Notion-like data table interface for entering weekly tasks.
+- Input fields include: Task Name, Category, Due Date, Start Date, and Time (in minutes).
+- Table supports unlimited row addition, deletion, and cell editing.
+- Enforce domain constraints and input validation based on Notion schema.
+- Automatically resize to fit content and maintain accessibility.
+- Display in dark mode aligned with Notion styling.
 
-3. Stat Cards by Day
-    * Display a card per day with:
-      * Total planned time for that day
-      * Status indicator: "Poor", "Moderate", "Good" (based on hardcoded or simple rule-based time thresholds)
-      * Simple color (e.g., red/yellow/green) to indicate status
-    * (From R-1.10 to R-1.14, R-1.22 to R-1.23)
+### 2. Daily Feasibility Categorization
+- Calculate daily time totals based on tasks scheduled for each day.
+- Retrieve historical averages (`μ_d`) and standard deviations (`σ_d`) for each weekday.
+- Categorize feasibility as:
+  - Good: within 1σ of μ_d
+  - Moderate: within 2σ
+  - Poor: beyond 2σ
+- Show each day's status via a color-coded stat card (green, yellow/orange, red).
 
-4. Plan Summary
-    * Overall plan rating based on all stat cards + time sum relative to historical performance
-    * Color-coded summary (red/yellow/green) shown at the top or bottom.
-    * (From R-1.20, R-1.30 to R-1.31)
+### 3. Weekly Plan Summary
+- Compute total planned time for the week (`T_week`).
+- Count number of Good/Moderate/Poor statuses across all days.
+- Derive weekly feasibility rating using a heuristic combining `T_week` and daily counts.
+- Display summary with matching color/style in a top/bottom plan summary component.
 
-5. Submit Button (Triggers API POST to Notion)
-    * Basic button to send the task list to a connected Notion table.
-    * Include success/failure indicator.
-    * (From R-2.20, R-2.21, R-7.30 to R-7.31)
+### 4. Submission System
+- Include a submission button that sends data to a connected Notion table via POST request.
+- Provide visual confirmation of request success or failure.
+- Style button dynamically to reflect weekly feasibility rating.
+- Apply cooldown styling and delay between subsequent requests.
 
-## Non-functional Features
-* Minimal styling using modern CSS framework (Tailwind or similar).
-* Responsive layout for 1920x1080 screens (R-3.30, R-4.22).
-* Prediction model pre-trained and loaded on launch (R-4.11).
+---
 
-## Safety Basics
-* Use .env file for Notion/MongoDB API keys.
-* (From R-9.20)
+## ⚙️ Non-Functional Requirements
+- Responsive layout for 1920x1080 screens without horizontal scrolling.
+- Use TailwindCSS or similar for consistent, modern design.
+- Store API credentials in a local `.env` file.
 
-## For later versions (if time permits)
-* Tooltips, animations, transitions (R-3.10, R-4.20)
-* Settings page (R-5)
-* Custom time ranges / manual entry mode (R-5.12, R-5.13)
-* Full stats page (R-8)
-* Automatic model retraining (R-4.12)
-* API status cooldown (R-9.10)
-* Full Notion schema mapping (R-6.13)
+---
+
+## 🧪 Safety and Feedback
+- Tooltip and visual feedback update in real time as tasks are changed.
+- Button state and color change dynamically based on plan feasibility.
+- All sensitive data (API keys, thresholds) is hidden and locally stored.
+
+---
+
+## 🌱 Stretch Features (Future Work)
+- Settings page for toggling tooltips, customizing time thresholds, or adjusting weighting logic.
+- Stats page to display weekly trends and class-specific breakdowns.
+- Export option for saving weekly plans as PDF or CSV.
+- Toggle between historical-based feasibility vs. manual time ranges.
