@@ -3,8 +3,8 @@
 ## 📅 Sprint #2 – Basic Frontend
 * **Dates:** May 19 - May 29 (2025)
 * **Total Days:** 11 days
-* **Total Standups:**  
-* **Standup Participation:**
+* **Total Standups:** 3 days
+* **Standup Participation:** 27%
 
 ---
 
@@ -94,19 +94,19 @@
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-• Discuss timelines created (rough/comprehensive timeline + immediate/detailed timeline)
-• Finally trying to implement the static ui elements to web page (actually coding)
-• Evaluate merit of "vibe coding" and explore steps to take to learn content more rigorously
-• Introduce the newly added table to the React app
-• Debate feasibility of timeline in conjunction with Japan trip
+- Discuss timelines created (rough/comprehensive timeline + immediate/detailed timeline)
+- Finally trying to implement the static ui elements to web page (actually coding)
+- Evaluate merit of "vibe coding" and explore steps to take to learn content more rigorously
+- Introduce the newly added table to the React app
+- Debate feasibility of timeline in conjunction with Japan trip
 
 #### 🧠 Discussion Notes
-• The immediate timeline is not realistic
-• Relying too much on ChatGPT to direct this project and write code
-• Not following the timeline I created -- completing tasks in incorrect order
-• Need more time to understand and write code myself
-• Should probably cancel Japan trip and put more time into this project
-• The annotated timeline that included indicators of what has been completed and what is being worked on for the immediate timeline is useful and should be done every standup
+- The immediate timeline is not realistic
+- Relying too much on ChatGPT to direct this project and write code
+- Not following the timeline I created -- completing tasks in incorrect order
+- Need more time to understand and write code myself
+- Should probably cancel Japan trip and put more time into this project
+- The annotated timeline that included indicators of what has been completed and what is being worked on for the immediate timeline is useful and should be done every standup
 
 ### 🧾 Results
 
