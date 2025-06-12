@@ -8,17 +8,17 @@
 
 ---
 
-### 🗓️ Standup 1 - AI Crutch
+## 🗓️ Standup 1 - AI Crutch
 
-#### Overview
+### Overview
 * Date: June 2, 2025
 * Time: ...
 * Attendees: Dad (Project Manager)
 * Discussed Backlog Items:
   * Data Entry Table
 
-#### Contents
-##### Planned Agenda:
+### Contents
+#### Planned Agenda:
 1. Discuss Progress
     1. Almost finished a working model of the data entry table but it was all mostly done with ChatGPT and didn't have a strong grasp on the concepts used
     2. Completed the React course + the two initial backlog items by passing the quizzes (Introduction to Scrum, UI/UX Foundation)
@@ -31,7 +31,7 @@
     1. Redo table implementation without any chatgpt assistance
     2. Start using documentation for Tailwind CSS and Shadcn/UI
 
-##### Discussion Notes:
+#### Discussion Notes:
 1. Timeline
     1. Change title of timelines to "Master Schedule"
     2. Add legends to timeline to label backlog items
@@ -50,19 +50,19 @@
     3. Feedback isn't going to be too specific at this point as technical details are discussed more often
     4. Information isn't clearly communicated, explanations are too technical and miss the big picture
 
-#### Results
-##### Key Decisions:
+### Results
+#### Key Decisions:
     1. try not to be too reliant on chatGPT
     2. use official documentation more (Tailwind CSS, Shadcn/ui, React)
     3. redo data table without any AI assistance
-##### Action Items:
+#### Action Items:
     1. learn how to use context API
     2. create two context API components for the 1. (data table, submission button) and 2. (stat card section, plan summary)
 ---
 
-### 🗓️ Standup 2 - Documentation & Testing Problems
+## 🗓️ Standup 2 - Documentation & Testing Problems
 
-#### Overview
+### Overview
 * Date: June 8, 2025
 * Time: ...
 * Attendees: Dad (project manager), Mom, Brother
@@ -71,7 +71,7 @@
     * Intro to Code Reviews & Testing
     * Data Entry Table
 
-#### Contents
+### Contents
 * Planned Agenda:
     1. Discuss problems:
         1. Documentation problems
@@ -86,7 +86,7 @@
         5. Only completed two standups
     2. Mostly finished the table component
     3. Started looking into unit testing with React Testing Library and vitest
-#### Results
+### Results
 * Key Decisions:
     1. Lump left over tasks into separate backlog items
         1. Documentation issues
