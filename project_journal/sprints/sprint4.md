@@ -3,11 +3,12 @@
 ## 📝 Overview
 * Dates: June 9 - June 16 (2025)
 * Status: In Progress
-* Backlog Progress: 0 item / 3 items (0%)
+* Backlog Progress: 0 item / 4 items (0%)
 * Backlogs Assigned:
     * Intro to Code Reviews & Testing
     * Documentation Catchup
     * Stat Card System
+    * Retro3: Reward System 2.0
 * Goal: Catch up on key documentation, gain hands-on experience with testing React applications, and complete a simulated code review to reinforce professional development skills.
 * Objective: The objective is to finalize or update all relevant documentation for the MVS, sprint progress, backlog items, retrospectives, and standups; apply unit and integration testing across all components using React Testing Library with Vitest; and simulate a complete code review process through pull requests that include thorough documentation of recommendations, rationale, and implemented changes.
 * Milestones:

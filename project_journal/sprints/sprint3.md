@@ -9,7 +9,7 @@
     * Intro to React
     * Data Entry Table
 * Goal: Use newly developed React skills and understanding to implement a basic CRUD data entry table in the same style as Notion’s database.
-* Objective: Complete Codecademy course for “Learn React” then create a CRUD database table with minimal assistance from ChatGPT.
+* Objective: Complete Codeacademy course for “Learn React” then create a CRUD database table with minimal assistance from ChatGPT.
 * Milestones:
     1. Achieve 100% completion of "Learn React" codeacademy course
     2. Implement basic CRUD datatable
