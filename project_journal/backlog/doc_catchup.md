@@ -56,6 +56,6 @@
 - Rough timeline includes new backlog items and reflects current state of project
 - Rough timeline is saved to the sdp
 - Rough timeline is annotated and added to the sprint 4 standup presentation
-- Sprint 4 timeline is created and saved to the sprint 4 directory, standup presentation, and to the sprint 4 Notion page
-- project_journal/sprints/sprint_X is reformatted where there is a .md file and an assets folder with the assets folder containing all the other files currently stored in the directory
-- all documentation items to be completed are finished and uploaded to GitHub in the appropriate locations
+- Sprint 4 timeline is created and saved to the sprint 4 directory and standup presentation
+- project_journal/sprints/sprint_X is reformatted
+- all documentation items to be completed are finished and uploaded to GitHub in the appropriate locations for standups, backlogs, sprints, and retrospectives
