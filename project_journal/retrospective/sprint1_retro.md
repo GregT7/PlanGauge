@@ -4,17 +4,17 @@
 **Date:** Sunday, May 18, 2025
 
 **What Went Well**
-Consistent documentation, hosted standup on almost all days, flexible to feedback
+- Consistent documentation, hosted standup on almost all days, flexible to feedback
 
 **What Didn't Go Well**
-Meetings were disorganized, confusing, and hosted at inconsistent times of the day. Working consecutive days caused fatigue and burnout. Overwhelmed by new standup actions.
+- Meetings were disorganized, confusing, and hosted at inconsistent times of the day.
 
 ---
 
 ## 🧩 Problems
 
 **Issues Identified**
-Got overwhelmed and burnt out from the agile learning curve. Also, completing tasks from multiple different sources is overwhelming, causing burnout and anxiousness.
+- Got overwhelmed from the agile learning curve
 
 **Root Cause**
 - Tasks come from too many sources (daily standup, retrospective, backlog) and are not placed in centralized area
