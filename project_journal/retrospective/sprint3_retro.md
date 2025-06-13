@@ -7,11 +7,11 @@
 - Completed the React course and adapted well despite initial confusion with the technology.
 - Implemented the data entry table with minimal ChatGPT assistance.
 - Followed through with next steps from standups:
-- Implemented Context API as discussed.
-- Repackaged larger goals into new backlog items for better tracking.
-- Acted on past retrospective suggestions, such as starting to incrementally test code.
-- Applied recent advice to avoid premature focus on the ML model; used rough estimators instead to get a working prototype up and running.
-- Created and followed an entertainment management plan that helped structure my time; qualified for both basic and extended rewards.
+    - Implemented Context API as discussed.
+    - Repackaged larger goals into new backlog items for better tracking and project management.
+    - Acted on past retrospective suggestions, such as starting to incrementally test code.
+    - Updated plans and documentation to avoid premature focus on the ML model; plan to use rough estimators instead to get a working prototype up and running.
+    - Created and followed an entertainment management plan that helped structure my time.
 
 **What Didn't Go Well**
 - Inconsistent standup schedule (only completed 2 out of 10 possible days).
@@ -26,22 +26,28 @@
 ## 🧩 Problems
 
 **Issues Identified**
-- Project manager (Dad) lacks technical expertise, limiting the depth of feedback on implementation issues.
-- My updates do not align with my audience's perspective; Dad understands planning, not the codebase.
-- Time and energy were diverted by planning for my Japan trip and other external stressors.
-- Reward systems were not project-specific, making progress feel less tied to incentives.
-- Standups were harder to coordinate while Dad was traveling.
-- Lack of prior experience in coding led to underestimating the time required to implement features.
+- The project manager lacks technical expertise, which limits the depth and specificity of feedback on implementation-related challenges.
+- Project updates have not been sufficiently aligned with the project manager’s perspective; while they are familiar with planning processes they lack context regarding the technical details of the codebase.
+- Time and energy were diverted due to preparations for an upcoming trip to Japan and other external stressors, impacting focus and consistency.
+- The reward system lacked direct relevance to project milestones, reducing its effectiveness in reinforcing task completion.
+- Standup coordination was inconsistent due to the project manager's travel schedule, affecting communication flow and accountability.
+- Inexperience with certain technical tasks led to underestimating the time and complexity involved in feature implementation.
 
 **Root Cause**
-The core issues this sprint stemmed from a combination of structural gaps, limited technical confidence, and inconsistent accountability systems. Standups were infrequent due to both logistical challenges (e.g., Dad’s availability while traveling) and a lack of personal urgency stemming from insufficient reinforcement. Technical progress slowed as the project shifted from planning—where feedback was clearer and more actionable—into areas requiring hands-on coding, where I lacked confidence and independent problem-solving experience. My productivity also suffered from a diluted focus: although I followed a general entertainment management plan, it wasn’t tied directly to this project, so the effort didn’t translate into meaningful momentum. Compounding this, external life obligations (like preparing for my Japan trip) made it difficult to sustain consistent attention and energy. Overall, these factors created a feedback loop: reduced feedback quality, increased implementation friction, and a weakening discipline system led to slow execution and declining motivation.
+- Structural gaps in the project workflow and accountability systems contributed to inconsistent execution.
+- Technical confidence was limited, particularly as the project transitioned from planning (where feedback was clearer) to hands-on implementation.
+- Standups were infrequent due to logistical challenges, including the project manager’s travel schedule.
+- Productivity declined as progress moved into areas requiring independent coding and problem-solving, where I lacked prior experience.
+- External obligations (e.g., preparing for an extended trip to Japan) further diluted attention and energy across the sprint.
+- These factors compounded to reduce feedback quality and increase implementation friction, ultimately slowing overall execution.
+
 
 ---
 
 ## 🛠️ Solutions
 
 **Proposed Solutions**
-- Consider using ChatGPT for asynchronous standup feedback when unavailable.
+- Consider using ChatGPT for asynchronous standup feedback when project manager unavailable.
 - Explore restructuring the entertainment management plan to better support project-specific progress.
 - Evaluate creating new backlog groupings based on retrospective themes (e.g., technical growth, testing, planning).
 

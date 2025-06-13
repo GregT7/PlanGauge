@@ -1,65 +1,37 @@
+# 🌀 Retrospective #2 – Inconsistent Workweek
 
-# Inconsistent Workweek
+## 📋 Summary
+**Date:** Thursday, May 29, 2025
 
-**Date:** May 29, 2025  
-**Sprint Dashboard:** [Sprint 2 - Basic Frontend](https://www.notion.so/Sprint-2-Basic-Frontend-1f63de45756f8007b818e898dbfe364b?pvs=21)
+**What Went Well**
+- Successfully recognized the problem of not understanding React and pivoted by creating a new backlog item
+- Almost completed React codeacademy.com course
+- Met with Dr. Raymer to review project and get career feedback
 
----
-
-## 🧭 Action Plan
-
-- Put all items/goals I need to accomplish for the week inside a word document then print it  
-- Establish a baseline goal and offer a reward for reaching it  
-  - Don’t drink Baja Blast Freeze + true crime podcast for next week  
-  - **Reward:** listening to true crime + podcast + driving through scenic area  
+**What Didn't Go Well**
+Didn't work on things consistently and according to plans, got little done/accomplished with my time
 
 ---
 
-## 🪪 Issue Identified
+## 🧩 Problems
 
-- Didn’t end sprint at the targeted time  
-- Didn’t consistently meet to complete daily standup  
-- Didn’t finish quizzes for the backlog item "UI/UX Foundation" and didn’t finish 13-hour course over entire week  
-- Went some days without working on anything or doing very little  
+**Issues Identified**
+- Didn't end sprint at the targeted time
+- Didn't consistently meet to complete daily standup
+- Didn't finish quizzes for the backlog item "UI/UX Foundation" and didn't finish 13 hour course over entire week
+- Went some days without working on anything or doing very little
 
+**Root Cause**
+- Consuming excessive entertainment media
+- Going to bed too late and inconsistently
+- Adapting to new work schedule takes time
 ---
 
-## ⚠️ Root Cause
+## 🛠️ Solutions
 
-- Watching too much YouTube  
-- Going to bed too late and inconsistently  
-- Not feeling motivated, feeling overwhelmed  
+**Proposed Solutions**
+- limit entertainment consumption
 
----
-
-## 💡 Proposed Solutions
-
-- Limit YouTube video/twitch content to **3 hours per day**  
-  - Use stopwatch every time I watch entertainment (podcasts count while driving)  
-
----
-
-## ❌ What Didn’t Go Well
-
-- Didn’t work on things consistently and according to plans  
-- Got little done/accomplished with my time  
-
----
-
-## ✅ What Went Well
-
-- Successfully recognized the problem of not understanding React and pivoted by creating a new backlog item  
-- Almost completed React [Codecademy](http://codeacademy.com) course  
-- Met with Dr. Raymer to review project and get career feedback  
-
----
-
-# React Course Progress
-
-## 📘 Codecademy Progress Overview
-
-![Image](https://github.com/user-attachments/assets/143926ea-c606-42a8-9004-4f51fb0907be)
----
-
-## 📚 Module Completion Checklist
-![Image](https://github.com/user-attachments/assets/cbdb4d71-ec8e-43f7-8d2e-f5e3150b89c9)
+**Action Plan**
+- Put all items/goals I need to accomplish for the week inside a word document then print it
+- Monitor time spent on digital entertainment
