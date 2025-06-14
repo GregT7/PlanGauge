@@ -145,6 +145,6 @@
 - Document and commit standup notes for 6/13 and 6/14 to GitHub
 - Complete and commit one unit test by end of day
 - **Fallback:** If blocked on writing a full test, isolate the logic into a scratch file and manually verify expected behavior using `console.log`
-
+- Add today's testing results for the unit testing review to sprint 4's assets folder
 
 ---
