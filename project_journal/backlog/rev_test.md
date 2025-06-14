@@ -22,10 +22,7 @@
     1. Render rows with mock data
     2. Test click events on row selectors
     3. Test edge cases: empty table, long strings
-5. Write light integration tests:
-    1. Selecting a row enables the submit button
-    2. Changing a date updates the task row
-    3. Submit button triggers mock callback
+5. Research integration testing
 6. Create a pull request on GitHub with summary and scope
 7. Leave self-review comments simulating real feedback
 8. Commit code changes in response to feedback
@@ -35,7 +32,6 @@
 ### 📘 Definition of Done
 - A separate feature branch named feature/datatable has been created from main
 - All essential unit tests for the DataTable component are implemented using Vitest and React Testing Library
-- At least two integration tests are written to verify component interactions (e.g., row selection, date change, submit logic)
 - Tests pass locally via npm run test without errors or warnings
 - A GitHub pull request is created with:
     * A clear title and summary of changes
@@ -48,3 +44,6 @@
     * What issues were discovered during testing
     * Why they occurred
     * How they were resolved
+- Two individual quizzes for the following topics are created, taken, and passed with at a score of 75% or greater
+    * Unit testing
+    * Integration testing
