@@ -3,8 +3,8 @@
 ## 📅 Sprint #4 – Documentation  & Testing
 * **Dates:** June 10 - June 16 (2025)
 * **Total Days:** 7 days
-* **Total Standups:** 
-* **Standup Participation:**
+* **Total Standups:** 4
+* **Standup Participation:** 57%
 
 ---
 
@@ -245,8 +245,8 @@
 - [ ] Finish unit test for `DateSelector.jsx`
 - [ ] Complete and post Sprint 4 retrospective
 - [ ] Update Sprint 4 `sprint_dashboard.md`
-- [ ] Generate `.md` for today’s standup
-- [ ] Upload `.md` to GitHub in long-form folder
-- [ ] ✅ **New:** Create directory `/digests/` in GitHub repo
-- [ ] ✅ **New:** Add recurring reminder to summarize standups near end of project
+- [X] Generate `.md` for today’s standup
+- [x] Upload `.md` to GitHub in long-form folder
+- [x] ✅ **New:** Create directory `/digests/` in GitHub repo
+- [x] ✅ **New:** Add recurring reminder to summarize standups near end of project
 - [ ] ✅ **New:** At end of project, convert all standups into digest format for polished summary
