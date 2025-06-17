@@ -3,8 +3,8 @@
 ## 📅 Sprint #4 – Documentation  & Testing
 * **Dates:** June 10 - June 16 (2025)
 * **Total Days:** 7 days
-* **Total Standups:** 4
-* **Standup Participation:** 57%
+* **Total Standups:** 3
+* **Standup Participation:** 43%
 
 ## 🗓️ Standup Digest #1 – 2025-06-11: Personal vs Professional Documentation
 
@@ -104,38 +104,3 @@
 - [x] Finish at least one unit test
 - [x] Fallback: validate test logic in scratch file via console output
 - [x] Add test result for ChatGPT generated quiz on unit testing to sprint 4 asset folder
-
-
----
-
-## 🗓️ Standup Digest #4 – 2025-06-17: Refining the Standup Process
-
-### ✅ Planned Agenda
-- Complete Sprint 4 retrospective
-- Use ChatGPT reflection questions
-- Continue unit testing (6 components)
-- Start integration test planning
-
----
-
-### 🧠 Discussion Notes
-- Double-formatting for standups feels tedious
-- Unified documentation template proposed and adopted
-- Clarified long-form vs digest logs for GitHub
-- Skipping Notion automation—manual paste is fast enough
-
----
-
-### 🗝️ Key Decisions
-- Adopt new 4-step workflow for standups using ChatGPT
-- Store full standups in GitHub
-- Create `/digests/standups/` directory for summaries
-- Convert all long-form standups to digest at project end
-
----
-
-### 📌 Action Items
-- [ ] Finish unit test for `DateSelector.jsx`
-- [ ] Post Sprint 4 retrospective and update dashboard
-- [x] Create digest directory and start converting standups
-- [x] Add project-end reminder to summarize standups
