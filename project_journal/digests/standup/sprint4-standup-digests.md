@@ -100,10 +100,10 @@
 ---
 
 ### 📌 Action Items
-- [ ] Commit standup notes for 6/13 and 6/14
-- [ ] Finish at least one unit test
-- [ ] Fallback: validate test logic in scratch file via console output
-- [ ] Add test result to sprint 4 asset folder
+- [x] Commit standup notes for 6/13 and 6/14
+- [x] Finish at least one unit test
+- [x] Fallback: validate test logic in scratch file via console output
+- [x] Add test result for ChatGPT generated quiz on unit testing to sprint 4 asset folder
 
 
 ---
@@ -137,5 +137,5 @@
 ### 📌 Action Items
 - [ ] Finish unit test for `DateSelector.jsx`
 - [ ] Post Sprint 4 retrospective and update dashboard
-- [ ] Create digest directory and start converting standups
-- [ ] Add project-end reminder to summarize standups
+- [x] Create digest directory and start converting standups
+- [x] Add project-end reminder to summarize standups

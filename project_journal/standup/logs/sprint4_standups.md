@@ -249,4 +249,4 @@
 - [x] Upload `.md` to GitHub in long-form folder
 - [x] ✅ **New:** Create directory `/digests/` in GitHub repo
 - [x] ✅ **New:** Add recurring reminder to summarize standups near end of project
-- [ ] ✅ **New:** At end of project, convert all standups into digest format for polished summary
+- [x] ✅ **New:** At end of sprint, convert all standups into digest format for polished summary
