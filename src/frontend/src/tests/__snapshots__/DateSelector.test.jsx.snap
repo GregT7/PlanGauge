@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DateSelector unit testing > passes snapshot test 1`] = `
+<div>
+  <td
+    class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+    data-slot="table-cell"
+  >
+    <button
+      aria-controls="radix-:r0:"
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      class="w-full h-full text-left cursor-pointer"
+      data-slot="popover-trigger"
+      data-state="closed"
+      type="button"
+    >
+       
+      <span
+        class="px-2 py-2 wrap-normal"
+      >
+        June 16, 2025
+      </span>
+    </button>
+  </td>
+</div>
+`;

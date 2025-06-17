@@ -22,7 +22,6 @@ function App() {
           <h1 className="pb-5 m-0 text-4xl leading-none">PlanGauge</h1>
             <TaskContextProvider>
               <TaskTable></TaskTable>
-              {/* <TestTable2></TestTable2> */}
             </TaskContextProvider>
           
         </ThemeProvider>

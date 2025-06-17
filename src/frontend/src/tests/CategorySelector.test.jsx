@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { render, screenn} from '@testing-library/react';
+import { render, screen} from '@testing-library/react';
 import "../components/CategorySelector";
 import userEvent from "@testing-library/user-event";
 import CategorySelector from '../components/CategorySelector';
