@@ -15,7 +15,7 @@ import {
   TableRow,
   TableFooter
 } from "@/components/ui/table";
-
+import categories from "../categories";
 
 function TaskTable() {
   
@@ -81,25 +81,27 @@ function TaskTable() {
       </TableHeader>
       <TableBody>
         {tasks.map((task) => (
-          <TableRow key={task.id}>
-            <RowSelector selected={task.selected}
-            onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}/>
+            <TableRow key={task.id}>
+              <RowSelector selected={task.selected}
+              onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}/>
+              
+              <NameInput task={task} updateTaskField={updateTaskField}
+              className={`border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
             
-            <NameInput task={task} updateTaskField={updateTaskField}
-            className={`border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-           
-            <CategorySelector task={task} onChange={(val) => {updateTaskField(task.id, "category", val)}} 
-            className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
+              <CategorySelector task={task} onChange={(val) => {updateTaskField(task.id, "category", val)}} 
+              className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`} categories={categories}/>
+              {/* <CategorySelector task={task} onChange={(val) => {updateTaskField(task.id, "category", val)}} 
+              className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`} categories={categories}/> */}
 
-            <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "due_date", val) } field={"due_date"}
-            className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
+              <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "due_date", val) } field={"due_date"}
+              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
 
-            <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "start_date", val) } field={"start_date"}
-            className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
+              <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "start_date", val) } field={"start_date"}
+              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
 
-            <TimeInput task={task} updateTaskField={updateTaskField}
-            className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-          </TableRow>
+              <TimeInput task={task} updateTaskField={updateTaskField}
+              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
+            </TableRow>
         ))}
       </TableBody>
       <CustomFooter handleAddTask={handleAddTask} calcSum={calcSum}/>

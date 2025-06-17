@@ -18,7 +18,7 @@ const CustomFooter = ({handleAddTask, calcSum}) => {
           <TableCell colSpan={5}/>
           <TableCell className="text-right">
             <span className="text-stone-400 px-2">SUM</span>
-            <span className="">{calcSum}</span>
+            <span data-testid="time-display">{calcSum}</span>
           </TableCell>
         </TableRow>
       </TableFooter>
