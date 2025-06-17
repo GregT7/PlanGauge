@@ -2,8 +2,8 @@
 
 ## 📝 Overview
 * Dates: June 9 - June 16 (2025)
-* Status: In Progress
-* Backlog Progress: 0 item / 4 items (0%)
+* Status: Completed
+* Backlog Progress: 1 item / 4 items (25%)
 * Backlogs Assigned:
     * Intro to Code Reviews & Testing
     * Documentation Catchup
