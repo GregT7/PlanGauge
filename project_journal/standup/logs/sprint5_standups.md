@@ -99,7 +99,7 @@
 - ✅ Skip Notion automation tools — copy/paste `.md` into Notion manually (takes <5s)
 
 #### 📌 Action Items
-- [ ] Finish unit test for `DateSelector.jsx`
+- [x] Finish unit test for `DateSelector.jsx`
 - [x] Complete and post Sprint 4 retrospective
 - [x] Update Sprint 4 `sprint_dashboard.md`
 - [X] Generate `.md` for today’s standup
@@ -107,3 +107,75 @@
 - [x] ✅ **New:** Create directory `/digests/` in GitHub repo
 - [x] ✅ **New:** Add recurring reminder to summarize standups near end of project
 - [x] ✅ **New:** At end of sprint, convert all standups into digest format for polished summary
+
+---
+
+## 🗓️ Standup #2 – Pull Request Start + Review ChatGPT Code Modifications
+
+### 🧾 Overview
+* **Date:** June 18, 2025  
+* **Time:** 1:05 PM - 1:50 PM
+* **Attendees:** Solo (Self, ChatGPT)  
+* **Discussed Backlog Items:**  
+  - Intro to Code Reviews & Testing  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Review and understand ChatGPT modifications to `TaskTable`, `CustomFooter`, `DateSelector`, `NameInput`, and `TimeInput`.
+- Review ChatGPT-written integration tests for `TaskTable.test.jsx`.
+- Finalize unit and integration tests.
+- Learn about pull requests through reading/watching material instead of attempting one immediately.
+
+#### 📈 Previous Progress
+- Nearly finished writing test files for all components.
+- Just one integration test for `TaskTable` and one basic test for `App` remaining.
+
+#### 🧱 Problems & Blockers
+- Over-relying on ChatGPT when feeling unmotivated or overwhelmed.
+- Inexperience with Git pull requests and merge conflict resolution.
+
+#### ⏳ Pending Actions
+- Finalize testing.
+- Complete integration testing quiz.
+
+#### 🔜 Next Steps
+- Write final integration test for `TaskTable` without ChatGPT assistance.
+- Write basic unit test for `App.test.jsx`.
+- Create quiz + exercise to review ChatGPT-written integration test logic.
+- Read article or watch video about pull requests and take notes.
+- Complete the integration test quiz.
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Are the next step tasks small enough to complete today?
+- Yes. Each item is scoped and achievable: writing one test, reviewing another, reading one article/video, and writing quiz content.
+
+#### ❓ What am I assuming that might be wrong?
+- That passing tests means full understanding of how they work.
+- That PR creation will be simple and error-free.
+- That integrating ChatGPT code means it’s fully correct and optimal.
+
+#### ❓ What feels unclear or risky about today's tasks?
+- The pull request process—unfamiliar and possibly error-prone.
+- Understanding how the tests work beneath the surface.
+- Maintaining independent problem-solving instead of defaulting to AI assistance.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Significant ChatGPT-assisted development is complete, but deeper understanding of test internals is still developing.
+- The pull request process will be approached through learning today, not immediate execution.
+- Standup and reflection process is maturing and helpful for reinforcing daily structure.
+
+#### 🗝️ Key Decisions
+- Will write last `TaskTable` integration test independently.
+- Will create a quiz to reinforce learning from ChatGPT’s test logic.
+- Will not initiate PR today—will study it instead.
+
+#### 📌 Action Items
+- ✅ Complete final integration test for `TaskTable` without AI.
+- ✅ Write basic unit test for `App.test.jsx`.
+- ✅ Create quiz + exercise to review ChatGPT code/test logic.
+- ✅ Read or watch one resource on pull requests and take notes.
+- ✅ Finish integration test quiz.
