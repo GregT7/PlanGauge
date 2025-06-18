@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TimeInput unit testing > passes snapshot test 1`] = `
+<div>
+  <td
+    class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+    data-slot="table-cell"
+  >
+    <input
+      class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      type="number"
+      value="10"
+    />
+  </td>
+</div>
+`;

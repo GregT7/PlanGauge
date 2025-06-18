@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { TaskContext } from "../contexts/TaskContext";
 import RowSelector from "./RowSelector";
 import CategorySelector from "./CategorySelector";
@@ -9,11 +9,9 @@ import CustomFooter from "./CustomFooter";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  TableFooter
 } from "@/components/ui/table";
 import categories from "../categories";
 
@@ -21,9 +19,10 @@ function TaskTable() {
   
   const {tasks, setTasks} = useContext(TaskContext);
 
-  const calcSum = useMemo(() => {
-    return tasks.reduce((accumulator, task) => accumulator + task.time_estimation, 0)
-  }, [tasks]); 
+  const calcSum = useMemo(() =>
+    tasks.reduce((acc, task) => acc + (Number(task.time_estimation) || 0), 0),
+  [tasks]);
+
 
 
   useEffect(() => {
@@ -57,7 +56,7 @@ function TaskTable() {
       category: '',
       due_date: '',
       start_date: '',
-      time_estimation: '',
+      time_estimation: 0,
       selected: null
     };
     setTasks([...tasks, newTask]);

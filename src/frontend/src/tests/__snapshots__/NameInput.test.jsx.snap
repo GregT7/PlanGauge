@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NameInput unit tests > passes snapshot test 1`] = `
+<div>
+  <td
+    class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+    data-slot="table-cell"
+  >
+    <input
+      class="outline-none w-full h-full bg-transparent text-left px-2"
+      type="text"
+      value="Plan tool p88"
+    />
+  </td>
+</div>
+`;

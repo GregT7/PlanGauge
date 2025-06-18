@@ -1,12 +1,14 @@
 import { TableCell } from "@/components/ui/table";
 
-const NameInput = ({task, updateTaskField, className}) => {
-
+const NameInput = ({task = {'name': ''}, updateTaskField, className}) => {
+    const validName = typeof task?.name === "string";
+    const taskName = validName ? task.name : '';
+    
     return (
         <TableCell className={className}>
             <input 
             type="text" 
-            value={task.name} 
+            value={taskName} 
             onChange={(e) => {updateTaskField(task.id, "name", e.target.value)}}
             className="outline-none w-full h-full bg-transparent text-left px-2"
             />
