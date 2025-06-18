@@ -11,7 +11,9 @@ const CustomFooter = ({handleAddTask, calcSum}) => {
         <TableRow>
           <TableCell/>
           <TableCell colSpan={5} className="h-10 border border-stone-600">
-            <button className="text-left hover:bg-stone-800 w-full h-full px-2" onClick={handleAddTask}>+ New Page</button>
+            <button data-testid="add-task-button" className="text-left hover:bg-stone-800 w-full h-full px-2" onClick={handleAddTask}
+            >+ New Page
+            </button>
           </TableCell>
         </TableRow>
         <TableRow>

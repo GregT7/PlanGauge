@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import TaskTable from '../components/TaskTable';
 import { TaskContext } from '../contexts/TaskContext';
 import { vi } from 'vitest';
+import { useState } from 'react';
 
 const renderWithContext = (tasks, setTasks = vi.fn()) => {
   return render(
@@ -11,6 +12,26 @@ const renderWithContext = (tasks, setTasks = vi.fn()) => {
     </TaskContext.Provider>
   );
 };
+
+
+
+const renderWithContextWrapper = (initialTasks) => {
+  const Wrapper = ({ children }) => {
+    const [tasks, setTasks] = useState(initialTasks);
+    return (
+      <TaskContext.Provider value={{ tasks, setTasks }}>
+        {children}
+      </TaskContext.Provider>
+    );
+  };
+
+  return render(
+    <Wrapper>
+      <TaskTable />
+    </Wrapper>
+  );
+};
+
 
 describe('TaskTable Integration Tests', () => {
   const sampleTasks = [
@@ -78,4 +99,28 @@ describe('TaskTable Integration Tests', () => {
 
     expect(mockSetTasks).not.toHaveBeenCalled();
   });
+
+    it('adds an extra row and task object when the "+ New Page" button is pressed, then update the time and time-sum display', async () => {
+        renderWithContextWrapper([{ id: 1, name: 'A', time_estimation: 50 }]);
+
+        const user = userEvent.setup();
+        const footerButton = screen.getByTestId("add-task-button");
+
+        const rowsBefore = screen.getAllByRole("row");
+        await user.click(footerButton); // should now update the task list
+        const rowsAfter = await screen.findAllByRole("row");
+
+        expect(rowsAfter.length - rowsBefore.length).toEqual(1);
+        
+        const numInputs = screen.getAllByRole('spinbutton');
+        const newNumInput = numInputs[numInputs.length - 1];
+        await user.type(newNumInput, "100");
+
+        expect(newNumInput.value).toEqual('100');
+        expect(screen.getByText('150')).toBeInTheDocument();
+    });
+
+    it('deselects all selected rows when anything other than another RowSelector checkbox is clicked', () => {
+
+    });
 });

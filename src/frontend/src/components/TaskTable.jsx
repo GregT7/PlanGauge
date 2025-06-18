@@ -16,35 +16,55 @@ import {
 import categories from "../categories";
 
 function TaskTable() {
-  
-  const {tasks, setTasks} = useContext(TaskContext);
+  const { tasks, setTasks } = useContext(TaskContext);
 
   const calcSum = useMemo(() =>
     tasks.reduce((acc, task) => acc + (Number(task.time_estimation) || 0), 0),
-  [tasks]);
+    [tasks]
+  );
 
-
-
+  // 🔻 Handle Backspace/Delete key to remove selected tasks
   useEffect(() => {
-    const handleKeyDown = ((e) => {
-      const {key} = e;
+    const handleKeyDown = (e) => {
+      const { key } = e;
       const exists = tasks.some(task => task.selected);
-      if (exists) {
-        if (key === "Delete" || key === "Backspace") {
-          setTasks((prev) => 
-           prev.filter((task) => !task.selected));
-        }
+      if (exists && (key === "Delete" || key === "Backspace")) {
+        setTasks(prev => prev.filter(task => !task.selected));
         e.preventDefault();
       }
-    });
+    };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  });
+  }, [tasks, setTasks]);
+
+  // ✅ 🔻 Handle deselection when clicking outside row selectors
+useEffect(() => {
+  const handleMouseDown = (e) => {
+    // If user clicked inside *any* RowSelector, skip
+    const isInsideRowSelector = e.target.closest('[data-role="row-selector"]');
+    const isInsideDropdownOrDate = e.target.closest('[data-role="popup"]');
+
+    if (isInsideRowSelector || isInsideDropdownOrDate) return;
+
+    // Defer to next event loop tick to avoid race condition with onChange
+    setTimeout(() => {
+      const anySelected = tasks.some(task => task.selected);
+      if (anySelected) {
+        setTasks(prev => prev.map(task => ({ ...task, selected: false })));
+      }
+    }, 0);
+  };
+
+  document.addEventListener('mousedown', handleMouseDown);
+  return () => document.removeEventListener('mousedown', handleMouseDown);
+}, [tasks, setTasks]);
+
 
   const updateTaskField = (id, field, val) => {
-    setTasks((prev) => 
-      prev.map((task) => 
-        task.id === id ? {...task, [field]: val} : task
+    setTasks(prev =>
+      prev.map(task =>
+        task.id === id ? { ...task, [field]: val } : task
       )
     );
   };
@@ -60,7 +80,7 @@ function TaskTable() {
       selected: null
     };
     setTasks([...tasks, newTask]);
-  }
+  };
 
   const hoverColor = "hover:bg-stone-800";
   const selectColor = "bg-cyan-600/50";
@@ -68,7 +88,7 @@ function TaskTable() {
 
   return (
     <Table className="w-[73.5%] mx-auto">
-      <TableHeader >
+      <TableHeader>
         <TableRow>
           <TableHead className="w-[3.5%]"></TableHead>
           <TableHead className="text-left px-2 border border-stone-600 w-[30%]">Task Name</TableHead>
@@ -80,33 +100,45 @@ function TaskTable() {
       </TableHeader>
       <TableBody>
         {tasks.map((task) => (
-            <TableRow key={task.id}>
-              <RowSelector selected={task.selected}
-              onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}/>
-              
-              <NameInput task={task} updateTaskField={updateTaskField}
-              className={`border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-            
-              <CategorySelector task={task} onChange={(val) => {updateTaskField(task.id, "category", val)}} 
-              className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`} categories={categories}/>
-              {/* <CategorySelector task={task} onChange={(val) => {updateTaskField(task.id, "category", val)}} 
-              className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`} categories={categories}/> */}
-
-              <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "due_date", val) } field={"due_date"}
-              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-
-              <DateSelector task={task} onSelect={(val) => updateTaskField(task.id, "start_date", val) } field={"start_date"}
-              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-
-              <TimeInput task={task} updateTaskField={updateTaskField}
-              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}/>
-            </TableRow>
+          <TableRow key={task.id}>
+            <RowSelector
+              selected={task.selected}
+              onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}
+              data-role="row-selector"
+            />
+            <NameInput
+              task={task}
+              updateTaskField={updateTaskField}
+              className={`border border-stone-600 ${applyHoverSelectStyles(task)}`}
+            />
+            <CategorySelector
+              task={task}
+              onChange={(val) => updateTaskField(task.id, "category", val)}
+              className={`px-2 border border-stone-600 ${applyHoverSelectStyles(task)}`}
+              categories={categories}
+            />
+            <DateSelector
+              task={task}
+              onSelect={(val) => updateTaskField(task.id, "due_date", val)}
+              field={"due_date"}
+              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}
+            />
+            <DateSelector
+              task={task}
+              onSelect={(val) => updateTaskField(task.id, "start_date", val)}
+              field={"start_date"}
+              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}
+            />
+            <TimeInput
+              task={task}
+              updateTaskField={updateTaskField}
+              className={`h-10 text-left border border-stone-600 ${applyHoverSelectStyles(task)}`}
+            />
+          </TableRow>
         ))}
       </TableBody>
-      <CustomFooter handleAddTask={handleAddTask} calcSum={calcSum}/>
-
+      <CustomFooter handleAddTask={handleAddTask} calcSum={calcSum} />
     </Table>
-    
   );
 }
 

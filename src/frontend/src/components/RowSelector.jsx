@@ -7,8 +7,12 @@ const RowSelector = ({ selected, onCheckedChange }) => {
   const handleChange = typeof onCheckedChange === "function" ? onCheckedChange : () => {};
 
   return (
-    <TableCell>
-      <Checkbox checked={isSelected} onCheckedChange={handleChange} />
+    <TableCell data-role="row-selector">
+      <Checkbox
+        checked={selected}
+        onCheckedChange={onCheckedChange}
+        className="cursor-pointer"
+      />
     </TableCell>
   );
 };
