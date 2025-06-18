@@ -1,0 +1,427 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App unit tests > passes snapshot test 1`] = `
+<div>
+  <h1
+    class="pb-5 m-0 text-4xl leading-none"
+  >
+    PlanGauge
+  </h1>
+  <div
+    class="relative w-full overflow-x-auto"
+    data-slot="table-container"
+  >
+    <table
+      class="caption-bottom text-sm w-[73.5%] mx-auto"
+      data-slot="table"
+    >
+      <thead
+        class=""
+        data-slot="table-header"
+      >
+        <tr
+          class="data-[state=selected]:bg-muted transition-colors"
+          data-slot="table-row"
+        >
+          <th
+            class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[3.5%]"
+            data-slot="table-head"
+          />
+          <th
+            class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[30%]"
+            data-slot="table-head"
+          >
+            Task Name
+          </th>
+          <th
+            class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+            data-slot="table-head"
+          >
+            Category
+          </th>
+          <th
+            class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+            data-slot="table-head"
+          >
+            Due Date
+          </th>
+          <th
+            class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+            data-slot="table-head"
+          >
+            Start Date
+          </th>
+          <th
+            class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[2.5%]"
+            data-slot="table-head"
+          >
+            Time
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        class=""
+        data-slot="table-body"
+      >
+        <tr
+          class="data-[state=selected]:bg-muted transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-role="row-selector"
+            data-slot="table-cell"
+          >
+            <button
+              aria-checked="false"
+              class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+              data-slot="checkbox"
+              data-state="unchecked"
+              role="checkbox"
+              type="button"
+              value="on"
+            />
+          </td>
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <input
+              class="outline-none w-full h-full bg-transparent text-left px-2"
+              type="text"
+              value="Plan Tool p58"
+            />
+          </td>
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="cursor-pointer w-full h-full text-left"
+              data-slot="dropdown-menu-trigger"
+              data-state="closed"
+              id="radix-:r0:"
+              type="button"
+            >
+              <span
+                class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+              >
+                Career
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-controls="radix-:r2:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="w-full h-full text-left cursor-pointer"
+              data-slot="popover-trigger"
+              data-state="closed"
+              type="button"
+            >
+               
+              <span
+                class="px-2 py-2 wrap-normal"
+              >
+                 
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-controls="radix-:r3:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="w-full h-full text-left cursor-pointer"
+              data-slot="popover-trigger"
+              data-state="closed"
+              type="button"
+            >
+               
+              <span
+                class="px-2 py-2 wrap-normal"
+              >
+                 
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <input
+              class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              type="number"
+              value="90"
+            />
+          </td>
+        </tr>
+        <tr
+          class="data-[state=selected]:bg-muted transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-role="row-selector"
+            data-slot="table-cell"
+          >
+            <button
+              aria-checked="false"
+              class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+              data-slot="checkbox"
+              data-state="unchecked"
+              role="checkbox"
+              type="button"
+              value="on"
+            />
+          </td>
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <input
+              class="outline-none w-full h-full bg-transparent text-left px-2"
+              type="text"
+              value="Update CV p6"
+            />
+          </td>
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="cursor-pointer w-full h-full text-left"
+              data-slot="dropdown-menu-trigger"
+              data-state="closed"
+              id="radix-:r4:"
+              type="button"
+            >
+              <span
+                class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+              >
+                Career
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-controls="radix-:r6:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="w-full h-full text-left cursor-pointer"
+              data-slot="popover-trigger"
+              data-state="closed"
+              type="button"
+            >
+               
+              <span
+                class="px-2 py-2 wrap-normal"
+              >
+                 
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-controls="radix-:r7:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="w-full h-full text-left cursor-pointer"
+              data-slot="popover-trigger"
+              data-state="closed"
+              type="button"
+            >
+               
+              <span
+                class="px-2 py-2 wrap-normal"
+              >
+                 
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <input
+              class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              type="number"
+              value="45"
+            />
+          </td>
+        </tr>
+        <tr
+          class="data-[state=selected]:bg-muted transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-role="row-selector"
+            data-slot="table-cell"
+          >
+            <button
+              aria-checked="false"
+              class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+              data-slot="checkbox"
+              data-state="unchecked"
+              role="checkbox"
+              type="button"
+              value="on"
+            />
+          </td>
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <input
+              class="outline-none w-full h-full bg-transparent text-left px-2"
+              type="text"
+              value="Plan Japan trip p2"
+            />
+          </td>
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="cursor-pointer w-full h-full text-left"
+              data-slot="dropdown-menu-trigger"
+              data-state="closed"
+              id="radix-:r8:"
+              type="button"
+            >
+              <span
+                class="cursor-pointer bg-teal-600 px-1.5 py-0.5 rounded-sm"
+              >
+                Life
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-controls="radix-:ra:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="w-full h-full text-left cursor-pointer"
+              data-slot="popover-trigger"
+              data-state="closed"
+              type="button"
+            >
+               
+              <span
+                class="px-2 py-2 wrap-normal"
+              >
+                 
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <button
+              aria-controls="radix-:rb:"
+              aria-expanded="false"
+              aria-haspopup="dialog"
+              class="w-full h-full text-left cursor-pointer"
+              data-slot="popover-trigger"
+              data-state="closed"
+              type="button"
+            >
+               
+              <span
+                class="px-2 py-2 wrap-normal"
+              >
+                 
+              </span>
+            </button>
+          </td>
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+            data-slot="table-cell"
+          >
+            <input
+              class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              type="number"
+              value="90"
+            />
+          </td>
+        </tr>
+      </tbody>
+      <tfoot
+        class="font-medium"
+        data-slot="table-footer"
+      >
+        <tr
+          class="data-[state=selected]:bg-muted transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            data-slot="table-cell"
+          />
+          <td
+            class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 border border-stone-600"
+            colspan="5"
+            data-slot="table-cell"
+          >
+            <button
+              class="text-left hover:bg-stone-800 w-full h-full px-2"
+              data-testid="add-task-button"
+            >
+              + New Page
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="data-[state=selected]:bg-muted transition-colors"
+          data-slot="table-row"
+        >
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+            colspan="5"
+            data-slot="table-cell"
+          />
+          <td
+            class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
+            data-slot="table-cell"
+          >
+            <span
+              class="text-stone-400 px-2"
+            >
+              SUM
+            </span>
+            <span
+              data-testid="time-display"
+            >
+              225
+            </span>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+`;

@@ -38,27 +38,27 @@ function TaskTable() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [tasks, setTasks]);
 
-  // ✅ 🔻 Handle deselection when clicking outside row selectors
-useEffect(() => {
-  const handleMouseDown = (e) => {
-    // If user clicked inside *any* RowSelector, skip
-    const isInsideRowSelector = e.target.closest('[data-role="row-selector"]');
-    const isInsideDropdownOrDate = e.target.closest('[data-role="popup"]');
+    // ✅ 🔻 Handle deselection when clicking outside row selectors
+  useEffect(() => {
+    const handleMouseDown = (e) => {
+      // If user clicked inside *any* RowSelector, skip
+      const isInsideRowSelector = e.target.closest('[data-role="row-selector"]');
+      const isInsideDropdownOrDate = e.target.closest('[data-role="popup"]');
 
-    if (isInsideRowSelector || isInsideDropdownOrDate) return;
+      if (isInsideRowSelector || isInsideDropdownOrDate) return;
 
-    // Defer to next event loop tick to avoid race condition with onChange
-    setTimeout(() => {
-      const anySelected = tasks.some(task => task.selected);
-      if (anySelected) {
-        setTasks(prev => prev.map(task => ({ ...task, selected: false })));
-      }
-    }, 0);
-  };
+      // Defer to next event loop tick to avoid race condition with onChange
+      setTimeout(() => {
+        const anySelected = tasks.some(task => task.selected);
+        if (anySelected) {
+          setTasks(prev => prev.map(task => ({ ...task, selected: false })));
+        }
+      }, 0);
+    };
 
-  document.addEventListener('mousedown', handleMouseDown);
-  return () => document.removeEventListener('mousedown', handleMouseDown);
-}, [tasks, setTasks]);
+    document.addEventListener('mousedown', handleMouseDown);
+    return () => document.removeEventListener('mousedown', handleMouseDown);
+  }, [tasks, setTasks]);
 
 
   const updateTaskField = (id, field, val) => {

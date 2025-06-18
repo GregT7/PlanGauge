@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import TaskTable from '../components/TaskTable';
+import default_tasks from '../../public/default_tasks';
 import { TaskContext } from '../contexts/TaskContext';
 import { vi } from 'vitest';
 import { useState } from 'react';
@@ -120,7 +121,23 @@ describe('TaskTable Integration Tests', () => {
         expect(screen.getByText('150')).toBeInTheDocument();
     });
 
-    it('deselects all selected rows when anything other than another RowSelector checkbox is clicked', () => {
+    it('deselects all selected rows when anything other than another RowSelector checkbox is clicked', async () => {
+      renderWithContextWrapper(default_tasks);
 
+      const user = userEvent.setup();
+      const checkboxes = screen.getAllByRole('checkbox');
+
+      await user.click(checkboxes[0]);
+      await user.click(checkboxes[1]);
+
+      expect(checkboxes[0]).toHaveAttribute('data-state', 'checked');
+      expect(checkboxes[1]).toHaveAttribute('data-state', 'checked');
+      expect(checkboxes[2]).toHaveAttribute('data-state', 'unchecked');
+
+      await user.click(screen.getAllByRole('spinbutton')[0]);
+
+      expect(checkboxes[0]).toHaveAttribute('data-state', 'unchecked');
+      expect(checkboxes[1]).toHaveAttribute('data-state', 'unchecked');
+      expect(checkboxes[2]).toHaveAttribute('data-state', 'unchecked');
     });
 });
