@@ -247,5 +247,7 @@
 
 #### 📌 Action Items
 - Update standup instructions `.txt` file to ease process further  
-- Take ChatGPT-generated quiz for reviewing some testing + React (70% or greater to pass)  
+- Start ChatGPT-generated quiz for reviewing testing concepts (70% or greater to pass)
+  - Finish all multiple choice and short response questions
+  - Complete at least 2 coding questions
 - Start developing the Stat Card System  
