@@ -151,4 +151,28 @@ describe("category selector unit testing", () => {
         await user.click(choreItem);
         expect(triggerButton).toHaveTextContent("Chore");
     });
+
+    it('calls onChange when a new category is selected', async () => {
+        const user = userEvent.setup();
+        const mockOnChange = vi.fn();
+        
+        render(
+        <CategorySelector
+            task={{ category: 'Career' }}
+            onChange={mockOnChange}
+            categories={{
+            "Career": "bg-amber-600",
+            "Study": "bg-blue-600"
+            }}
+        />
+        );
+
+        // Open dropdown
+        await user.click(screen.getByText('Career'));
+        // Click on another item
+        await user.click(screen.getByText('Study'));
+
+        // ✅ This ensures the onChange gets invoked
+        expect(mockOnChange).toHaveBeenCalledWith('Study');
+    });
 })

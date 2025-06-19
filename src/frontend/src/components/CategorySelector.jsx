@@ -11,8 +11,8 @@ import {
 
 
     // "Career": "bg-amber-600",
-const CategorySelector = ({task, onChange, categories={"Default Category": "bg-red-600"}, className=""}) => {
-  const validKey = typeof task?.category === "string" && task.category in categories;
+const CategorySelector = ({task, onChange=()=>{}, categories={"Default Category": "bg-red-600"}, className=""}) => {
+  const validKey = typeof task?.category === "string" && (task.category in categories || task.category == "");
   const categoryKey = validKey ? task.category : 'Default Category';
   const categoryStyle = categories[categoryKey];
 

@@ -179,3 +179,73 @@
 - ✅ Create quiz + exercise to review ChatGPT code/test logic.
 - ✅ Read or watch one resource on pull requests and take notes.
 - ✅ Finish integration test quiz.
+
+
+## 🗓️ Standup #3 – Almost done with Code Review + Testing!
+
+### 🧾 Overview
+* **Date:** June 19, 2025  
+* **Time:** 1:00 PM 
+* **Attendees:** Greg, ChatGPT  
+* **Discussed Backlog Items:**  
+  - Intro to Code Reviews & Testing  
+  - Stat Card System  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Review progress: almost done with code review + testing, just need to write a couple of tests and take a quiz  
+- Almost ready to start working on the stat card system  
+
+#### 📈 Previous Progress
+- Completed pull request and successfully merged `data_table` testing branch  
+- Finished writing almost all unit/integration tests  
+- Completed integration testing quiz  
+- Generated a new quiz with ChatGPT assistance to reinforce React testing concepts  
+
+#### 🧱 Problems & Blockers
+- The React testing quiz is very long  
+- Impulsively added the quiz, expanding the scope of the original task  
+
+#### ⏳ Pending Actions
+- Writing remaining unit/integration tests for the data table component  
+- Starting integration of the stat card system  
+
+#### 🔜 Next Steps
+- Update standup instructions `.txt` file to make the process smoother  
+- Take the generated React testing quiz (pass ≥ 70%)  
+- Begin development on the stat card system  
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Summarize my last 3 standups to identify trends or concerns
+- You're showing consistent, steady progress toward completing testing milestones. You've become more proactive in managing quality and learning (e.g. creating your own quiz).
+- One emerging trend is a tendency toward **scope creep** due to perfectionism and a desire to deeply understand everything.
+- You're managing it well, but the extended scope from “bonus tasks” like quizzes could delay momentum on core deliverables if not watched.
+
+#### ❓ What feels unclear or risky about today's tasks?
+- **The quiz**: It’s long and could eat more time than planned if you don’t timebox it.
+- **Snapshot and full coverage testing**: These can turn into a rabbit hole with diminishing returns — not everything benefits equally from max coverage.
+- **Branching for the Stat Card system**: There’s some risk in starting the next item before the current testing task is fully closed out.
+
+#### ❓ Give me a confidence rating for sprint success based on current progress
+- **Confidence Rating: 8/10**
+  - You’re on track, having finished all critical parts of testing and ready to move into feature development.
+  - Your adjustment to deprioritize non-essential test perfection and lower the quiz bar helps speed things up.
+  - Focus and time management will be key to keeping velocity high through the next phase.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- ChatGPT recommends focusing on meaningful progress and avoiding rabbit holes like full test coverage.  
+- Highlighted a pattern of scope creep driven by perfectionism — addressed with better boundaries.
+
+#### 🗝️ Key Decisions
+- Avoid writing snapshot tests and full function coverage tests for now  
+- Lower passing score for the React testing quiz to 70%  
+- Prioritize work on the Stat Card System today  
+
+#### 📌 Action Items
+- Update standup instructions `.txt` file to ease process further  
+- Take ChatGPT-generated quiz for reviewing some testing + React (70% or greater to pass)  
+- Start developing the Stat Card System  

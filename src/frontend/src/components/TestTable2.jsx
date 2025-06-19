@@ -1,3 +1,4 @@
+/* c8 ignore file */
 import { useEffect, useState, useContext  } from 'react';
 import { TaskContext } from "./TaskContext";
 import { cn } from "@/lib/utils";

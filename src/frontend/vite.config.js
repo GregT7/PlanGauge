@@ -14,6 +14,20 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/tests/setupTests.js'
-  },
+    setupFiles: './src/tests/setupTests.js',
+    coverage: {
+          provider: 'v8',
+          exclude: [
+            // Existing excludes...
+            'src/components/TestTable2.jsx',
+            './eslint.config.js',
+            './tailwind.config.js',
+            './vite.config.js',
+            './src/main.jsx',
+            'src/components/ui/**'
+          ],
+        },
+      },
+
 })
+

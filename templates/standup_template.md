@@ -34,15 +34,12 @@
 #### 🔜 Next Steps
 - 
 
-### 🤖 ChatGPT Reflection
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
 
-#### ❓ Are the next step tasks small enough to complete today?
+#### ❓ Question 1
 - 
 
-#### ❓ What am I assuming that might be wrong?
-- 
-
-#### ❓ What feels unclear or risky about today's tasks?
+#### ❓ Question 2...
 - 
 
 ### 🧾 Results
