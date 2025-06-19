@@ -2,8 +2,8 @@
 
 ## 📝 Overview
 * Dates: June 9 - June 16 (2025)
-* Status: In Progress
-* Backlog Progress: 0 item / 4 items (0%)
+* Status: Completed
+* Backlog Progress: 1 item / 4 items (25%)
 * Backlogs Assigned:
     * Intro to Code Reviews & Testing
     * Documentation Catchup
@@ -32,5 +32,7 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: 
-* Retrospective Notes: 
+* Major Feedback:
+    * This sprint highlighted a recurring issue of overestimating personal capacity, leading to frustration when only a portion of the planned backlog items were completed. While strong improvements were made in automating documentation and integrating ChatGPT for standups and quizzes, the time costs of thorough documentation and testing were greater than anticipated. Writing in dual standup formats proved inefficient, and unit testing took longer due to a high standard of completeness or unfamiliarity with tools. Despite these challenges, the sprint demonstrated adaptability through structural changes, increased clarity in planning, and a proactive approach to feedback and iteration.
+* Retrospective Notes:
+    * Sprint 4 focused on refining workflows and expanding testing efforts but was ultimately slowed by overly ambitious planning and high documentation demands. Key progress included successful integration of ChatGPT into daily processes, development of unit tests for two components, and implementation of a motivational reward system. However, the volume of assigned tasks outpaced available time, and the use of two separate standup formats added unnecessary work. In response, the plan moving forward is to simplify the standup process, limit each sprint to two backlog items, and continue refining workflows to align capacity with expectations.

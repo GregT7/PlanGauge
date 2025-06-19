@@ -1,0 +1,23 @@
+1. Fill out these sections
+	- Title: 
+	- Standup #: 
+	- Date: 
+	- Backlog items
+	- Agenda
+	- Previous Progress
+	- Problems & Blockers
+	- Pending Actions
+	- Next Steps
+2. Select questions for ChatGPT to answer + append to above section. Ask the following query to ChatGPT
+
+Here's the content for today's standup. Please review what I've filled out so far and answer the questions at the bottom.
+
+
+3. Read feedback + decide on 1. Key decisions and 2. Action Items
+4. Post new key decisions + action items, and ask ChatGPT to format into a .md file. Copy and paste the following query into ChatGPT
+
+I will provide my key decisions and final action items for in a second. After receiving this information, please format today's standup based on our conversation today into a .md file with the same formatting referenced in the standup_template.md file that is accessible via this project's uploaded files.
+Key decisions: 
+Action items:
+
+5. Copy and paste into .md file, then push to GitHub

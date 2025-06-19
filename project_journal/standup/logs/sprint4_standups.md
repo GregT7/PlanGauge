@@ -3,8 +3,8 @@
 ## 📅 Sprint #4 – Documentation  & Testing
 * **Dates:** June 10 - June 16 (2025)
 * **Total Days:** 7 days
-* **Total Standups:** 
-* **Standup Participation:**
+* **Total Standups:** 3
+* **Standup Participation:** 43%
 
 ---
 
@@ -57,29 +57,92 @@
 
 ---
 
-## 🗓️ Standup 2 – 
+## 🗓️ Standup 2 – First ChatGPT Standup
 
 ### 🧾 Overview
-* **Date:**
-* **Time:**
-* **Attendees:**
+* **Date:** June 13, 2025
+* **Time:** ~10:00 AM
+* **Attendees:** Greg (solo) + ChatGPT
 * **Discussed Backlog Items:**  
-  - 
+  - Code Review & Testing  
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-
+- Review and refine current approach to asynchronous standups using ChatGPT
+- Submit current notes for feedback and make edits based on suggestions
+- Shift focus from documentation-heavy tasks to more implementation and technical backlog items
 
 #### 🧠 Discussion Notes
-
+- Hosted first standup using ChatGPT
+- Created a standup document in `.txt` format using the same presentation-style format, then pasted results into ChatGPT for feedback and formatting help
+- ChatGPT recommended improving clarity by adding framing statements to each section
+- Requested ChatGPT to recreate the `.txt` document with suggested improvements
+- Noted that the presentation-style and log-style formats approach standups differently — translating between them may require adaptation
+- Added estimated timelines to each item in the Next Steps section
 
 ### 🧾 Results
 
 #### 🗝️ Key Decisions
-- 
+- No need to over-engineer standup documentation with additional narrative framing; the current approach is sufficient
+- Continue writing both presentation-style and log-style versions of standups, then pass to ChatGPT for refinement
+- Start incorporating rough timeline values into Next Steps and task tracking
 
 #### 📌 Action Items
-- 
+- Create a new branch specifically for data table testing (6/13)
+- Delete temporary or outdated testing files from the main branch (6/13)
+- Find a comprehensive article on testing with Vitest and React Testing Library (6/13)
+- Read the article (6/14)
+- Use ChatGPT to generate a 20-question quiz based on the article (6/13)
+- Take quiz and score at least 75% before continuing (6/14)
 
 ---
+
+## 🗓️ Standup 3 – Testing Research
+
+### 🧾 Overview
+* **Date:** June 14, 2025
+* **Time:** 7:00 PM
+* **Attendees:** Greg (solo) + ChatGPT
+* **Discussed Backlog Items:**  
+  - Code Review & Testing  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Host 2nd ChatGPT-based standup and receive feedback on approach
+- Publish recent standups to avoid falling behind
+- Researched unit and integration testing — ready to begin writing tests
+
+#### 🧠 Discussion Notes
+- Created presentation-style standup in `.txt` format with sections: Agenda, Previous Progress, Problems & Blockers, Pending Actions, Next Steps
+- Submitted standup to ChatGPT for review and received detailed feedback:
+  - Revised wording to improve clarity and tone
+  - ChatGPT provided 5 improvement suggestions:
+    1. Add a fallback goal for the unit test in case it’s too difficult
+    2. Set a deadline for finalizing integration testing decision
+    3. Decide whether to defer the Stat Card System to next sprint or define a scaled-down version that’s still doable
+    4. Start estimating how much time today’s action items will take
+- Asked ChatGPT for feedback on using it more effectively for standups. It recommended:
+  1. Ask a recurring set of reflection questions to improve scope and risk awareness
+  2. Ask questions that simulate team interaction or stakeholder input
+  3. Use consistent standup formatting to improve parsing and feedback quality
+  4. Add lightweight metrics (e.g., task confidence or commit intent)
+  5. Occasionally simulate stakeholder reviews or questions to gain outside perspective
+
+### 🧾 Results
+
+#### 🗝️ Key Decisions
+- Begin incorporating questions from both lists into future standups and retrospectives
+- Integration testing will be implemented this sprint
+- Added fallback goal to today’s task list for unit test progress
+- Will *not* include time estimates in standup for now
+- Chose not to track lightweight standup metrics — information overload risk
+- Will likely explore the idea of stakeholder-style questions later on
+- Plan to reuse some ChatGPT reflection questions in the next sprint retrospective
+
+#### 📌 Action Items
+- Document and commit standup notes for 6/13 and 6/14 to GitHub
+- Complete and commit one unit test by end of day
+- **Fallback:** If blocked on writing a full test, isolate the logic into a scratch file and manually verify expected behavior using `console.log`
+- Add today's testing results for the unit testing review to sprint 4's assets folder

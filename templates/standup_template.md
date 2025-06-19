@@ -8,24 +8,47 @@
 
 ---
 
-## 🗓️ Standup 1 – Standup Title
+## 🗓️ Standup [#] – [Standup Title]
 
 ### 🧾 Overview
-* **Date:**
-* **Time:**
-* **Attendees:**
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
 * **Discussed Backlog Items:**  
   - 
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
+- 
 
+#### 📈 Previous Progress
+- 
 
-#### 🧠 Discussion Notes
+#### 🧱 Problems & Blockers
+- 
 
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Are the next step tasks small enough to complete today?
+- 
+
+#### ❓ What am I assuming that might be wrong?
+- 
+
+#### ❓ What feels unclear or risky about today's tasks?
+- 
 
 ### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
 
 #### 🗝️ Key Decisions
 - 
@@ -33,4 +56,4 @@
 #### 📌 Action Items
 - 
 
----
+--- 
