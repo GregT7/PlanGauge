@@ -1,23 +1,77 @@
-1. Fill out these sections
-	- Title: 
-	- Standup #: 
-	- Date: 
-	- Backlog items
-	- Agenda
-	- Previous Progress
-	- Problems & Blockers
-	- Pending Actions
-	- Next Steps
-2. Select questions for ChatGPT to answer + append to above section. Ask the following query to ChatGPT
-
+1. Copy and paste + fill out
+-------------------------------------
 Here's the content for today's standup. Please review what I've filled out so far and answer the questions at the bottom.
 
+- Title: 
+- Standup #: 
+- Date: 
+- Backlog items
+- Agenda
+- Previous Progress
+- Problems & Blockers
+- Pending Actions
+- Next Steps
+- ChatGPT questions
 
-3. Read feedback + decide on 1. Key decisions and 2. Action Items
-4. Post new key decisions + action items, and ask ChatGPT to format into a .md file. Copy and paste the following query into ChatGPT
+-------------------------------------
 
-I will provide my key decisions and final action items for in a second. After receiving this information, please format today's standup based on our conversation today into a .md file with the same formatting referenced in the standup_template.md file that is accessible via this project's uploaded files.
-Key decisions: 
-Action items:
+2. Get feedback + format into .md file, copy and paste the following
+=========================================
+Great, here are my key decisions and action items. Based on this conversation so far, please create format this standup into a .md format with an inline code block (not using the ChatGPT code editor). Please use the template format pasted at the bottom:
+
+Key decisions
+- 
+Action Items
+- 
+
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+=========================================
 
 5. Copy and paste into .md file, then push to GitHub
+6. Add to file to Notion
