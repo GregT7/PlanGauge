@@ -6,24 +6,26 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-// import isValidTask from "../utils/validateTask";
-import createNewTask from "../utils/createNewTask";
+
 
 
 
     // "Career": "bg-amber-600",
 const CategorySelector = ({task, onChange, categories={"Default Category": "bg-red-600"}, className=""}) => {
+  const validKey = typeof task?.category === "string" && task.category in categories;
+  const categoryKey = validKey ? task.category : 'Default Category';
+  const categoryStyle = categories[categoryKey];
 
   return (
     <TableCell className={className}>
         <DropdownMenu >
         <DropdownMenuTrigger className="cursor-pointer w-full h-full text-left">
-            <span className={`cursor-pointer ${categories[task.category]} px-1.5 py-0.5 rounded-sm`}>
-              {task.category}
+            <span className={`cursor-pointer ${categoryStyle} px-1.5 py-0.5 rounded-sm`}>
+              {categoryKey}
             </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-            <DropdownMenuRadioGroup value={task.category} onValueChange={onChange}>
+            <DropdownMenuRadioGroup value={categoryKey} onValueChange={onChange}>
               {
                 Object.entries(categories).map(([key, value]) => (
                   <DropdownMenuRadioItem key={key} value={key} className={value}>{key}</DropdownMenuRadioItem>

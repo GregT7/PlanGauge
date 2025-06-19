@@ -44,7 +44,9 @@ describe("category selector unit testing", () => {
     });
 
     it("displays the selected category on render", () => {
-        render(<CategorySelector task={{'category': 'Operating Systems'}}/>)
+        const osTask = {'category': 'Operating Systems'};
+        const osCategory = {'Operating Systems': 'bg-amber-500'};
+        render(<CategorySelector task={osTask} categories={osCategory}/>)
         expect(screen.getByRole("button")).toHaveTextContent('Operating Systems');
     })
 
