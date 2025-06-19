@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { TaskContext } from "../contexts/TaskContext";
+import { TaskContext } from "../../contexts/TaskContext";
 import RowSelector from "./RowSelector";
 import CategorySelector from "./CategorySelector";
 import DateSelector from './DateSelector';
@@ -12,8 +12,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import categories from "../categories";
+} from "../ui/table";
+import categories from "../../categories";
 
 function TaskTable() {
   const { tasks, setTasks } = useContext(TaskContext);

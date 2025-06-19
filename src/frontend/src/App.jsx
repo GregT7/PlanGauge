@@ -1,8 +1,7 @@
 import TaskContextProvider from "../src/contexts/TaskContext";
 import { ThemeProvider } from './components/ui/ThemeProvider'
-import TaskTable from "./components/TaskTable"
+import TaskTable from "./components/TaskTable/TaskTable"
 import './App.css'
-// import TestTable2 from "./components/TestTable2"
 
 function App() {
   return (
