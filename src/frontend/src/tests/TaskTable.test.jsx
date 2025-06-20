@@ -75,7 +75,7 @@ describe('TaskTable Integration Tests', () => {
   });
 
   it('calculates and displays the correct sum of time estimations', () => {
-    renderWithContext([
+    renderWithContextWrapper([
       { id: 1, name: 'A', time_estimation: 30 },
       { id: 2, name: 'B', time_estimation: 70 }
     ]);
@@ -109,25 +109,25 @@ describe('TaskTable Integration Tests', () => {
     expect(mockSetTasks).not.toHaveBeenCalled();
   });
 
-    // it('adds an extra row and task object when the "+ New Page" button is pressed, then update the time and time-sum display', async () => {
-    //     renderWithContextWrapper([{ id: 1, name: 'A', time_estimation: 50 }]);
+    it('adds an extra row and task object when the "+ New Page" button is pressed, then update the time and time-sum display', async () => {
+        renderWithContextWrapper([{ id: 1, name: 'A', time_estimation: 50 }]);
 
-    //     const user = userEvent.setup();
-    //     const footerButton = screen.getByTestId("add-task-button");
+        const user = userEvent.setup();
+        const footerButton = screen.getByTestId("add-task-button");
 
-    //     const rowsBefore = screen.getAllByRole("row");
-    //     await user.click(footerButton); // should now update the task list
-    //     const rowsAfter = await screen.findAllByRole("row");
+        const rowsBefore = screen.getAllByRole("row");
+        await user.click(footerButton); // should now update the task list
+        const rowsAfter = await screen.findAllByRole("row");
 
-    //     expect(rowsAfter.length - rowsBefore.length).toEqual(1);
+        expect(rowsAfter.length - rowsBefore.length).toEqual(1);
         
-    //     const numInputs = screen.getAllByRole('spinbutton');
-    //     const newNumInput = numInputs[numInputs.length - 1];
-    //     await user.type(newNumInput, "100");
+        const numInputs = screen.getAllByRole('spinbutton');
+        const newNumInput = numInputs[numInputs.length - 1];
+        await user.type(newNumInput, "100");
 
-    //     expect(newNumInput.value).toEqual('100');
-    //     expect(screen.getByText('150')).toBeInTheDocument();
-    // });
+        expect(newNumInput.value).toEqual('100');
+        expect(screen.getByText('150')).toBeInTheDocument();
+    });
 
     it('deselects all selected rows when anything other than another RowSelector checkbox is clicked', async () => {
       renderWithContextWrapper(default_tasks);
