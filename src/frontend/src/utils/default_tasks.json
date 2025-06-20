@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Plan Tool p58",
+    "category": "Career",
+    "due_date": "2025-07-03",
+    "start_date": "2025-07-01",
+    "time_estimation": 90,
+    "selected": false
+  },
+  {
+    "id": 2,
+    "name": "Update CV p6",
+    "category": "Career",
+    "due_date": "2025-07-25",
+    "start_date": "2025-07-22",
+    "time_estimation": 45,
+    "selected": false
+  },
+  {
+    "id": 3,
+    "name": "Plan Japan trip p2",
+    "category": "Life",
+    "due_date": "2025-08-06",
+    "start_date": "2025-07-30",
+    "time_estimation": 90,
+    "selected": false
+  }
+]

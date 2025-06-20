@@ -1,0 +1,9 @@
+[
+  { "name": "Monday",    "ave": 400, "std": 35, "date": "2025-06-16", "status": "neutral", "sum": 50 },
+  { "name": "Tuesday",   "ave": 320, "std": 62, "date": "2025-06-17", "status": "neutral", "sum": 500 },
+  { "name": "Wednesday", "ave": 225, "std": 43, "date": "2025-06-18", "status": "neutral", "sum": 325 },
+  { "name": "Thursday",  "ave": 290, "std": 29, "date": "2025-06-19", "status": "neutral", "sum": 432 },
+  { "name": "Friday",    "ave": 353, "std": 58, "date": "2025-06-20", "status": "neutral", "sum": 153 },
+  { "name": "Saturday",  "ave": 180, "std": 78, "date": "2025-06-21", "status": "neutral", "sum": 245 },
+  { "name": "Sunday",    "ave": 254, "std": 61, "date": "2025-06-22", "status": "neutral", "sum": 275 }
+]

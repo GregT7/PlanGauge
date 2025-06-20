@@ -11,7 +11,7 @@
 ### 🧾 Overview
 * **Date:** 2025-06-17
 * **Time:** 10:30 AM - 11:30 AM
-* **Attendees:** Greg T. (with ChatGPT feedback)
+* **Attendees:** Solo (Self, ChatGPT) 
 * **Discussed Backlog Items:**  
   - Intro to Code Reviews & Testing
   - Retro3: Reward System 2.0
@@ -186,7 +186,7 @@
 ### 🧾 Overview
 * **Date:** June 19, 2025  
 * **Time:** 1:00 PM 
-* **Attendees:** Greg, ChatGPT  
+* **Attendees:** Solo (Self, ChatGPT)  
 * **Discussed Backlog Items:**  
   - Intro to Code Reviews & Testing  
   - Stat Card System  
@@ -251,3 +251,78 @@
   - Finish all multiple choice and short response questions
   - Complete at least 2 coding questions
 - Start developing the Stat Card System  
+
+
+## 🗓️ Standup [#4] – Stat Card System Boot-Up & Date Bug Debug
+
+### 🧾 Overview
+* **Date:** June 20, 2025
+* **Time:** 12:40 PM - 1:20 PM 
+* **Attendees:** Solo (Self, ChatGPT) 
+* **Discussed Backlog Items:**  
+  - Retro3: Reward System 2.0  
+  - Intro to Code Reviews & Testing  
+  - Stat Card System  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Wrap up Intro to Code Reviews & Testing + Reward System 2.0 backlog items  
+- Start setup for Stat Card System  
+- Ran into bugs with date alignment  
+- Made design decisions on derived values vs state vs context  
+- Begin drafting stat card component styling while investigating the bug  
+
+#### 📈 Previous Progress
+- Organized data files and component directory structure  
+- Updated and fixed existing test files after refactor  
+- Created a new context for evaluation system  
+- Added mock stat card data file  
+- Used `useMemo` in `TaskContext` to calculate and memoize time sum, then passed it as a derived prop  
+
+#### 🧱 Problems & Blockers
+- **Date Bug**: Task times are added to the wrong day (e.g., 6/15 task appears on 6/16 stat card)  
+- **Performance**: Re-rendering might be happening too frequently — may indicate design inefficiency  
+
+#### ⏳ Pending Actions
+- Fix date selection + time summation bug  
+- Complete final quiz for Code Reviews & Testing backlog item  
+- Finalize last day of Reward System 2.0  
+
+#### 🔜 Next Steps
+- Design styling and layout draft of Stat Card components  
+- Isolate and resolve the task date alignment bug  
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1: Identify dependencies I might be missing based on today's task
+- You're possibly missing consistent timezone/date parsing between task entry, calendar, and stat card rendering. Also, watch for excessive `useContext` triggers and ensure decoupling between data and layout logic.
+
+#### ❓ Question 2: Suggest 1 improvement to my testing workflow
+- Add unit + integration tests targeting date selection and derived time sums. This isolates the date bug and guards against future regressions.
+
+#### ❓ Question 3: Rate today's standup out of 5 on quality
+- **4.5/5** — great structure, thoughtful progress tracking, and reflection. Could improve clarity around short-term vs long-term planning.
+
+#### ❓ Question 4: What feels unclear or risky about today's date?
+- Debugging the date bug *while* building out stat card design may create layering problems. Suggest decoupling those steps to reduce design drift caused by logic errors.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Highlighted need for consistent date parsing and timezone handling  
+- Memoization and rendering triggers might be affecting performance  
+- Testing plan will be expanded to include date-based behavior  
+
+#### 🗝️ Key Decisions
+- Try to resolve bug before designing the individual stat card component
+- Organize test files -- create directory for TaskTable tests and new directory for StatCardSystem
+- Write a basic unit test for the stat card component
+
+#### 📌 Action Items
+- Resolve task-to-date misalignment bug  
+- Finish Code Reviews quiz
+- Begin drafting stat card component structure and style  
+- Organize test files -- create directory for TaskTable tests and new directory for StatCardSystem
+- Write a basic unit test for the stat card component
+---
