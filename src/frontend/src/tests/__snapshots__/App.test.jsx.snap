@@ -423,5 +423,8 @@ exports[`App unit tests > passes snapshot test 1`] = `
       </tfoot>
     </table>
   </div>
+  <div>
+    225
+  </div>
 </div>
 `;

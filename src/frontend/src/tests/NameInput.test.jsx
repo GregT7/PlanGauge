@@ -1,4 +1,4 @@
-import NameInput from "../components/NameInput";
+import NameInput from "@/components/TaskTable/NameInput";
 import { render, screen } from "@testing-library/react"
 import { describe, it, expect } from "vitest";
 import userEvent from "@testing-library/user-event";

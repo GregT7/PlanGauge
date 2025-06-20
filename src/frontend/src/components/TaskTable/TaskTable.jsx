@@ -13,15 +13,10 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import categories from "../../categories";
+import categories from "@/utils/categories";
 
 function TaskTable() {
-  const { tasks, setTasks } = useContext(TaskContext);
-
-  const calcSum = useMemo(() =>
-    tasks.reduce((acc, task) => acc + (Number(task.time_estimation) || 0), 0),
-    [tasks]
-  );
+  const { tasks, setTasks, timeSum } = useContext(TaskContext);
 
   // 🔻 Handle Backspace/Delete key to remove selected tasks
   useEffect(() => {
@@ -137,7 +132,7 @@ function TaskTable() {
           </TableRow>
         ))}
       </TableBody>
-      <CustomFooter handleAddTask={handleAddTask} calcSum={calcSum} />
+      <CustomFooter handleAddTask={handleAddTask} calcSum={timeSum} />
     </Table>
   );
 }

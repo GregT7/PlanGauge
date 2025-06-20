@@ -3,9 +3,9 @@ import { describe, it, expect } from 'vitest';
 
 import { screen, render } from '@testing-library/react';
 import { useState } from 'react';
-import { TaskContext } from '../contexts/TaskContext';
+import { TaskContext } from '@/contexts/TaskContext';
 import { vi } from 'vitest'
-import default_tasks from '../../public/default_tasks';
+import default_tasks from '@/utils/default_tasks';
 import App from "../App";
 
 const AppWithContextWrapper = ({children}) => {
