@@ -253,7 +253,7 @@
 - Start developing the Stat Card System  
 
 
-## 🗓️ Standup [#4] – Stat Card System Boot-Up & Date Bug Debug
+## 🗓️ Standup #4 – Stat Card System Boot-Up & Date Bug Debug
 
 ### 🧾 Overview
 * **Date:** June 20, 2025
@@ -327,7 +327,7 @@
 - Write a basic unit test for the stat card component
 ---
 
-## 🗓️ Standup #4 – Close to finishing stat card draft
+## 🗓️ Standup #5 – Close to finishing stat card draft
 
 ### 🧾 Overview
 * **Date:** June 21, 2025
