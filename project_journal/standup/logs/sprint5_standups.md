@@ -11,7 +11,7 @@
 ### 🧾 Overview
 * **Date:** 2025-06-17
 * **Time:** 10:30 AM - 11:30 AM
-* **Attendees:** Greg T. (with ChatGPT feedback)
+* **Attendees:** Solo (Self, ChatGPT) 
 * **Discussed Backlog Items:**  
   - Intro to Code Reviews & Testing
   - Retro3: Reward System 2.0
@@ -186,7 +186,7 @@
 ### 🧾 Overview
 * **Date:** June 19, 2025  
 * **Time:** 1:00 PM 
-* **Attendees:** Greg, ChatGPT  
+* **Attendees:** Solo (Self, ChatGPT)  
 * **Discussed Backlog Items:**  
   - Intro to Code Reviews & Testing  
   - Stat Card System  
@@ -251,3 +251,187 @@
   - Finish all multiple choice and short response questions
   - Complete at least 2 coding questions
 - Start developing the Stat Card System  
+
+
+## 🗓️ Standup [#4] – Stat Card System Boot-Up & Date Bug Debug
+
+### 🧾 Overview
+* **Date:** June 20, 2025
+* **Time:** 12:40 PM - 1:20 PM 
+* **Attendees:** Solo (Self, ChatGPT) 
+* **Discussed Backlog Items:**  
+  - Retro3: Reward System 2.0  
+  - Intro to Code Reviews & Testing  
+  - Stat Card System  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Wrap up Intro to Code Reviews & Testing + Reward System 2.0 backlog items  
+- Start setup for Stat Card System  
+- Ran into bugs with date alignment  
+- Made design decisions on derived values vs state vs context  
+- Begin drafting stat card component styling while investigating the bug  
+
+#### 📈 Previous Progress
+- Organized data files and component directory structure  
+- Updated and fixed existing test files after refactor  
+- Created a new context for evaluation system  
+- Added mock stat card data file  
+- Used `useMemo` in `TaskContext` to calculate and memoize time sum, then passed it as a derived prop  
+
+#### 🧱 Problems & Blockers
+- **Date Bug**: Task times are added to the wrong day (e.g., 6/15 task appears on 6/16 stat card)  
+- **Performance**: Re-rendering might be happening too frequently — may indicate design inefficiency  
+
+#### ⏳ Pending Actions
+- Fix date selection + time summation bug  
+- Complete final quiz for Code Reviews & Testing backlog item  
+- Finalize last day of Reward System 2.0  
+
+#### 🔜 Next Steps
+- Design styling and layout draft of Stat Card components  
+- Isolate and resolve the task date alignment bug  
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1: Identify dependencies I might be missing based on today's task
+- You're possibly missing consistent timezone/date parsing between task entry, calendar, and stat card rendering. Also, watch for excessive `useContext` triggers and ensure decoupling between data and layout logic.
+
+#### ❓ Question 2: Suggest 1 improvement to my testing workflow
+- Add unit + integration tests targeting date selection and derived time sums. This isolates the date bug and guards against future regressions.
+
+#### ❓ Question 3: Rate today's standup out of 5 on quality
+- **4.5/5** — great structure, thoughtful progress tracking, and reflection. Could improve clarity around short-term vs long-term planning.
+
+#### ❓ Question 4: What feels unclear or risky about today's date?
+- Debugging the date bug *while* building out stat card design may create layering problems. Suggest decoupling those steps to reduce design drift caused by logic errors.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Highlighted need for consistent date parsing and timezone handling  
+- Memoization and rendering triggers might be affecting performance  
+- Testing plan will be expanded to include date-based behavior  
+
+#### 🗝️ Key Decisions
+- Try to resolve bug before designing the individual stat card component
+- Organize test files -- create directory for TaskTable tests and new directory for StatCardSystem
+- Write a basic unit test for the stat card component
+
+#### 📌 Action Items
+- Resolve task-to-date misalignment bug  
+- Finish Code Reviews quiz
+- Begin drafting stat card component structure and style  
+- Organize test files -- create directory for TaskTable tests and new directory for StatCardSystem
+- Write a basic unit test for the stat card component
+---
+
+## 🗓️ Standup #4 – Close to finishing stat card draft
+
+### 🧾 Overview
+* **Date:** June 21, 2025
+* **Time:** 1:30 PM
+* **Attendees:** Solo (Self, ChatGPT) 
+* **Discussed Backlog Items:**  
+  - Stat Card System  
+  - Retro3: Reward System 2.0
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Review progress on stat card system
+- Acknowledge ongoing work on React testing quiz
+- Plan for CI/CD/E2E integration without overloading immediate scope
+
+#### 📈 Previous Progress
+- Solved bug with converting string dates to Date objects
+- Populated stat card container with stat cards
+- Stat cards are responsive to task data changes (styling and logic)
+- Some styling reflects card status dynamically
+
+#### 🧱 Problems & Blockers
+- Testing (unit and E2E) is time-consuming
+- Balancing between feature creep vs. necessary improvements
+- Hard to quantify performance without tooling; risk of premature optimization
+- CD not needed yet, but prepping early adds scope
+
+#### ⏳ Pending Actions
+- Complete remaining coding questions in React testing quiz
+- Finalize draft implementation of stat card UI and logic
+- Continue to resist premature optimization/expansion unless value is clear
+
+#### 🔜 Next Steps
+- Complete 2–4 React testing quiz coding questions
+- Rewrite card data structure to make testing/debugging easier
+- Create three new backlog items:
+  - End-to-End testing
+  - CI setup
+  - CD setup
+- Write brief description and light subtasks for each item
+- Add subtasks to E2E backlog item specifically for performance tracking
+- Write and implement status count system under stat card container
+- Write 1 basic unit test each for:
+  - StatCardSystem
+  - StatCard
+  - StatusCount
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1  
+**Q:** Identify dependencies I might be missing based on today's tasks  
+**A:**  
+- Mocking context/props is necessary for unit tests  
+- `StatCard` could benefit from `React.memo()` to reduce unnecessary re-renders  
+- E2E tests require setup of a framework (e.g. Cypress or Playwright)  
+- A CI runner (like GitHub Actions) is needed to automate testing  
+- Status consistency is needed for reliable status count display  
+- Optional: Faker.js or other tools could help if you scale up test datasets  
+
+#### ❓ Question 2  
+**Q:** Rate my responsiveness to ChatGPT suggestions so far  
+**A:**  
+- You're applying advice thoughtfully and critically  
+- You've implemented `useMemo`, centralized calculations, and explored Context vs Props intelligently  
+- You're now following through with test setup, mock data, and considering performance analysis  
+
+#### ❓ Question 3  
+**Q:** What might I be missing that could be wrong?  
+**A:**  
+- Potential over-rendering of stat cards if `useContext` or props aren’t memoized  
+- Lack of profiling may hide performance regressions  
+- Without isolating calculation logic from render logic, testing may become harder later  
+- You’re managing scope well, but E2E + CD simultaneously can be taxing if not staged properly  
+
+#### ❓ Question 4  
+**Q:** Is it fair to add a backlog item for end-to-end testing, or is this just scope creep?  
+**A:**  
+- It’s fair and valuable, especially for resume and quality assurance  
+- Key is to scope it carefully (e.g., 1–2 test flows, basic performance checks)  
+- Pair it with a future CD plan, but don’t rush deployment setup — your instincts are right  
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Mock data is already in place and sufficient for testing current UI logic  
+- Faker.js isn't necessary now but can be useful later for load testing  
+- CD will eventually matter once the app is usable and demoable, but not a priority yet  
+- Profiler usage should be baked into E2E flow for performance insight  
+- Your current architecture allows for scaling and testability — strong base
+
+#### 🗝️ Key Decisions
+- Add new backlog items: CI setup, CD setup, End-to-End testing  
+  - Keep item subtasks and DoD simple to maintain balance with scope creep  
+  - Don’t worry about CD setup for a while (until the project is good enough to be deployed but not yet perfect)  
+  - Include basic performance testing (e.g., `useMemo`, `useContext`) as part of E2E  
+
+#### 📌 Action Items
+-  Complete 2–4 of the coding questions on the React testing quiz  
+-  Rewrite card data for easier testing and debugging of new feature implementations  
+-  Add 3 new backlog items: End-to-End Testing, CI Setup, CD Setup  
+-  Write a brief description + subtasks for each new backlog item  
+-  Add basic subtasks to End-to-End testing for performance testing (e.g., memoization, context updates)  
+-  Write and design the Status Count system below the StatCardSystem container  
+-  Write one unit test each for StatCardSystem, StatCard, and StatusCount  
+
+---
