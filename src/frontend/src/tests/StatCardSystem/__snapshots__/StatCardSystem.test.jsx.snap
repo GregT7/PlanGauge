@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatCardSystem unit testing > passes a snapshot test 1`] = `
+<div>
+  <div>
+    <h3>
+      Day: Monday, Date: 2025-06-16, sum: 0
+    </h3>
+    <h3>
+      Day: Tuesday, Date: 2025-06-17, sum: 0
+    </h3>
+    <h3>
+      Day: Wednesday, Date: 2025-06-18, sum: 0
+    </h3>
+    <h3>
+      Day: Thursday, Date: 2025-06-19, sum: 90
+    </h3>
+    <h3>
+      Day: Friday, Date: 2025-06-20, sum: 0
+    </h3>
+    <h3>
+      Day: Saturday, Date: 2025-06-21, sum: 0
+    </h3>
+    <h3>
+      Day: Sunday, Date: 2025-06-22, sum: 0
+    </h3>
+  </div>
+</div>
+`;

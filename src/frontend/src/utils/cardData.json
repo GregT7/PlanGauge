@@ -1,5 +1,5 @@
 [
-  { "name": "Monday",    "ave": 400, "std": 35, "date": "2025-06-16", "status": "neutral", "sum": 50 },
+  { "name": "Monday",    "ave": 400, "std": 35, "date": "2025-06-16", "status": "neutral", "sum": 0 },
   { "name": "Tuesday",   "ave": 320, "std": 62, "date": "2025-06-17", "status": "neutral", "sum": 500 },
   { "name": "Wednesday", "ave": 225, "std": 43, "date": "2025-06-18", "status": "neutral", "sum": 325 },
   { "name": "Thursday",  "ave": 290, "std": 29, "date": "2025-06-19", "status": "neutral", "sum": 432 },

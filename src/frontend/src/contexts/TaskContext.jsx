@@ -8,8 +8,8 @@ export default function TaskContextProvider({children}) {
     const reformattedTasks = default_tasks.map(task => (
         {
             ...task, 
-            "start_date": new Date(task["start_date"]),
-            "due_date": new Date(task["due_date"])
+            "start_date": toLocalMidnight(task["start_date"]),
+            "due_date": toLocalMidnight(task["due_date"])
         }
     ))
     const [tasks, setTasks] = useState(reformattedTasks);
