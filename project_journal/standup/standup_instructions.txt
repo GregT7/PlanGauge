@@ -3,7 +3,7 @@
 Here's the content for today's standup. Please review what I've filled out so far and answer the questions at the bottom.
 
 - Title: 
-- Time: 12:40 PM - 1:15 PM
+- Time: 
 - Standup #: 
 - Date: 
 - Backlog items

@@ -1,0 +1,44 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatCard unit testing > passes snapshot test 1`] = `
+<div>
+  <div
+    class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+    data-slot="card"
+    data-testid="StatCard"
+  >
+    <div
+      class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+      data-slot="card-header"
+    >
+      <div
+        class="font-semibold text-base truncate"
+        data-slot="card-title"
+      >
+        Monday
+      </div>
+      <div
+        class="text-muted-foreground text-sm truncate"
+        data-slot="card-description"
+      >
+        June 16, 2025
+      </div>
+    </div>
+    <div
+      class="px-6 space-y-1 text-sm"
+      data-slot="card-content"
+    >
+      <p
+        class="truncate"
+      >
+        Status: Neutral
+      </p>
+      <p
+        class="truncate"
+      >
+        Sum: 500 mins
+      </p>
+    </div>
+  </div>
+</div>
+`;
