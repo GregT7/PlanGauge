@@ -435,3 +435,70 @@
 -  Write one unit test each for StatCardSystem, StatCard, and StatusCount  
 
 ---
+
+## 🗓️ Standup 6 – Almost done testing stat card system
+
+### 🧾 Overview
+* **Date:** June 23, 2025
+* **Time:** 4:40-5:10 PM
+* **Attendees:** Solo
+* **Discussed Backlog Items:**  
+  - Stat Card System
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Explore idea of integration testing with two major subsystems: task table + stat card system
+- Close to finishing testing, taking on the task above will prolong things but will ensure code is robust
+- End of sprint, need to wrap up
+
+#### 📈 Previous Progress
+- Modified 3 out of 4 component files for invalid prop handling to match test cases, just need to do `StatCardSystem.test.jsx`
+- Added new backlog items for CI/CD setup and E2E testing with brief descriptions
+- Completed Retro3: Reward System 2.0 — it was a success
+
+#### 🧱 Problems & Blockers
+- Need to decide on integration testing between major subsystems (task table + stat card system)
+- Code for the stat card system is a little more complicated so it might take some time
+- There are a lot of different functions inside each of the React component files that aren't being directly tested
+  - Don't know if I should export all the functions or put everything in a JS file inside the util folder
+  - Don’t want to be too thorough/perfect and waste time
+- Today is the last day of Sprint 5 so I will have to write + upload new documentation
+
+#### ⏳ Pending Actions
+- Finish testing & then initiate a pull request for stat card system
+- Retro 5 wrap-up
+
+#### 🔜 Next Steps
+- Decide on subsystem integration tests for frontend
+- Finish up writing tests for the `StatCardSystem.test.jsx`
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ What do you think I should do about testing local helper functions used in React components, is this being too thorough at the cost of time?
+- Skip testing or exporting local functions if they're simple, not reused, and already indirectly tested via component tests. Refactor later if complexity grows.
+
+#### ❓ Identify dependencies I might be missing depending on today's tasks
+- Ensure you have `@testing-library/react`, `@testing-library/user-event`, and `vitest` installed. Consider adding `msw`, `cypress`, or `playwright` for E2E testing later.
+
+#### ❓ Give me a confidence rating for sprint success based on current progress
+- 8.5/10 — Almost all work is done; just finish the final test file and write Retro5. Avoid scope creep.
+
+#### ❓ Should I do subsystem integration tests (task table + stat card system)?
+- Yes, but keep it limited in scope. Test 2–3 core flows where TaskTable updates affect StatCardSystem. Helps validate system-level behavior and provides coverage without overdoing it.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- You’re wrapping up Sprint 5 strong, with testing nearly complete and documentation tasks planned.
+- Integration testing is a useful but optional enhancement — worth doing briefly now, expanding later if needed.
+
+#### 🗝️ Key Decisions
+- Don't unit test the functions or move them to a util folder script as they are not reusable and are simple enough
+- Create an integration test for TaskTable and StatCardSystem but don't spend too much time on it
+
+#### 📌 Action Items
+- Finish `StatCardSystem.test.jsx`
+- Start writing `TaskTable_StatCardSystem.test.jsx`
+
+---
