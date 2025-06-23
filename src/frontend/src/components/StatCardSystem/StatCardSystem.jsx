@@ -1,6 +1,5 @@
 import { useContext, useMemo } from 'react';
 import { TaskContext } from '@/contexts/TaskContext';
-import cardData from "@/utils/cardData";
 import StatCard from "@/components/StatCardSystem/StatCard";
 import StatusCounter from "@/components/StatCardSystem/StatusCounter";
 import toLocalMidnight from '@/utils/toLocalMidnight';
@@ -29,7 +28,7 @@ function evalStatus(zScore, _std, sum) {
   else return "undefined";
 }
 
-const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName) => (
+const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName, cardData) => (
   <div className={`${gridClassName} gap-4`}>
     {evaluatedCardStatus
       .filter(card => daysRegex.test(card.name))
@@ -44,7 +43,7 @@ const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName) => (
 );
 
 
-function StatCardSystem() {
+function StatCardSystem({cardData}) {
   const { tasks } = useContext(TaskContext);
 
   const evaluatedCardSums = useMemo(() =>
@@ -87,8 +86,8 @@ function StatCardSystem() {
     <div className="w-[73.5%] mx-auto border-2 border-dashed pt-2">
         <h1 className="text-2xl pt-2 pb-4 text-left pl-8">Stat Card System</h1>
 
-        {renderCardRow(evaluatedCardStatus, /monday|tuesday|wednesday|thursday/i, "grid grid-cols-4")}
-        {renderCardRow(evaluatedCardStatus, /friday|saturday|sunday/i, "grid grid-cols-3 mt-4")}
+        {renderCardRow(evaluatedCardStatus, /monday|tuesday|wednesday|thursday/i, "grid grid-cols-4", cardData)}
+        {renderCardRow(evaluatedCardStatus, /friday|saturday|sunday/i, "grid grid-cols-3 mt-4", cardData)}
 
         <div>
             <StatusCounter statusCount={statusCount} />

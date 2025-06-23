@@ -23,8 +23,7 @@ describe("CountElement unit tests", () => {
         expect(container).toBeInTheDocument();
     });
 
-    // applies default styling and count when invalid props are passed
-    it("", () => {
+    it("applies default styling and count when invalid props are passed", () => {
         const count = {'objKey': 123};
         const styling = 512;
         const { container } = render(<CountElement count={count} styling={styling}/>)

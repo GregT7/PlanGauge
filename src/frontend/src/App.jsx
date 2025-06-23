@@ -2,6 +2,7 @@ import TaskContextProvider from "../src/contexts/TaskContext";
 import { ThemeProvider } from './components/ui/ThemeProvider'
 import TaskTable from "./components/TaskTable/TaskTable"
 import StatCardSystem from "./components/StatCardSystem/StatCardSystem";
+import cardData from "@/utils/cardData";
 import './App.css'
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
             <TaskContextProvider>
               <div className="space-y-10 pt-5">
                 <TaskTable/>
-                <StatCardSystem/>
+                <StatCardSystem cardData={cardData}/>
               </div>
             </TaskContextProvider>
             
