@@ -3,13 +3,13 @@
 ## 📅 Sprint #5 – Finish up Testing
 * **Dates:** June 17 - June 23 (2025)
 * **Total Days:** 7 days
-* **Total Standups:** 
-* **Standup Participation:** 
+* **Total Standups:** 6
+* **Standup Participation:** 85.7% 
 
 ## 🗓️ Standup 1 – Refining the Standup Process
 
 ### 🧾 Overview
-* **Date:** 2025-06-17
+* **Date:** June 17, 2025
 * **Time:** 10:30 AM - 11:30 AM
 * **Attendees:** Solo (Self, ChatGPT) 
 * **Discussed Backlog Items:**  
