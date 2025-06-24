@@ -1,4 +1,4 @@
-import { TableCell } from "@/components/ui/table";
+import { TableCell } from "../ui/table";
 
 const NameInput = ({task = {'name': ''}, updateTaskField, className}) => {
     const validName = typeof task?.name === "string";

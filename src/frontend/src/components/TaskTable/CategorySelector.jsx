@@ -1,16 +1,12 @@
-import { TableCell } from "./ui/table";
+import { TableCell } from "../ui/table"; 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "../ui/dropdown-menu"
 
-
-
-
-    // "Career": "bg-amber-600",
 const CategorySelector = ({task, onChange=()=>{}, categories={"Default Category": "bg-red-600"}, className=""}) => {
   const validKey = typeof task?.category === "string" && (task.category in categories || task.category == "");
   const categoryKey = validKey ? task.category : 'Default Category';

@@ -1,4 +1,4 @@
-import { TableCell } from "@/components/ui/table";
+import { TableCell } from "../ui/table";
 
 const TimeInput = ({ task = { id: Date.now(), time_estimation: 0 }, updateTaskField = () => {}, className }) => {
   return (
