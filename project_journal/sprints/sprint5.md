@@ -21,5 +21,15 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: insert text here...
+* Major Feedback:
+    - Successfully completed all assigned backlog items and merged two clean, well-documented pull requests.
+    - Demonstrated noticeable growth in planning consistency through daily standups and improved task tracking.
+    - Frontend development is in a strong place — system is modular, tested, and visually functional.
+    - Project timeline may be at risk if backend and database phases don’t begin with stronger structure and planning discipline.
+    - Planning gaps from this sprint revealed the need for enforcing backlog dependencies more strictly and reserving space for process work.
 * Retrospective Notes: insert text here...
+    - Maintained high momentum with 6/7 days of standups and full backlog completion.
+    - Deferred retrospectives and backend planning created friction moving into Sprint 6.
+    - Felt slightly overextended near the end of the sprint, causing skipped reflection tasks.
+    - Chose to delay diagrams and integration planning to avoid burnout — a tradeoff that was intentional but had consequences.
+    - Learned the importance of respecting existing backlog dependencies and enforcing transition space.
