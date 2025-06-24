@@ -1,8 +1,7 @@
 import { expect, it, describe } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { screen, render } from '@testing-library/react';
-
-import TimeInput from "../components/TimeInput";
+import TimeInput from "@/components/TaskTable/TimeInput";
 import { useState } from 'react';
 
 const TestWrapper = ({ defaultTask }) => {

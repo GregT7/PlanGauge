@@ -2,10 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
-import RowSelector from '../components/RowSelector';
+import RowSelector from '@/components/TaskTable/RowSelector';
 
-            //   <RowSelector selected={task.selected}
-            //   onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}/>
 const TestWrapper = ({newTask}) => {
     const [task, setTask] = useState(newTask);
 

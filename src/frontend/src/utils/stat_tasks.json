@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Plan Tool p58",
+    "category": "Career",
+    "due_date": "2025-07-03",
+    "start_date": "2025-06-16",
+    "time_estimation": 90,
+    "selected": false
+  },
+  {
+    "id": 2,
+    "name": "Update CV p6",
+    "category": "Career",
+    "due_date": "2025-07-25",
+    "start_date": "2025-06-17",
+    "time_estimation": 130,
+    "selected": false
+  },
+  {
+    "id": 3,
+    "name": "Plan Japan trip p2",
+    "category": "Life",
+    "due_date": "2025-08-06",
+    "start_date": "2025-06-18",
+    "time_estimation": 115,
+    "selected": false
+  },
+  {
+    "id": 4,
+    "name": "Update CV p6",
+    "category": "Career",
+    "due_date": "2025-07-25",
+    "start_date": "2025-06-19",
+    "time_estimation": 75,
+    "selected": false
+  },
+  {
+    "id": 5,
+    "name": "Update CV p6",
+    "category": "Career",
+    "due_date": "2025-07-25",
+    "start_date": "2025-06-20",
+    "time_estimation": 70,
+    "selected": false
+  },
+  {
+    "id": 6,
+    "name": "Update CV p6",
+    "category": "Career",
+    "due_date": "2025-07-25",
+    "start_date": "2025-06-21",
+    "time_estimation": 55,
+    "selected": false
+  },
+  {
+    "id": 7,
+    "name": "Update CV p6",
+    "category": "Career",
+    "due_date": "2025-07-25",
+    "start_date": "2025-06-22",
+    "time_estimation": 20,
+    "selected": false
+  }
+]

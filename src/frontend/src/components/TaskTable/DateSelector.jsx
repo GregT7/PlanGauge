@@ -2,9 +2,9 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { Calendar } from "@/components/ui/calendar";
-import { TableCell } from "./ui/table";
+} from "../ui/popover"
+import { Calendar } from "../ui/calendar";
+import { TableCell } from "../ui/table";
 import { parse, isValid, format } from "date-fns";
 
 
