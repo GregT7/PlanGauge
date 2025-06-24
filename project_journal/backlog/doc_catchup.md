@@ -2,8 +2,8 @@
 
 ## 📝 Task Overview
 * Sprint: 4
-* Dates: June 9 - ... (2025)
-* Status: In progress
+* Dates: June 9 - June 12 (2025)
+* Status: Completed
 * Story Points: 4
 * Dependencies:
   * Sprint 1, 2, and 3 completion

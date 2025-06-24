@@ -2,8 +2,8 @@
 
 ## 📝 Task Overview
 * Sprint: 4
-* Dates: ... - ... (2025)
-* Status: In progress
+* Dates: June 19 - June 23 (2025)
+* Status: Completed
 * Story Points: 7
 * Dependencies:
     * Data Table: Need basic CRUD table implemented so the stat cards can take the data from the table and other sources to make calculations
