@@ -2,8 +2,8 @@
 
 ## 📝 Task Overview
 * Sprint: 4
-* Dates: June 7 - ... (2025)
-* Status: In progress
+* Dates: June 7 - June 19 (2025)
+* Status: Completed
 * Story Points: 6
 * Dependencies:
   * Data Entry Table - need to have at least one component of the project written before something can be tested or have code be reviewed

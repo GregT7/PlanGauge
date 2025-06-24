@@ -2,8 +2,8 @@
 
 ## 📝 Task Overview
 * Sprint: 4
-* Dates: June 12 - ... (2025)
-* Status: Not Started
+* Dates: June 12 - June 20 (2025)
+* Status: Completed
 * Story Points: 4
 * Dependencies:
   * Documentation Catchup -- want to finish this before moving on to additional documentation + planning tasks
