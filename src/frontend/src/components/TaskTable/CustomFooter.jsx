@@ -2,7 +2,7 @@ import {
   TableCell,
   TableRow,
   TableFooter
-} from "@/components/ui/table";
+} from "../ui/table";
 
 const CustomFooter = ({handleAddTask, calcSum}) => {
 

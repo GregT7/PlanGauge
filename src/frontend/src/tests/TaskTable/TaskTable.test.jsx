@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TaskTable from '../components/TaskTable';
-import default_tasks from '../../public/default_tasks';
-import { TaskContext } from '../contexts/TaskContext';
+import TaskTable from '@/components/TaskTable/TaskTable';
+import default_tasks from '@/utils/default_tasks';
+import { TaskContext } from '@/contexts/TaskContext';
 import { vi } from 'vitest';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+
 
 const renderWithContext = (tasks, setTasks = vi.fn()) => {
+
   return render(
     <TaskContext.Provider value={{ tasks, setTasks }}>
       <TaskTable />
@@ -19,8 +21,14 @@ const renderWithContext = (tasks, setTasks = vi.fn()) => {
 const renderWithContextWrapper = (initialTasks) => {
   const Wrapper = ({ children }) => {
     const [tasks, setTasks] = useState(initialTasks);
+
+    const timeSum = useMemo(() =>
+        tasks.reduce((sum, task) => sum + task.time_estimation , 0), 
+        [tasks]
+    );
+
     return (
-      <TaskContext.Provider value={{ tasks, setTasks }}>
+      <TaskContext.Provider value={{ tasks, setTasks, timeSum }}>
         {children}
       </TaskContext.Provider>
     );
@@ -67,7 +75,7 @@ describe('TaskTable Integration Tests', () => {
   });
 
   it('calculates and displays the correct sum of time estimations', () => {
-    renderWithContext([
+    renderWithContextWrapper([
       { id: 1, name: 'A', time_estimation: 30 },
       { id: 2, name: 'B', time_estimation: 70 }
     ]);

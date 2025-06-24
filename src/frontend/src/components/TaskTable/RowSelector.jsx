@@ -1,5 +1,5 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { TableCell } from "@/components/ui/table";
+import { Checkbox } from "../ui/checkbox";
+import { TableCell } from "../ui/table";
 
 
 const RowSelector = ({ selected, onCheckedChange }) => {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import CustomFooter from "../components/CustomFooter";
+import CustomFooter from "@/components/TaskTable/CustomFooter";
 
 describe('custom footer unit testing', () => {
     it('does not crash without props', () => {

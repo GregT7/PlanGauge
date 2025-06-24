@@ -1,9 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen} from '@testing-library/react';
-import "../components/CategorySelector";
 import userEvent from "@testing-library/user-event";
-import CategorySelector from '../components/CategorySelector';
-import default_tasks from '../../public/default_tasks';
+import CategorySelector from '@/components/TaskTable/CategorySelector';
+import default_tasks from '@/utils/default_tasks';
 import { useState } from "react"
 import {
   Table,

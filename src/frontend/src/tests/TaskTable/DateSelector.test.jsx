@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { render, screen, within } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
-import DateSelector from "../components/DateSelector";
+import DateSelector from "@/components/TaskTable/DateSelector";
 import { useState } from "react"
 import { format } from "date-fns";
 
