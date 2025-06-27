@@ -86,3 +86,82 @@
 - Complete Retrospective 5  
 
 ---
+
+## 🗓️ Standup #2 – Flask Intro
+
+### 🧾 Overview
+* **Date:** June 27, 2025  
+* **Time:** 11:20 AM - 12:00 PM  
+* **Attendees:** Solo
+* **Discussed Backlog Items:**  
+  - Backend Setup & Integration  
+  - Database Setup & Integration  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Set up basic Supabase SQL database and insert records  
+- Prepare Flask backend structure  
+- Address backlog instability and scope creep  
+
+#### 📈 Previous Progress
+- Entered and cleaned most recent records in Excel  
+- Created Supabase account and project  
+- Designed ER diagram and translated it into PostgreSQL SQL schema  
+- Imported cleaned CSV data into Supabase  
+- Chose Supabase over MongoDB for its structured data and integrity  
+- Labeled extra backlog items to maintain MVS focus  
+
+#### 🧱 Problems & Blockers
+- Sprint subtasks are changing frequently and lack clear scope  
+- Scope creep emerging due to tempting extra ideas  
+- Intertwined dependencies between tasks make tracking and planning harder  
+- Limited backend/Flask experience under time constraints  
+- Downloaded Notion plan data exists, but is not currently required  
+- Potentially useful analytics tables for ML models are a distraction from MVS  
+
+#### ⏳ Pending Actions
+- Setup Flask app structure  
+
+#### 🔜 Next Steps
+- Decide on Flask learning strategy (e.g., take Codecademy course?)  
+- Create backend branch  
+- Begin development with minimum functional components
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Identify dependencies I might be missing based on today's tasks
+- Flask CORS setup for React communication  
+- Supabase client library or psycopg2 for DB connection  
+- `.env` management for API keys and credentials  
+- Possible database migration tool (e.g., Alembic) if schema evolves
+
+#### ❓ Summarize my last 3 standups to identify trends or concerns
+- Standup #0: Planning stage, finalized backlog and MVS priorities  
+- Standup #1: Frontend nearly complete, backend scope started forming  
+- Standup #2: Backend foundation in progress, struggle with scope control and complex dependencies
+
+**Trend:** Forward progress continues, but consistently challenged by shifting task definitions and unplanned idea sprawl
+
+#### ❓ Are my tasks aligned with this sprint's goals?
+Yes, the current work on Flask and Supabase supports the MVS. However, integrating Notion data and expanding analytics is not MVS-aligned and should be deferred to the icebox.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- A rigid scope lock doesn't fit the discovery-heavy nature of the project right now  
+- An adaptive scope lock model—locking sprint goals but allowing evolving subtasks—strikes the right balance  
+- Using a “learning buffer” and a “parking lot” (icebox) can manage ideas without disrupting flow
+
+#### 🗝️ Key Decisions
+- Icebox section for preserving ideas outside of scope is a great idea, will implement this now  
+- Don't create new tables or clean additional data that is unneeded to achieve the MVS  
+- Start creating .env files for storing API keys and other sensitive config info  
+
+#### 📌 Action Items
+- Create icebox section in Notion for new ideas that are outside of scope but can be reviewed and decided upon during each sprint retrospective  
+- Create a new branch for backend: `backend-setup`  
+- Set up Flask project structure (app.py, routes.py, models.py, etc.)  
+- Install dependencies (`flask`, `python-dotenv`, `supabase-py`, `flask-cors`, etc.)
+
+---
