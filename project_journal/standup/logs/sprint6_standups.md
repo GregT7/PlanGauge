@@ -202,14 +202,14 @@ Yes, the current work on Flask and Supabase supports the MVS. However, integrati
 3. Continue backend development using **Flask** in conjunction with the **Supabase** database.
 4. Maintain professional development workflow by using **pull requests**, **code reviews**, and **automated testing**.
 5. Evaluate whether to include a **learning quiz** as part of the backend backlog for self-assessment and deeper understanding.
+6. Continue using visual assets (GIFs, live demos) in future standups to effectively communicate progress.
 
 #### 📌 Action Items
 1. Add design rationale for status counter colors to the UI (e.g., tooltip or help section).
 2. Continue Flask setup and learning.
-3. Define and create subtasks in Notion for backend and database integration, including endpoints for frontend communication.
-4. Ensure subtasks reflect **full-stack integration**, not just internal backend/database concerns.
-5. Create a backend learning quiz (tentative).
-6. Continue using visual assets (GIFs, live demos) in future standups to effectively communicate progress.
+3. Ensure subtasks reflect **full-stack integration**, not just internal backend/database concerns.
+4. Create a backend learning quiz (tentative).
+
 
 ---
 
