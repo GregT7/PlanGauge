@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CountElement unit tests > passes snapshot test 1`] = `
+<div>
+  <div
+    class="flex items-center gap-1"
+  >
+    <div
+      class="w-12 h-12 rounded-full bg-emerald-500"
+      data-testid="circle-div"
+    />
+    <span>
+      <span>
+        x3
+      </span>
+    </span>
+  </div>
+</div>
+`;
