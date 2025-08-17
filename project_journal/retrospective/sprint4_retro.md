@@ -1,7 +1,7 @@
 # 🌀 Retrospective #4 – Overestimating Capabilities
 
 ## 📋 Summary
-**Date:** (Tuesday, June 17, 2025)
+**Date:** Tuesday, June 17, 2025
 
 **What Went Well**
 - was adaptive:
