@@ -9,7 +9,7 @@
 - Met with Dr. Raymer to review project and get career feedback
 
 **What Didn't Go Well**
-Didn't work on things consistently and according to plans, got little done/accomplished with my time
+- Didn't work on things consistently and according to plans, got little done/accomplished with my time
 
 ---
 
