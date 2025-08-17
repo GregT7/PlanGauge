@@ -24,17 +24,17 @@
 ## 🛠️ Solutions
 
 **Proposed Solutions**
-1. Organize a consistent meeting time in the morning for the daily standups
-2. Fill out the standup agenda prior
-3. For meetings, create flexible presentation where visuals are included, share this using the tv
-4. Put specific actions and the day under the sprint file in Notion (Sprint dashboard)
-- pool from backlog, daily standup, and retrospective
-5. Email Dr. Raymer and try to schedule a meeting discussing the first sprint and progress so far
+- Organize a consistent meeting time in the morning for the daily standups
+- Fill out the standup agenda prior
+- For meetings, create flexible presentation where visuals are included, share this using the tv
+- Put specific actions and the day under the sprint file in Notion (Sprint dashboard)
+    - pool from backlog, daily standup, and retrospective
+- Email Dr. Raymer and try to schedule a meeting discussing the first sprint and progress so far
 
 **Action Plan**
-1. Coordinate with parents to find a good meet time (try not to choose a time too early or too late)
-2. Put standup prep in weekly plan
-3. Put HDMI chord next to tv for easy presentation setup
-4. Create template standup presenation slides and save in easily rememberable location
-5. Prior to standup, put todo items for the day inside the current sprint's respective page, detailing the date
-6. Email Dr. Raymer to schedule meeting if possible
+- Coordinate with parents to find a good meet time (try not to choose a time too early or too late)
+- Put standup prep in weekly plan
+- Put HDMI chord next to tv for easy presentation setup
+- Create template standup presenation slides and save in easily rememberable location
+- Prior to standup, put todo items for the day inside the current sprint's respective page, detailing the date
+- Email Dr. Raymer to schedule meeting if possible
