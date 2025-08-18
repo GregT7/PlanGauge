@@ -49,6 +49,7 @@
     - Probably will need to create some document to make this plan more "official" to increase the chances I follow through
     - Might want to consider an official starting time in the morning and ending time in the afternoon
     - Need some way to track + enforce the planned schedule
+    - Consider adding a reward for follow through
 - Ensure the last day is reserved for completing the retrospective, planning, documentation, etc.
 - Assign only one backlog item per sprint and add new items as things are completed only during the sprint
 - Further research and define the backlog items that will be worked on in the immediate future
