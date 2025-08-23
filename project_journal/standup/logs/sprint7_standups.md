@@ -71,4 +71,117 @@
 - Delete existing Supabase records  
 - Populate Categorization table from Excel  
 - Add category references (`cat_reference`) to all tables  
-- Insert cleaned task records into Supabase  
+- Insert cleaned task records into Supabase 
+
+---
+
+## 🗓️ Standup 2 – Database Troubles
+
+### 🧾 Overview
+* **Date:** Saturday, August 23 (2025)
+* **Time:** 1:43 PM
+* **Attendees:** Solo
+* **Discussed Backlog Items:**  
+  - Database Setup
+  - Intro to Flask
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Encountered more issues with database design but finally fixed it (now in BCNF)
+- Still need to work more on the flask solo project
+- Not sure if the backend will see any work this sprint
+
+#### 📈 Previous Progress
+- Fixed database schema design: went from 2NF to BCNF
+- Fixed functional dependency diagram and posted into assets folder
+- Wrote + executed SQL code to create corresponding tables
+
+#### 🧱 Problems & Blockers
+- Stored data does not match the formatting of the new schema design, will need to refactor stored data
+- Not working on backend much
+- Haven't really worked on "Backend Setup" backlog
+
+#### ⏳ Pending Actions
+- Database Setup
+
+#### 🔜 Next Steps
+- Write basic app setup for flask (Backend Setup)
+- Reformat stored data to match new schema design without any data integrity violations
+- Work on Intro to Flask project for 30 mins
+
+### 🤖 ChatGPT Reflection  
+
+#### ❓ Question 1  
+- **What feels unclear or risky about today’s tasks?**  
+  Reformatting stored data is the biggest risk—there’s a chance of mismatched references or data loss if done carelessly. Flask setup is lower risk but still requires consistent work sessions.  
+
+#### ❓ Question 2  
+- **What am I assuming that might be wrong?**  
+  Assuming that the corrected schema will be easy to populate—this might not be true if old data is too messy to map directly. Also assuming backend work can be pushed later without affecting sprint scope, which may not hold if time runs short.  
+
+### 🧾 Results  
+
+#### 🧠 Discussion Notes  
+- Database schema issues have been resolved and design is in BCNF  
+- Realized data refactoring will take more time than expected  
+- Backend setup is lagging behind, but Flask solo project remains a viable entry point  
+
+#### 🗝️ Key Decisions  
+- Schema will not be revised further; focus shifts to refactoring data  
+- Minimal Flask setup will be attempted this sprint to avoid total backend stagnation  
+- Prioritize database integrity over speed when reformatting stored data  
+
+#### 📌 Action Items  
+- Reformat existing stored data to match new schema  
+- Create a basic Flask app scaffold (Backend Setup)  
+- Dedicate at least 30 minutes to the Flask solo project
+
+---
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
