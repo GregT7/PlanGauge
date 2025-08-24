@@ -139,6 +139,81 @@
 
 ---
 
+## 🗓️ Standup 3 – Flask Routing & Scope Creep
+
+### 🧾 Overview
+* **Date:** Sunday, August 24th (2025)  
+* **Time:** 12:08 PM  
+* **Attendees:** Solo  
+* **Discussed Backlog Items:**  
+  - Database Setup  
+  - Intro to Flask  
+  - Backend Setup  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Completed database setup for now  
+- Need to finish Coursera course on Flask  
+- Not fully understanding Flask but will continue working on it  
+
+#### 📈 Previous Progress
+- Completed **Database Setup** backlog item  
+- Created comprehensive quiz covering concepts in this sprint  
+- Nearly finished Coursera Flask course  
+- Began **Backend Setup** backlog item  
+- Created swimlane diagram for visualizing system processes  
+
+#### 🧱 Problems & Blockers
+- Designing API endpoints in Flask (routing.py) still confusing  
+- Subsystem flow unclear:  
+  - How React should interact with Flask  
+  - Division of responsibilities (frontend vs backend)  
+- Swimlane diagram issues:  
+  - User should not need to manually launch both servers, may add complexity  
+  - Notion lane missing in the diagram  
+- Scope Creep: Swimlane diagram not tied to current backlog items  
+
+#### ⏳ Pending Actions
+- Finish Coursera Flask course  
+- Set up backend app and routing  
+
+#### 🔜 Next Steps
+- Finish course  
+- Install backend dependencies (supabase-py)  
+- Create a small API endpoint spec table/diagram  
+- Implement at least 3 routes  
+- Test one route with curl  
+
+### 🤖 ChatGPT Reflection  
+
+#### ❓ Question 1  
+**Should I continue creating the swimlane diagram even though it’s not in the backlog?**  
+👉 Yes, but treat it as supporting documentation rather than a deliverable. It clarifies scope and roles (React = UI input + display, Flask = logic + API/DB/Notion interaction). Keep it lightweight and avoid overinvestment.  
+
+#### ❓ Question 2  
+**Confidence rating for sprint success with two days left, considering full backlog definitions of done?**  
+👉 **~45–50% confidence** if *full completion* is required (both backlog items fully meeting DoD).  
+👉 **~65–70% confidence** if *minimum viable finish* is acceptable (Intro to Flask done, Backend Setup progressed with dependencies + structure + `/ping` route working, but Supabase connection deferred).  
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Routing confusion stems from unclear frontend vs backend responsibilities.  
+- Swimlane diagrams help clarify flow but should not derail sprint focus.  
+
+#### 🗝️ Key Decisions
+- Treat swimlane diagram as reference only, not backlog work.  
+- Prioritize Intro to Flask to guarantee 1 backlog item closed.  
+- Limit Backend Setup to essentials (dependencies, project structure, `/ping` route).  
+
+#### 📌 Action Items
+- Complete Coursera course + summary + quiz  
+- Implement basic backend project structure + test route  
+- Connect Supabase if time permits; otherwise defer to next sprint  
+
+---
+
 ## 🗓️ Standup [#] – [Standup Title]
 
 ### 🧾 Overview
