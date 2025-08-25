@@ -214,49 +214,81 @@
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 4 – Same Mistakes
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Monday, August 25th (2025)
+* **Time:** 3:55 PM
+* **Attendees:** Solo
 * **Discussed Backlog Items:**  
-  - 
+  - Intro to Flask  
+  - Backend Setup  
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Big problem: didn’t follow up on decision to leave last day for retrospective + planning  
+- Made some progress on Backend but the backlog item still isn’t fully defined  
+- Was easy to connect Flask to Supabase, only takes a couple lines of code  
+- Almost done with Intro to Flask backlog item  
+- Didn’t follow up on swimlane diagram completion  
 
 #### 📈 Previous Progress
-- 
+- Created routes table for Flask outlining what API endpoints need to be defined  
+- Implemented basic `/health` route for testing and started on `/stats` route  
+- Tested Flask routes with curl and verified it works  
+- Connected Flask to Supabase and was able to successfully query the database  
+- Finished Coursera course, just need to finalize routing  
 
 #### 🧱 Problems & Blockers
-- 
+- Scope creep: added extra networking questions to quiz  
+- Not following through with previous key decisions (e.g., documentation on last sprint day)  
+- Backend Setup subtasks unclear, out of order, not reflecting actual work done  
+- Progress feels slower than expected  
+- Swimlane diagram incomplete, Lucidchart too limiting (need Whimsical)  
+- Accidentally coding backend changes on `main` branch  
 
 #### ⏳ Pending Actions
-- 
+- Finish up Flask routing and clean up code  
+- Transfer code to `backend_setup` branch and delete from `main`  
+- Complete swimlane diagrams in Whimsical  
+- Redefine “Backend Setup” subtasks for clarity  
 
 #### 🔜 Next Steps
-- 
+- Move backend code into `backend_setup` branch, reset `main`  
+- Separate app into `app`, `routes`, and `utils` files  
+- Complete `/stats` route  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+---
+
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**Q:** What can I do to ensure I finally follow through with documentation and planning on the final day of the sprint?  
+**A:** Treat documentation as a backlog item, not an optional add-on. Assign it subtasks (e.g., “write retrospective,” “update sprint doc,” “commit diagrams”). Block off the final 1–2 hours of the sprint and commit only to this work—no coding.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**Q:** I feel like I keep making the same mistakes and not following through with key decisions. Do you agree or disagree? What are your observations?  
+**A:** Agree. Based on your last standups, there’s a recurring pattern: (1) sprint planning not strictly followed, (2) scope creep mid-sprint, (3) final-day documentation neglected. The technical side (connecting Flask, task table, etc) moves forward, but planning/structure is consistently sacrificed. Confidence in finishing all backlog items for a sprint remains **low to medium** unless documentation and planning are elevated to the same priority as coding.
+
+---
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Technical execution is strong (Flask ↔ Supabase working, task table functioning), but project management discipline is inconsistent.  
+- “Backend Setup” backlog is misaligned with actual coding order; needs restructuring.  
+- Decision to always document on sprint’s final day was not upheld—pattern repeats.  
 
 #### 🗝️ Key Decisions
-- 
+- Documentation and retrospectives will be explicit backlog items.  
+- Move backend changes to a feature branch to avoid polluting `main`.  
+- Switch swimlane diagrams to Whimsical for flexibility.  
 
 #### 📌 Action Items
-- 
+- [ ] Restructure “Backend Setup” backlog subtasks to match real workflow  
+- [ ] Move backend code into `backend_setup` branch
+- [ ] Schedule documentation/retrospective as fixed backlog items for sprint end  
+- [ ] Recreate swimlane diagrams in Whimsical
 
---- 
+---
