@@ -1,4 +1,9 @@
-## 🗓️ Standup 2 – Database Redesign + Flask Kickoff
+# 📅 Sprint #7 – Backend Continued
+* **Dates:** August 19th - August 25th (2025)
+
+---
+
+## 🗓️ Standup 1 – Database Redesign + Flask Kickoff
 
 ### 🧾 Overview
 * **Date:** Thursday, August 21 (2025)

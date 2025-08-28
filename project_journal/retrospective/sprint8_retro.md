@@ -13,6 +13,8 @@
     * [] Key decision 1... (8/24)
     * [x] Key decision 2... (8/25)
     * [] Key decision 3... (8/26)
+
+* **Q: Did I reserve the final sprint day for planning + retrospective?**
   
 ## 📋 Summary
 **Date:** Day of Week, Month Day, Year (Tuesday, June 17, 2025)
