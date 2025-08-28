@@ -1,4 +1,4 @@
-# 🧭 Standup Digests Log
+# 🧭 Standup Reports Log
 
 ## 📅 Sprint #6 – Intro to the Backend
 * **Dates:** June 24 - June 29 (2025)
