@@ -281,14 +281,13 @@
 - Decision to always document on sprint’s final day was not upheld—pattern repeats.  
 
 #### 🗝️ Key Decisions
-- Documentation and retrospectives will be explicit backlog items.  
 - Move backend changes to a feature branch to avoid polluting `main`.  
-- Switch swimlane diagrams to Whimsical for flexibility.  
+- Switch swimlane diagrams to Whimsical for flexibility
+- Make individual swimlane diagrams for each process instead of combining them all into one
 
 #### 📌 Action Items
-- [ ] Restructure “Backend Setup” backlog subtasks to match real workflow  
-- [ ] Move backend code into `backend_setup` branch
-- [ ] Schedule documentation/retrospective as fixed backlog items for sprint end  
+- [x] Restructure “Backend Setup” backlog subtasks to match real workflow  
+- [x] Move backend code into `backend_setup` branch
 - [ ] Recreate swimlane diagrams in Whimsical
 
 ---
