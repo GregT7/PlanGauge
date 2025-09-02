@@ -2,8 +2,8 @@
 
 ## 📝 Overview
 * Dates: August 19 - August 29 (2025)
-* Status: In Progress
-* Backlog Progress: 0 backlogs completed / 3 backlogs assigned ( X% )
+* Status: Completed
+* Backlog Progress: 1 backlogs completed / 3 backlogs assigned ( 33% )
 * Tasks Assigned:
     * Database Setup
     * Intro to Flask
@@ -25,5 +25,5 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: insert text here...
-* Retrospective Notes: insert text here...
+* Major Feedback: Sprint 7 showed strong technical progress with the Flask setup, database redesign into BCNF, and consistent backlog momentum, but the sprint was slowed by planning disorganization and difficulty following through on standup action items. While you adapted well to unexpected schema issues and balanced multiple backlog items, gaps emerged around documentation (ER diagram not updated) and tracking key decisions. The solutions you proposed—like blocking time for retros/planning, adding decision-tracking metrics, and creating a backlog for retro ideas—set a solid foundation for reducing friction in future sprints and ensuring more consistent follow-through.
+* Retrospective Notes: Sprint 7 notes highlight that you made meaningful progress by coding with Flask for the first time, completing the Coursera course, and restructuring the database schema into BCNF with supporting diagrams. Standups were held more consistently, and backlog items saw steady advancement, with most either completed or close to done. However, challenges included difficulty managing scattered to-dos, overlooking schema issues until midway, and limited follow-through on updating documentation and presenting work.
