@@ -4,7 +4,7 @@
 * **Dates:** 
 * **Standup Participation:**
   * **Total Standups:**  
-  * **Total Days:**
+  * **Total Days:** 16
 
 * **Key Decision Follow-through**:
   * **Key Decisions Pursued:**
