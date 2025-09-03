@@ -1,0 +1,14 @@
+-- general tables
+ALTER TABLE public.assignment ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.category ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.plan_submission ENABLE ROW LEVEL SECURITY;
+
+-- plan tables
+ALTER TABLE public.plan ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.assigned_plan ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.general_plan ENABLE ROW LEVEL SECURITY;
+
+-- work tables
+ALTER TABLE public.work ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.assigned_work ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.general_work ENABLE ROW LEVEL SECURITY;
