@@ -101,6 +101,119 @@
 ---
 
 
+## 🗓️ Standup 2 – Refining Subsystem Integration
+
+### 🧾 Overview
+* **Date:** Thursday, September 4th (2025)
+* **Time:** 1:54 PM
+* **Attendees:** Solo
+* **Discussed Backlog Items:**  
+  - Intro to Flask
+  - Backend Setup
+  - Subsystem Integration
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Almost done with 'Backend Setup' and 'Intro to Flask' backlog items
+- Subsystem Integration backlog is still a little confusing, need to refine and research subtasks + DoD more
+- Need to work on some documentation issues
+- Want to host a presentation on Friday
+
+#### 📈 Previous Progress
+- Mostly finished /api/stats endpoint and wrote some unit tests to verify functionality
+  - Manually calculated statistic values for a single data range covering a month, then compared to the calculated values derived when curling the endpoint
+  - Locally stored the data used from the database to make calculations into a .txt file for future reference/validation
+- Finished the web architecture + Flask quiz
+
+#### 🧱 Problems & Blockers
+- Subsystem Integration subtasks and DoD are not clear enough
+- Not sure where to store Excel file documenting Flask API endpoints  
+  - Living document but subject to frequent change → unclear if versions should go in sprint folders or project management folder
+- Unsure how to handle design artifacts (keep separate asset folder vs. embed in finalized `.md` docs)
+- Progress coding feels slow — several weeks just to create a bare-bones Flask app
+- Rediscovered Ice Box in Notion but haven’t been using it
+
+#### ⏳ Pending Actions
+- Flask basics quiz
+- Define Subsystem Integration backlog item
+- Finish /api/stats endpoint (status message for connection & processing tests)
+
+#### 🔜 Next Steps
+- Include Flask basics quiz in deliverables
+- Create timeline + add to presentation
+- Organize standup meeting for Friday (add to planner + coordinate with parents)
+- Upload new screenshots of test results for /api/stats and utils functions
+- Upload quiz scores for Flask & web architecture quiz
+- Update Notion after backlog completion:
+  - Sprint page
+  - Product backlog status
+- Update backend description:
+  - Replace “choose 3 metrics” with “write unit tests”
+  - Add try/except branch + `connected: true/false` flag
+  - Review if more pieces of `/stats` endpoint are needed
+  - Consider updating API Excel doc
+- Rewrite & explore subsystem integration — still unclear
+
+---
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1  
+**Identify dependencies I might be missing based on today's tasks.**  
+- **Frontend–Backend contract**: Need consistent API schema for TaskTable data → depends on a stable `/api/stats` and `/api/save_plans` 
+- **Notion sync**: Subsystem integration tasks implicitly depend on Notion API setup (keys, schema mapping).  
+- **Deployment**: Docker setup may affect subsystem testing later; documenting environment early will reduce blockers.  
+
+#### ❓ Question 2  
+**What feels unclear or risky about today's tasks?**  
+- **Subsystem Integration backlog**: scope creep risk → currently overlaps with Backend Setup. Needs subtasks clarified into: (1) React–Flask flow, (2) Flask–DB flow, (3) Flask–Notion flow, (4) end-to-end testing.  
+- **Living documents**: Risk of fragmentation if Excel files get versioned inconsistently. Might need a single canonical folder for “active living docs” with snapshot exports into sprint folders.  
+- **Slow progress perception**: Risk of discouragement. But given architecture complexity (React + Flask + DB + Notion), weeks for foundations is normal.  
+
+---
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Backend is progressing but subsystem integration remains ambiguous
+- Documentation storage strategy needs a decision
+- Presentation prep is a motivating milestone but adds time pressure
+
+#### 🗝️ Key Decisions
+- `/api/stats` will include something to indicate status like `connected: true/false` for better response clarity
+- Replace arbitrary metric choices with systematic unit testing as DoD
+- Need to define a clear policy for handling “living documents” (API Excel, diagrams)
+
+#### 📌 Action Items
+- [ ] Draft subsystem integration subtasks (React ↔ Flask, Flask ↔ DB, Flask ↔ Notion, end-to-end tests)
+- [ ] Add connection status flag + try/except to `/api/stats`
+- [ ] Centralize “living docs” in project management folder, snapshot finalized versions into sprint folders
+- [ ] Presentation
+  - [ ] Prep timeline + visuals for Friday’s presentation
+  - [ ] Coordinate to organize time
+- [ ] Quiz Scores
+  - [ ] Take Flask basics quiz
+  - [ ] Review missing questions
+  - [ ] Upload quiz scores
+- [ ] Documentation
+  - [ ] Update Notion after completing 'Backend Setup' and 'Intro to Flask'
+    - [ ] Sprint Page
+    - [ ] Product Backlog
+  - [ ] Add screenshots of test results to assets folder
+- [ ] Finish 'Backend Setup'
+  - [ ] Update subtasks + DoD
+    - [ ] Add documentation of endpoints
+    - [ ] Add try/except + other data when for the json response of /api/stats
+  - [ ] Implement new changes
+    - [ ] Document end points
+    - [ ] Add try/except
+    - [ ] Consider other datapoints
+    - [ ] Briefly test things
+- [ ] Redefine Subsystem Integration
+
+---
+
 ## 🗓️ Standup [#] – [Standup Title]
 
 ### 🧾 Overview
