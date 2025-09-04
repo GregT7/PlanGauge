@@ -3,13 +3,13 @@ import statistics
 
 
 def find_valid_range(start, end):
-    valid_range = {'start': None, 'end': None}
+    date_range = {'start': None, 'end': None}
 
     if isinstance(start, datetime): start = start.date()
     if isinstance(end, datetime):   end   = end.date()
 
     if end < start:
-        return valid_range
+        return date_range
     
     num_days = (end - start).days
     days_offset = ((7 - start.weekday()) % 7)
@@ -23,7 +23,7 @@ def find_valid_range(start, end):
         valid_end = valid_start + timedelta(num_weeks * 7 - 1)
         return {'start': valid_start, 'end': valid_end}
     
-    return valid_range
+    return date_range
 
 def time_duration(work_record):
     time_fmt = "%H:%M:%S"
@@ -104,7 +104,7 @@ def calc_day_stats(date_range, data):
             day_vals[inits].append(current_sum)
 
     for key in day_vals.keys():
-        day_ave[key] = day_sums[key] / num_weeks if day_sums[key] != 0 else -1
+        day_ave[key] = day_sums[key] / num_weeks if num_weeks != 0 else -1
         day_std[key] = statistics.stdev(day_vals[key])
 
     return {'ave': day_ave, 'std': day_std}
