@@ -186,8 +186,6 @@
 - Need to define a clear policy for handling “living documents” (API Excel, diagrams)
 
 #### 📌 Action Items
-- [ ] Draft subsystem integration subtasks (React ↔ Flask, Flask ↔ DB, Flask ↔ Notion, end-to-end tests)
-- [ ] Add connection status flag + try/except to `/api/stats`
 - [ ] Centralize “living docs” in project management folder, snapshot finalized versions into sprint folders
 - [ ] Presentation
   - [ ] Prep timeline + visuals for Friday’s presentation
