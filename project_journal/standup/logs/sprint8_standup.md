@@ -79,23 +79,23 @@
 - Sprint extended to two weeks.  
 
 #### 📌 Action Items
-- [ ] Finalize `/api/stats` endpoint.
-	- [ ] Finalize utils script for statistics.
-    - [ ] Write Code
-    - [ ] Test Code
-      - [ ] Choose 3 date ranges
-      - [ ] Manually calculate expected statistic values
-      - [ ] Run utils script on same date ranges + compare
-      - [ ] Create script with unit tests
-	- [ ] Add utils script to `/api/stats/` route
-	- [ ] Test route
-- [ ] Take flask basics quiz
-- [ ] Reattempt web_flask_quiz:
-	- [ ] Learn Qs: 6, 7, 8, 15, 17
-	- [ ] Take Quiz again
-- [ ] Create standup presentation
-	- [ ] Set up basic structure
-	- [ ] Create + add new timeline 
+- [x]  Finalize `/api/stats` endpoint.
+    - [x]  Finalize utils script for statistics.
+        - [x]  Finish Code
+        - [x]  Test Code
+            - [x]  Choose 1 date ranges
+            - [x]  Query database and store data locally
+            - [x]  Manually calculate expected statistic values + compare using excel
+            - [x]  Add test case
+    - [x]  Add utils script to `/api/stats/` route
+    - [x]  Curl route to ensure it works (same metric values)
+- [ ]  Take flask basics quiz
+- [x]  Reattempt web_flask_quiz:
+    - [x]  Learn Qs: 6, 7, 8, 15, 17
+    - [x]  Take Quiz again
+- [ ]  Create standup presentation
+    - [x]  Set up basic structure
+    - [ ]  Create + add new timeline
  
 
 ---
