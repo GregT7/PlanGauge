@@ -1,4 +1,4 @@
-import flask, statistics
+import flask, json
 from flask import jsonify, request
 from datetime import datetime
 from app import app, supabase
@@ -27,6 +27,10 @@ def calc_stats():
 
         # curl "http://127.0.0.1:5000/api/stats?start=2025-07-01&end=2025-07-31"
         # curl "http://127.0.0.1:5000/api/stats?start=2025-06-01&end=2025-06-30"
+        # curl "http://127.0.0.1:5000/api/stats?start=2025-04-01&end=2025-04-30"
+        # curl "http://127.0.0.1:5000/api/stats?start=2025-02-13&end=2025-03-23"
+
+
         start_arg = request.args.get('start') # ?start=2024-06-14
         end_arg = request.args.get('end') # ?end=2025-08-24
 
@@ -49,26 +53,12 @@ def calc_stats():
         response = query.execute()
         data = response.data
 
-        return jsonify(calc_day_stats(date_range, data))
-        # return jsonify(calc_week_stats(date_range, data))
+        statistic_data = {
+            'week': calc_week_stats(date_range, data),
+            'day': calc_day_stats(date_range, data)
+        }
 
-
-
-
-        # time_vals = []
-        # time_sum = 0
-        # for row in rows:
-        #     fmt = "%H:%M:%S"
-        #     start = datetime.strptime(row["start_time"], fmt)
-        #     end = datetime.strptime(row["end_time"], fmt)
-        #     diff_minutes = (end - start).seconds / 60
-        #     time_vals.append(diff_minutes)
-        #     time_sum += diff_minutes
+        return jsonify(statistic_data)
         
-        # ave = time_sum / len(rows)
-        # std = statistics.stdev(time_vals)
-        # # return jsonify({'ave': ave, 'std': std, 'count': len(time_vals)}), 200
-        # return jsonify(rows)
-
     except Exception as e:
         print("Error:", str(e))
