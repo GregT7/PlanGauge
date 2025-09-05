@@ -186,31 +186,112 @@
 - Need to define a clear policy for handling “living documents” (API Excel, diagrams)
 
 #### 📌 Action Items
-- [ ] Centralize “living docs” in project management folder, snapshot finalized versions into sprint folders
-- [ ] Presentation
-  - [ ] Prep timeline + visuals for Friday’s presentation
-  - [ ] Coordinate to organize time
-- [ ] Quiz Scores
-  - [ ] Take Flask basics quiz
-  - [ ] Review missing questions
-  - [ ] Upload quiz scores
-- [ ] Documentation
-  - [ ] Update Notion after completing 'Backend Setup' and 'Intro to Flask'
-    - [ ] Sprint Page
-    - [ ] Product Backlog
-  - [ ] Add screenshots of test results to assets folder
-- [ ] Finish 'Backend Setup'
-  - [ ] Update subtasks + DoD
-    - [ ] Add documentation of endpoints
-    - [ ] Add try/except + other data when for the json response of /api/stats
-  - [ ] Implement new changes
-    - [ ] Document end points
-    - [ ] Add try/except
-    - [ ] Consider other datapoints
-    - [ ] Briefly test things
-- [ ] Redefine Subsystem Integration
+- [x]  Move flask api excel doc to project management folder and take screenshot of previous state, then save to assets folder where the excel doc was originally saved
+- [x]  Presentation
+    - [x]  Prep timeline + visuals for Friday’s presentation
+    - [x]  Coordinate to organize time
+- [x]  Quiz Scores
+    - [x]  Take Flask basics quiz
+    - [x]  Review missing questions
+    - [x]  Upload quiz scores
+- [x]  Documentation
+    - [x]  Update Notion after completing 'Backend Setup' and 'Intro to Flask’
+        - [x]  Sprint Page
+        - [x]  Product Backlog
+    - [x]  Add screenshots of test results to assets folder
+- [x]  Finish 'Backend Setup’
+    - [x]  Update subtasks + DoD
+        - [x]  Add documentation of endpoints
+        - [x]  Add try/except + other data when for the json response of /api/stats
+    - [x]  Implement new changes
+        - [x]  Document end points
+        - [x]  Add try/except + other metrics to http_response object
+            - [x]  /api/health
+            - [x]  /api/stats
+        - [x]  Consider other datapoints
+        - [x]  Briefly test things
+            - [x]  change stats error - “status” to “ok”: False
+            - [x]  remove params from stats error
+- [x]  Redefine Subsystem Integration
+    - [x]  Subtasks
+    - [x]  DoD
 
 ---
+
+## 🗓️ Standup 3 – Mid-Project Alignment
+
+### 🧾 Overview
+* **Date:** Friday, September 5th
+* **Time:** 1:30 PM 
+* **Attendees:** Self, Dad
+* **Discussed Backlog Items:**  
+  - Subsystem Integration
+  - Intro to Flask
+  - Backend Setup
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Discuss projected project conclusion (Oct 13)
+- Reviewed 6 Main backlog items
+  - x1 is already addressed (Subsystem Integration)
+  - x2 are for developing the last features
+  - x2 are for testing
+  - x1 is for making things presentable
+
+#### 📈 Previous Progress
+- Finished 'Backend Setup' and 'Intro to Flask' backlog items
+- Redefined 'Subsystem Integration' subtasks + DoD
+  - Stopped scope creep, separated subtasks into three total backlog items, then labelled the 2 new items as 'Extras'
+- Designed + passed two basic quizzes covering concepts learned for Flask (score must be 70% or greater)
+- Created rough timeline detailing the schedule from August 19 until the estimated end of the project
+
+#### 🧱 Problems & Blockers
+- Swimlane diagrams increased scope
+  - Added a bunch of error handling logic, made things more complicated
+  - Not entirely sure how to handle this, created two separate backlog items to address this but labeled them as extra
+    - 'App Startup', 'UI Alerts'
+- Will take an entire month longer to complete
+- Project Management documentation is outdated
+- Included some personal information in the text file storing a snapshot of database data used in testing
+
+#### ⏳ Pending Actions
+- Subsystem Integration
+
+#### 🔜 Next Steps
+- Further flask API design (Subsystem Integration subtasks)
+  - Design endpoint schemas for checking the status of Notion and the DB (2 endpoints)
+  - Update documentation
+  - Implement endpoint schemas (Notion + DB)
+- Remove personal information from testing data, reupload updated version, then scrub the old version from GitHub entirely
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- **What feels unclear or risky about today's tasks?**  
+  The biggest uncertainty is around the *scope creep from swimlane diagrams*. Adding full error-handling layers and startup checks could delay progress past October 13 if not carefully constrained. Risk is medium–high because they touch both frontend (alerts) and backend (startup checks).
+
+#### ❓ Question 2
+- **Give me a confidence rating for sprint success based on current progress**  
+  Current progress is solid: 2 backlog items finished, scope redefined, and quizzes passed. However, documentation debt and scope creep lower confidence. I’d rate **70–75% confidence** that the sprint will succeed *if extras remain extras* and core features (submission, stat cards, task table) stay prioritized.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Projected finish date adjusted to October 13.
+- Extras identified but deliberately deprioritized to avoid further delays.
+- Agreement that database snapshot must be scrubbed/replaced quickly to avoid security issues.
+
+#### 🗝️ Key Decisions
+- Keep “App Startup” and “UI Alerts” backlog items marked as *extra*.
+- Remove sensitive test data from GitHub ASAP.
+
+#### 📌 Action Items
+- [ ] Further flask API design
+  - [ ]  Design endpoint schemas for checking the status of Notion and the DB (`/api/db/health` and `/api/notion/health`)
+  - [ ]  Update documentation
+  - [ ]  Implement endpoint schemas (Notion + DB)
+- [ ] Replace data txt file containing data requested from database (for testing) and scrub old version from GitHub history.  
 
 ## 🗓️ Standup [#] – [Standup Title]
 
