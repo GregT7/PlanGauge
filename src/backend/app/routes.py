@@ -1,4 +1,4 @@
-import flask, json, time
+import flask, time
 from flask import jsonify, request
 from datetime import datetime
 from app import app, supabase
@@ -21,7 +21,7 @@ def determine_health():
             "now": datetime.now(),
             "response_time_ms": (time.perf_counter() - start_time) * 1000
         }
-        return jsonify(http_response)
+        return jsonify(http_response), 200
     except Exception as e:
         http_response = {
             "ok": False,
@@ -29,7 +29,7 @@ def determine_health():
             "now": datetime.now(),
             "response_time_ms": (time.perf_counter() - start_time) * 1000
         }
-        return jsonify(http_response)
+        return jsonify(http_response), 503
 
 # curl "http://127.0.0.1:5000/api/stats?start=2025-06-01&end=2025-06-30"
 @app.route('/api/stats', methods=['GET'])
@@ -70,7 +70,7 @@ def calc_stats():
             "data": statistic_data
         }
 
-        return jsonify(http_response)
+        return jsonify(http_response), 200
         
     except Exception as e:
         end_time = time.perf_counter()
@@ -82,4 +82,4 @@ def calc_stats():
             "now": datetime.now()
         }
 
-        return jsonify(http_response)
+        return jsonify(http_response), 503
