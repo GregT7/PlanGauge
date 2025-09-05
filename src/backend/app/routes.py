@@ -31,11 +31,11 @@ def determine_health():
         }
         return jsonify(http_response)
 
+# curl "http://127.0.0.1:5000/api/stats?start=2025-06-01&end=2025-06-30"
 @app.route('/api/stats', methods=['GET'])
 def calc_stats():
     start_time = time.perf_counter()
     try:
-        # curl "http://127.0.0.1:5000/api/stats?start=2025-06-01&end=2025-06-30"
         start_arg = request.args.get('start') # ?start=2024-06-14
         end_arg = request.args.get('end') # ?end=2025-08-24
 
@@ -56,7 +56,6 @@ def calc_stats():
             'week': calc_week_stats(date_range, data),
             'day': calc_day_stats(date_range, data)
         }
-
 
         end_time = time.perf_counter()
         elapsed_time = (end_time - start_time) * 1000
