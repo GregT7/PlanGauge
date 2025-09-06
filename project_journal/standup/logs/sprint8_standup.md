@@ -287,11 +287,85 @@
 - Remove sensitive test data from GitHub ASAP.
 
 #### 📌 Action Items
-- [ ] Further flask API design
-  - [ ]  Design endpoint schemas for checking the status of Notion and the DB (`/api/db/health` and `/api/notion/health`)
-  - [ ]  Update documentation
-  - [ ]  Implement endpoint schemas (Notion + DB)
+- [x] Further flask API design
+  - [x]  Design endpoint schemas for checking the status of Notion and the DB (`/api/db/health` and `/api/notion/health`)
+  - [x]  Update documentation
+  - [x]  Implement endpoint schemas (Notion + DB)
 - [ ] Replace data txt file containing data requested from database (for testing) and scrub old version from GitHub history.  
+
+## 🗓️ Standup 4 – Creating Frontend Health Test
+
+### 🧾 Overview
+* **Date:** Saturday, September 6th (2025)
+* **Time:** 10:29 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - Subsystem Integration
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Created health API endpoints for the db and Notion
+- Started reading Notion's API documentation
+
+#### 📈 Previous Progress
+- Wrote up schema designs for `/api/db/health` and `/api/notion/health`
+- Took some trial and error but learned how to successfully query Notion's API  
+  - Found and added Notion's API key, target page id, and target database id to the .env file  
+  - Queried the page and database successfully  
+
+#### 🧱 Problems & Blockers
+- Wrote up the schema for /api/db/health and /api/notion/health but then didn't follow the plan  
+  - Realized some attributes in the response either weren't needed or were needed but weren't already accounted for  
+  - The implementation and documentation are not aligned, documentation needs to be updated  
+
+#### ⏳ Pending Actions
+- Still need to scrub personal data from the text file referenced in yesterday's standup  
+
+#### 🔜 Next Steps
+- Replace data txt file containing data requested from database (for testing) and scrub old version from GitHub history
+- Subsystem Integration  
+  - Write and append a new unit test case for /api/notion/health  
+  - Write and append a new unit test case for /api/db/health  
+  - Update Flask API documentation  
+  - Create a test connection script in React to query all of Flask's 'health' API endpoints for the db, Notion API, and Flask itself  
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1  
+**Summarize my last 3 standups to identify trends or concerns**  
+- Health endpoints have been a recurring focus (design → testing → implementation).  
+- Subsystem integration dominates backlog discussions, broken down into React ↔ Flask, Flask ↔ DB, Flask ↔ Notion.  
+- Documentation often lags behind implementation, causing mismatches.  
+- Cleanup tasks (e.g., scrubbing sensitive data) tend to roll over between days.
+
+#### ❓ Question 2  
+**Identify dependencies I might be missing based on today's tasks**  
+1. React test connection script depends on Flask endpoints being finalized and returning consistent JSON.  
+2. Unit tests depend on stable endpoint schemas—misaligned docs will cause churn.  
+3. Notion health checks require correct `.env` credentials (Notion key, DB id).  
+4. Frontend context (`TaskTable`, `TaskContext`) is stable, but centralizing API utilities will help avoid duplication.  
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Progress is steady but documentation and cleanup need to catch up to coding tasks.  
+- Subsystem integration is progressing logically from backend endpoints → tests → frontend connection.  
+
+#### 🗝️ Key Decisions
+- Update API docs before writing tests to lock down schemas.  
+- Use centralized API utilities in React to manage health checks.
+- Update backlog documentation near the end of the sprint cycle when the retrospective & planning is also addressed.
+
+#### 📌 Action Items
+- [ ]  Replace data txt file containing data requested from database (for testing) and scrub old version from GitHub history
+- [ ]  Subsystem
+    - [ ]  Write and append a new unit test case for /api/notion/health
+    - [ ]  Write and append a new unit test case for /api/db/health
+    - [ ]  Update flask api documentation
+    - [ ]  Build React test connection script once endpoints are stable
+
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
