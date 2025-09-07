@@ -1,9 +1,9 @@
-import flask, time, os, requests
+import importlib.metadata, time, os, requests
 from flask import jsonify, request
 from datetime import datetime, timezone
-from app import app, supabase
+from . import app, supabase
 from dotenv import load_dotenv
-from utils import *
+from .utils import *
 
 load_dotenv()
 
@@ -23,7 +23,7 @@ def determine_health():
         http_response = {
             "ok": True,
             "service": "flask",
-            "version": flask.__version__,
+            "version": importlib.metadata.version("flask"),
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000
         }
@@ -100,10 +100,10 @@ def notion_health_check():
         notion_db_ping = requests.get(f"https://api.notion.com/v1/databases/{notion_db_id}", headers=headers, timeout=5)
 
         checks = {
-            "auth": pack(notion_user_ping),
+            "user": pack(notion_user_ping),
             "database": pack(notion_db_ping),
         }
-        all_ok = checks["auth"]["ok"] and checks["database"]["ok"]
+        all_ok = checks["user"]["ok"] and checks["database"]["ok"]
 
         http_response = {
             "ok": all_ok,
@@ -113,6 +113,15 @@ def notion_health_check():
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
             "checks": checks
         }
+
+        if not checks["user"]["ok"] and checks["database"]["ok"]:
+            http_response["error"] = "Network Error: Notion user inaccessible"
+
+        elif checks["user"]["ok"] and not checks["database"]["ok"]:
+            http_response["error"] = "Network Error: Notion database inaccessible"
+
+        elif not checks["user"]["ok"] and not checks["database"]["ok"]:
+            http_response["error"] = "Network Error: Notion user AND database inaccessible"
 
         return jsonify(http_response), (200 if all_ok else 503)
         

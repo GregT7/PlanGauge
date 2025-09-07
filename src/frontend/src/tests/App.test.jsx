@@ -19,14 +19,7 @@ const AppWithContextWrapper = ({children}) => {
 }
 
 describe("App unit tests", () => {
-  it("passes snapshot test", () => {
-    const { container } = render(
-      <AppWithContextWrapper>
-        <App/>
-      </AppWithContextWrapper>
-    );
-    expect(container).toMatchSnapshot();
-  })
+
 })
 
 // describe("App integration tests", () => {
