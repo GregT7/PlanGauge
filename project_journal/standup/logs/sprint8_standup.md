@@ -359,13 +359,86 @@
 
 #### 📌 Action Items
 - [ ]  Replace data txt file containing data requested from database (for testing) and scrub old version from GitHub history
-- [ ]  Subsystem
-    - [ ]  Write and append a new unit test case for /api/notion/health
-    - [ ]  Write and append a new unit test case for /api/db/health
-    - [ ]  Update flask api documentation
-    - [ ]  Build React test connection script once endpoints are stable
+- [x]  Subsystem
+    - [x]  Write and append a new unit test case for /api/notion/health
+    - [x]  Write and append a new unit test case for /api/db/health
+    - [x]  Update flask api documentation
+    - [x]  Build React test connection script once endpoints are stable
 
 ---
+
+## 🗓️ Standup 5 – Subsystem Integration Progress
+
+### 🧾 Overview
+* **Date:** Sunday, September 7th (2025)
+* **Time:** 1:32 PM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - Subsystem Integration
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Still haven't followed up on scrubbing the text file with PII
+- Worked more on integrating React with the backend, almost done
+- Used ChatGPT to autogenerate test cases
+
+#### 📈 Previous Progress
+- Finished the react connectionTest.js script
+- Finished writing test cases for connectionTest.js script
+- Started working on writing additional test cases for App.jsx
+- Added toaster notifications using shadcn to notify user of system health statuses
+
+#### 🧱 Problems & Blockers
+- It's difficult to test for shadcn's Sonner or Toaster element (appears briefly when certain conditions are met)
+- Don't fully understand the ChatGPT generated test cases. Also don’t know if the test cases cover enough situations.
+- Need to learn how to use AbortController for retrying fetch requests in case of failure
+- Keep on working for 3–4 hours early in the day, and then doing nothing for the rest of it. Want to work and accomplish more.
+
+#### ⏳ Pending Actions
+- Remove text file with PII
+- Finish React test cases for App.jsx
+
+#### 🔜 Next Steps
+- Examine `Subsystem Integration` DoD to ensure almost all requirements are fulfilled
+- Replace data txt file containing data requested from database (for testing) and scrub old version from GitHub history
+- Subsystem Integration
+  - Explore adding fetch retry handling
+     - Learn about AbortController
+     - Decide: is it worth implementing
+  - Add test cases for App.jsx
+  - Examine DoD
+    - Update inaccurate or old parts
+    - Make checklist under backlog item page
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- **Q:** How do I go about working more in the day? My routine has been going to Starbucks for 3–4 hours where I will work on this project, go home, and then binge TV shows + YouTube until the end of the day.  
+- **A:** The core issue is the transition point—when you leave Starbucks, your momentum stops. To extend productivity, create a small but deliberate second work block at home (even 30 minutes). Reduce friction by setting a predefined task before leaving Starbucks. If bingeing is irresistible, delay it until after that second block. Also consider environment cues: working in a library, coworking space, or a different room at home may help you restart.
+
+#### ❓ Question 2
+- **Q:** What feels unclear or risky about today’s tasks?  
+- **A:** The biggest uncertainty is around testing ephemeral UI elements like shadcn’s Sonner/Toaster. Standard testing tools may not catch them reliably. There’s also risk that the ChatGPT-generated test cases don’t align with your real usage scenarios. Finally, implementing retry logic with AbortController requires clarity on whether it’s truly necessary at this stage—might add scope creep to Subsystem Integration.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Need a deliberate system to extend work sessions into the afternoon/evening.
+- Testing transient UI components remains a challenge and may not be worth fully solving during Subsystem Integration.
+- Retry logic could be postponed if core API communication is already stable.
+
+#### 🗝️ Key Decisions
+- Focus on completing Subsystem Integration DoD first, then revisit retry logic.
+- Commit to removing the PII file before pushing further changes.
+
+#### 📌 Action Items
+- [ ] Remove text file with PII and scrub GitHub history
+- [ ] Finish React test cases for App.jsx
+- [ ] Review and update Subsystem Integration DoD
+- [ ] Decide on retry logic implementation after DoD review
+- [ ] Experiment with a short second work block at home
+
 
 ## 🗓️ Standup [#] – [Standup Title]
 
