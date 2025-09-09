@@ -18,8 +18,22 @@ const AppWithContextWrapper = ({children}) => {
   )
 }
 
-describe("App unit tests", () => {
+describe("App", () => {
+  it("renders all components without problems", () => {
 
+  });
+
+  it("calls connectionTest only once at launch", () => {
+
+  });
+
+  it("displays sonner/toaster component when toast is invoked", () => {
+
+  });
+
+  it("doesn't crash when connectionTest fails", () => {
+    
+  })
 })
 
 // describe("App integration tests", () => {

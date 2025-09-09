@@ -43,29 +43,45 @@ export async function connectionTest() {
     const notion_url = "http://localhost:5000/api/notion/health";
     try {
         const flask_response = await persistent_fetch(flask_url, "Flask")
+        let supabase_response = null, notion_response = null
         
         if (flask_response?.ok) {
-            const supabase_response = await persistent_fetch(supabase_url, "Supabase");
+            console.log("Flask is connected!")
+            supabase_response = await persistent_fetch(supabase_url, "Supabase");
             if (!supabase_response?.ok) {
                 toast.error("Database (Supabase) is currently unavailable...");
+                console.log("Database (Supabase) is currently unavailable...");
             }
             
-            const notion_response = await persistent_fetch(notion_url, "Notion");
+            notion_response = await persistent_fetch(notion_url, "Notion");
             if (!notion_response?.ok) {
                 toast.error("Notion is currently unavailable...");
+                console.log("Notion is currently unavailable...");
             }
 
             if (notion_response?.ok && supabase_response?.ok) {
                 toast.success("All systems are online!");
+                console.log("All systems are online!");
             }
         }
+        
         else {
-            toast.error("Flask is currently inaccessible...")
+            toast.error("Flask is currently unavailable...")
+            console.log("Flask is currently unavailable...")
         }
 
+        return {
+            'flask': flask_response,
+            'supabase': supabase_response,
+            'notion': notion_response
+        };
     } catch (error) {
+        toast.error("Internal error! App may not be fully functional...");
         console.log("Health check failed! Internal error occured...", error);
-        toast.error("Internal error! App may not be fully functional...")
+        return {
+            'error': error,
+            'message': toString(error)
+        }
     }
 
 }
