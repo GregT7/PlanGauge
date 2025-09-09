@@ -3,7 +3,7 @@ import { ThemeProvider } from './components/ui/ThemeProvider'
 import TaskTable from "./components/TaskTable/TaskTable"
 import StatCardSystem from "./components/StatCardSystem/StatCardSystem";
 import cardData from "@/utils/cardData";
-import connectionTest from "./utils/connectionTest";
+import { connectionTest } from "./utils/connectionTest";
 import { useEffect } from 'react';
 import { Toaster } from 'sonner'
 import './App.css'

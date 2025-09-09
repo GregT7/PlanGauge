@@ -1,0 +1,50 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatusCounter unit testing > passes snapshot test 1`] = `
+<div>
+  <div
+    class="flex justify-center gap-5 items-center py-5"
+    data-testid="StatusCounter"
+  >
+    <div
+      class="flex items-center gap-1"
+    >
+      <div
+        class="w-12 h-12 rounded-full bg-emerald-500"
+        data-testid="circle-div"
+      />
+      <span>
+        <span>
+          x0
+        </span>
+      </span>
+    </div>
+    <div
+      class="flex items-center gap-1"
+    >
+      <div
+        class="w-12 h-12 rounded-full bg-amber-500"
+        data-testid="circle-div"
+      />
+      <span>
+        <span>
+          x0
+        </span>
+      </span>
+    </div>
+    <div
+      class="flex items-center gap-1"
+    >
+      <div
+        class="w-12 h-12 rounded-full bg-rose-500"
+        data-testid="circle-div"
+      />
+      <span>
+        <span>
+          x0
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
+`;

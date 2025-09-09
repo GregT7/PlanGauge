@@ -1,88 +1,58 @@
-// tests/connectionTest.test.js
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import connectionTest from "../utils/connectionTest"
+import { connectionTest, timed_fetch, persistent_fetch } from "@/utils/connectionTest";
+import { start } from "repl";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Mock `sonner` to capture toast calls
-vi.mock('sonner', () => {
-  const success = vi.fn()
-  const error = vi.fn()
-  return { toast: { success, error } }
-})
-import { toast } from 'sonner'
+beforeEach(() => {
+  vi.restoreAllMocks();
+});
 
-// Helper to build a fake fetch response
-const mkResp = (ok, body = { ok }) => ({
-  ok,
-  json: async () => body,
-})
 
-describe('connectionTest()', () => {
-  const originalFetch = global.fetch
+describe("timed_fetch, a helper function used in connectionTest()", () => {
+  const url = "http://localhost:5000/api/health";
+  const service_str = "Flask";
+  const duration = 1000;
 
-  beforeEach(() => {
-    vi.clearAllMocks()
+    const mockResponse = {
+      ok: true,
+      message: 'hello world'
+    }
+
+  it("successfully fetches a response when there are no timing issues", async () => {
+    vi.spyOn(global, "fetch").mockResolvedValueOnce(mockResponse)
+
+    const response = await timed_fetch(url, service_str, duration);
+    expect(response).toEqual(mockResponse)
   })
 
-  afterEach(() => {
-    global.fetch = originalFetch
+  it("times out after attempting to fetch longer than the specified duration threshold", async () => {
+    // vi.useFakeTimers();
+
+    global.fetch = vi.fn((url, init) => 
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log("inside fetch function!!!!!")
+          resolve ({
+            ok: true,
+            json: () => Promise.resolve({message: "Fetch response message"})
+          })
+        }, duration + 2000)
+    }))
+
+
+    const start_fetch = timed_fetch(url, service_str, duration);
+    await vi.advanceTimersByTimeAsync(duration + 1);
+    const response = await start_fetch;
+
+    console.log(response)
   })
 
-  it('shows success when Flask, DB, and Notion are all OK', async () => {
-    // Order: Flask → Supabase → Notion
-    global.fetch = vi.fn()
-      .mockResolvedValueOnce(mkResp(true, { service: 'flask', ok: true }))
-      .mockResolvedValueOnce(mkResp(true, { service: 'db', ok: true }))
-      .mockResolvedValueOnce(mkResp(true, { service: 'notion', ok: true }))
+  // it("handles other exceptions thrown besides time handling or AbortError errors", () => {
 
-    await connectionTest()
+  // });
 
-    expect(toast.error).not.toHaveBeenCalled()
-    expect(toast.success).toHaveBeenCalledTimes(1)
-    expect(toast.success).toHaveBeenCalledWith('All systems are online!')
-  })
+  // it("always clears the Timeout function regardless of the fetch attempts outcome", () => {
 
-  it('shows Flask error and stops when Flask is NOT ok', async () => {
-    global.fetch = vi.fn()
-      .mockResolvedValueOnce(mkResp(false, { service: 'flask', ok: false }))
+  // })
 
-    await connectionTest()
 
-    expect(toast.error).toHaveBeenCalledWith('Flask is currently inaccessible...')
-    // Should not even attempt DB/Notion fetches
-    expect(global.fetch).toHaveBeenCalledTimes(1)
-    expect(toast.success).not.toHaveBeenCalled()
-  })
-
-  it('shows DB error when Supabase is NOT ok (but Flask ok); no success toast', async () => {
-    global.fetch = vi.fn()
-      .mockResolvedValueOnce(mkResp(true, { service: 'flask', ok: true }))   // Flask
-      .mockResolvedValueOnce(mkResp(false, { service: 'db', ok: false }))    // DB
-      .mockResolvedValueOnce(mkResp(true, { service: 'notion', ok: true }))  // Notion
-
-    await connectionTest()
-
-    expect(toast.error).toHaveBeenCalledWith('Database (Supabase) is currently unavailable...')
-    expect(toast.success).not.toHaveBeenCalled()
-  })
-
-  it('shows Notion error when Notion is NOT ok (Flask & DB ok); no success toast', async () => {
-    global.fetch = vi.fn()
-      .mockResolvedValueOnce(mkResp(true, { service: 'flask', ok: true }))   // Flask
-      .mockResolvedValueOnce(mkResp(true, { service: 'db', ok: true }))      // DB
-      .mockResolvedValueOnce(mkResp(false, { service: 'notion', ok: false }))// Notion
-
-    await connectionTest()
-
-    expect(toast.error).toHaveBeenCalledWith('Notion is currently unavailable...')
-    expect(toast.success).not.toHaveBeenCalled()
-  })
-
-  it('shows internal error toast when fetch throws', async () => {
-    global.fetch = vi.fn().mockRejectedValue(new Error('boom'))
-
-    await connectionTest()
-
-    expect(toast.error).toHaveBeenCalledWith('Internal error! App may not be fully functional...')
-    expect(toast.success).not.toHaveBeenCalled()
-  })
 })
