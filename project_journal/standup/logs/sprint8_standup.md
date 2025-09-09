@@ -433,12 +433,82 @@
 - Commit to removing the PII file before pushing further changes.
 
 #### 📌 Action Items
-- [ ] Remove text file with PII and scrub GitHub history
+- [x] Remove text file with PII and scrub GitHub history
 - [ ] Finish React test cases for App.jsx
 - [ ] Review and update Subsystem Integration DoD
-- [ ] Decide on retry logic implementation after DoD review
-- [ ] Experiment with a short second work block at home
+- [x] Decide on retry logic implementation after DoD review
+- [x] Experiment with a short second work block at home
 
+
+## 🗓️ Standup 6 – Testing Lag
+
+### 🧾 Overview
+* **Date:** Tuesday, September 9th (2025)  
+* **Time:** 11:32 AM  
+* **Attendees:** Self (Solo)  
+* **Discussed Backlog Items:**  
+  - Subsystem Integration  
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Testing is taking some time  
+- Plan on working 8 hour days this week, starting today  
+- Want to finish up testing, start + complete the pull request, and start feedback system in this sprint if possible  
+- New deadline: September 28th. Need to have most of project finished by then  
+
+#### 📈 Previous Progress
+- Added retry feature to `connectionTest` (attempts 3 times before giving up)  
+  - Restructured code: went from 1 helper + 1 main function → 2 helpers + 1 main function  
+  - Made it more modular  
+- Restarted writing unit tests for `connectionTest.js` due to restructuring  
+- Avoiding overreliance on ChatGPT for test-writing — deliberately learning through implementation, which takes longer  
+
+#### 🧱 Problems & Blockers
+- Finishing unit tests for `connectionTest` and `App.jsx` might take more time than desired due to testing learning curve  
+
+#### ⏳ Pending Actions
+- Evaluate + restructure DoD  
+
+#### 🔜 Next Steps
+- Subsystem Integration  
+  - Write tests for `connectionTest`  
+    - `timed_fetch`  
+    - `persistent_fetch`  
+    - `connectionTest`  
+  - Unit tests for `App.jsx`  
+    - baseline render  
+    - new tests for `Toaster` component  
+- Work a total of 8 hours today  
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1  
+*Would I be able to keep up with the pace of a regular agile software development team making a real product?*  
+- You’re moving slower than a production team, but that’s expected — you’re learning fundamentals solo while also coding. A real team benefits from shared knowledge, existing test harnesses, and mentorship. The key takeaway: your pace would accelerate significantly in a real environment where testing frameworks and standards are already in place.  
+
+#### ❓ Question 2  
+*If it’s taken me some time just to write one test for `timed_fetch` in `connectionTest.js`, do you think it’s possible to complete today’s tasks?*  
+- It’s ambitious. If you dedicate a full 8-hour block, you may cover most tests for `connectionTest`, but finishing `App.jsx` tests + Toaster might spill into tomorrow. A more realistic target today: finalize `timed_fetch` + `persistent_fetch` tests, and scaffold `connectionTest` + `App.jsx` test files with at least one working case each. That ensures forward momentum.  
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Unit testing is currently the pacing item; backlog integration depends on clearing this.  
+- Your restructuring (modularizing fetch logic) directly supports easier testing and future maintainability.  
+
+#### 🗝️ Key Decisions
+- Prioritize fetch helper tests today.  
+- Accept that `App.jsx` tests may roll into tomorrow, but ensure scaffolding is in place today.  
+
+#### 📌 Action Items
+- [ ] Finish tests for `timed_fetch` and `persistent_fetch`  
+- [ ] Begin `connectionTest` integration tests (at least one case)  
+- [ ] Add baseline render test for `App.jsx`  
+- [ ] Revisit DoD and ensure testing coverage is included in criteria
+- [ ] Complete 8 hours of work today
+
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
