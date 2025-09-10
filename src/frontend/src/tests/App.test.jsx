@@ -27,12 +27,12 @@ describe("App", () => {
 
   });
 
-  it("displays sonner/toaster component when toast is invoked", () => {
+  it("displays Toaster component when toast is invoked", () => {
 
   });
 
   it("doesn't crash when connectionTest fails", () => {
-    
+
   })
 })
 
