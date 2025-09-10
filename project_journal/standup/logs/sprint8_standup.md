@@ -502,11 +502,75 @@
 - Accept that `App.jsx` tests may roll into tomorrow, but ensure scaffolding is in place today.  
 
 #### 📌 Action Items
-- [ ] Finish tests for `timed_fetch` and `persistent_fetch`  
-- [ ] Begin `connectionTest` integration tests (at least one case)  
-- [ ] Add baseline render test for `App.jsx`  
+- [x] Finish tests for `timed_fetch` and `persistent_fetch`  
+- [x] Begin `connectionTest` integration tests (at least one case)  
+- [x] Add baseline render test for `App.jsx`  
 - [ ] Revisit DoD and ensure testing coverage is included in criteria
 - [ ] Complete 8 hours of work today
+
+---
+
+## 🗓️ Standup 7 – Almost Ready to Pull backend_setup!
+
+### 🧾 Overview
+* **Date:** Wednesday, September 10th (2025)
+* **Time:** 10:41 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - Subsystem Integration
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Might finally finish `Subsystem Integration` today!
+- Which should I assign next to this sprint: `Feedback System` or `Plan Submission`?
+- Need to finally redefine/update DoD for `Subsystem Integration`
+
+#### 📈 Previous Progress
+- Finished writing tests for connectionTest.js (12 tests in total)
+- Wrote up the outline for 4 unit tests for App.jsx
+
+#### 🧱 Problems & Blockers
+- Not working long enough on project
+- Pull request might take a while to document and complete
+
+#### ⏳ Pending Actions
+- Examine + redefine the DoD for `Subsystem Integration`
+
+#### 🔜 Next Steps
+- Draft up work plan for this and next week to help me work longer
+- Work at least 4 hours on this project today
+- Finish the final 4 tests for App.test.jsx
+- Redefine the DoD for `Subsystem Integration`
+- Start the pull request for `backend_setup` branch with `main`
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1  
+- Which should I implement first after completing `Subsystem Integration`: `Feedback System` or `Plan Submission`?  
+  👉 **Answer:** Do **Plan Submission** first. It’s a core MVP feature, requires Notion API integration and error handling, and unblocks the full system flow. Feedback System builds more easily on top once submission works.
+
+#### ❓ Question 2  
+- Are there any dependencies I am missing for today's tasks? Do you think it’s feasible for me to complete today's tasks?  
+  👉 **Answer:** Dependencies are mostly in place (TaskTable, TaskContext, Tailwind, test scaffolding). Missing pieces: a redefined DoD checklist, isolated tests for event-driven components, and a PR template/notes. Feasible if you scope tightly—DoD + App tests within ~4 hrs; PR draft may spill into tomorrow.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- MVP priorities: Plan Submission is more critical than Feedback System.  
+- TaskTable + supporting components are solid; testing coverage still needs finalization.  
+- Need to formalize DoD for Subsystem Integration to avoid scope creep during PR.  
+- Timeboxing PR work is key, as documentation could take longer than coding.
+
+#### 🗝️ Key Decisions
+- Assign **Plan Submission** as the next backlog item after Subsystem Integration.  
+- Focus today on DoD redefinition + finishing App tests before touching PR.
+
+#### 📌 Action Items
+- [ ] Redefine DoD for Subsystem Integration  
+- [ ] Write 4 remaining App unit tests  
+- [ ] Work minimum 4 hrs today  
+- [ ] Draft PR notes/template to accelerate merge process tomorrow  
 
 ---
 
