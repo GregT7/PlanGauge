@@ -16,6 +16,7 @@ notion_version = os.getenv("NOTION_VERSION")
 def index():
     return 'Home Web Page'
 
+
 @app.route('/api/health', methods=['GET'])
 def determine_health():
     start_time = time.perf_counter()
@@ -31,12 +32,20 @@ def determine_health():
     except Exception as e:
         http_response = {
             "ok": False,
-            "error": str(e),
+            "service": "flask",
+            "version": importlib.metadata.version("flask"),
             "now": datetime.now(timezone.utc).isoformat(),
-            "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000
+            "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+            "error": {
+                "code": "internal_error",
+                "message": "Flask internal error",
+                "details": str(e)
+            }
         }
-        return jsonify(http_response), 503
+        return jsonify(http_response), 500
     
+# 200: { "ok": true, "service": "supabase", "version": "postgrest-x.y", "now": "…Z", "response_time_ms": 143.2, 
+# "checks": { "auth": { "ok": true, "status_code": 200 }, "database": { "ok": true, "status_code": 200 } } }
 
 @app.route('/api/db/health', methods=['GET'])
 def db_health_check():
@@ -46,14 +55,19 @@ def db_health_check():
         data = response.data
         error = getattr(response, "error", None)
 
-        # Service unavailable error
+        # Service inaccesible error
         if error:
             http_response = {
                 "ok": False,
+                "service": "supabase",
                 "now": datetime.now(timezone.utc).isoformat(),
                 "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
-                "service": "supabase",
-                "error": str(error)
+                
+                "error": {
+                    'code': 'service_inaccessible',
+                    'message': 'Supabase network not available',
+                    'details': str(error)
+                }
             }
             return jsonify(http_response), 503
         
@@ -61,10 +75,10 @@ def db_health_check():
         else:
             http_response = {
                 "ok": True,
-                "num_rows_returned": len(data or []),
+                "service": "supabase",
                 "now": datetime.now(timezone.utc).isoformat(),
                 "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
-                "service": "supabase"
+                "num_rows_returned": len(data or [])
             }
             return jsonify(http_response), 200
 
@@ -72,13 +86,19 @@ def db_health_check():
     except Exception as e:
         http_response = {
             "ok": False,
+            "service": "supabase",
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
-            "service": "supabase",
-            "error": str(e)
+
+            "error": {
+                'code': 'internal_error',
+                'message': "Unexpected error",
+                'details': str(e)
+            }
         }
         return jsonify(http_response), 500
-    
+
+
 @app.route('/api/notion/health', methods=['GET'])
 def notion_health_check():
     start_time = time.perf_counter()
@@ -111,20 +131,33 @@ def notion_health_check():
             "version": notion_version,
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
-            "checks": checks
         }
 
-        if not checks["user"]["ok"] and checks["database"]["ok"]:
-            http_response["error"] = "Network Error: Notion user inaccessible"
+
+        error_obj = {
+            'code': 'service_inaccessible',
+            'message': 'Notion user and database inaccessible',
+            'details': checks
+        }
+
+        if all_ok:
+            http_response['checks'] = checks
+
+        elif not checks["user"]["ok"]:
+            error_obj.code = 'user_inaccessible'
+            error_obj.message = "Notion user endpoint inaccessible"
+            http_response["error"] = error_obj
 
         elif checks["user"]["ok"] and not checks["database"]["ok"]:
-            http_response["error"] = "Network Error: Notion database inaccessible"
+            error_obj.code = 'database_inaccessible'
+            error_obj.message = "Notion database unreachable"
+            http_response["error"] = error_obj
 
         elif not checks["user"]["ok"] and not checks["database"]["ok"]:
-            http_response["error"] = "Network Error: Notion user AND database inaccessible"
+            http_response["error"] = error_obj
 
         return jsonify(http_response), (200 if all_ok else 503)
-        
+  
     except requests.exceptions.RequestException as e:
         # Network/HTTP layer problems
         body = {
@@ -133,7 +166,11 @@ def notion_health_check():
             "version": notion_version,
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": int((time.perf_counter() - start_time) * 1000),
-            "error": str(e),
+            "error": {
+                'code': 'network_error',
+                'message': 'Network/HTTP failure while contacting Notion',
+                'details': str(e)
+            }
         }
         return jsonify(body), 503
     except Exception as e:
@@ -143,12 +180,16 @@ def notion_health_check():
             "version": notion_version,
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
-            "error": str(e)
+            "error": {
+                'code': 'internal_error',
+                'message': "Unexpected error",
+                'details': str(e)
+            }
         }
         return jsonify(http_response), 500
 
 # curl "http://127.0.0.1:5000/api/stats?start=2025-06-01&end=2025-06-30"
-@app.route('/api/stats', methods=['GET'])
+@app.route('/api/db/stats', methods=['GET'])
 def calc_stats():
     start_time = time.perf_counter()
     try:
@@ -178,24 +219,29 @@ def calc_stats():
 
         http_response = {
             "ok": True,
-            "num_records": len(data),
-            "db_connected": True,
-            "params": {'start_date': start_arg, 'end_date': end_arg},
-            "response_time_ms": elapsed_time,
+            "service": "supabase",
             "now": datetime.now(timezone.utc).isoformat(),
+            "response_time_ms": elapsed_time,
+            "num_records": len(data),
+            "params": {'start_date': start_arg, 'end_date': end_arg},
             "data": statistic_data
         }
 
         return jsonify(http_response), 200
-        
+
     except Exception as e:
         end_time = time.perf_counter()
         elapsed_time = (end_time - start_time) * 1000
         http_response = {
             "ok": False,
-            "error": str(e),
+            "service": "supabase",
+            "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": elapsed_time,
-            "now": datetime.now(timezone.utc).isoformat()
+            "error": {
+                'code': 'internal_error',
+                'message': 'DB stats request: unexpected error occured',
+                'details': str(e)
+            }  
         }
 
-        return jsonify(http_response), 503
+        return jsonify(http_response), 500
