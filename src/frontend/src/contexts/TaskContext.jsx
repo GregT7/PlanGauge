@@ -5,9 +5,8 @@ import toLocalMidnight from '@/utils/toLocalMidnight';
 
 export const TaskContext = createContext(undefined);
 
-export default function TaskContextProvider({children}) {
-    // const reformattedTasks = default_tasks.map(task => (
-    const reformattedTasks = stat_tasks.map(task => (
+export default function TaskContextProvider({children, starting_tasks=default_tasks}) {
+    const reformattedTasks = starting_tasks.map(task => (
         {
             ...task, 
             "start_date": toLocalMidnight(task["start_date"]),

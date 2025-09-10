@@ -11,7 +11,16 @@ import './App.css'
 
 function App() {
   useEffect(() => {
-    connectionTest()
+    const launchConnectionTest = async () => {
+      try {
+        await connectionTest();
+        console.log("connectionTest passed")
+      } catch (error) {
+        console.log("connectTest failed, error: ", error)
+      }
+    }
+
+    launchConnectionTest();
   }, []);
 
   return (
