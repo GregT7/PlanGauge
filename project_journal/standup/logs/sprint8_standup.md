@@ -567,10 +567,105 @@
 - Focus today on DoD redefinition + finishing App tests before touching PR.
 
 #### 📌 Action Items
-- [ ] Redefine DoD for Subsystem Integration  
-- [ ] Write 4 remaining App unit tests  
-- [ ] Work minimum 4 hrs today  
+- [x] Redefine DoD for Subsystem Integration  
+- [x] Write 4 remaining App unit tests  
+- [x] Work minimum 4 hrs today
+- [x] Redefine DoD for Subsystem Integration
+- [x] Update flask api documentation
+- [x] Confirm flask api documentation matches flask routes
+  - [x] /api/health
+  - [x] /api/notion/health
+  - [x] /api/db/health
+  - [x] /api/db/stats
+- [x] Update flask routes
+  - [x] /api/health
+  - [x] /api/notion/health
+  - [x] /api/db/health
+  - [x] /api/db/stats
+- [x] Testing (pytest)
+  - [x] rerun tests
+  - [x] Fix issues
 - [ ] Draft PR notes/template to accelerate merge process tomorrow  
+
+---
+
+## 🗓️ Standup 8 – Finalizing Subsystem Integration
+
+### 🧾 Overview
+* **Date:** Thursday, September 11th (2025)
+* **Time:** 9:41 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - Subsystem Integration
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Had to fix some new issues with the flask api + documentation, slowed things down a little
+- Just need to finish the pull request and `Subsystem Integration` will finally be done
+- Can start planning `Plan Submission` soon if not today
+
+#### 📈 Previous Progress
+- Completed App.test.jsx testing
+- Made flask api endpoint response structure consistent across all routes
+  - Updated flask_api.xlsx document recording the response schemas
+  - Rewrote the test_routes.py to account for new changes in the routes
+
+#### 🧱 Problems & Blockers
+- Didn't account for inconsistencies in flask routing design which needed fixing
+- Not entirely sure what to post in the pull request in terms of documentation, not sure if anything is gif worthy
+- If I add a new backlog item to this sprint, do I need to redo the sprint page's documentation since there will be a shift in the overall goal/objective/expected outcome?
+
+#### ⏳ Pending Actions
+- Pull request
+
+#### 🔜 Next Steps
+- Pull request
+  - Draft pull request + save .md document
+  - Make request & solve merge conflicts
+  - Consider making a new folder for pull requests
+- Update Notion documentation
+  - Mark `Subsystem Integration` as done
+  - Update completed backlog items from 2 to 3 on the sprint dashboard page
+  - Add `Plan Submission` to sprint 8's backlog items
+- Start defining `Plan Submission` (dependencies, task description, subtasks)
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- **Q:** If I add a new backlog item to this sprint, do I need to redo the sprint page's documentation since there will be a shift in the overall goal/objective/expected outcome?  
+- **A:** You don’t need to redo the entire sprint doc—just update the **Backlog Progress** section and note the addition in your sprint’s “Tasks Assigned.” The sprint’s original goal/objective can remain, but you can add a short note under *Milestones* or *Retrospective Notes* explaining the adjustment.
+
+#### ❓ Question 2
+- **Q:** What am I assuming that might be wrong? What are some dependencies I am missing for today's tasks?  
+- **A:** Possible assumptions to re-check:  
+  - That your test routes fully cover the new error-handling cases (e.g., 400 vs 503).  
+  - That your Notion API integration won’t need schema updates when `Plan Submission` is added.  
+  - That your pull request reviewers will understand context without screenshots/gifs—consider adding short API response examples or a brief workflow diagram for clarity.  
+  - Dependency to flag: the `Plan Submission` backlog item might rely on having the Notion schema finalized, so make sure you lock that down first.
+
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Subsystem Integration is essentially complete pending the PR.
+- Documentation has been aligned but needs polish before merging.
+- Planning for `Plan Submission` can begin immediately after PR.
+
+#### 🗝️ Key Decisions
+- Add `Plan Submission` to Sprint 8 instead of starting a new sprint.
+- Keep sprint doc intact, only update backlog + notes instead of rewriting objectives.
+
+#### 📌 Action Items
+- [ ] Finish pull request (draft + resolve conflicts)
+  - [ ] Draft pull request + save .md document
+  - [ ] Make request & solve merge conflicts
+  - [ ] Consider making a new folder for pull requests
+- [ ] Update Notion sprint doc
+- [ ] Start defining the next backlog item: `Plan Submission`
+  - [ ] Dependencies
+  - [ ] Task Description
+  - [ ] Subtasks
 
 ---
 
