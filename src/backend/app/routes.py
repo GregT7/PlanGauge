@@ -44,8 +44,6 @@ def determine_health():
         }
         return jsonify(http_response), 500
     
-# 200: { "ok": true, "service": "supabase", "version": "postgrest-x.y", "now": "…Z", "response_time_ms": 143.2, 
-# "checks": { "auth": { "ok": true, "status_code": 200 }, "database": { "ok": true, "status_code": 200 } } }
 
 @app.route('/api/db/health', methods=['GET'])
 def db_health_check():
@@ -188,7 +186,7 @@ def notion_health_check():
         }
         return jsonify(http_response), 500
 
-# curl "http://127.0.0.1:5000/api/stats?start=2025-06-01&end=2025-06-30"
+# curl "http://127.0.0.1:5000/api/db/stats?start=2025-06-01&end=2025-06-30"
 @app.route('/api/db/stats', methods=['GET'])
 def calc_stats():
     start_time = time.perf_counter()
