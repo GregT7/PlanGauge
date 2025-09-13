@@ -592,11 +592,12 @@
 ## 🗓️ Standup 8 – Finalizing Subsystem Integration
 
 ### 🧾 Overview
-* **Date:** Thursday, September 11th (2025)
+* **Date:** Thursday + Friday, September 11-12th (2025)
 * **Time:** 9:41 AM
 * **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
   - Subsystem Integration
+  - Plan Submission
 
 ### 📋 Contents
 
@@ -657,15 +658,89 @@
 - Keep sprint doc intact, only update backlog + notes instead of rewriting objectives.
 
 #### 📌 Action Items
-- [ ] Finish pull request (draft + resolve conflicts)
-  - [ ] Draft pull request + save .md document
-  - [ ] Make request & solve merge conflicts
-  - [ ] Consider making a new folder for pull requests
-- [ ] Update Notion sprint doc
-- [ ] Start defining the next backlog item: `Plan Submission`
-  - [ ] Dependencies
-  - [ ] Task Description
-  - [ ] Subtasks
+- [x] Finish pull request (draft + resolve conflicts)
+  - [x] Draft pull request + save .md document
+  - [x] Make request & solve merge conflicts
+  - [x] Consider making a new folder for pull requests
+- [x] Update Notion sprint doc
+- [x] Start defining the next backlog item: `Plan Submission`
+  - [x] Dependencies
+  - [x] Task Description
+  - [x] Subtasks
+
+---
+
+## 🗓️ Standup 9 – Plan Submission Kickoff
+
+### 🧾 Overview
+* **Date:** Saturday, September 13th (2025)
+* **Time:** 9:30 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Plan Submission`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Complete defining `Plan Submission` backlog item
+- Think about approach to completing `Extra` backlog items
+- Start working on implementing `Plan Submission` items
+
+#### 📈 Previous Progress
+- Finished pull request with supporting documentation (including gifs and diagrams)
+- Finished testing the backend and subsystem integrations
+- Defined the `Plan Submission` dependencies, description, and subtask items
+
+#### 🧱 Problems & Blockers
+- MVS is not updated and hasn't been entirely followed → some scope creep
+- Idempotency enforcement seems complicated and a little outside scope of just submitting plan data
+- Many nice-to-have backlog items labeled 'Extra' in Notion will take a long time to implement
+- Deployment of the application is currently not a backlog; app only runs on local testing servers
+- Documentation is behind: backlog items not consistently updated
+
+#### ⏳ Pending Actions
+- Defining `Plan Submission`
+- Updating backlog item documentation
+
+#### 🔜 Next Steps
+- Complete defining `Plan Submission` backlog item
+- Briefly research deployment approaches
+- Choose at most 3 `Extra` backlog items to pursue, mark them in Notion
+- Implement button feature to React
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- **Q:** Are my next steps lacking? What am I assuming that might be incorrect?  
+- **A:** Your next steps are solid, but they’re very execution-oriented. What’s missing is a checkpoint for *validation* (e.g., “does this backlog item align with the MVS?”). You might also be assuming deployment can stay “later”—but delaying even a basic deployment plan could make integration riskier. A lightweight deployment experiment early would de-risk future work.
+
+#### ❓ Question 2
+- **Q:** How do I address the problems I listed? I already have a full plate of tasks so I won’t be addressing everything today but I also don’t want to forget about them. How should I go about solving this problem?  
+- **A:** Treat these as **parallel backlog items** in Notion, but tag them “Deferred” or “Parking Lot.” That way they don’t clutter your active sprint, but you won’t lose sight of them. For scope creep/MVS drift, add a small action item: “Review MVS compliance once per sprint.” For extras, pick 2–3 you truly want and archive the rest. For deployment, at least create a placeholder backlog (“Deployment Options Research”) so it’s tracked.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Plan Submission backlog is shaping up but needs clarity on idempotency scope.
+- Extra backlog items risk distracting from MVS alignment.
+- Deployment research should start soon to avoid integration surprises.
+
+#### 🗝️ Key Decisions
+- Limit Extra backlog pursuit to a maximum of 3 items.
+- Create a separate backlog item for Idempotency Enforcement rather than forcing it into Plan Submission.
+- Add deployment placeholder backlog for visibility.
+- Add `Review MVS compliance` to end of this sprint's tasks when reviewing and planning for the next sprint. Also add to next sprint's to-do items.
+- Complete documentation on the feature branch instead of main to make things more convenient (less branch swapping and conflict resolution)
+- Keep the `backend_setup` branch but only locally -- incase something goes wrong
+
+#### 📌 Action Items
+- [ ] Finalize Plan Submission backlog definition today
+- [ ] Create new branch for button submissions
+- [ ] Create submission button component with shadcn styling
+- [ ] Create new backlog item: “Deployment”  
+- [x] Move Idempotency Enforcement to a new backlog item and mark as `Extra`
+- [x] Mark top 3 Extras in Notion 
+- [x] Add “MVS alignment check” step to end of this sprint and the next sprint
 
 ---
 
