@@ -1,845 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`App > doesn't crash when connectionTest fails 1`] = `
+exports[`App unit tests > passes snapshot test 1`] = `
 <div>
-  <section
-    aria-atomic="false"
-    aria-label="Notifications alt+T"
-    aria-live="polite"
-    aria-relevant="additions text"
-    tabindex="-1"
-  />
-  <h1
-    class="m-0 text-4xl leading-none"
-  >
-    PlanGauge
-  </h1>
-  <div
-    class="space-y-10 pt-5"
-  >
-    <div
-      class="w-[73.5%] mx-auto border-2 border-dashed pr-9"
-    >
-      <h1
-        class="text-2xl py-4 text-left pl-8"
-      >
-        Task Table
-      </h1>
-      <div
-        class="relative w-full overflow-x-auto"
-        data-slot="table-container"
-      >
-        <table
-          class="caption-bottom text-sm w-full"
-          data-slot="table"
-        >
-          <thead
-            class=""
-            data-slot="table-header"
-          >
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <th
-                class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[3.5%]"
-                data-slot="table-head"
-              />
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[30%]"
-                data-slot="table-head"
-              >
-                Task Name
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
-                data-slot="table-head"
-              >
-                Category
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
-                data-slot="table-head"
-              >
-                Due Date
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
-                data-slot="table-head"
-              >
-                Start Date
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[2.5%]"
-                data-slot="table-head"
-              >
-                Time
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class=""
-            data-slot="table-body"
-          >
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-role="row-selector"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-checked="false"
-                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                  data-slot="checkbox"
-                  data-state="unchecked"
-                  role="checkbox"
-                  type="button"
-                  value="on"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="outline-none w-full h-full bg-transparent text-left px-2"
-                  type="text"
-                  value="Plan Tool p58"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                  class="cursor-pointer w-full h-full text-left"
-                  data-slot="dropdown-menu-trigger"
-                  data-state="closed"
-                  id="radix-:r18:"
-                  type="button"
-                >
-                  <span
-                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
-                  >
-                    Career
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1a:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 3, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1b:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    June 19, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  type="number"
-                  value="90"
-                />
-              </td>
-            </tr>
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-role="row-selector"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-checked="false"
-                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                  data-slot="checkbox"
-                  data-state="unchecked"
-                  role="checkbox"
-                  type="button"
-                  value="on"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="outline-none w-full h-full bg-transparent text-left px-2"
-                  type="text"
-                  value="Update CV p6"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                  class="cursor-pointer w-full h-full text-left"
-                  data-slot="dropdown-menu-trigger"
-                  data-state="closed"
-                  id="radix-:r1c:"
-                  type="button"
-                >
-                  <span
-                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
-                  >
-                    Career
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1e:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 25, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1f:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 22, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  type="number"
-                  value="45"
-                />
-              </td>
-            </tr>
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-role="row-selector"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-checked="false"
-                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                  data-slot="checkbox"
-                  data-state="unchecked"
-                  role="checkbox"
-                  type="button"
-                  value="on"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="outline-none w-full h-full bg-transparent text-left px-2"
-                  type="text"
-                  value="Plan Japan trip p2"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                  class="cursor-pointer w-full h-full text-left"
-                  data-slot="dropdown-menu-trigger"
-                  data-state="closed"
-                  id="radix-:r1g:"
-                  type="button"
-                >
-                  <span
-                    class="cursor-pointer bg-teal-600 px-1.5 py-0.5 rounded-sm"
-                  >
-                    Life
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1i:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    August 6, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1j:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 30, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  type="number"
-                  value="90"
-                />
-              </td>
-            </tr>
-          </tbody>
-          <tfoot
-            class="font-medium"
-            data-slot="table-footer"
-          >
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-slot="table-cell"
-              />
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 border border-stone-600"
-                colspan="5"
-                data-slot="table-cell"
-              >
-                <button
-                  class="text-left hover:bg-stone-800 w-full h-full px-2"
-                  data-testid="add-task-button"
-                >
-                  + New Page
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                colspan="5"
-                data-slot="table-cell"
-              />
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
-                data-slot="table-cell"
-              >
-                <span
-                  class="text-stone-400 px-2"
-                >
-                  SUM
-                </span>
-                <span
-                  data-testid="time-display"
-                >
-                  225
-                </span>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-    <div
-      class="w-[73.5%] mx-auto border-2 border-dashed pt-2"
-    >
-      <h1
-        class="text-2xl pt-2 pb-4 text-left pl-8"
-      >
-        Stat Card System
-      </h1>
-      <div
-        class="grid grid-cols-4 gap-4"
-      >
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Monday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 16, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Tuesday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 17, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Wednesday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 18, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-emerald-900 border-2 border-emerald-400 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Thursday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 19, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Good
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 90 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="grid grid-cols-3 mt-4 gap-4"
-      >
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Friday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 20, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Saturday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 21, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Sunday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 22, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          class="flex justify-center gap-5 items-center py-5"
-          data-testid="StatusCounter"
-        >
-          <div
-            class="flex items-center gap-1"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-emerald-500"
-              data-testid="circle-div"
-            />
-            <span>
-              <span>
-                x1
-              </span>
-            </span>
-          </div>
-          <div
-            class="flex items-center gap-1"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-amber-500"
-              data-testid="circle-div"
-            />
-            <span>
-              <span>
-                x0
-              </span>
-            </span>
-          </div>
-          <div
-            class="flex items-center gap-1"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-rose-500"
-              data-testid="circle-div"
-            />
-            <span>
-              <span>
-                x0
-              </span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`App > renders all components without problems 1`] = `
-<div>
-  <section
-    aria-atomic="false"
-    aria-label="Notifications alt+T"
-    aria-live="polite"
-    aria-relevant="additions text"
-    tabindex="-1"
-  />
   <h1
     class="m-0 text-4xl leading-none"
   >
@@ -999,7 +161,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    June 19, 2025
+                    June 16, 2025
                   </span>
                 </button>
               </td>
@@ -1101,7 +263,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    July 22, 2025
+                    June 17, 2025
                   </span>
                 </button>
               </td>
@@ -1112,7 +274,7 @@ exports[`App > renders all components without problems 1`] = `
                 <input
                   class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   type="number"
-                  value="45"
+                  value="130"
                 />
               </td>
             </tr>
@@ -1203,7 +365,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    July 30, 2025
+                    June 18, 2025
                   </span>
                 </button>
               </td>
@@ -1214,7 +376,415 @@ exports[`App > renders all components without problems 1`] = `
                 <input
                   class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   type="number"
-                  value="90"
+                  value="115"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Update CV p6"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rc:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:re:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    July 25, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rf:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    June 19, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="75"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Update CV p6"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rg:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:ri:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    July 25, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rj:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    June 20, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="70"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Update CV p6"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rk:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rm:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    July 25, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rn:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    June 21, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="55"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Update CV p6"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:ro:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rq:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    July 25, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rr:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    June 22, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="20"
                 />
               </td>
             </tr>
@@ -1265,7 +835,7 @@ exports[`App > renders all components without problems 1`] = `
                 <span
                   data-testid="time-display"
                 >
-                  225
+                  555
                 </span>
               </td>
             </tr>
@@ -1291,7 +861,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-emerald-900 border-2 border-emerald-400 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1319,12 +889,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Good
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 90 mins
                 </p>
               </div>
             </div>
@@ -1337,7 +907,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-amber-900 border-2 border-amber-400 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1365,12 +935,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Moderate
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 130 mins
                 </p>
               </div>
             </div>
@@ -1383,7 +953,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-rose-900 border-2 border-rose-400 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1411,12 +981,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Poor
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 115 mins
                 </p>
               </div>
             </div>
@@ -1462,7 +1032,7 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Sum: 90 mins
+                  Sum: 75 mins
                 </p>
               </div>
             </div>
@@ -1479,7 +1049,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-amber-900 border-2 border-amber-400 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1507,12 +1077,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Moderate
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 70 mins
                 </p>
               </div>
             </div>
@@ -1525,7 +1095,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-emerald-900 border-2 border-emerald-400 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1553,12 +1123,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Good
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 55 mins
                 </p>
               </div>
             </div>
@@ -1571,7 +1141,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-zinc-900 h-full overflow-hidden"
+              class="text-card-foreground flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-emerald-900 border-2 border-emerald-400 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1599,12 +1169,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Good
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 20 mins
                 </p>
               </div>
             </div>
@@ -1625,7 +1195,7 @@ exports[`App > renders all components without problems 1`] = `
             />
             <span>
               <span>
-                x1
+                x4
               </span>
             </span>
           </div>
@@ -1638,7 +1208,7 @@ exports[`App > renders all components without problems 1`] = `
             />
             <span>
               <span>
-                x0
+                x2
               </span>
             </span>
           </div>
@@ -1651,7 +1221,7 @@ exports[`App > renders all components without problems 1`] = `
             />
             <span>
               <span>
-                x0
+                x1
               </span>
             </span>
           </div>

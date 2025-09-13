@@ -22,6 +22,7 @@ __pycache__
 # IDE files
 .vscode/
 .idea/
+__pycache__
 
 # macOS / Windows
 .DS_Store

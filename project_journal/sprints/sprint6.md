@@ -20,5 +20,5 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: insert text here...
-* Retrospective Notes: insert text here...
+* Major Feedback: Sprint 6 exposed critical planning issues, including overly broad backlog items, unclear dependencies, and unrealistic scope given time constraints. Despite low completion, it was a pivotal sprint marked by a smart architectural pivot from MongoDB to Supabase and deeper understanding of Flask integration needs. Some self-awareness was demonstrated through identifying fatigue and proposing a sustainable work schedule and clearer sprint structure. Moving forward, improving documentation during pivots, refining backlog decomposition, and enforcing a consistent workflow will support better execution.
+* Retrospective Notes: The retrospective notes highlighted poor backlog planning, with items being too broad, lacking clear subtasks, and containing confusing dependencies. A key architectural shift from MongoDB to Supabase was made after reassessing project needs. The sprint suffered from reduced available work time, burnout, and a lack of documentation updates. Proposed solutions included implementing a consistent work schedule, reserving the last day of each sprint for retrospectives and planning, assigning fewer backlog items, and better defining immediate future tasks.

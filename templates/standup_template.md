@@ -1,10 +1,5 @@
-# 🧭 Standup Reports Log
-
-## 📅 Sprint #X – Sprint X Title
+# 📅 Sprint #X – Sprint X Title
 * **Dates:** 
-* **Total Days:**
-* **Total Standups:**  
-* **Standup Participation:**
 
 ---
 
