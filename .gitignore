@@ -2,6 +2,8 @@ test[0-9]*.py
 img
 venv
 research
+__pycache__
+.pytest_cache
 
 # dependencies
 /node_modules
