@@ -734,10 +734,10 @@
 - Keep the `backend_setup` branch but only locally -- incase something goes wrong
 
 #### 📌 Action Items
-- [ ] Finalize Plan Submission backlog definition today
+- [x] Finalize Plan Submission backlog definition today
 - [ ] Create new branch for button submissions
 - [ ] Create submission button component with shadcn styling
-- [ ] Create new backlog item: “Deployment”  
+- [x] Create new backlog item: “Deployment”  
 - [x] Move Idempotency Enforcement to a new backlog item and mark as `Extra`
 - [x] Mark top 3 Extras in Notion 
 - [x] Add “MVS alignment check” step to end of this sprint and the next sprint
