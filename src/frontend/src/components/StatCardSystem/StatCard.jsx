@@ -25,11 +25,11 @@ function determineStatusStyle(status) {
         case "neutral":
             return "bg-zinc-900";
         case "good":
-            return "bg-emerald-900 border-2 border-emerald-400"
+            return "bg-emerald-900 border-2 border-emerald-500"
         case "moderate":
-            return "bg-amber-900 border-2 border-amber-400"
+            return "bg-amber-900 border-2 border-amber-500"
         case "poor":
-            return "bg-rose-900 border-2 border-rose-400";
+            return "bg-rose-900 border-2 border-rose-500";
         default:
             return "bg-red-900 border-2 border-red-500"
     }
