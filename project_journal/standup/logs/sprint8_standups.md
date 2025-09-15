@@ -182,7 +182,7 @@
 
 #### 🗝️ Key Decisions
 - `/api/stats` will include something to indicate status like `connected: true/false` for better response clarity
-- Replace arbitrary metric choices with systematic unit testing as DoD
+- Manually calculate statistic data using excel and locally stored data to confirm the stats calculating script is accurate and add this to the DoD
 - Need to define a clear policy for handling “living documents” (API Excel, diagrams)
 
 #### 📌 Action Items
@@ -851,6 +851,7 @@ Unlikely, unless you work a long stretch. Defining subtasks, updating the MVS, a
 
 #### 🧱 Problems & Blockers
 - FDD diagram and ERD schema for plan_submissions needs to be updated
+- There is currently no way to link data to assignments in the application
 
 #### ⏳ Pending Actions
 - 
