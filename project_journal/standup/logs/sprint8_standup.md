@@ -735,19 +735,107 @@
 
 #### 📌 Action Items
 - [x] Finalize Plan Submission backlog definition today
-- [ ] Create new branch for button submissions
-- [ ] Create submission button component with shadcn styling
+- [x] Create new branch for button submissions
+- [x] Create submission button component with shadcn styling
 - [x] Create new backlog item: “Deployment”  
 - [x] Move Idempotency Enforcement to a new backlog item and mark as `Extra`
 - [x] Mark top 3 Extras in Notion 
 - [x] Add “MVS alignment check” step to end of this sprint and the next sprint
+- [ ] Design /api/notion/plans route in the documentation
+- [ ] Design /api/db/plans route in the documentation
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 10 – Wrapping Up
 
 ### 🧾 Overview
-* **Date:** 
+* **Date:** Monday, September 15 (2025)
+* **Time:** 4:08 PM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Plan Submission`
+  - `Feedback System`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Confusion over flask API design & security concerns
+- Not sure about implementing swim lane diagram design for the submission process
+- Need to wrap up this sprint and start planning for sprint 9
+
+#### 📈 Previous Progress
+- Created a new submission button with styling and implemented it into the App react component
+- Refactored some styling code for category statuses to be more modular and implemented new changes into the submission button's design
+- Started designing flask api endpoints for submitting plans to Notion + Supabase
+
+#### 🧱 Problems & Blockers
+- **Security:** Endpoints are exposed; need token-based auth or API key stored safely (.env already listed in MVS for this:contentReference[oaicite:0]{index=0}).  
+- **Design overhead:** Swimlane diagram updates feel wasteful if design is still fluid. Consider keeping it “lo-fi” until the flow stabilizes.  
+- **Submission API sync issues:**
+  - Deleting Supabase rows if Notion fails introduces race conditions. Better pattern: treat Supabase as system of record and include a `synced_with_notion` flag, retry failed syncs later.
+  - Updating `synced_with_notion`: start with `false`, flip to `true` only after Notion confirms success.
+
+#### ⏳ Pending Actions
+- Finish defining `Plan Submission` subtasks
+- Update MVS
+- Finish API design for submitting plan data
+- Fix swimlane diagram for the submission process
+- Updating backlog .md files
+
+#### 🔜 Next Steps
+- Documentation
+  - Finish retrospective
+  - Finish Sprint 8's documentation page
+  - Briefly create Notion page for Sprint 9
+  - Update backlog .md files
+  - Redefine `Plan Submission` subtasks + DoD
+- Review ice box items
+- Briefly examine MVS
+- Research API design approach
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+**Q:** How do you think I should solve the problems listed in the Problems & Blockers section?  
+**A:**  
+- For **security**, introduce an API key or JWT verification at your Flask layer. Keep secrets in `.env` as planned.  
+- For the **diagram**, prioritize clarity over polish—update it roughly, and only clean it once the flow is finalized.  
+- For **synchronization**, don’t delete Supabase rows if Notion fails. Instead, persist everything in Supabase with `synced_with_notion=false`, then retry sync jobs until success (either automatic background process or triggered manually).
+
+#### ❓ Question 2
+**Q:** Do you think it’s possible to complete all tasks assigned for today so far?  
+**A:**  
+Unlikely, unless you work a long stretch. Defining subtasks, updating the MVS, and redesigning API flows are heavy. Prioritize finishing the **API design + subtask definitions** and **basic documentation updates** today, then leave the retrospective/diagram polish for tomorrow.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Security will be addressed at the Flask level with API key validation.
+- Diagram updates will be lightweight sketches until the flow is finalized.
+- Synchronization strategy will favor persistence with retry logic instead of destructive deletes.
+
+#### 🗝️ Key Decisions
+- Supabase remains the system of record; Notion sync failures will not cause deletions.
+- Use `synced_with_notion` flag and retry mechanism for robustness.
+- Diagram updates deprioritized until API flow stabilizes.
+
+#### 📌 Action Items
+- [ ] Documentation
+  - [ ] Finish retrospective
+  - [ ] Finish Sprint 8's documentation page
+  - [ ] Briefly create Notion page for Sprint 9
+  - [ ] Update backlog .md files
+  - [ ] Redefine `Plan Submission` subtasks + DoD
+- [ ] Review ice box items
+- [ ] Briefly examine MVS
+- [ ] Research API design approach
+
+---
+
+## 🗓️ Standup 11 – [Standup Title]
+
+### 🧾 Overview
+* **Date:** Tuesday, September 16 (2025)
 * **Time:** 
 * **Attendees:** 
 * **Discussed Backlog Items:**  
@@ -762,7 +850,7 @@
 - 
 
 #### 🧱 Problems & Blockers
-- 
+- FDD diagram and ERD schema for plan_submissions needs to be updated
 
 #### ⏳ Pending Actions
 - 
