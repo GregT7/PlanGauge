@@ -3,6 +3,7 @@ import { ThemeProvider } from './components/ui/ThemeProvider'
 import TaskTable from "./components/TaskTable/TaskTable"
 import StatCardSystem from "./components/StatCardSystem/StatCardSystem";
 import cardData from "@/utils/cardData";
+import SubmissionButton from "./components/SubmissionButton";
 import { connectionTest } from "./utils/connectionTest";
 import { useEffect } from 'react';
 import { Toaster } from 'sonner'
@@ -19,7 +20,7 @@ function App() {
       }
     }
 
-    launchConnectionTest();
+    // launchConnectionTest();
   }, []);
 
   return (
@@ -30,6 +31,7 @@ function App() {
               <div className="space-y-10 pt-5">
                 <TaskTable/>
                 <StatCardSystem cardData={cardData}/>
+                <SubmissionButton status="neutral"/>
               </div>
             </TaskContextProvider>   
         </ThemeProvider>
