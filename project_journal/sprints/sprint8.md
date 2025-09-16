@@ -2,8 +2,8 @@
 
 ## 📝 Overview
 * Dates: September 1 - September 16 (2025)
-* Status: In Progress
-* Backlog Progress: 0 backlogs completed / 3 backlogs assigned ( 0% )
+* Status: Completed
+* Backlog Progress: 3 backlogs completed / 4 backlogs assigned ( 75% )
 * Tasks Assigned:
     * Intro to Flask
     * Backend Setup
