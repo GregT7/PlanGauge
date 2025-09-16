@@ -2,7 +2,7 @@
 
 ## 📝 Overview
 * Dates: June 17 - June 23 (2025)
-* Status: In Progress
+* Status: Completed
 * Backlog Progress: 0 backlogs completed / 2 backlogs assigned ( 0% )
 * Tasks Assigned:
     * Retro3: Reward System 2.0

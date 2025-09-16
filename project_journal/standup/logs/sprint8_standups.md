@@ -852,6 +852,7 @@ Unlikely, unless you work a long stretch. Defining subtasks, updating the MVS, a
 #### 🧱 Problems & Blockers
 - FDD diagram and ERD schema for plan_submissions needs to be updated
 - There is currently no way to link data to assignments in the application
+- Previous StatCardSystem unit tests started failing when rerunning react tests
 
 #### ⏳ Pending Actions
 - 
