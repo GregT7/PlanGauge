@@ -1,10 +1,10 @@
 # 🌀 Retrospective #X – Insert title here
 
 ## 🧭 Review
-* **Dates:** 
+* **Dates:** September 17th - October 1 (2025)
 * **Standup Participation:**
   * **Total Standups:**  
-  * **Total Days:**
+  * **Total Days:** 15 days
 
 * **Key Decision Follow-through**:
   * **Key Decisions Pursued:**
@@ -14,6 +14,9 @@
     * [x] Key decision 2... (8/25)
     * [] Key decision 3... (8/26)
   
+
+* **Q: Did I reserve the final sprint day for planning + retrospective?**
+
 ## 📋 Summary
 **Date:** Day of Week, Month Day, Year (Tuesday, June 17, 2025)
 

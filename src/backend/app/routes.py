@@ -243,3 +243,14 @@ def calc_stats():
         }
 
         return jsonify(http_response), 500
+    
+
+@app.route('/api/plan-submissions', methods=['POST'])
+def submit_plans():
+    # send data to supabase
+    # Q: What data are we storing and how will it be formatted?
+    # A: General Plan + Submission
+
+    if request.methods == "POST":
+        return "a"
+    return "a"
