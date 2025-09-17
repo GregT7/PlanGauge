@@ -821,62 +821,87 @@ Unlikely, unless you work a long stretch. Defining subtasks, updating the MVS, a
 
 #### 📌 Action Items
 - [ ] Documentation
-  - [ ] Finish retrospective
-  - [ ] Finish Sprint 8's documentation page
-  - [ ] Briefly create Notion page for Sprint 9
-  - [ ] Update backlog .md files
+  - [x] Finish retrospective
+  - [x] Finish Sprint 8's documentation page
+  - [x] Briefly create Notion page for Sprint 9
+  - [x] Update backlog .md files
   - [ ] Redefine `Plan Submission` subtasks + DoD
-- [ ] Review ice box items
+- [x] Review ice box items
 - [ ] Briefly examine MVS
 - [ ] Research API design approach
 
 ---
 
-## 🗓️ Standup 11 – [Standup Title]
+## 🗓️ Standup 11 – Wrapping Up
 
 ### 🧾 Overview
-* **Date:** Tuesday, September 16 (2025)
-* **Time:** 
-* **Attendees:** 
+* **Date:** Tuesday, September 16th (2025)  
+* **Time:** 12:50 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`  
+  - `Feedback System` (early planning)  
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Still need to look at MVS, redefine `Plan Submission`, and solve submission API approach
+- Wrap up sprint 8
 
 #### 📈 Previous Progress
-- 
+- Updated backlog item documentation and sprint 8 documentation + retrospective  
+- Started planning sprint 9  
 
 #### 🧱 Problems & Blockers
-- FDD diagram and ERD schema for plan_submissions needs to be updated
-- There is currently no way to link data to assignments in the application
-- Previous StatCardSystem unit tests started failing when rerunning react tests
+- FDD diagram and ERD schema for plan_submissions needs to be updated  
+- There is currently no way to link data to assignments in the application  
+- Previous StatCardSystem unit tests started failing when rerunning react tests  
+- There is currently no way to link plan records to assignments in the application  
+  - General_Plan records can be created while Assigned_Plan records can not  
+  - The distinction between the two plan record schemas was made to help with developing a time estimation feature but this feature has been deprioritized  
+- The task table does not include a 'type' column meaning only partial plan records will be created  
 
 #### ⏳ Pending Actions
-- 
+- Redefine MVS  
+- Redefine `Plan Submission`  
+- Submission API  
+  - Decide on approach  
+  - Update flask api docs  
 
 #### 🔜 Next Steps
-- 
+- Redefine MVS  
+- Redefine `Plan Submission`  
+- Submission API  
+  - Decide on approach  
+  - Update flask api docs  
+- Start filling out `Feedback System` backlog item (description, dependencies, expected outcome)  
+- Note these larger scale problems in the final sprint document as reminder  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection  
 
 #### ❓ Question 1
-- 
+- **Q:** Can today's tasks be realistically accomplished? What assumptions might be wrong?  
+- **A:** Yes, but only if you keep the scope small. Redefining the MVS and `Plan Submission` doesn’t require code changes, just documentation and schema updates. The risky assumption is that redefining the API approach won’t open up bigger problems (e.g., idempotency or multi-service sync). If you discover that you need to rewrite core logic, today’s goals may slip.  
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- **Q:** Have you noticed any trends within the last three standups?  
+- **A:** Yes—there’s a recurring pattern of redefining backlog items (`Subsystem Integration`, `Plan Submission`, now MVS). This shows you’re iterating properly but also that you may be pushing features into later sprints without fully closing the loop. Another trend is schema mismatch issues: StatCardSystem tests, missing `type` in TaskTable, and ERD/FDD misalignments all point to a gap between documentation and implementation.  
 
-### 🧾 Results
+### 🧾 Results  
 
 #### 🧠 Discussion Notes
-- 
+- Keeping the plan lean by focusing on documentation redefinition rather than code-heavy fixes.  
+- Realized schema drift (FDD/ERD vs React implementation) is becoming a repeating blocker.  
+- Noted that deprioritizing time estimation (Assigned_Plan vs General_Plan) simplifies the immediate scope but may complicate future features.  
 
 #### 🗝️ Key Decisions
-- 
+- Focus on redefining `Plan Submission` backlog rather than trying to solve assignment-linking today.  
+- In Notion, notate all the bigger problems in the final sprint's Notion page to remind me to address them later on 
+- Treat failing StatCardSystem tests as secondary priority since they don’t block sprint 9 planning.  
 
 #### 📌 Action Items
-- 
-
---- 
+- [x] Redefine MVS with current scope and update documentation.  
+- [x] Rewrite `Plan Submission` backlog subtasks + DoD
+- [x] Draft API submission approach and update Flask docs accordingly.  
+- [ ] Start filling out `Feedback System` backlog item (description, dependencies, expected outcome)
+- [x] Note these larger scale problems in the final sprint document as reminder  

@@ -1,14 +1,14 @@
-# 📅 Sprint #X – Sprint X Title
-* **Dates:** 
+# 📅 Sprint #9 – Approaching MVS Design Completion
+* **Dates:** September 17th - October 1 (2025)
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 1 – [Standup Title]
 
 ### 🧾 Overview
-* **Date:** 
+* **Date:** Wednesday, September 17th (2025)
 * **Time:** 
-* **Attendees:** 
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
   - 
 
