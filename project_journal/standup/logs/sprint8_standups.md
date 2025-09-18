@@ -903,5 +903,5 @@ Unlikely, unless you work a long stretch. Defining subtasks, updating the MVS, a
 - [x] Redefine MVS with current scope and update documentation.  
 - [x] Rewrite `Plan Submission` backlog subtasks + DoD
 - [x] Draft API submission approach and update Flask docs accordingly.  
-- [ ] Start filling out `Feedback System` backlog item (description, dependencies, expected outcome)
+- [x] Start filling out `Feedback System` backlog item (description, dependencies, expected outcome)
 - [x] Note these larger scale problems in the final sprint document as reminder  
