@@ -7,6 +7,7 @@ CREATE TABLE "category" (
  CONSTRAINT "UQ_category_subject_type" UNIQUE ("subject","type")
 );
 
+-- Table: work
 CREATE TABLE "work" (
   "work_id" SERIAL PRIMARY KEY,
   "completion_date" DATE,
@@ -16,16 +17,20 @@ CREATE TABLE "work" (
 );
 
 -- Table: plan_submission
-CREATE TABLE "plan_submission" (
-  "submission_id" SERIAL PRIMARY KEY,
-  "initial_submission_date" DATE,
-  "recent_submission_date" DATE,
-  "synced_with_notion" BOOLEAN DEFAULT FALSE,
-  "total_time" INTEGER,
-  "num_tasks" INTEGER,
-  "plan_start_date" DATE,
-  "plan_end_date" DATE
+-- The earliest data record date was August 13, 2025 hence the default '2025-08-13'
+CREATE TABLE plan_submission (
+  submission_id SERIAL PRIMARY KEY,
+  sync_status TEXT NOT NULL DEFAULT 'pending'
+    CHECK (sync_status IN ('pending','success','failed')),
+  synced_with_notion BOOLEAN NOT NULL DEFAULT FALSE,
+  sync_attempts INT NOT NULL DEFAULT 0
+    CHECK (sync_attempts >= 0),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  last_modified TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  filter_start_date DATE NOT NULL DEFAULT '2025-08-13',
+  filter_end_date DATE NOT NULL DEFAULT CURRENT_DATE
 );
+
 
 -- Table: assignment
 CREATE TABLE "assignment" (
@@ -100,6 +105,7 @@ CREATE TABLE "assigned_plan" (
     ON DELETE RESTRICT
 );
 
+-- Table: general_plan
 CREATE TABLE "general_plan" (
   "plan_id" INTEGER PRIMARY KEY,
   "cat_id" INTEGER NOT NULL,

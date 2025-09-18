@@ -67,7 +67,7 @@ def test_api_health_happy_path(client):
     assert r.status_code == 200
     body = r.get_json()
     assert body["ok"] is True
-    assert body["service"] == "flask"
+    assert body["service"] == ["flask"]
     assert isinstance(body.get("version"), str) and body["version"]
     assert isinstance(body.get("response_time_ms"), (int, float))
     assert "now" in body
@@ -83,7 +83,7 @@ def test_db_health_ok(client, monkeypatch):
     assert r.status_code == 200
     body = r.get_json()
     assert body["ok"] is True
-    assert body["service"] == "supabase"
+    assert body["service"] == ["supabase"]
     assert body["num_rows_returned"] == 1
 
 def test_db_health_service_unavailable(client, monkeypatch):
@@ -93,7 +93,7 @@ def test_db_health_service_unavailable(client, monkeypatch):
     assert r.status_code == 503
     body = r.get_json()
     assert body["ok"] is False
-    assert body["service"] == "supabase"
+    assert body["service"] == ["supabase"]
     assert "error" in body
 
 def test_db_health_internal_exception(client, monkeypatch):
@@ -103,7 +103,7 @@ def test_db_health_internal_exception(client, monkeypatch):
     assert r.status_code == 500
     body = r.get_json()
     assert body["ok"] is False
-    assert body["service"] == "supabase"
+    assert body["service"] == ["supabase"]
     assert "error" in body
 
 
@@ -120,7 +120,7 @@ def test_notion_health_all_ok(client, monkeypatch):
     assert r.status_code == 200
     body = r.get_json()
     assert body["ok"] is True
-    assert body["service"] == "notion"
+    assert body["service"] == ["notion"]
     assert "checks" in body
     assert body["checks"]["user"]["ok"] is True
     assert body["checks"]["database"]["ok"] is True
@@ -137,11 +137,11 @@ def test_notion_health_db_inaccessible(client, monkeypatch):
     assert r.status_code in (503, 500)
     body = r.get_json()
     assert body["ok"] is False
-    assert body["service"] == "notion"
+    assert body["service"] == ["notion"]
     # error may be string or object during migration
     assert "error" in body
     # on error responses, there should be no top-level checks (per your latest spec)
-    assert "checks" not in body
+    assert "checks" in body
 
 def test_notion_health_network_exception(client, monkeypatch):
     # mimic requests.exceptions.Timeout
@@ -153,8 +153,8 @@ def test_notion_health_network_exception(client, monkeypatch):
     assert r.status_code in (503, 500)
     body = r.get_json()
     assert body["ok"] is False
-    assert body["service"] == "notion"
-    assert "checks" not in body
+    assert body["service"] == ["notion"]
+    assert "checks" in body
     assert "error" in body
 
 

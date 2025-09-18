@@ -23,7 +23,7 @@ def determine_health():
     try:
         http_response = {
             "ok": True,
-            "service": "flask",
+            "service": ["flask"],
             "version": importlib.metadata.version("flask"),
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000
@@ -32,7 +32,7 @@ def determine_health():
     except Exception as e:
         http_response = {
             "ok": False,
-            "service": "flask",
+            "service": ["flask"],
             "version": importlib.metadata.version("flask"),
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
@@ -57,7 +57,7 @@ def db_health_check():
         if error:
             http_response = {
                 "ok": False,
-                "service": "supabase",
+                "service": ["supabase"],
                 "now": datetime.now(timezone.utc).isoformat(),
                 "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
                 
@@ -73,7 +73,7 @@ def db_health_check():
         else:
             http_response = {
                 "ok": True,
-                "service": "supabase",
+                "service": ["supabase"],
                 "now": datetime.now(timezone.utc).isoformat(),
                 "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
                 "num_rows_returned": len(data or [])
@@ -84,7 +84,7 @@ def db_health_check():
     except Exception as e:
         http_response = {
             "ok": False,
-            "service": "supabase",
+            "service": ["supabase"],
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
 
@@ -125,59 +125,42 @@ def notion_health_check():
 
         http_response = {
             "ok": all_ok,
-            "service": "notion",
+            "service": ["notion"],
             "version": notion_version,
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+            "checks": checks
         }
 
-
-        error_obj = {
-            'code': 'service_inaccessible',
-            'message': 'Notion user and database inaccessible',
-            'details': checks
-        }
-
-        if all_ok:
-            http_response['checks'] = checks
-
-        elif not checks["user"]["ok"]:
-            error_obj.code = 'user_inaccessible'
-            error_obj.message = "Notion user endpoint inaccessible"
+        error_obj = {}
+        if checks["user"]["ok"] and not checks["database"]["ok"]:
+            error_obj["code"] = 'database_inaccessible'
+            error_obj["message"] = "Notion database unreachable"
+            error_obj["details"] = "db: " + str(notion_db_ping)
             http_response["error"] = error_obj
 
-        elif checks["user"]["ok"] and not checks["database"]["ok"]:
-            error_obj.code = 'database_inaccessible'
-            error_obj.message = "Notion database unreachable"
+        elif not checks["user"]["ok"] and checks["database"]["ok"]:
+            error_obj["code"] = 'user_inaccessible'
+            error_obj["message"] = "Notion user endpoint inaccessible"
+            error_obj["details"] = "user: " + str(notion_user_ping)
             http_response["error"] = error_obj
 
         elif not checks["user"]["ok"] and not checks["database"]["ok"]:
+            error_obj["code"] = 'service_inaccessible'
+            error_obj["message"] = 'Notion user and database inaccessible'
+            error_obj["details"] = "db: " + str(notion_db_ping) + ", user: " + str(notion_user_ping)
             http_response["error"] = error_obj
 
         return jsonify(http_response), (200 if all_ok else 503)
   
-    except requests.exceptions.RequestException as e:
-        # Network/HTTP layer problems
-        body = {
-            "ok": False,
-            "service": "notion",
-            "version": notion_version,
-            "now": datetime.now(timezone.utc).isoformat(),
-            "response_time_ms": int((time.perf_counter() - start_time) * 1000),
-            "error": {
-                'code': 'network_error',
-                'message': 'Network/HTTP failure while contacting Notion',
-                'details': str(e)
-            }
-        }
-        return jsonify(body), 503
     except Exception as e:
         http_response = {
             "ok": False,
-            "service": "notion",
+            "service": ["notion"],
             "version": notion_version,
             "now": datetime.now(timezone.utc).isoformat(),
             "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+            "checks": None,
             "error": {
                 'code': 'internal_error',
                 'message': "Unexpected error",
@@ -212,14 +195,11 @@ def calc_stats():
             'day': calc_day_stats(date_range, data)
         }
 
-        end_time = time.perf_counter()
-        elapsed_time = (end_time - start_time) * 1000
-
         http_response = {
             "ok": True,
-            "service": "supabase",
+            "service": ["supabase"],
             "now": datetime.now(timezone.utc).isoformat(),
-            "response_time_ms": elapsed_time,
+            "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
             "num_records": len(data),
             "params": {'start_date': start_arg, 'end_date': end_arg},
             "data": statistic_data
@@ -228,13 +208,11 @@ def calc_stats():
         return jsonify(http_response), 200
 
     except Exception as e:
-        end_time = time.perf_counter()
-        elapsed_time = (end_time - start_time) * 1000
         http_response = {
             "ok": False,
-            "service": "supabase",
+            "service": ["supabase"],
             "now": datetime.now(timezone.utc).isoformat(),
-            "response_time_ms": elapsed_time,
+            "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
             "error": {
                 'code': 'internal_error',
                 'message': 'DB stats request: unexpected error occured',
@@ -245,12 +223,70 @@ def calc_stats():
         return jsonify(http_response), 500
     
 
+    # headers = {
+    #     "Authorization": f"Bearer {notion_key}",
+    #     "Notion-Version": "2022-06-28"
+    # }
+
+    # def pack(resp):
+    #     # Helper to safely pack response details
+    #     if resp is None:
+    #         return {"ok": False, "status_code": None}
+    #     return {
+    #         "ok": resp.ok,
+    #         "status_code": resp.status_code
+    #     }
+    # try:
+    #     notion_user_ping = requests.get('https://api.notion.com/v1/users/', headers=headers, timeout=5)
+    #     notion_db_ping = requests.get(f"https://api.notion.com/v1/databases/{notion_db_id}", headers=headers, timeout=5)
+
+# bulk inserting + inserting into supabase
+# https://chatgpt.com/g/g-p-682a71da88288191bc7dd5bec7990532-plangauge/c/68cb4d89-a3c0-8331-a432-5f636ea692d7
+
 @app.route('/api/plan-submissions', methods=['POST'])
 def submit_plans():
-    # send data to supabase
-    # Q: What data are we storing and how will it be formatted?
-    # A: General Plan + Submission
+# def submit_plans(plan_records):
+    start_time = time.perf_counter()
+    test_record = {
+        'submission_id': 1,
+        'sync_attempts': 0,
+        'synced_with_notion': False,
+        'sync_status': 'pending',
+        'created_at': datetime.now(timezone.utc).isoformat(),
+        'last_modified': datetime.now(timezone.utc).isoformat(),
+        'filter_start_date': '2025-06-01',
+        'filter_end_date': '2025-06-30'
+    }
+    response = supabase.table("plan_submission").insert(test_record).execute()
+    error = getattr(response, "error", None)
 
-    if request.methods == "POST":
-        return "a"
+    if not error:
+        http_response = {
+            'ok': True,
+            'service':["Supabase"],
+            'now': datetime.now(timezone.utc).isoformat(),
+            "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+            "plan_submission": test_record
+        }
+        return jsonify(http_response), 201
+    
+
+    
+
+
+    # send data to supabase
+    # Q1: What data are we storing and how will it be formatted?
+    # A1: General Plan + Submission
+
+    # Q2: How is the post request triggered?
+    # A2: Curl with additional flags or JS/React fetch
+    #     https://chatgpt.com/c/68ca223a-d29c-8324-b50e-0c7260b0388f
+
+    # 1. flask --> supabase --> flask (send data to database)
+
+    #   Q. Formatting of plan data received from React?
+    #   Q. 
+    # 2. flask --> notion --> flask (send data to notion)
+    # 3. flask --> supabase --> flask (test synchronization)
+
     return "a"
