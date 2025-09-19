@@ -5,7 +5,10 @@ from supabase import create_client
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
+# CORS(app, resources={r"/api/plan-submissions": {"origins": "http://localhost:5173"}})
+# CORS(api, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}}, supports_credentials=False)
 
 # Load variables from .env
 load_dotenv()

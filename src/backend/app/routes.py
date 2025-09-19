@@ -11,6 +11,10 @@ notion_key = os.getenv("NOTION_API_KEY")
 notion_page_id = os.getenv("NOTION_PAGE_ID")
 notion_db_id = os.getenv("NOTION_DB_ID")
 notion_version = os.getenv("NOTION_VERSION")
+notion_header = {
+    "Authorization": f"Bearer {notion_key}",
+    "Notion-Version": notion_version
+}
 
 @app.route('/')
 def index():
@@ -100,10 +104,6 @@ def db_health_check():
 @app.route('/api/notion/health', methods=['GET'])
 def notion_health_check():
     start_time = time.perf_counter()
-    headers = {
-        "Authorization": f"Bearer {notion_key}",
-        "Notion-Version": "2022-06-28"
-    }
 
     def pack(resp):
         # Helper to safely pack response details
@@ -114,8 +114,8 @@ def notion_health_check():
             "status_code": resp.status_code
         }
     try:
-        notion_user_ping = requests.get('https://api.notion.com/v1/users/', headers=headers, timeout=5)
-        notion_db_ping = requests.get(f"https://api.notion.com/v1/databases/{notion_db_id}", headers=headers, timeout=5)
+        notion_user_ping = requests.get('https://api.notion.com/v1/users/', headers=notion_header, timeout=5)
+        notion_db_ping = requests.get(f"https://api.notion.com/v1/databases/{notion_db_id}", headers=notion_header, timeout=5)
 
         checks = {
             "user": pack(notion_user_ping),
@@ -223,70 +223,139 @@ def calc_stats():
         return jsonify(http_response), 500
     
 
-    # headers = {
-    #     "Authorization": f"Bearer {notion_key}",
-    #     "Notion-Version": "2022-06-28"
-    # }
-
-    # def pack(resp):
-    #     # Helper to safely pack response details
-    #     if resp is None:
-    #         return {"ok": False, "status_code": None}
-    #     return {
-    #         "ok": resp.ok,
-    #         "status_code": resp.status_code
-    #     }
-    # try:
-    #     notion_user_ping = requests.get('https://api.notion.com/v1/users/', headers=headers, timeout=5)
-    #     notion_db_ping = requests.get(f"https://api.notion.com/v1/databases/{notion_db_id}", headers=headers, timeout=5)
 
 # bulk inserting + inserting into supabase
 # https://chatgpt.com/g/g-p-682a71da88288191bc7dd5bec7990532-plangauge/c/68cb4d89-a3c0-8331-a432-5f636ea692d7
 
+# curl -X POST http://127.0.0.1:5000/api/plan-submissions -H "Content-Type: application/json"
+# https://developers.notion.com/docs/working-with-databases
+
+# response = requests.post(
+#     "http://localhost:5000/api/plan-submissions",
+#     headers=notion_header,
+#     json={"test": 123}   # <-- this ensures JSON encoding
+# )
+# @app.route('/api/plan-submissions', methods=['POST'])
+# def submit_plans():
+#     start_time = time.perf_counter()
+#     if request.method == 'POST':
+
+#         # try:
+#         #     data = request.get_json(force=True)
+#         # except:
+#         #     print("aa")
+
+#         # notion_payload = pack_notion_request(notion_db_id, checked=False, title="This is a test title!!", 
+#         #                                      category="Career", priority=None, due="2025-09-20",
+#         #                                      start="2025-09-20", time=90)
+
+#         # notion_post = requests.post(f"https://api.notion.com/v1/pages", 
+#         #                             headers=notion_header, json=notion_payload, timeout=10)
+        
+#         # return str(notion_post.text), 200
+
+#         if not request.is_json:
+#             return jsonify({
+#                 "ok": False,
+#                 "code": "invalid_content_type",
+#                 "message": "Expected application/json"
+#             }), 415
+        
+#         data = request.get_json(silent=True)  # returns Python list/dict or None
+#         if data is None:
+#             # Still bytes? Log and fail gracefully
+#             raw_preview = request.data[:200]  # bytes
+#             return jsonify({
+#                 "ok": False,
+#                 "code": "invalid_json",
+#                 "message": "Request body is not valid JSON",
+#                 "details": str(raw_preview)
+#             }), 400
+        
+#         if type(data) == 'list' and len(data) < 1:
+#             return jsonify({
+#                 "ok": False,
+#                 "code": "no_records",
+#                 "message": "Request body contains no new records to submit",
+#                 "details": data
+#             }), 400
+        
+
+#         test_record = format_react_to_supabase(data)[0]
+#         response = supabase.table("plan").insert(test_record).execute()
+
+#         http_response = {
+#             'ok': response.ok,
+#             'record': test_record,
+#             'test': "123",
+#             'valid': str(validate_react_data(data)),
+#             'tasks': data
+#         }
+#         return jsonify(http_response), 200
+
+    
+#     else:
+#         http_response = {
+#             'ok': False
+#         }
+#         return jsonify(http_response), 600
+
+
+#     # test_record = {
+#     #     'submission_id': 1,
+#     #     'sync_attempts': 0,
+#     #     'synced_with_notion': False,
+#     #     'sync_status': 'pending',
+#     #     'created_at': datetime.now(timezone.utc).isoformat(),
+#     #     'last_modified': datetime.now(timezone.utc).isoformat(),
+#     #     'filter_start_date': '2025-06-01',
+#     #     'filter_end_date': '2025-06-30'
+#     # }
+#     # response = supabase.table("plan_submission").insert(test_record).execute()
+#     # error = getattr(response, "error", None)
+
+#     # if not error:
+#     #     http_response = {
+#     #         'ok': True,
+#     #         'service':["Supabase"],
+#     #         'now': datetime.now(timezone.utc).isoformat(),
+#     #         "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+#     #         "plan_submission": test_record
+#     #     }
+#     #     return jsonify(http_response), 201
+
+# resp = supabase.table("plan").insert(row).execute()
+# print(resp)  # inspect fields
+# payload = {
+#     "data": getattr(resp, "data", None),
+#     "error": getattr(resp, "error", None),
+#     "status_code": getattr(resp, "status_code", None),
+# }
+# return jsonify(payload)
+
+import traceback
 @app.route('/api/plan-submissions', methods=['POST'])
 def submit_plans():
-# def submit_plans(plan_records):
     start_time = time.perf_counter()
-    test_record = {
-        'submission_id': 1,
-        'sync_attempts': 0,
-        'synced_with_notion': False,
-        'sync_status': 'pending',
-        'created_at': datetime.now(timezone.utc).isoformat(),
-        'last_modified': datetime.now(timezone.utc).isoformat(),
-        'filter_start_date': '2025-06-01',
-        'filter_end_date': '2025-06-30'
-    }
-    response = supabase.table("plan_submission").insert(test_record).execute()
-    error = getattr(response, "error", None)
+    if request.method == 'POST':
+        try:
+            data = request.get_json(silent=True)
+            test_record = format_react_to_supabase(data)[0]
+            response = supabase.table("plan").insert(test_record).execute()
+            http_response = {
+                'ok': True,
+                'message': 'record posted to database'
+            }
+            return jsonify(http_response), 201
+            # return jsonify(response)
+            # return jsonify("asdads")
+        except Exception as e:
 
-    if not error:
-        http_response = {
-            'ok': True,
-            'service':["Supabase"],
-            'now': datetime.now(timezone.utc).isoformat(),
-            "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
-            "plan_submission": test_record
-        }
-        return jsonify(http_response), 201
-    
-
-    
+            return jsonify({
+                "ok": False,
+                "code": "unhandled_exception",
+                "message": str(e),
+                "trace": traceback.format_exc()
+            }), 500
 
 
-    # send data to supabase
-    # Q1: What data are we storing and how will it be formatted?
-    # A1: General Plan + Submission
-
-    # Q2: How is the post request triggered?
-    # A2: Curl with additional flags or JS/React fetch
-    #     https://chatgpt.com/c/68ca223a-d29c-8324-b50e-0c7260b0388f
-
-    # 1. flask --> supabase --> flask (send data to database)
-
-    #   Q. Formatting of plan data received from React?
-    #   Q. 
-    # 2. flask --> notion --> flask (send data to notion)
-    # 3. flask --> supabase --> flask (test synchronization)
-
-    return "a"
