@@ -182,16 +182,348 @@ Overall, velocity depends on stabilizing the schema quickly; risk is high if cha
   - Document this problem for later reference though
 
 #### 📌 Action Items  
-- [ ] Figure out formatting issues
-  - [ ] Structure of state data for the plans entered in the task table
-  - [ ] Structure of payload sent to Supabase
-  - [ ] Structure of payload sent to Notion
+- [x] Figure out formatting issues
+  - [x] Structure of state data for the plans entered in the task table
+  - [x] Structure of payload sent to Supabase
+  - [x] Structure of payload sent to Notion
 - [ ] Write helper function that validates formatting structure prior to making external API calls
-- [ ] Send mock plan_record data to Supabase
-- [ ] Send mock data to Notion database
+- [x] Send mock plan_record data to Supabase
+- [x] Send mock data to Notion database
 - [ ] Have route send post requests to both supabase and notion
 
 ---
+
+## 🗓️ Standup 3 – Plan Submission Is Going To Take Some Time
+
+### 🧾 Overview
+* **Date:** Friday, September 19th (2025)
+* **Time:** 11:33 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Plan Submission`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Work for `Plan Submission` will probably take the entire sprint
+
+#### 📈 Previous Progress
+- Wrote js script for submitting data through and attached to SubmissionButton
+  - React <--> Flask <--> Supabase/Notion
+- Refactored connectionTest.js by moving helper functions into separate file -- intended to be reused in the plan submission script
+- Successfully wrote a basic POST flask API endpoint and a basic POST fetch request
+  - Data was stored to both Supabase and Notion with test code + records (not at same time though)
+- Wrote function that validates plan data sent from react and received by flask prior to attempting a POST request to Supabase (on flask end and does not consider formatting for Notion yet)
+
+#### 🧱 Problems & Blockers
+- I might be introducing race conditions with plan submission functions (react + flask), need to look into this
+- Can post data to Supabase using the submit button but this always throws an Internal Error for some reason
+- As I started writing code, realized the API documentation will probably need to be updated to account for additional errors
+- Separated connectionTest helper functions persistentFetch and timedFetch into independent file for reuse in submitTasks but need modification to work in both js scripts
+
+#### ⏳ Pending Actions
+- Finish writing validation functions
+- Fix problem with Internal Error throwing when posting data to Supabase
+- Have /api/plan-submissions send data to both Notion and Supabase without problems
+
+#### 🔜 Next Steps
+- Solve Internal Error issue
+- Briefly look into race conditions issue
+- Write validation + reformatting function for posting data from flask to Notion
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+**Have you detected any potential for race conditions with my code so far?**
+
+**Likely hotspots & fixes:**
+1) **Double-submit from UI** (rapid clicks, retries in `persistentFetch`): causes duplicate inserts.  
+→ *Frontend*: disable the button while `isSubmitting`, use an `AbortController` for retries, and debounce (250–400ms). Also keep a client idempotency key per submission (e.g., `submission_id: UUIDv7`).  
+→ *Backend*: enforce idempotency with a **unique constraint** on `submission_id` or a server-computed `submission_hash` (hash of normalized plan list). Use `INSERT ... ON CONFLICT DO NOTHING` (or upsert).
+
+2) **Parallel writes to the same `plan_submission` row** (Supabase + Notion updates running concurrently): last writer wins on `sync_status` / `synced_with_notion`.  
+→ Serialize server work: do Supabase write first (transaction), then Notion; update `sync_status` at the end. If you must parallelize, update separate columns and compute final status atomically (transaction or one `UPDATE` that derives final state).
+
+3) **Retries without idempotency** (network flakiness + your `persistentFetch`): the server may process the same payload twice.  
+→ Require header `Idempotency-Key` or field `submission_id`. On the server, if a row already exists with that key, return 200/201 with the existing resource rather than inserting again.
+
+4) **Flask concurrency in prod** (gunicorn/uwsgi multi-workers): any shared globals or in-memory queues could race.  
+→ Keep Supabase client stateless, avoid mutable module-level structures, and push all coordination to the DB (constraints/transactions).
+
+5) **Out-of-order updates** (client fires `/submit` then `/sync` quickly): later request can finish before the first.  
+→ Gate follow-ups behind the created resource (`/plan-submissions/{id}`) and only allow sync transitions that make sense (state machine: `pending` → `in_progress` → `success|failed`), enforced by a guarded `UPDATE ... WHERE state IN (...)`.
+
+**DB-side guards you can add now (fast wins):**
+- Unique index: `UNIQUE(submission_id)` or `UNIQUE(submission_hash)`.  
+- Use **upsert** when inserting plans: `ON CONFLICT (plan_id) DO UPDATE ...` or `DO NOTHING`.  
+- Wrap related writes in a transaction and return a single response.
+
+#### ❓ Question 2
+**Do you think I can finish `Plan Submission` this sprint (duration is 2 weeks and the first week is almost over)?**
+
+It’s possible, but tight. You’ve already set up the major plumbing (React form, Flask endpoint, Supabase/Notion test inserts). The biggest time sinks left are:  
+- Debugging the Supabase Internal Error (likely serialization/response shape).  
+- Adding robust validation + reformatting logic for Notion.  
+- Ensuring idempotency and race condition safety.  
+- Updating API docs to reflect real-world error handling.
+
+If you dedicate the remaining week fully to this backlog item and accept a **“first draft” definition of done** (working but not perfectly polished), you can likely finish. If you aim for a fully production-ready version (with all error codes, retries, retries with exponential backoff, etc.), it might slip past the sprint. Prioritizing “good enough, consistent with docs” will help you land it.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- UI + network retries can easily produce duplicate inserts without idempotency; solve with a client key and DB uniqueness.
+- Supabase write should happen inside a transaction; Notion sync occurs after, then update `sync_status` once.
+- Flask 500s today are likely serialization/return-shape problems rather than the DB write itself.
+
+#### 🗝️ Key Decisions
+- Disable submit button during in-flight request; add debounce + `AbortController` for retries.
+- Sequence: Supabase (transaction) → Notion → final `sync_status` update; no parallel writes to the same row.
+- Standardize responses to be JSON-safe (ISO datetimes, no raw client objects).
+- Address race condition problems later
+
+#### 📌 Action Items
+- [ ] Normalize all datetimes to `UTC ISO-8601` before returning JSON.
+- [ ] Solve Internal Error issue
+- [x] Briefly look into race conditions issue
+- [ ] Write validation + reformatting function for posting data from flask to Notion
+
+---
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
 
 ## 🗓️ Standup [#] – [Standup Title]
 

@@ -108,3 +108,81 @@ def calc_day_stats(date_range, data):
         day_std[key] = statistics.stdev(day_vals[key])
 
     return {'ave': day_ave, 'std': day_std}
+
+from datetime import datetime
+
+def validate_react_data(data):
+
+    # 1. Top-level must be a list
+    if not isinstance(data, list):
+        return False
+
+    expected_keys = ['name', 'category', 'due_date', 'start_date', 'time_estimation']
+
+    
+    for plan in data:
+        # 2. Each item must be a dict
+        if not isinstance(plan, dict):
+            return False
+
+        # 3. Must have all required keys
+        if not all(key in plan for key in expected_keys):
+            return False
+
+        # 4. Validate types
+        if not isinstance(plan['name'], str):
+            return False
+        if not isinstance(plan['category'], str):
+            return False
+        if not isinstance(plan['time_estimation'], int):
+            return False
+
+        # 5. Validate date format
+        for date_field in ['due_date', 'start_date']:
+            if not isinstance(plan[date_field], str):
+                return False
+            try:
+                datetime.fromisoformat(plan[date_field])  # will raise if invalid
+            except ValueError:
+                return False
+
+    return True
+
+def format_react_to_supabase(data, submission_id):
+
+    record_list = []
+    count = 0
+    for record in data:
+        new_record = {
+            "plan_id": count,
+            "plan_name": record["name"],
+            "start_date": record["start_date"],
+            "due_date": record["due_date"],
+            "submission_id": submission_id
+        }
+        record_list.append(new_record)
+        count += 1
+    return record_list
+
+def pack_notion_request(db_id, checked, title, category, priority, due, start, time):
+    return {
+        "parent": { "database_id" : db_id},
+        "properties": 
+            {
+                "YG%60S": { "checkbox": checked },
+                "Task": {
+                    "title": [
+                        {"type": "text", "text": {"content": title}}
+                    ]
+                },
+                "Category": {
+                    "select": {
+                        "name": category
+                    }
+                },
+                "Priority": { "select": priority },
+                "Due": { "date": { "start": due } },
+                "Start": { "date": { "start": start } },
+                "Total": {"number": time}
+            }
+    }
