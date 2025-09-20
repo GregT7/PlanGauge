@@ -1,31 +1,16 @@
-import { persistentFetch} from './persistentFetch';
+import { persistentFetch } from './persistentFetch';
 
-// fetch('https://jsonplaceholder.typicode.com/posts', {
-//     method: 'POST', // Specify the HTTP method as POST
-//     headers: {
-//         'Content-Type': 'application/json', // Indicate that the body is JSON
-//     },
-//     body: JSON.stringify(postData), // Convert the JavaScript object to a JSON string
-// })
-// .then(response => {
-//     if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//     return response.json(); // Parse the JSON response
-// })
-// .then(data => {
-//     console.log('Success:', data);
-// })
-// .catch(error => {
-//     console.error('Error:', error);
-// });
 
-// persistentFetch(url, service_str, timeoutDuration = 2500)
-export default async function submitTasks(tasks) {
+export default async function submitTasks(tasks, start_date, end_date) {
     const submit_url = "http://localhost:5000/api/plan-submissions"
     // const response = await persistentFetch(submit_url, "plan submission", 5000).then(value => {
     //     console.log(value)
     // })
+    const payload = {
+        'tasks': tasks,
+        'filter_start_date': start_date,
+        'filter_end_date': end_date
+    }
 
     const response = await fetch(submit_url, {
         method: 'POST',
@@ -33,11 +18,11 @@ export default async function submitTasks(tasks) {
             'Content-Type': 'application/json',
             "Accept": "application/json"
         },
-        body: JSON.stringify(tasks)
+        body: JSON.stringify(payload)
     }).then(response => {
         if(!response.ok) {
-            console.log(response)
-            // throw new Error(`HTTP error! status: ${response.status}`);
+            console.log("response: ", response)
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.json(); // Parse the JSON response
     }).then(data => {
@@ -46,5 +31,4 @@ export default async function submitTasks(tasks) {
     .catch(error => {
         console.error('Error:', error);
     });
-    
 }

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import statistics
-
+import uuid
 
 def find_valid_range(start, end):
     date_range = {'start': None, 'end': None}
@@ -148,41 +148,51 @@ def validate_react_data(data):
 
     return True
 
-def format_react_to_supabase(data, submission_id):
+def generate_unique_integer_id():
+  """Generates a unique integer ID using UUIDs."""
+  unique_uuid = uuid.uuid4()  # Generate a random UUID (version 4)
+  unique_integer_id = unique_uuid.int  # Convert the UUID to an integer
+  
+  return unique_integer_id % 2147483647
 
+
+def format_react_to_supabase(data, submission_id):
     record_list = []
-    count = 0
     for record in data:
         new_record = {
-            "plan_id": count,
+            "plan_id": generate_unique_integer_id(),
             "plan_name": record["name"],
             "start_date": record["start_date"],
             "due_date": record["due_date"],
             "submission_id": submission_id
         }
         record_list.append(new_record)
-        count += 1
+
     return record_list
 
-def pack_notion_request(db_id, checked, title, category, priority, due, start, time):
-    return {
-        "parent": { "database_id" : db_id},
-        "properties": 
-            {
-                "YG%60S": { "checkbox": checked },
-                "Task": {
-                    "title": [
-                        {"type": "text", "text": {"content": title}}
-                    ]
-                },
-                "Category": {
-                    "select": {
-                        "name": category
-                    }
-                },
-                "Priority": { "select": priority },
-                "Due": { "date": { "start": due } },
-                "Start": { "date": { "start": start } },
-                "Total": {"number": time}
-            }
-    }
+def format_react_to_notion(data, db_id):
+    notion_records = []
+    for record in data:
+        formatted_record = {
+            "parent": { "database_id" : db_id},
+            "properties": 
+                {
+                    "YG%60S": { "checkbox": False },
+                    "Task": {
+                        "title": [
+                            {"type": "text", "text": {"content": record["name"]}}
+                        ]
+                    },
+                    "Category": {
+                        "select": {
+                            "name": record["category"]
+                        }
+                    },
+                    "Priority": { "select": None },
+                    "Due": { "date": { "start": record["due_date"] } },
+                    "Start": { "date": { "start": record["start_date"] } },
+                    "Total": {"number": record['time_estimation']}
+                }
+        }
+        notion_records.append(formatted_record)
+    return notion_records

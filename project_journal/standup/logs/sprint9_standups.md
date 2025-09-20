@@ -283,59 +283,84 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - Address race condition problems later
 
 #### 📌 Action Items
-- [ ] Normalize all datetimes to `UTC ISO-8601` before returning JSON.
-- [ ] Solve Internal Error issue
+- [x] Normalize all datetimes to `UTC ISO-8601` before returning JSON.
+- [x] Solve Internal Error issue
 - [x] Briefly look into race conditions issue
-- [ ] Write validation + reformatting function for posting data from flask to Notion
+- [x] Write validation + reformatting function for posting data from flask to Notion
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 4 – Response Verification & Management
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, September 20th (2025)  
+* **Time:** 3:48 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Got the React button to successfully store data and check for sync errors.  
+- Current implementation is messy and will require significant refactoring.  
+- Begin designing response management: what happens if one API call fails?
 
 #### 📈 Previous Progress
-- 
+- Passed an informal end-to-end test posting tasks to **Notion** & **Supabase** with sync updates.  
+- Resolved the internal error issue from the last standup.  
+- Verified all datetime key pairs in Flask are using `UTC ISO-8601`.  
+  - Example: `"created_at": datetime.now(timezone.utc).isoformat()`.  
+- Created a comprehensive list of current problems for debugging.
 
 #### 🧱 Problems & Blockers
-- 
+- **React**
+  - Need to collect dynamic date ranges for stat calculations and pass them to backend.  
+    - Question: store in state, context, or props? Currently hard-coded.  
+  - Fetches run only once; `persistent_fetch` is not modular enough for reuse across components.  
+- **Flask**
+  - Data verification coverage exists but is incomplete.  
+  - `plan_submission` dict is hard-coded → not adaptive to real API responses.  
+  - No retry implementation.  
+  - Random IDs for test records risk collision; need proper unique record IDs.  
+  - `validate_react_data` function is written but not used.  
+- Race condition issues expected; will require careful handling.
 
 #### ⏳ Pending Actions
-- 
+- Build response management: define failure/partial-success handling for internal API calls.
 
 #### 🔜 Next Steps
-- 
+- Add response management to `/api/plan-submissions`.  
+- Implement `validate_react_data` for payload validation.  
+- Review Excel docs and implement at least 2 of the planned routes.
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**Would backend retry logic be worth adding?**  
+- Probably not. Retry handling inside Flask adds complexity and risk since the number of API calls is already high (Notion requires individual calls per row, plus Supabase insert/update).  
+- Retries might be better handled selectively in backend for testing, but not worth a full implementation at this stage.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**Are today’s tasks missing dependencies?**  
+- No blocking external dependencies noted. Current tasks depend only on internal fixes (React state mgmt, Flask validation, response handling).
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Backend should be the source of truth for `last_modified`. Avoid relying on Supabase auto-triggers.  
+- Retry logic will not be implemented in React. If retries are needed, they’ll be handled in backend for debugging purposes.  
 
 #### 🗝️ Key Decisions
-- 
+- Manage `last_modified` attribute in Flask backend.  
+- Do not implement retry functionality in React fetches; consider lightweight retry logic in Flask only if needed.  
 
 #### 📌 Action Items
-- 
-
---- 
+- [ ] Use `validate_react_data` in `/api/plan-submissions` to verify incoming data.   
+- [ ] Replace hard-coded `plan_submission` dict with adaptive logic
+- [ ] Add response management to `/api/plan-submissions`.
+  - [ ] Review Excel docs and implement at least 2 of the planned routes.
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 

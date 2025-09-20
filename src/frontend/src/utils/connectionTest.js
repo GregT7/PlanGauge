@@ -1,5 +1,5 @@
 import { toast } from 'sonner'
-import { persistentFetch} from './persistentFetch';
+import { persistentFetch } from './persistentFetch';
 
 export async function connectionTest() {
     const flask_url = "http://localhost:5000/api/health";

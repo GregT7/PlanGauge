@@ -19,8 +19,13 @@ function SubmissionButton({submit_plans = () => {}, status = 'neutral'}) {
         }
     }
 
+
+    // ! FIX ME - HARD CODED VALUES
+    const filter_start_date = '2025-06-01'
+    const filter_end_date =  '2025-06-30'
+
     const handleClick = () => {
-        submitTasks(tasks)
+        submitTasks(tasks, filter_start_date, filter_end_date)
     }
 
     const initialColors = handleStyling(status)
