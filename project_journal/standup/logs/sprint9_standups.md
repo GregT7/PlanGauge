@@ -353,61 +353,89 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 
 #### 🗝️ Key Decisions
 - Manage `last_modified` attribute in Flask backend.  
-- Do not implement retry functionality in React fetches; consider lightweight retry logic in Flask only if needed.  
+- Do not implement retry functionality in React fetches for the `/api/plan-submissions` endpoint; consider lightweight retry logic in Flask only if needed.  
 
 #### 📌 Action Items
-- [ ] Use `validate_react_data` in `/api/plan-submissions` to verify incoming data.   
-- [ ] Replace hard-coded `plan_submission` dict with adaptive logic
-- [ ] Add response management to `/api/plan-submissions`.
+- [x] Use `validate_react_data` in `/api/plan-submissions` to verify incoming data.   
+- [x] Add response management to `/api/plan-submissions`.
   - [ ] Review Excel docs and implement at least 2 of the planned routes.
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 5 – Flask Route Refactoring
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Sunday September 21 (2025)  
+* **Time:** 2:24 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Had ChatGPT review current `routes.py` implementation; received 10 solid critiques + recommended changes. Will implement before moving forward  
+  - [Reference conversation](https://chatgpt.com/g/g-p-682a71da88288191bc7dd5bec7990532-plangauge/c/68cf0f81-1c9c-8325-8301-135b7f60ce8f)
+- Finished a basic working draft of `/api/plan-submissions`
 
 #### 📈 Previous Progress
-- 
+- `/api/plan-submissions` passed an informal end-to-end test (data posted to Supabase + Notion; sync update succeeded)
 
 #### 🧱 Problems & Blockers
-- 
+- `/api/plan-submissions` implementation still has some logic + syntax bugs  
+- `routes.py` has a lot of repetition → can be simplified  
+- Flask-generated record IDs for `plans` and `plan_submissions` aren’t ideal
 
 #### ⏳ Pending Actions
-- 
+- Achieve 100% response management coverage for `/api/plan-submissions`
 
 #### 🔜 Next Steps
-- 
+- Address ChatGPT critiques of routes.py:
+  1. `generate_db_error_response(response)` bug  
+  2. Dead branch for non-POST requests in `/api/plan-submissions`  
+  3. Parameter validation for `/api/db/stats`  
+  4. Request validation naming + payload shape  
+  5. Consistency of `service` and `error` fields  
+  6. Partial-failure semantics for Notion / Supabase  
+  7. Notion error detail quality  
+  8. Reduce repetition with tiny helpers  
+  9. IDs: avoid random collisions  
+  10. Health endpoints: unify error signaling  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- *What assumptions am I making that might be wrong?*  
+  → Assuming record ID generation can be left to Flask/Supabase; this may create collisions or non-ideal formats. Also assuming error detail consistency won’t matter until later, when it may actually matter a lot for debugging.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- *Do today’s tasks contribute to this sprint’s goals?*  
+  → Yes. Sprint goal is to stabilize `Plan Submission`. Cleaning and refactoring routes is directly aligned, especially for correctness + maintainability.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- The critiques highlighted structural issues rather than just bugs. Fixing them should reduce technical debt early.  
+- Getting consistent error responses across endpoints will pay off when I start adding retries or debugging sync issues with Notion.  
 
 #### 🗝️ Key Decisions
-- 
+- Adopt helper functions to reduce repetition in response handling.  
+- Replace Flask-generated IDs with deterministic UUIDs to prevent collisions for `plan` and `plan_submission` records
+  - Don't worry about other records like `work` using incrementing integers for ids
+- Standardize error + service fields in all JSON responses.  
 
 #### 📌 Action Items
-- 
+- [ ] Fix bug in `generate_db_error_response(response)`  
+- [ ] Remove dead branch for non-POST requests in `/api/plan-submissions`  
+- [ ] Add parameter validation for `/api/db/stats`  
+- [ ] Update request validation naming + enforce payload shape  
+- [ ] Standardize `service` and `error` fields across responses  
+- [ ] Define partial-failure semantics for Notion and Supabase syncs  
+- [ ] Improve detail quality of Notion error messages  
+- [ ] Create tiny helper functions to reduce repetition in routes  
+- [ ] Replace Flask-generated IDs with UUIDs (or similar deterministic IDs)  
+- [ ] Unify error signaling in health endpoints  
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
