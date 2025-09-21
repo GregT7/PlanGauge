@@ -21,7 +21,7 @@ export default async function submitTasks(tasks, start_date, end_date) {
         body: JSON.stringify(payload)
     }).then(response => {
         if(!response.ok) {
-            console.log("response: ", response)
+            console.log("response: ", response.body)
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.json(); // Parse the JSON response

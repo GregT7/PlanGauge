@@ -111,42 +111,100 @@ def calc_day_stats(date_range, data):
 
 from datetime import datetime
 
-def validate_react_data(data):
+def validate_react_payload(data):
+    """
+    Expected payload shape (from React):
+    {
+      "filter_start_date": "2025-06-01T00:00:00Z",   # ISO-8601 string
+      "filter_end_date":   "2025-06-30T23:59:59Z",   # ISO-8601 string
+      "tasks": [
+        {
+          "name": "Do HW 3",
+          "category": "School",
+          "due_date": "2025-06-05T00:00:00Z",        # ISO-8601 string
+          "start_date": "2025-06-03T00:00:00Z",      # ISO-8601 string
+          "time_estimation": 90                      # integer minutes
+          # other fields allowed but ignored
+        },
+        ...
+      ]
+    }
+    Returns: (ok: bool, errors: list[str])
+    """
 
-    # 1. Top-level must be a list
-    if not isinstance(data, list):
-        return False
+    errors = []
 
-    expected_keys = ['name', 'category', 'due_date', 'start_date', 'time_estimation']
-
-    
-    for plan in data:
-        # 2. Each item must be a dict
-        if not isinstance(plan, dict):
+    # --- helpers ---
+    def is_iso8601(s: str) -> bool:
+        if not isinstance(s, str):
+            return False
+        try:
+            # support trailing 'Z'
+            normalized = s[:-1] + "+00:00" if s.endswith("Z") else s
+            datetime.fromisoformat(normalized)
+            return True
+        except Exception:
             return False
 
-        # 3. Must have all required keys
-        if not all(key in plan for key in expected_keys):
-            return False
+    def req(d: dict, key: str):
+        return d.get(key, None)
 
-        # 4. Validate types
-        if not isinstance(plan['name'], str):
-            return False
-        if not isinstance(plan['category'], str):
-            return False
-        if not isinstance(plan['time_estimation'], int):
-            return False
+    # --- top-level object ---
+    if not isinstance(data, dict):
+        return False, ["payload must be a JSON object"]
 
-        # 5. Validate date format
-        for date_field in ['due_date', 'start_date']:
-            if not isinstance(plan[date_field], str):
-                return False
-            try:
-                datetime.fromisoformat(plan[date_field])  # will raise if invalid
-            except ValueError:
-                return False
+    # required top-level keys
+    start = req(data, "filter_start_date")
+    end = req(data, "filter_end_date")
+    tasks = req(data, "tasks")
 
-    return True
+    if not is_iso8601(start):
+        errors.append("filter_start_date must be an ISO-8601 string (UTC recommended).")
+    if not is_iso8601(end):
+        errors.append("filter_end_date must be an ISO-8601 string (UTC recommended).")
+
+    if not isinstance(tasks, list) or len(tasks) == 0:
+        errors.append("tasks must be a non-empty array.")
+
+    # short-circuit if top-level already broken
+    if errors:
+        return False, errors
+
+    # --- per-task validation ---
+    REQUIRED = ["name", "category", "due_date", "start_date", "time_estimation"]
+
+    for i, task in enumerate(tasks):
+        prefix = f"tasks[{i}]"
+        if not isinstance(task, dict):
+            errors.append(f"{prefix} must be an object.")
+            continue
+
+        # keys present
+        missing = [k for k in REQUIRED if k not in task]
+        if missing:
+            errors.append(f"{prefix} missing required key(s): {', '.join(missing)}.")
+            # continue to next task; no need to type-check missing fields
+            continue
+
+        # types / formats
+        if not isinstance(task["name"], str) or not task["name"].strip():
+            errors.append(f"{prefix}.name must be a non-empty string.")
+
+        if not isinstance(task["category"], str) or not task["category"].strip():
+            errors.append(f"{prefix}.category must be a non-empty string.")
+
+        # time_estimation: integer minutes (>= 0)
+        if not isinstance(task["time_estimation"], int) or task["time_estimation"] < 0:
+            errors.append(f"{prefix}.time_estimation must be an integer ≥ 0 (minutes).")
+
+        # dates must be ISO-8601 strings
+        if not is_iso8601(task["due_date"]):
+            errors.append(f"{prefix}.due_date must be ISO-8601.")
+        if not is_iso8601(task["start_date"]):
+            errors.append(f"{prefix}.start_date must be ISO-8601.")
+
+    return (len(errors) == 0), errors
+
 
 def generate_unique_integer_id():
   """Generates a unique integer ID using UUIDs."""

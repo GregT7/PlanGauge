@@ -227,15 +227,34 @@ def calc_stats():
 # curl -X POST http://127.0.0.1:5000/api/plan-submissions -H "Content-Type: application/json"
 # https://developers.notion.com/docs/working-with-databases
 
-import traceback
+
+# https://chatgpt.com/g/g-p-682a71da88288191bc7dd5bec7990532-plangauge/c/68cf0f81-1c9c-8325-8301-135b7f60ce8f
 @app.route('/api/plan-submissions', methods=['POST'])
 def submit_plans():
     start_time = time.perf_counter()
     submission_id = generate_unique_integer_id() #! fix me
     if request.method == 'POST':
         try:
-            data = request.get_json(force=True)
+            payload = request.get_json(silent=True)
 
+            is_valid_payload, errors = validate_react_payload(payload)
+            if not is_valid_payload:
+                separator = ", "
+                http_response = {
+                    "ok": False,
+                    "service": [],
+                    "now": datetime.now(timezone.utc).isoformat(),
+                    "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+                    "plan_submission": None,
+                    "error": {
+                        "code": "bad_request",
+                        "message": "The formatting of the payload sent from react is invalid for processing...",
+                        "errors": separator.join(errors)
+                    }
+                }
+
+                return jsonify(http_response), 400
+            
             # POST plan_submission - Supabase
             plan_submission = {
                 "submission_id": submission_id,
@@ -244,20 +263,59 @@ def submit_plans():
                 "sync_status": "pending",
                 "created_at": datetime.now(timezone.utc).isoformat(),
                 "last_modified": datetime.now(timezone.utc).isoformat(),
-                "filter_start_date": data['filter_start_date'],
-                "filter_end_date": data['filter_end_date']
+                "filter_start_date": payload['filter_start_date'],
+                "filter_end_date": payload['filter_end_date']
             }
-            response = supabase.table("plan_submission").insert(plan_submission).execute()
+
+            def generate_db_error_response(response):
+                return {
+                    "ok": False,
+                    "service": ["supabase"],
+                    "now": datetime.now(timezone.utc).isoformat(),
+                    "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+                    "error": {
+                        'code': 'supabase_post_error',
+                        'message': 'Supabase insert failed',
+                        'details': str(resp_error)
+                    }
+                }
+
+            db_submission_response = supabase.table("plan_submission").insert(plan_submission).execute()
+            resp_error = getattr(db_submission_response, "error", None)
+
+            if resp_error:
+                http_response = generate_db_error_response(resp_error)
+                return jsonify(http_response), 503
 
             # POST plans - Supabase DB
-            formatted_records = format_react_to_supabase(data['tasks'], submission_id)
-            response = supabase.table("plan").insert(formatted_records).execute()
+            formatted_records = format_react_to_supabase(payload['tasks'], submission_id)
+            db_plans_response = supabase.table("plan").insert(formatted_records).execute()
+            resp_error = getattr(db_plans_response, "error", None)
+
+            if resp_error:
+                http_response = generate_db_error_response(resp_error)
+                return jsonify(http_response), 503
             
             # POST plans - Notion
-            notion_payload = format_react_to_notion(data['tasks'], notion_db_id)
+            notion_payload = format_react_to_notion(payload['tasks'], notion_db_id)
             for record in notion_payload:
-                notion_post = requests.post(f"https://api.notion.com/v1/pages", 
+                notion_response = requests.post(f"https://api.notion.com/v1/pages", 
                                         headers=notion_header, json=record, timeout=10)
+                if notion_response is None or not notion_response.ok:
+                    http_response = {
+                        "ok": False,
+                        "service": ["supabase", "notion"],
+                        "now": datetime.now(timezone.utc).isoformat(),
+                        "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+                        "error": {
+                            'code': 'notion_post_error',
+                            'message': 'Notion insert failed',
+                            'details': str(notion_response)
+                        }
+                    }
+                    return jsonify(http_response), 503
+
+                
                 
             # UPDATE plan_submission - Supabase
             updates = {
@@ -267,25 +325,33 @@ def submit_plans():
                 "last_modified": datetime.now(timezone.utc).isoformat()
             }
 
-            response = (
+            db_sync_response = (
                 supabase.table("plan_submission")
                 .update(updates)
                 .eq("submission_id", submission_id)   # filter on PK
                 .execute()
             )
+            resp_error = getattr(db_sync_response, "error", None)
+            if resp_error:
+                http_response = {
+                    "ok": False,
+                    "service": ["supabase", "notion"],
+                    "now": datetime.now(timezone.utc).isoformat(),
+                    "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+                    "error": {
+                        'code': 'supabase_sync_error',
+                        'message': 'Supabase plan_submission synchronization update failed',
+                        'details': str(resp_error)
+                    }
+                }
+                return jsonify(http_response), 503
 
             for key in updates:
                 plan_submission[key] = updates[key]
 
-            # plan_submission['sync_status'] = updates['sync_status']
-            # plan_submission['sync_attempts'] = updates['sync_attempts']
-            # plan_submission['synced_with_notions'] = updates['synced_with_notion']
-            # plan_submission['last_modified'] = updates['last_modified']
-
-
             http_response = {
                 'ok': True,
-                "service": ["supabase"],
+                "service": ["supabase", "notion"],
                 "now": datetime.now(timezone.utc).isoformat(),
                 "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
                 "num_plans": len(formatted_records),
@@ -296,11 +362,17 @@ def submit_plans():
 
         except Exception as e:
             print("exception thrown: ", e)
-            return jsonify({
+            http_response = {
                 "ok": False,
-                "code": "unhandled_exception",
-                "message": str(e),
-                "trace": traceback.format_exc()
-            }), 500
+                "service": [],
+                "now": datetime.now(timezone.utc).isoformat(),
+                "response_time_ms": round(time.perf_counter() - start_time, 2) * 1000,
+                "error": {
+                    'code': 'internal_error',
+                    'message': 'Unexpected error occured when trying to submit data',
+                    'details': str(e)
+                }  
+            }
+            return jsonify(http_response), 500
 
 
