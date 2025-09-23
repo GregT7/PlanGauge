@@ -424,112 +424,181 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - Standardize error + service fields in all JSON responses.  
 
 #### 📌 Action Items
-- [ ] Fix bug in `generate_db_error_response(response)`  
-- [ ] Remove dead branch for non-POST requests in `/api/plan-submissions`  
-- [ ] Add parameter validation for `/api/db/stats`  
-- [ ] Update request validation naming + enforce payload shape  
-- [ ] Standardize `service` and `error` fields across responses  
-- [ ] Define partial-failure semantics for Notion and Supabase syncs  
-- [ ] Improve detail quality of Notion error messages  
-- [ ] Create tiny helper functions to reduce repetition in routes  
-- [ ] Replace Flask-generated IDs with UUIDs (or similar deterministic IDs)  
-- [ ] Unify error signaling in health endpoints  
+- [x] Fix bug in `generate_db_error_response(response)`  
+- [x] Remove dead branch for non-POST requests in `/api/plan-submissions`  
+- [x] Add parameter validation for `/api/db/stats`  
+- [x] Update request validation naming + enforce payload shape  
+- [x] Standardize `service` and `error` fields across responses  
+- [x] Define partial-failure semantics for Notion and Supabase syncs  
+- ~~Improve detail quality of Notion error messages~~
+- [x] Create tiny helper functions to reduce repetition in routes  
+- [x] Replace Flask-generated IDs with UUIDs (or similar deterministic IDs)  
+- [x] Unify error signaling in health endpoints  
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 6 – Route Refactoring Continued
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Monday, September 22nd (2025)
+* **Time:** 3:42 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Finished implementing first round of ChatGPT recommendations for `routes.py`
+- Need to spend more time ironing out `routes.py` implementation and supporting documentation still
+- Almost ready to move on to other aspects of `Plan Submission` backlog
 
 #### 📈 Previous Progress
-- 
+- Completed first round of ChatGPT recommendations for `routes.py` and `utils.py`, got feedback, and want to implement a second round of changes
+- Made c
 
 #### 🧱 Problems & Blockers
-- 
+- New changes introduced a bug where data submission no longer works when initiated from the frontend for Supabase + Notion (raises an exception)
+- There are inconsistencies/confusion/redundant code for date handling on both the React side and Flask side
+- There are additional bugs/inconsistencies in new code that need to be ironed out
 
 #### ⏳ Pending Actions
-- 
+- Complete Flask routing code + documentation
 
 #### 🔜 Next Steps
-- 
+- **Big Issues/Problems with `routes.py`**
+  - Fix Notion failure branch: swap the two `err_resp(...)` returns so they match the actual failure; update `plan_submission` to `"failure"` first; use `pack_requests_response(notion_response)` in details.
+  - Stop generating `plan_id` app-side; let Postgres default `gen_random_uuid()` fill it. Remove `generate_unique_integer_id()` and omit `plan_id` from inserts.
+  - Normalize date fields for Supabase: if columns are `DATE`, truncate to `YYYY-MM-DD` (`iso_to_date()`); if `timestamptz`, keep full ISO.
+  - Include the DB-assigned `submission_id` in the final success response (`plan_submission` object).
+  - Wrap Notion POST in `try/except requests.exceptions.RequestException`; treat exceptions as failures and pack details (`pack_exc(...)` / `pack_requests_response(None)`).
+  - Remove unused local UUID in `submit_plans()` and any unused helpers (e.g., inner `pack` in Notion health).
+  - Provide a clear message for `/api/db/stats` bad requests (insufficient data) instead of an empty string.
+- **Polishing / Consistency**
+  - Flatten response params: use `"params": {"start": ..., "end": ...}` (no nested `{"params": {...}}`).
+  - Add `"Content-Type": "application/json"` to Notion request headers.
+  - Fix typos (e.g., `occured` → `occurred`).
+  - Standardize `pack_requests_response` keys (use `"status"` everywhere, or `"status_code"`—pick one and stick to it).
+  - Rename inner loop variable in `calc_day_stats` to avoid shadowing (use `j` instead of reusing `i`).
+- Investigate issue causing React-initiated submissions to fail
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- **Do you think all of the next steps can be accomplished today?**  
+  Probably not all at once — there’s both bug-fixing and cleanup work, and some of the Notion/Supabase issues may require debugging time. It would be more realistic to finish 2–3 high-impact fixes (e.g., `plan_id` handling, Notion failure branch, and React submission failure) today, then handle polish (typos, response flattening) later.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- **How would you rate progress so far in this sprint? Do you think I'll be able to finish `Plan Submission` in time?**  
+  Progress has been steady, though slightly slowed by the introduction of new bugs after the refactor. The fact that you’re already iterating on a second round of recommendations means you’re moving toward a clean, maintainable implementation. If you focus on core functionality first (ensuring successful Supabase + Notion submissions end-to-end) and treat polish as stretch tasks, you should still be on track to finish `Plan Submission` by the sprint deadline.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Refactoring improved code readability but introduced new bugs with frontend-triggered submissions.  
+- Date handling is inconsistent across React and Flask — must be standardized before moving forward.  
+- The current Notion error-handling flow is misleading, and the response details aren’t consistent.  
+- Postgres should generate UUIDs for IDs, reducing reliance on custom ID generation.  
+- Polishing tasks (typos, param flattening, consistency) should be deprioritized until core submission flow is reliable.
 
 #### 🗝️ Key Decisions
-- 
+- Let Postgres handle UUID generation (`gen_random_uuid()`) instead of app-side functions.  
+- Standardize date formatting early to prevent downstream errors.  
+- Treat Notion POST exceptions explicitly with try/except and consistent error packing.  
 
 #### 📌 Action Items
-- 
+- [x] Debug and fix frontend-initiated submission failure.  
+- [x] Swap Notion failure branch logic and ensure `plan_submission` updates to `"failure"`.  
+- [x] Remove `generate_unique_integer_id()` and stop passing `plan_id` in inserts.  
+- [x] Normalize date handling: `DATE` → `YYYY-MM-DD`, `timestamptz` → full ISO.  
+- [x] Ensure DB-assigned `submission_id` is included in final success response.  
+- [x] Wrap Notion POST in `try/except` for robust error handling.  
+- [x] Clean up unused helpers (local UUID, inner pack in Notion health).  
+- [x] Update `/api/db/stats` bad request responses with a clear error message.  
+- [x] After core fixes, polish: flatten response params, add `Content-Type` header, fix typos, standardize keys, rename loop vars.
 
---- 
+---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 7 – Review ChatGPT Code Changes
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Tuesday, September 23rd (2025)
+* **Time:** 3:30 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Review ChatGPT generated code changes to make sure I understand it and decide if I want to keep it
+- Want to start implementing other parts of `Plan Submission` like the button disabling thing and come back to routes.py later for testing
+- Testing is going to be a nightmare and will take up a lot of time
 
 #### 📈 Previous Progress
-- 
+- Fixed submission bug -- can now post to Supabase and Notion DB without issues
+- Fixed inconsistency/inefficiency/redundant code issues in routes.py
 
 #### 🧱 Problems & Blockers
-- 
+- Need to understand ChatGPT generated code better
+- Still haven't updated flask API documentation
 
 #### ⏳ Pending Actions
-- 
+- Update flask api documentation
 
 #### 🔜 Next Steps
-- 
+- Implement button feature: Temporarily disables after being clicked  
+    - Can’t click it  
+    - Color changes when disabled
+- Review chatGPT generated changes more thoroughly  
+  - Backend  
+    - routes.py — `/api/plan-submissions`  
+    - utils.py  
+  - Frontend  
+    - utils/submitPlans.js  
+    - context/TaskContext.jsx  
+    - components/SubmissionButton.jsx  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- What feels unclear or risky about today's tasks?  
+  → Understanding all the code changes and confirming they don’t introduce silent issues. Testing burden feels heavy.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- What am I assuming that might be wrong?  
+  → Assuming button disabling is trivial; may require careful state handling with async calls.  
+  → Assuming code generated by ChatGPT is consistent with the intended Supabase schema.  
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Reviewing changes shows TaskContext, TaskTable, and supporting components are cleaner and modular, but I still need to check if the changes align with API expectations.  
+- The button disabling feature should integrate with React state cleanly, but I’ll need to ensure that it re-enables only when submission is complete or fails.  
+- Flask API documentation gap is becoming more critical, since it ties directly into testing clarity.  
 
 #### 🗝️ Key Decisions
-- 
+- Postpone deep dive into `routes.py` testing until after the button disabling feature is working.  
+- Keep ChatGPT’s refactoring changes but double-check against Supabase/Notion requirements.  
+- Update API documentation in parallel with reviewing code so I don’t lose track of intended schema and response formats.  
 
 #### 📌 Action Items
-- 
+- [ ]  Implement button feature: Temporarily disables after being clicked
+    - [ ]  Can’t click it
+    - [ ]  Color changes when disabled
+- [ ]  Review chatGPT generated changes more thoroughly
+    - [ ]  Backend
+        - [ ]  routes.py — `/api/plan-submissions`
+        - [ ]  utils.py
+    - [ ]  Frontend
+        - [ ]  utils/submitPlans.js
+        - [ ]  context/TaskContext.jsx
+        - [ ]  components/SubmissionButton.jsx
+- [ ] Write/update Flask API documentation to match current reality.  
+- [ ] Outline testing plan to avoid being overwhelmed later. 
 
---- 
+---
+
 
 ## 🗓️ Standup [#] – [Standup Title]
 
