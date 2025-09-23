@@ -1,0 +1,61 @@
+export default async function submitPlans(tasks, start_date, end_date) {
+  const submit_url = "http://localhost:5000/api/plan-submissions";
+  const payload = {
+    tasks,
+    filter_start_date: start_date,
+    filter_end_date: end_date,
+  };
+
+  const res = await fetch(submit_url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const text = await res.text();
+  let data;
+  try { data = text ? JSON.parse(text) : null; } catch { data = { raw: text }; }
+
+  if (!res.ok) {
+    // Bubble a structured error up to the UI (toast, etc.)
+    const status = res.status;
+    const msg = data?.error?.message || `HTTP ${status}`;
+    const code = data?.error?.code || "http_error";
+    throw Object.assign(new Error(msg), { status, code, details: data?.error?.details ?? data });
+  }
+
+  return data
+}
+
+
+// export default async function submitTasks(tasks, start_date, end_date) {
+//     const submit_url = "http://localhost:5000/api/plan-submissions"
+//     // const response = await persistentFetch(submit_url, "plan submission", 5000).then(value => {
+//     //     console.log(value)
+//     // })
+//     const payload = {
+//         'tasks': tasks,
+//         'filter_start_date': start_date,
+//         'filter_end_date': end_date
+//     }
+
+//     const response = await fetch(submit_url, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify(payload)
+//     }).then(response => {
+//         if(!response.ok) {
+//             console.log("response: ", response.body)
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
+//         return response.json(); // Parse the JSON response
+//     }).then(data => {
+//         console.log('Success:', data);
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });
+// }
