@@ -583,70 +583,115 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - Update API documentation in parallel with reviewing code so I don’t lose track of intended schema and response formats.  
 
 #### 📌 Action Items
-- [ ]  Implement button feature: Temporarily disables after being clicked
-    - [ ]  Can’t click it
-    - [ ]  Color changes when disabled
-- [ ]  Review chatGPT generated changes more thoroughly
-    - [ ]  Backend
-        - [ ]  routes.py — `/api/plan-submissions`
-        - [ ]  utils.py
-    - [ ]  Frontend
-        - [ ]  utils/submitPlans.js
-        - [ ]  context/TaskContext.jsx
-        - [ ]  components/SubmissionButton.jsx
-- [ ] Write/update Flask API documentation to match current reality.  
-- [ ] Outline testing plan to avoid being overwhelmed later. 
+- [x]  Implement button feature: Temporarily disables after being clicked
+    - [x]  Can’t click it
+    - [x]  Color changes when disabled
+- [x]  Review chatGPT generated changes more thoroughly
+    - [x]  Backend
+        - [x]  [routes.py](http://routes.py/) — `/api/plan-submissions`
+        - [x]  [utils.py](http://utils.py/)
+    - [x]  Frontend
+        - [x]  utils/submitPlans.js
+        - [x]  context/TaskContext.jsx
+        - [x]  components/SubmissionButton.jsx
+- [x]  Write/update Flask API documentation to match current reality.
+- [x]  Outline testing plan to avoid being overwhelmed later.
+- [x]  submitPlans — verify payload before sending (tasks, filter_start, filter_end)
+    - [x]  add error handling
+    - [x]  also load in the submit url from env file
+- [x]  add Toast feature for plan-submissions
+    - [x]  Loading toast
+    - [x]  Resolves: Success & Failure coverage
+- [x]  Reformat connectionTest
 
 ---
 
-
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 8 – Start Testing
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Wednesday, September 24th (2025)  
+* **Time:** 2:08 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Want to start writing some unit tests & resolve previous tests that now fail
+- Implemented some data verification on the frontend but this has caused some issues  
+  - Not completely done yet
 
 #### 📈 Previous Progress
-- 
+- Changed connectionTest & planSubmit toast to be a loading toast that resolves to success or error
+- Added payload verification on frontend prior to making http POST request -- but still in progress
+- Added additional error handling to frontend
+- Finished updating flask api documentation
 
 #### 🧱 Problems & Blockers
-- 
+- Reformatting of submitPlans to verify payload has created new bugs that crash the app
+- Rerunning previous tests for the frontend results in:  
+  - 4 failed test files, 10 passed test files (14 total test files)  
+  - 23 tests failed, 65 tests passed (88 total test cases)  
+  - StatCardSystem still has unresolved failing test cases (introduced in previous sprints)
 
 #### ⏳ Pending Actions
-- 
+- Reformatting of submitPlans to verify payload has created new bugs that crash the app
+- Resolve previous tests from failing
+- Fix swim lane diagram for the plan submission process
 
 #### 🔜 Next Steps
-- 
+- Resolve submitPlans refactoring bug
+- Resolve previously written failed test cases  
+  - Fix 5 total test cases  
+  - Fix 10 total test cases  
+  - Fix 15 total test cases  
+  - Fix 20 total test cases  
+  - Fix 23 total test cases  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+---
 
-#### ❓ Question 1
-- 
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 2...
-- 
+**Overall Trends/Concerns (last 3 standups):**  
+- Each improvement/refactor introduces instability, creating a cycle of fixing breakage before moving on.  
+- Technical debt in testing is mounting, slowing down momentum.  
+- Risk of scope creep when overengineering (e.g., TaskContext changes).  
+- Need a stronger stabilization phase before adding features.  
+
+**Assumptions that might be wrong:**  
+- That payload validation must live inside submitPlans instead of being factored into a utility or input-level validation.  
+- That all failing tests should be fixed as-is (some may need rewriting or removal due to design evolution).  
+- That test failures equal regressions rather than mismatches between old expectations and new architecture.
+
+---
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Testing backlog is now a major focus — must be prioritized before further features.  
+- Payload validation approach may need redesign for maintainability.  
+- Consider whether to mark some tests as obsolete and prune them.  
 
 #### 🗝️ Key Decisions
-- Wont be using the `TaskContext.jsx` chatGPT recommended changes -- too complicated
-- However, will keep modifications for routes.py, utils.py, submitPlans.js, and SubmissionButton.jsx
+- Won’t be using the `TaskContext.jsx` ChatGPT recommended changes — too complicated.  
+- Will keep modifications for `routes.py`, `utils.py`, `submitPlans.js`, and `SubmissionButton.jsx`.  
+- Prioritize test stabilization before new features.  
+- Allow incremental bug fixing/testing (batch approach) to avoid being overwhelmed.  
+- Redesign validation to live in a utility/helper function instead of deeply tied to submitPlans.  
 
 #### 📌 Action Items
-- 
+- [ ] Debug and fix submitPlans refactoring crash.  
+- [ ] Resolve 23 failing test cases incrementally (in batches of 5).
+  - [ ] 5 total
+  - [ ] 10 total
+  - [ ] 15 total
+  - [ ] 20 total
+  - [ ] 23 total
+- [ ] Refactor payload validation into a dedicated utility function.  
+- [ ] Review which tests should be rewritten vs fixed.  
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
