@@ -115,7 +115,6 @@ def calc_week_stats(date_range, data):
     except:
         return {'ave': None, 'std': None}
 
-# day_name = my_date.strftime("%A")
 def calc_day_stats(date_range, data):
     try:
         names_list = ('Mon','Tue','Wed','Thu','Fri','Sat','Sun')
