@@ -1,29 +1,51 @@
 import { Button } from "@/components/ui/button"
 import { useContext, useState } from "react"
 import styleData from "@/utils/styleData.json"
-import submitTasks from "@/utils/submitPlans"
+import submitPlans from "@/utils/submitPlans"
 import { TaskContext } from "@/contexts/TaskContext"
 import formatDateToYYYYMMDD from "@/utils/formatDateToYYYYMMDD"
 import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
+import { toast } from 'sonner'
 
 
-// not sure if there would be a 'default' status, this structure is based on StatCard.jsx
-// determineStatusStyle function that uses a switch case with a default case
+
 
 function SubmissionButton({status = 'neutral', 
     filter_start_date = DEFAULT_PLAN_START, filter_end_date = DEFAULT_PLAN_END}) {
 
     const { tasks } = useContext(TaskContext);
-    let tasksCopy = structuredClone(tasks)
 
+    const [isDisabled, setIsDisabled] = useState(false)
+    
     function formatDates(records) {
         records.forEach((item, index) => {
             records[index].due_date = formatDateToYYYYMMDD(records[index].due_date);
             records[index].start_date = formatDateToYYYYMMDD(records[index].start_date);
         })
     }
+    let tasksCopy = structuredClone(tasks)
+    formatDates(tasksCopy);
 
-    
+    const handleClick = async () => {
+        setIsDisabled(true);
+        try {
+            const resp = submitPlans(tasksCopy, filter_start_date, filter_end_date);
+
+            await toast.promise(resp, {
+                loading: 'Submitting data...',
+                success: "Data successfully saved!",
+                error: 'Uh oh! Something went wrong...',
+            });
+            console.log(resp)
+        } catch (err) {
+            // e.g., toast.error(err.message || "Submission failed");
+            console.log("Submission exception caught: ", err);
+            toast.error(err.message || "Submission failed");
+        } finally {
+            setIsDisabled(false);
+        }
+    };
+
 
     function handleStyling(status) {
         if (styleData?.[status]) {
@@ -33,29 +55,11 @@ function SubmissionButton({status = 'neutral',
         }
     }
 
-
-    formatDates(tasksCopy);
-    const handleClick = async () => {
-    try {
-        const resp = await submitTasks(tasksCopy, filter_start_date, filter_end_date);
-        if (resp.ok) {
-            console.log("Successful POST: ", resp)
-        } else {
-            console.log("Failed POST: ", resp)
-        }
-        // e.g., toast.success(`Synced ${resp?.num_plans ?? 0} plans`);
-    } catch (err) {
-        // e.g., toast.error(err.message || "Submission failed");
-        console.error(err);
-    }
-    };
-
-
     const initialColors = handleStyling(status)
     const [color, setColor] = useState(initialColors)
 
     return (     
-        <Button onClick={handleClick} className={`text-xl p-6 ${color}`} status={status}>
+        <Button onClick={handleClick} className={`text-xl p-6 ${color}`} status={status} disabled={isDisabled}>
             Submit
         </Button>
     )

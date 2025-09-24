@@ -6,7 +6,7 @@ import cardData from "@/utils/cardData";
 import SubmissionButton from "./components/SubmissionButton";
 import { connectionTest } from "./utils/connectionTest";
 import { useEffect } from 'react';
-import { Toaster } from 'sonner'
+import { Toaster, toast } from 'sonner'
 import './App.css'
 
 
@@ -14,13 +14,19 @@ function App() {
   useEffect(() => {
     const launchConnectionTest = async () => {
       try {
-        await connectionTest();
+        const resp = connectionTest();
+        await toast.promise(resp, {
+          loading: 'Testing system connections...',
+          success: (resp) => `${resp.message}`,
+          error: (resp) => `${resp.message}`
+        })
       } catch (error) {
-        console.log("connectTest failed, error: ", error)
+        console.log("connectTest failed due to an internal error: ", error)
+        toast.error("Submission failed due to an internal error...")
       }
     }
 
-    // launchConnectionTest();
+    launchConnectionTest();
   }, []);
 
   return (

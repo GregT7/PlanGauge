@@ -640,6 +640,242 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - 
 
 #### 🗝️ Key Decisions
+- Wont be using the `TaskContext.jsx` chatGPT recommended changes -- too complicated
+- However, will keep modifications for routes.py, utils.py, submitPlans.js, and SubmissionButton.jsx
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
+
+--- 
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1
+- 
+
+#### ❓ Question 2...
+- 
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
 - 
 
 #### 📌 Action Items

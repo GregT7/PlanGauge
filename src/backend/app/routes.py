@@ -16,7 +16,7 @@ notion_header = {
     "Notion-Version": notion_version,
     "Content-Type": "application/json"
 }
-# Add `"Content-Type": "application/json"` to Notion request headers.
+
 @app.route('/')
 def index():
     return 'Home Web Page'
