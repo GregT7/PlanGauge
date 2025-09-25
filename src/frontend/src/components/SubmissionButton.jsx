@@ -7,9 +7,6 @@ import formatDateToYYYYMMDD from "@/utils/formatDateToYYYYMMDD"
 import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 import { toast } from 'sonner'
 
-
-
-// https://chatgpt.com/c/68d364ca-8704-8331-b33c-42f75067d9b6
 function SubmissionButton({status = 'neutral', 
     filter_start_date = DEFAULT_PLAN_START, filter_end_date = DEFAULT_PLAN_END}) {
 
@@ -32,15 +29,15 @@ function SubmissionButton({status = 'neutral',
             const resp = submitPlans(tasksCopy, filter_start_date, filter_end_date);
 
             await toast.promise(resp, {
-                loading: 'Submitting data...',
-                success: "Data successfully saved!",
-                error: 'Uh oh! Something went wrong...',
+                loading: 'Submitting Plan Records...',
+                success: "Data Successfully Saved!",
+                error: 'Error: There Was An Unexpected Issue!',
             });
             console.log(resp)
         } catch (err) {
             // e.g., toast.error(err.message || "Submission failed");
             console.log("Submission exception caught: ", err);
-            toast.error(err.message || "Submission failed");
+            toast.error(err.message || 'Error: There Was An Unexpected Issue!');
         } finally {
             setIsDisabled(false);
         }

@@ -682,14 +682,14 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 
 #### 📌 Action Items
 - [ ] Debug and fix submitPlans refactoring crash.  
+- [ ] Refactor payload validation into a dedicated utility function.  
 - [ ] Resolve 23 failing test cases incrementally (in batches of 5).
   - [ ] 5 total
   - [ ] 10 total
   - [ ] 15 total
   - [ ] 20 total
   - [ ] 23 total
-- [ ] Refactor payload validation into a dedicated utility function.  
-- [ ] Review which tests should be rewritten vs fixed.  
+
 
 ---
 

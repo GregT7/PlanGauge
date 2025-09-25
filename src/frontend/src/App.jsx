@@ -2,9 +2,9 @@ import TaskContextProvider from "../src/contexts/TaskContext";
 import { ThemeProvider } from './components/ui/ThemeProvider'
 import TaskTable from "./components/TaskTable/TaskTable"
 import StatCardSystem from "./components/StatCardSystem/StatCardSystem";
-import cardData from "@/utils/cardData";
+import testCardData from "@/utils/testCardData";
 import SubmissionButton from "./components/SubmissionButton";
-import { connectionTest } from "./utils/connectionTest";
+import connectionTest from "./utils/connectionTest";
 import { useEffect } from 'react';
 import { Toaster, toast } from 'sonner'
 import './App.css'
@@ -36,7 +36,7 @@ function App() {
             <TaskContextProvider>
               <div className="space-y-10 pt-5">
                 <TaskTable/>
-                <StatCardSystem cardData={cardData}/>
+                <StatCardSystem cardData={testCardData}/>
                 <SubmissionButton status="neutral"/>
               </div>
             </TaskContextProvider>   

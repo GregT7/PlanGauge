@@ -838,52 +838,6 @@ exports[`App > doesn't crash when connectionTest fails 1`] = `
 </div>
 `;
 
-exports[`App > doesn't crash when connectionTest throws 1`] = `
-<div>
-  <section
-    aria-atomic="false"
-    aria-label="Notifications alt+T"
-    aria-live="polite"
-    aria-relevant="additions text"
-    tabindex="-1"
-  />
-  <h1
-    class="m-0 text-4xl leading-none"
-  >
-    PlanGauge
-  </h1>
-  <div
-    class="space-y-10 pt-5"
-  >
-    <div
-      data-testid="mock-task-table"
-    >
-      <input
-        aria-label="mock-checkbox"
-        type="checkbox"
-      />
-      <input
-        aria-label="mock-input"
-        value="Plan Japan trip p2"
-      />
-      <button
-        data-testid="add-task-button"
-      >
-        Add
-      </button>
-    </div>
-    <div
-      data-testid="mock-stat-cards"
-    />
-    <button
-      data-testid="mock-submit"
-    >
-      Submit
-    </button>
-  </div>
-</div>
-`;
-
 exports[`App > renders all components without problems 1`] = `
 <div>
   <section
@@ -1715,52 +1669,6 @@ exports[`App > renders all components without problems 1`] = `
       class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs h-9 has-[>svg]:px-3 text-xl p-6 bg-zinc-900 border-2 border-zinc-500 text-stone-50 hover:bg-zinc-700 hover:text-stone-200"
       data-slot="button"
       status="neutral"
-    >
-      Submit
-    </button>
-  </div>
-</div>
-`;
-
-exports[`App > renders without crashing and matches snapshot 1`] = `
-<div>
-  <section
-    aria-atomic="false"
-    aria-label="Notifications alt+T"
-    aria-live="polite"
-    aria-relevant="additions text"
-    tabindex="-1"
-  />
-  <h1
-    class="m-0 text-4xl leading-none"
-  >
-    PlanGauge
-  </h1>
-  <div
-    class="space-y-10 pt-5"
-  >
-    <div
-      data-testid="mock-task-table"
-    >
-      <input
-        aria-label="mock-checkbox"
-        type="checkbox"
-      />
-      <input
-        aria-label="mock-input"
-        value="Plan Japan trip p2"
-      />
-      <button
-        data-testid="add-task-button"
-      >
-        Add
-      </button>
-    </div>
-    <div
-      data-testid="mock-stat-cards"
-    />
-    <button
-      data-testid="mock-submit"
     >
       Submit
     </button>
