@@ -1,8 +1,7 @@
 import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
 
-
-export async function connectionTest() {
+export default async function connectionTest() {
     const flask_url = "http://localhost:5000/api/health";
     const supabase_url = "http://localhost:5000/api/db/health";
     const notion_url = "http://localhost:5000/api/notion/health";
@@ -10,8 +9,8 @@ export async function connectionTest() {
         const flask_response = await persistentFetch(flask_url, "Flask")
         let supabase_response = null, notion_response = null
         
-        const pass_msg = "All systems are online!"
-        const fail_msg = "Error: connectivity issues!"
+        const pass_msg = "All Systems Online!"
+        const fail_msg = "Error: Connectivity Issues!"
 
         let accept = false
         let resp = {message: null, details: null}
