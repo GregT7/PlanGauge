@@ -62,22 +62,22 @@ describe("StatCard unit testing", () => {
 
         // status: good
         const { unmount: unmount2 } = render(<StatCard cardData={goodData}/>)
-        expect(screen.getByTestId("StatCard")).toHaveClass("bg-emerald-900 border-emerald-400");
+        expect(screen.getByTestId("StatCard")).toHaveClass("bg-emerald-800 border-emerald-600");
         unmount2();
 
         // status: moderate
         const { unmount: unmount3 } = render(<StatCard cardData={moderateData}/>)
-        expect(screen.getByTestId("StatCard")).toHaveClass("bg-amber-900 border-2 border-amber-400");
+        expect(screen.getByTestId("StatCard")).toHaveClass("bg-amber-800 border-2 border-amber-600");
         unmount3();
 
         // status: poor
         const { unmount: unmount4 } = render(<StatCard cardData={poorData}/>)
-        expect(screen.getByTestId("StatCard")).toHaveClass("bg-rose-900 border-2 border-rose-400");
+        expect(screen.getByTestId("StatCard")).toHaveClass("bg-rose-800 border-2 border-rose-600");
         unmount4();
 
         // status: unknown
         const { unmount: unmount5 } = render(<StatCard cardData={unknownData}/>)
-        expect(screen.getByTestId("StatCard")).toHaveClass("bg-red-900 border-2 border-red-500");
+        expect(screen.getByTestId("StatCard")).toHaveClass("bg-red-800 border-2 border-red-600");
         unmount5();
     })
 })

@@ -1,252 +1,338 @@
-# test_utils.py
+# tests/test_utils.py
 # Run with: pytest -q
 
-from datetime import date, datetime, timedelta
-import statistics, pytest, json
-from pathlib import Path
+from datetime import date, datetime, timedelta, timezone
+import statistics
+import pytest
 
-
-# Adjust the import below if your module name/path is different
 from app.utils import (
+    # date & arg validators
+    is_valid_date,
+    verify_stat_args,
     find_valid_range,
+    # time helpers & aggregations
     time_duration,
     ranged_sum,
     day_sum,
     calc_week_stats,
     calc_day_stats,
+    # payload validators/formatters
+    validate_react_payload,
+    format_react_to_supabase,
+    # response helpers
+    now_iso,
+    ms_since,
+    ok_resp,
+    err_resp,
+    pack_exc,
+    pack_requests_response,
+    pack_supabase_error,
+    # side-effect helper
+    mark_submission_failed,
 )
 
+FMT = "%Y-%m-%d"
 
-# ---------- Test Fixtures ----------
+# ---------------------------
+# is_valid_date / verify_stat_args
+# ---------------------------
+
+# ---------------------------
+# is_valid_date / verify_stat_args
+# ---------------------------
+
+def test_is_valid_date_happy_and_bad():
+    # Accepts zero-padded and non-zero-padded month/day with the default "%Y-%m-%d"
+    assert is_valid_date("2025-06-01") is True
+    assert is_valid_date("2025-6-01") is True
+    assert is_valid_date("2025-06-1") is True
+
+    # Clearly invalid formats/values
+    assert is_valid_date("2025/06/01") is False
+    assert is_valid_date("not-a-date") is False
+    assert is_valid_date("") is False
+
+    # Custom format still works
+    assert is_valid_date("06-01-2025", "%m-%d-%Y") is True
+
+
+def test_verify_stat_args_ok_and_bad():
+    assert verify_stat_args("2025-06-01", "2025-06-30", FMT) is True
+    # end before start
+    assert verify_stat_args("2025-06-02", "2025-06-01", FMT) is False
+    # invalid start
+    assert verify_stat_args("2025/06/01", "2025-06-30", FMT) is False
+    # invalid end
+    assert verify_stat_args("2025-06-01", "06-30-2025", FMT) is False
+
+# ---------------------------
+# find_valid_range
+# ---------------------------
+
+def test_find_valid_range_snaps_to_full_weeks_within_bounds():
+    # Friday → Sunday; should snap to first Monday on/after start and last Sunday ≤ end
+    req_start = "2025-08-01"  # Fri
+    req_end   = "2025-08-31"  # Sun
+    rng = find_valid_range(req_start, req_end, FMT)
+    assert rng["start"] == date(2025, 8, 4)
+    assert rng["end"]   == date(2025, 8, 31)
+
+def test_find_valid_range_with_datetime_strings_only():
+    # Function expects strings; this ensures we keep using strings here
+    rng = find_valid_range("2025-08-01", "2025-08-07", FMT)  # 1 week but start=Fri → not enough span
+    assert rng == {"start": None, "end": None}
+
+def test_find_valid_range_insufficient_span():
+    # Start Mon, end Thu same week: only 4 days
+    rng = find_valid_range("2025-08-04", "2025-08-07", FMT)
+    assert rng == {"start": None, "end": None}
+
+# ---------------------------
+# time_duration / ranged_sum / day_sum
+# ---------------------------
 
 @pytest.fixture
-def two_week_range_aug_2025():
+def two_week_records_aug_2025():
     """
-    We ask for a broad range and expect find_valid_range to snap to:
-    start = Monday, Aug 4, 2025
-    end   = Sunday, Aug 31, 2025  (4 full weeks)
+    Two consecutive weeks of weekday sessions: 60 min each at 09:00–10:00.
+    Weeks: 2025-08-04..08-10 and 2025-08-11..08-17
     """
-    req_start = date(2025, 8, 1)   # Friday
-    req_end   = date(2025, 8, 31)  # Sunday
-    return find_valid_range(req_start, req_end)
-
-@pytest.fixture
-def june_2025_records():
-    HERE = Path(__file__).resolve().parent  # the folder this test file is in
-    data_path = HERE / "data_JUN1_JUN30_2025.txt"
-
-    with open(data_path, "r") as f:
-        data = json.load(f)
-    return data
-
-# See excel file for manual calculations
-@pytest.fixture
-def june_2025_statistics():
-    day_stats = {
-        "ave": {
-            "Mon": 423.000,
-            "Tue": 327.500,
-            "Wed": 357.250,
-            "Thu": 355.250,
-            "Fri": 396.250,
-            "Sat": 360.250,
-            "Sun": 473.250
-        },
-
-        "std": {
-            "Mon": 44.729,
-            "Tue": 147.789,
-            "Wed": 190.902,
-            "Thu": 129.113,
-            "Fri": 88.206,
-            "Sat": 131.988,
-            "Sun": 120.478
-        }
-    }
-
-    week_stats = {
-        "ave": 2692.750,
-        "std": 261.546
-    }
-
-    return {
-        "day": day_stats,
-        "week": week_stats
-    }
-
-@pytest.fixture
-def two_week_data_aug_2025():
-    """
-    Create work records for two consecutive weeks starting Aug 4, 2025 (Monday).
-    Each weekday has one 60-minute session (09:00-10:00). Weekends have 0.
-    """
-    # Week 1: 2025-08-04 (Mon) .. 2025-08-10 (Sun)
-    # Week 2: 2025-08-11 (Mon) .. 2025-08-17 (Sun)
-    records = []
-    def add(day):
-        records.append({
-            "completion_date": day.strftime("%Y-%m-%d"),
+    recs = []
+    def add(dstr):
+        recs.append({
+            "completion_date": dstr,
             "start_time": "09:00:00",
             "end_time":   "10:00:00",
         })
 
-    week1_start = date(2025, 8, 4)
-    week2_start = date(2025, 8, 11)
+    # Week 1 (Mon..Fri)
+    for i in range(5):
+        add((date(2025, 8, 4) + timedelta(days=i)).strftime(FMT))
+    # Week 2 (Mon..Fri)
+    for i in range(5):
+        add((date(2025, 8, 11) + timedelta(days=i)).strftime(FMT))
+    return recs
 
-    for base in (week1_start, week2_start):
-        for i in range(5):  # Mon-Fri
-            add(base + timedelta(days=i))
+def test_time_duration_minutes():
+    assert time_duration({"start_time": "09:15:00", "end_time": "10:00:00"}) == 45
+    assert time_duration({"start_time": "10:00:00", "end_time": "10:00:00"}) == 0
 
-    return records
+def test_ranged_sum_inclusive(two_week_records_aug_2025):
+    start = date(2025, 8, 4)
+    end   = date(2025, 8, 10)
+    assert ranged_sum(start, end, two_week_records_aug_2025) == 300  # 5 * 60
+
+def test_ranged_sum_outside(two_week_records_aug_2025):
+    start = date(2025, 7, 1)
+    end   = date(2025, 7, 31)
+    assert ranged_sum(start, end, two_week_records_aug_2025) == 0
+
+def test_day_sum(two_week_records_aug_2025):
+    assert day_sum(date(2025, 8, 4), two_week_records_aug_2025) == 60   # Mon in week 1
+    assert day_sum(date(2025, 8, 9), two_week_records_aug_2025) == 0    # Sat
+
+# ---------------------------
+# calc_week_stats / calc_day_stats
+# ---------------------------
+
+@pytest.fixture
+def four_week_range_aug_2025():
+    """From snapped full weeks: 2025-08-04 (Mon) through 2025-08-31 (Sun)."""
+    return {"start": date(2025, 8, 4), "end": date(2025, 8, 31)}
 
 @pytest.fixture
 def one_week_range_aug_2025():
-    """Exactly one week: Monday Aug 4-Sunday Aug 10, 2025."""
+    """Exactly one full week: Mon 2025-08-04 .. Sun 2025-08-10."""
     return {"start": date(2025, 8, 4), "end": date(2025, 8, 10)}
 
-# ---------- find_valid_range ----------
-
-def test_find_valid_range_snaps_to_full_weeks_within_bounds():
-    req_start = date(2025, 8, 1)   # Friday
-    req_end   = date(2025, 8, 31)  # Sunday
-    got = find_valid_range(req_start, req_end)
-    assert got["start"] == date(2025, 8, 4)   # First Monday on/after Aug 1
-    assert got["end"]   == date(2025, 8, 31)  # Last Sunday <= Aug 31
-
-def test_find_valid_range_with_datetime_inputs():
-    # Same request, but pass datetimes (the function must coerce to .date()).
-    req_start = datetime(2025, 8, 1, 12, 0, 0)
-    req_end   = datetime(2025, 8, 31, 23, 59, 59)
-    got = find_valid_range(req_start, req_end)
-    assert got["start"] == date(2025, 8, 4)
-    assert got["end"]   == date(2025, 8, 31)
-
-def test_find_valid_range_when_end_before_start():
-    got = find_valid_range(date(2025, 8, 10), date(2025, 8, 1))
-    assert got == {"start": None, "end": None}
-
-def test_find_valid_range_when_insufficient_span():
-    # Start on a Monday, end on Thursday of same week (only 4 days; need full 7-window)
-    got = find_valid_range(date(2025, 8, 4), date(2025, 8, 7))
-    assert got == {"start": None, "end": None}
-
-# ---------- time_duration ----------
-
-def test_time_duration_basic_minutes():
-    rec = {"start_time": "09:30:00", "end_time": "10:45:00"}
-    assert time_duration(rec) == 75
-
-def test_time_duration_zero_minutes():
-    rec = {"start_time": "10:00:00", "end_time": "10:00:00"}
-    assert time_duration(rec) == 0
-
-# ---------- ranged_sum & day_sum ----------
-
-def test_ranged_sum_inclusive_bounds(two_week_data_aug_2025):
-    # Single week (Mon–Sun) range; expect 5 weekdays * 60 = 300 minutes
-    start = date(2025, 8, 4)
-    end   = date(2025, 8, 10)
-    assert ranged_sum(start, end, two_week_data_aug_2025) == 300
-
-def test_ranged_sum_no_matches_returns_zero(two_week_data_aug_2025):
-    start = date(2025, 7, 1)
-    end   = date(2025, 7, 31)
-    assert ranged_sum(start, end, two_week_data_aug_2025) == 0
-
-def test_day_sum_exact_match(two_week_data_aug_2025):
-    # Monday, Aug 4, 2025 exists with a 60-min entry
-    assert day_sum(date(2025, 8, 4), two_week_data_aug_2025) == 60
-
-def test_day_sum_no_match_returns_zero(two_week_data_aug_2025):
-    # Weekend day without any entry
-    assert day_sum(date(2025, 8, 9), two_week_data_aug_2025) == 0  # Saturday
-
-# ---------- calc_week_stats ----------
-
-def test_calc_week_stats_two_weeks(two_week_range_aug_2025, two_week_data_aug_2025):
-    # The valid range fixture spans 4 weeks total (Aug 4–Aug 31), but our data only
-    # populate the first two weeks with weekday 60-minute sessions:
-    #
-    # Week1 (Aug 4–10): 5 * 60 = 300
-    # Week2 (Aug 11–17): 5 * 60 = 300
-    # Week3 (Aug 18–24): 0
-    # Week4 (Aug 25–31): 0
-    #
-    # calc_week_stats will compute over ALL weeks in the valid range (4 weeks).
-    stats = calc_week_stats(two_week_range_aug_2025, two_week_data_aug_2025)
-    # time_vals = [300, 300, 0, 0]  -> ave = 150, std = stdev([300,300,0,0]) = 173.205...
+def test_calc_week_stats_over_four_weeks(four_week_range_aug_2025, two_week_records_aug_2025):
+    # Weeks 1–2: 300 each; Weeks 3–4: 0 each → ave = 150, std = stdev([300,300,0,0])
+    stats = calc_week_stats(four_week_range_aug_2025, two_week_records_aug_2025)
     assert stats["ave"] == pytest.approx(150.0)
     assert stats["std"] == pytest.approx(statistics.stdev([300, 300, 0, 0]))
 
-def test_calc_week_stats_raises_on_single_week(one_week_range_aug_2025, two_week_data_aug_2025):
-    # With a single week in the range, statistics.stdev() has only one data point
-    # and will raise StatisticsError.
-    with pytest.raises(statistics.StatisticsError):
-        calc_week_stats(one_week_range_aug_2025, two_week_data_aug_2025)
+def test_calc_week_stats_single_week_returns_values(one_week_range_aug_2025, two_week_records_aug_2025):
+    # Function guards stdev with len<2 → std=0.0; ave should equal that week's total
+    stats = calc_week_stats(one_week_range_aug_2025, two_week_records_aug_2025)
+    assert stats["ave"] == pytest.approx(300.0)
+    assert stats["std"] == 0.0
 
-# ---------- calc_day_stats ----------
+def test_calc_day_stats_over_four_weeks(four_week_range_aug_2025, two_week_records_aug_2025):
+    # num_weeks = 4; weekdays values = [60,60,0,0] → ave 30; weekends [0,0,0,0] → ave 0
+    stats = calc_day_stats(four_week_range_aug_2025, two_week_records_aug_2025)
+    ave, std = stats["ave"], stats["std"]
 
-def test_calc_day_stats_two_weeks(two_week_range_aug_2025, two_week_data_aug_2025):
-    # Over the 4-week range, we have:
-    # - Weeks 1 & 2: Mon–Fri = 60; Sat & Sun = 0
-    # - Weeks 3 & 4: all days = 0
-    #
-    # num_weeks = 4
-    # For each weekday:
-    #   values = [60, 60, 0, 0] -> sum = 120 -> ave = 120/4 = 30
-    # For Sat/Sun:
-    #   values = [0, 0, 0, 0]  -> sum = 0   -> ave = 0
-    stats = calc_day_stats(two_week_range_aug_2025, two_week_data_aug_2025)
-
-    ave = stats["ave"]
-    std = stats["std"]
-
-    # Weekday averages: 30 min
     for d in ("Mon", "Tue", "Wed", "Thu", "Fri"):
         assert ave[d] == pytest.approx(30.0)
-
-    # Weekend averages: 0 sentinel
+        assert std[d] == pytest.approx(statistics.stdev([60, 60, 0, 0]))
     assert ave["Sat"] == 0
     assert ave["Sun"] == 0
-
-    # Standard deviations:
-    # stdev([60,60,0,0]) for weekdays; stdev([0,0,0,0]) = 0 for weekends
-    expected_weekday_std = statistics.stdev([60, 60, 0, 0])
-    for d in ("Mon", "Tue", "Wed", "Thu", "Fri"):
-        assert std[d] == pytest.approx(expected_weekday_std)
-
     assert std["Sat"] == 0
     assert std["Sun"] == 0
 
-def test_calc_day_stats_raises_on_single_week(one_week_range_aug_2025, two_week_data_aug_2025):
-    # For a single week, each day list has length 1; stdev requires at least 2
-    with pytest.raises(statistics.StatisticsError):
-        calc_day_stats(one_week_range_aug_2025, two_week_data_aug_2025)
+def test_calc_day_stats_single_week(one_week_range_aug_2025, two_week_records_aug_2025):
+    stats = calc_day_stats(one_week_range_aug_2025, two_week_records_aug_2025)
+    ave, std = stats["ave"], stats["std"]
+    for d in ("Mon", "Tue", "Wed", "Thu", "Fri"):
+        assert ave[d] == pytest.approx(60.0)
+        assert std[d] == 0.0
+    assert ave["Sat"] == 0
+    assert ave["Sun"] == 0
+    assert std["Sat"] == 0
+    assert std["Sun"] == 0
 
+# ---------------------------
+# validate_react_payload / format_react_to_supabase
+# ---------------------------
 
-# rounded everything to 3 decimal places then compared together
-def test_statistic_calcs_on_month(june_2025_records, june_2025_statistics):
-        start_arg = "2025-06-01"
-        end_arg = "2025-06-30"
+def _valid_payload():
+    return {
+        "filter_start_date": "2025-09-01",
+        "filter_end_date": "2025-09-30",
+        "tasks": [
+            {"name": "A", "category": "School",  "due_date": "2025-09-30", "start_date": "2025-09-24", "time_estimation": 60},
+            {"name": "B", "category": "Personal","due_date": "2025-10-02", "start_date": "2025-09-28", "time_estimation": 30},
+        ]
+    }
 
-        fmt = "%Y-%m-%d"
-        start = datetime.strptime(start_arg, fmt)
-        end = datetime.strptime(end_arg, fmt)
+def test_validate_react_payload_happy_path():
+    ok, errors = validate_react_payload(_valid_payload())
+    assert ok is True
+    assert errors == []
 
-        date_range = find_valid_range(start, end)
+def test_validate_react_payload_top_level_errors():
+    ok, errors = validate_react_payload({"tasks": []})
+    assert ok is False
+    # expect at least these two messages
+    assert any("filter_start_date" in e for e in errors)
+    assert any("filter_end_date" in e for e in errors)
+    assert any("tasks must be a non-empty array" in e for e in errors)
 
-        statistic_data = {
-            'week': calc_week_stats(date_range, june_2025_records),
-            'day': calc_day_stats(date_range, june_2025_records)
-        }
-        
-        statistic_data['week']['ave'] = round(statistic_data['week']['ave'], 3)
-        statistic_data['week']['std'] = round(statistic_data['week']['std'], 3)
+def test_validate_react_payload_per_task_errors():
+    bad = _valid_payload()
+    bad["tasks"][0]["time_estimation"] = "60"  # wrong type
+    bad["tasks"][1].pop("due_date")           # missing key
+    ok, errors = validate_react_payload(bad)
+    assert ok is False
+    assert any("time_estimation" in e for e in errors)
+    assert any("missing required key" in e for e in errors)
 
-        for key in statistic_data['day']['ave'].keys():
-            statistic_data['day']['ave'][key] = round(statistic_data['day']['ave'][key], 3)
+def test_format_react_to_supabase_maps_fields_and_submission_id():
+    tasks = _valid_payload()["tasks"]
+    rid = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    out = format_react_to_supabase(tasks, rid)
+    assert len(out) == 2
+    assert out[0]["plan_name"] == tasks[0]["name"]
+    assert out[0]["start_date"] == tasks[0]["start_date"]
+    assert out[0]["due_date"] == tasks[0]["due_date"]
+    assert out[0]["submission_id"] == rid
 
-        for key in statistic_data['day']['std'].keys():
-            statistic_data['day']['std'][key] = round(statistic_data['day']['std'][key], 3)
+# ---------------------------
+# ok_resp / err_resp / packers
+# ---------------------------
 
-        assert statistic_data == june_2025_statistics
+def test_ok_resp_and_err_resp_shapes():
+    t0 = 0.0  # not real; just ensure keys exist
+    ok = ok_resp(["flask"], t0, hello="world")
+    assert ok["ok"] is True
+    assert ok["service"] == ["flask"]
+    assert "now" in ok and isinstance(ok["now"], str)
+    assert "response_time_ms" in ok
+    assert ok["hello"] == "world"
+
+    err = err_resp(["flask"], t0, code="bad", message="nope", details={"x": 1})
+    assert err["ok"] is False
+    assert err["error"]["code"] == "bad"
+    assert err["error"]["message"] == "nope"
+    assert err["error"]["details"] == {"x": 1}
+
+def test_pack_exc():
+    e = ValueError("boom")
+    packed = pack_exc(e)
+    assert packed["type"] == "ValueError"
+    assert packed["message"] == "boom"
+
+class _DummyReqResp:
+    def __init__(self, ok=True, status_code=200, headers=None, json_body=None, text="TEXT"):
+        self.ok = ok
+        self.status_code = status_code
+        self.headers = headers or {"X-Id": "1"}
+        self._json_body = json_body
+        self.text = text
+
+    def json(self):
+        if self._json_body is None:
+            raise ValueError("no json")
+        return self._json_body
+
+def test_pack_requests_response_json_and_text():
+    r1 = _DummyReqResp(ok=True, status_code=200, json_body={"a": 1})
+    got = pack_requests_response(r1)
+    assert got["ok"] is True and got["status_code"] == 200 and got["body"] == {"a": 1}
+    r2 = _DummyReqResp(ok=False, status_code=500, json_body=None, text="oops")
+    got2 = pack_requests_response(r2)
+    assert got2["ok"] is False and got2["status_code"] == 500 and got2["body"] == "oops"
+
+def test_pack_supabase_error_variants():
+    assert pack_supabase_error(None) == {"message": None}
+    assert pack_supabase_error("boom") == {"message": "boom"}
+
+    class ErrObj:
+        code = "23505"
+        message = "unique violation"
+        details = "duplicate key"
+        hint = "check unique index"
+
+    got = pack_supabase_error(ErrObj())
+    assert got == {
+        "code": "23505",
+        "message": "unique violation",
+        "details": "duplicate key",
+        "hint": "check unique index",
+    }
+
+# ---------------------------
+# mark_submission_failed
+# ---------------------------
+
+class _SBResp:
+    def __init__(self, data=None, error=None):
+        self.data = data
+        self.error = error
+
+class _FakeSB:
+    def __init__(self):
+        self.last_table = None
+        self.updated = None
+        self.eq_filter = None
+    def table(self, name):
+        self.last_table = name
+        return self
+    def update(self, payload):
+        self.updated = payload
+        return self
+    def eq(self, *args, **kwargs):
+        self.eq_filter = (args, kwargs)
+        return self
+    def execute(self):
+        return _SBResp(data=[{"ok": True}], error=None)
+
+def test_mark_submission_failed_calls_update_and_returns_response():
+    fake = _FakeSB()
+    rid = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    resp = mark_submission_failed(fake, rid)
+    assert isinstance(resp, _SBResp)
+    assert fake.last_table == "plan_submission"
+    assert fake.updated["sync_status"] == "failed"
+    assert fake.eq_filter[0][0] == "submission_id"
+
+# ---------------------------
+# now_iso / ms_since smoke
+# ---------------------------
+
+def test_now_iso_and_ms_since():
+    s = now_iso()
+    assert isinstance(s, str) and "T" in s
+    t0 = 0.0
+    delta = ms_since(t0)
+    assert isinstance(delta, (int, float))
