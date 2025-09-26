@@ -3,7 +3,7 @@ import { TaskContext } from '@/contexts/TaskContext';
 import StatCard from "@/components/StatCardSystem/StatCard";
 import StatusCounter from "@/components/StatCardSystem/StatusCounter";
 import toLocalMidnight from '@/utils/toLocalMidnight';
-import testCardData from "@/utils/testCardData.json" assert { type: 'json'}
+import testCardData from "@/utils/testCardData.json" with { type: 'json'}
 // './my_data.json' assert { type: 'json' };
 
 const calcStatus = (ave, std, sum) => {

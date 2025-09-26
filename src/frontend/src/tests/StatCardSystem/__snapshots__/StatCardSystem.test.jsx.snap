@@ -38,7 +38,7 @@ exports[`StatCardSystem > passes a snapshot test 1`] = `
                 class="text-muted-foreground text-sm truncate"
                 data-slot="card-description"
               >
-                September 24, 2025
+                September 25, 2025
               </div>
             </div>
             <div
@@ -84,7 +84,7 @@ exports[`StatCardSystem > passes a snapshot test 1`] = `
                 class="text-muted-foreground text-sm truncate"
                 data-slot="card-description"
               >
-                September 24, 2025
+                September 25, 2025
               </div>
             </div>
             <div
@@ -134,7 +134,7 @@ exports[`StatCardSystem > passes a snapshot test 1`] = `
                 class="text-muted-foreground text-sm truncate"
                 data-slot="card-description"
               >
-                September 24, 2025
+                September 25, 2025
               </div>
             </div>
             <div

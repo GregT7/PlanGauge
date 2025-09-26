@@ -65,26 +65,25 @@ describe("connectionTest (new structure)", () => {
     expect(persistentFetch).toHaveBeenNthCalledWith(1, FLASK, "Flask");
   });
 
-  it("rejects when Flask OK but Supabase NOT ok (Notion still attempted)", async () => {
+  it("rejects when Flask OK but Supabase NOT ok (Notion NOT attempted)", async () => {
     // Flask OK, Supabase FAIL, Notion OK/FAIL → still reject
     persistentFetch
       .mockResolvedValueOnce(OK)    // Flask
       .mockResolvedValueOnce(FAIL)  // Supabase
-      .mockResolvedValueOnce(OK);   // Notion (value doesn't matter; accept=false)
+      .mockResolvedValueOnce(null);   // Notion (value doesn't matter; accept=false)
 
     await expect(connectionTest()).rejects.toEqual({
       message: "Error: Connectivity Issues!",
       details: {
         flask_response: OK,
         supabase_response: FAIL,
-        notion_response: OK,
+        notion_response: null,
       },
     });
 
     expect(persistentFetch).toHaveBeenNthCalledWith(1, FLASK,  "Flask");
     expect(persistentFetch).toHaveBeenNthCalledWith(2, SUPA,   "Supabase");
-    expect(persistentFetch).toHaveBeenNthCalledWith(3, NOTION, "Notion");
-    expect(persistentFetch).toHaveBeenCalledTimes(3);
+    expect(persistentFetch).toHaveBeenCalledTimes(2);
   });
 
   it("rejects when Flask OK, Supabase OK, but Notion NOT ok", async () => {
