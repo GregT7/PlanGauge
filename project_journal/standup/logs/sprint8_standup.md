@@ -182,7 +182,7 @@
 
 #### 🗝️ Key Decisions
 - `/api/stats` will include something to indicate status like `connected: true/false` for better response clarity
-- Manually calculate statistic data using excel and locally stored data to confirm the stats calculating script is accurate and add this to the DoD
+- Replace arbitrary metric choices with systematic unit testing as DoD
 - Need to define a clear policy for handling “living documents” (API Excel, diagrams)
 
 #### 📌 Action Items
@@ -735,173 +735,58 @@
 
 #### 📌 Action Items
 - [x] Finalize Plan Submission backlog definition today
-- [x] Create new branch for button submissions
-- [x] Create submission button component with shadcn styling
+- [ ] Create new branch for button submissions
+- [ ] Create submission button component with shadcn styling
 - [x] Create new backlog item: “Deployment”  
 - [x] Move Idempotency Enforcement to a new backlog item and mark as `Extra`
 - [x] Mark top 3 Extras in Notion 
 - [x] Add “MVS alignment check” step to end of this sprint and the next sprint
-- [ ] Design /api/notion/plans route in the documentation
-- [ ] Design /api/db/plans route in the documentation
 
 ---
 
-## 🗓️ Standup 10 – Wrapping Up
+## 🗓️ Standup [#] – [Standup Title]
 
 ### 🧾 Overview
-* **Date:** Monday, September 15 (2025)
-* **Time:** 4:08 PM
-* **Attendees:** Self (Solo)
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
 * **Discussed Backlog Items:**  
-  - `Plan Submission`
-  - `Feedback System`
+  - 
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- Confusion over flask API design & security concerns
-- Not sure about implementing swim lane diagram design for the submission process
-- Need to wrap up this sprint and start planning for sprint 9
+- 
 
 #### 📈 Previous Progress
-- Created a new submission button with styling and implemented it into the App react component
-- Refactored some styling code for category statuses to be more modular and implemented new changes into the submission button's design
-- Started designing flask api endpoints for submitting plans to Notion + Supabase
+- 
 
 #### 🧱 Problems & Blockers
-- **Security:** Endpoints are exposed; need token-based auth or API key stored safely (.env already listed in MVS for this:contentReference[oaicite:0]{index=0}).  
-- **Design overhead:** Swimlane diagram updates feel wasteful if design is still fluid. Consider keeping it “lo-fi” until the flow stabilizes.  
-- **Submission API sync issues:**
-  - Deleting Supabase rows if Notion fails introduces race conditions. Better pattern: treat Supabase as system of record and include a `synced_with_notion` flag, retry failed syncs later.
-  - Updating `synced_with_notion`: start with `false`, flip to `true` only after Notion confirms success.
+- 
 
 #### ⏳ Pending Actions
-- Finish defining `Plan Submission` subtasks
-- Update MVS
-- Finish API design for submitting plan data
-- Fix swimlane diagram for the submission process
-- Updating backlog .md files
+- 
 
 #### 🔜 Next Steps
-- Documentation
-  - Finish retrospective
-  - Finish Sprint 8's documentation page
-  - Briefly create Notion page for Sprint 9
-  - Update backlog .md files
-  - Redefine `Plan Submission` subtasks + DoD
-- Review ice box items
-- Briefly examine MVS
-- Research API design approach
+- 
 
-### 🤖 ChatGPT Reflection
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
 
 #### ❓ Question 1
-**Q:** How do you think I should solve the problems listed in the Problems & Blockers section?  
-**A:**  
-- For **security**, introduce an API key or JWT verification at your Flask layer. Keep secrets in `.env` as planned.  
-- For the **diagram**, prioritize clarity over polish—update it roughly, and only clean it once the flow is finalized.  
-- For **synchronization**, don’t delete Supabase rows if Notion fails. Instead, persist everything in Supabase with `synced_with_notion=false`, then retry sync jobs until success (either automatic background process or triggered manually).
+- 
 
-#### ❓ Question 2
-**Q:** Do you think it’s possible to complete all tasks assigned for today so far?  
-**A:**  
-Unlikely, unless you work a long stretch. Defining subtasks, updating the MVS, and redesigning API flows are heavy. Prioritize finishing the **API design + subtask definitions** and **basic documentation updates** today, then leave the retrospective/diagram polish for tomorrow.
+#### ❓ Question 2...
+- 
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- Security will be addressed at the Flask level with API key validation.
-- Diagram updates will be lightweight sketches until the flow is finalized.
-- Synchronization strategy will favor persistence with retry logic instead of destructive deletes.
+- 
 
 #### 🗝️ Key Decisions
-- Supabase remains the system of record; Notion sync failures will not cause deletions.
-- Use `synced_with_notion` flag and retry mechanism for robustness.
-- Diagram updates deprioritized until API flow stabilizes.
+- 
 
 #### 📌 Action Items
-- [ ] Documentation
-  - [x] Finish retrospective
-  - [x] Finish Sprint 8's documentation page
-  - [x] Briefly create Notion page for Sprint 9
-  - [x] Update backlog .md files
-  - [ ] Redefine `Plan Submission` subtasks + DoD
-- [x] Review ice box items
-- [ ] Briefly examine MVS
-- [ ] Research API design approach
+- 
 
----
-
-## 🗓️ Standup 11 – Wrapping Up
-
-### 🧾 Overview
-* **Date:** Tuesday, September 16th (2025)  
-* **Time:** 12:50 PM  
-* **Attendees:** Self (Solo)  
-* **Discussed Backlog Items:**  
-  - `Plan Submission`  
-  - `Feedback System` (early planning)  
-
-### 📋 Contents
-
-#### ✅ Planned Agenda
-- Still need to look at MVS, redefine `Plan Submission`, and solve submission API approach
-- Wrap up sprint 8
-
-#### 📈 Previous Progress
-- Updated backlog item documentation and sprint 8 documentation + retrospective  
-- Started planning sprint 9  
-
-#### 🧱 Problems & Blockers
-- FDD diagram and ERD schema for plan_submissions needs to be updated  
-- There is currently no way to link data to assignments in the application  
-- Previous StatCardSystem unit tests started failing when rerunning react tests  
-- There is currently no way to link plan records to assignments in the application  
-  - General_Plan records can be created while Assigned_Plan records can not  
-  - The distinction between the two plan record schemas was made to help with developing a time estimation feature but this feature has been deprioritized  
-- The task table does not include a 'type' column meaning only partial plan records will be created  
-
-#### ⏳ Pending Actions
-- Redefine MVS  
-- Redefine `Plan Submission`  
-- Submission API  
-  - Decide on approach  
-  - Update flask api docs  
-
-#### 🔜 Next Steps
-- Redefine MVS  
-- Redefine `Plan Submission`  
-- Submission API  
-  - Decide on approach  
-  - Update flask api docs  
-- Start filling out `Feedback System` backlog item (description, dependencies, expected outcome)  
-- Note these larger scale problems in the final sprint document as reminder  
-
-### 🤖 ChatGPT Reflection  
-
-#### ❓ Question 1
-- **Q:** Can today's tasks be realistically accomplished? What assumptions might be wrong?  
-- **A:** Yes, but only if you keep the scope small. Redefining the MVS and `Plan Submission` doesn’t require code changes, just documentation and schema updates. The risky assumption is that redefining the API approach won’t open up bigger problems (e.g., idempotency or multi-service sync). If you discover that you need to rewrite core logic, today’s goals may slip.  
-
-#### ❓ Question 2
-- **Q:** Have you noticed any trends within the last three standups?  
-- **A:** Yes—there’s a recurring pattern of redefining backlog items (`Subsystem Integration`, `Plan Submission`, now MVS). This shows you’re iterating properly but also that you may be pushing features into later sprints without fully closing the loop. Another trend is schema mismatch issues: StatCardSystem tests, missing `type` in TaskTable, and ERD/FDD misalignments all point to a gap between documentation and implementation.  
-
-### 🧾 Results  
-
-#### 🧠 Discussion Notes
-- Keeping the plan lean by focusing on documentation redefinition rather than code-heavy fixes.  
-- Realized schema drift (FDD/ERD vs React implementation) is becoming a repeating blocker.  
-- Noted that deprioritizing time estimation (Assigned_Plan vs General_Plan) simplifies the immediate scope but may complicate future features.  
-
-#### 🗝️ Key Decisions
-- Focus on redefining `Plan Submission` backlog rather than trying to solve assignment-linking today.  
-- In Notion, notate all the bigger problems in the final sprint's Notion page to remind me to address them later on 
-- Treat failing StatCardSystem tests as secondary priority since they don’t block sprint 9 planning.  
-
-#### 📌 Action Items
-- [x] Redefine MVS with current scope and update documentation.  
-- [x] Rewrite `Plan Submission` backlog subtasks + DoD
-- [x] Draft API submission approach and update Flask docs accordingly.  
-- [x] Start filling out `Feedback System` backlog item (description, dependencies, expected outcome)
-- [x] Note these larger scale problems in the final sprint document as reminder  
+--- 
