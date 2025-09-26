@@ -60,7 +60,7 @@ vi.mock('sonner', () => ({
 
 // ---------- IMPORT AFTER MOCKS ----------
 import { TaskContext } from '@/contexts/TaskContext';
-import SubmissionButton from '@/components/SubmissionButton';
+import SubmissionButton from '@/components/SubmissionButton/SubmissionButton';
 
 // Helper: render with our mocked TaskContext value
 function renderWithTasks(ui, tasks) {

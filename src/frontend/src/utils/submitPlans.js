@@ -24,7 +24,7 @@ export default async function submitPlans(tasks, filter_start_date, filter_end_d
 
     resp.details = submit_response
 
-    if (!submit_response.ok) {
+    if (!submit_response?.ok) {
       resp.message = "Submission Failed"
       return Promise.reject(resp)
     } else {
