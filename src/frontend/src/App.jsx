@@ -3,30 +3,21 @@ import { ThemeProvider } from './components/ui/ThemeProvider'
 import TaskTable from "./components/TaskTable/TaskTable"
 import StatCardSystem from "./components/StatCardSystem/StatCardSystem";
 import testCardData from "@/utils/testCardData";
-import SubmissionButton from "./components/SubmissionButton";
-import connectionTest from "./utils/connectionTest";
+import SubmissionButton from "./components/SubmissionButton/SubmissionButton";
+import setupApp from "./utils/setupApp";
 import { useEffect } from 'react';
 import { Toaster, toast } from 'sonner'
 import './App.css'
+import retrieveStats from "./utils/retrieveStats";
 
 
 function App() {
   useEffect(() => {
-    const launchConnectionTest = async () => {
-      try {
-        const resp = connectionTest();
-        await toast.promise(resp, {
-          loading: 'Testing system connections...',
-          success: (resp) => `${resp.message}`,
-          error: (resp) => `${resp.message}`
-        })
-      } catch (error) {
-        console.log("connectTest failed due to an internal error: ", error)
-        toast.error("Submission failed due to an internal error...")
-      }
+    const launchSetupApp = async () => {
+      await setupApp()
     }
 
-    launchConnectionTest();
+    launchSetupApp();
   }, []);
 
   return (

@@ -13,7 +13,7 @@ export default async function connectionTest() {
         const fail_msg = "Error: Connectivity Issues!"
 
         let accept = false
-        let resp = {message: null, details: null}
+        let resp = {ok: false, message: null, details: null}
 
         if (flask_response?.ok) {
             console.log("Flask is connected!")
@@ -24,6 +24,7 @@ export default async function connectionTest() {
         
         resp.details = {flask_response, supabase_response, notion_response}
         if (accept) {
+            resp.ok = true
             resp.message = pass_msg
             console.log(resp);
             return Promise.resolve(resp)
@@ -34,7 +35,7 @@ export default async function connectionTest() {
         }
     } catch (error) {
         const msg = "An unexpected error occured!"
-        const resp = {'message': msg, 'details': error}
+        const resp = {ok: false, message: msg, details: error}
         console.log(resp);
         return Promise.reject(resp)
     }
