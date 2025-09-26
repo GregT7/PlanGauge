@@ -1,7 +1,7 @@
 # Subsystem Integration
 
 ## 📝 Task Overview
-* Sprint: #8
+* Sprint: 8
 * Dates: September 1 - September 16 (2025)
 * Status: In Progress
 * Story Points: #5

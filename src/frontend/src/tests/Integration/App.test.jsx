@@ -7,7 +7,7 @@ import { TaskContext } from '@/contexts/TaskContext';
 import * as connect from '@/utils/connectionTest';
 import { vi } from 'vitest'
 import default_tasks from '@/utils/default_tasks';
-import App from "../App";
+import App from "../../App";
 
 const AppWithContextWrapper = (initialTasks) => {
   const Wrapper = ({children}) => {

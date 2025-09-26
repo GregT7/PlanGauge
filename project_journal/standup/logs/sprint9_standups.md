@@ -768,10 +768,10 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 
 #### 📌 Action Items
 - [x] Update swimlane diagram to include plan submission flow  
-- [ ] Review and refine generated test files  
-- [ ] Conduct informal end-to-end test and record gif  
-- [ ] Upload sprint9 + plan_submit.md documentation  
-- [ ] Draft PR doc, outline required gifs, open request on GitHub
+- [x] Review and refine generated test files  
+- [x] Conduct informal end-to-end test and record gif  
+- [x] Upload sprint9 + plan_submit.md documentation  
+- [x] Draft PR doc, outline required gifs, open request on GitHub
 
 ---
 

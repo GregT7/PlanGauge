@@ -3,7 +3,7 @@
 ## 📝 Overview
 * Dates: Month day - Month day (YYYY)
 * Status: (Completed, In Progress, Not Started)
-* Backlog Progress: # backlogs assigned / # backlogs completed ( X% )
+* Backlog Progress: # backlogs completed / # backlogs assigned ( X% )
 * Tasks Assigned:
     * Backlog item #1
     * Backlog item #2

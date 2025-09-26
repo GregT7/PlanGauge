@@ -1,3 +1,4 @@
+import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
 
 export default async function connectionTest() {
@@ -5,16 +6,20 @@ export default async function connectionTest() {
     const supabase_url = "http://localhost:5000/api/db/health";
     const notion_url = "http://localhost:5000/api/notion/health";
     try {
-        const flask_response = await persistent_fetch(flask_url, "Flask")
+        const flask_response = await persistentFetch(flask_url, "Flask")
         let supabase_response = null, notion_response = null
         
+        const pass_msg = "All Systems Online!"
+        const fail_msg = "Error: Connectivity Issues!"
+
+        let accept = false
+        let resp = {message: null, details: null}
+
         if (flask_response?.ok) {
             console.log("Flask is connected!")
             supabase_response = await persistentFetch(supabase_url, "Supabase");
-            if (supabase_response?.ok) {
-                notion_response = await persistentFetch(notion_url, "Notion");
-                accept = notion_response?.ok
-            }
+            notion_response = await persistentFetch(notion_url, "Notion");
+            accept = notion_response?.ok && supabase_response?.ok
         }
         
         resp.details = {flask_response, supabase_response, notion_response}
@@ -28,12 +33,10 @@ export default async function connectionTest() {
             return Promise.reject(resp)
         }
     } catch (error) {
-        toast.error("Internal error! App may not be fully functional...");
-        console.log("Health check failed! Internal error occured...", error);
-        return {
-            'error': error,
-            'message': toString(error)
-        }
+        const msg = "An unexpected error occured!"
+        const resp = {'message': msg, 'details': error}
+        console.log(resp);
+        return Promise.reject(resp)
     }
 
 }

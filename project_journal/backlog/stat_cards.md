@@ -1,8 +1,8 @@
 # Stat Card System
 
 ## 📝 Task Overview
-* Sprint: 4
-* Dates: June 19 - June 23 (2025)
+* Sprint: 4, 5
+* Dates: June 10 - June 23 (2025)
 * Status: Completed
 * Story Points: 7
 * Dependencies:
