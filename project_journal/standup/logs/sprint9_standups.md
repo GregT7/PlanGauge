@@ -775,54 +775,83 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 10 – Bad Merge Conflict Resolution - Oops!
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Friday, September 26th (2025)  
+* **Time:** 11:05 AM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Plan Submission`  
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Completely screwed up the merge conflict resolution and now a lot of files are incomplete or missing  
+- Can start `Feedback System` today & getting close to finishing the project  
+- Need to update req & mvs again  
 
 #### 📈 Previous Progress
-- 
+- Completed testing  
+- Reviewed and approved ChatGPT generated tests/code  
+- Completed PR request documentation + merging  
+  - Created gifs showing functionality  
+  - Passed E2E test showing successful plan submission  
+  - Updated swim lane diagram for the plan submission process  
 
 #### 🧱 Problems & Blockers
-- 
+- Made a lot of mistakes with merge conflict resolution during PR finalization  
+- Testing at the end was a pain, want to incrementally test things as I go  
 
 #### ⏳ Pending Actions
-- 
+- Finishing PR request (solve merge conflict resolution mistakes)  
 
 #### 🔜 Next Steps
-- 
+- [ ] Rectify PR conflict resolution mistakes  
+- [ ] Feedback Sys p1  
+  - [ ] Make call to `/api/stats` on mount or date-range change?  
+    - [ ] consider combining `connectionTest` with stats retrieval and putting into separate file  
+    - [ ] handle loading + error states  
+  - [ ] Figure out how stat data will be stored  
+    - [ ] Consider storing date-range data as state or by using context provider (`filter_start_date`)  
+    - [ ] Consider storing stats data with context  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection  
 
 #### ❓ Question 1
-- 
+- What am I assuming that might be wrong?  
+  → That merge conflicts can be fixed quickly without re-checking every component — in reality, given the repo complexity, it’s safer to restore known-good files and reapply changes incrementally.  
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- What feels unclear or risky about today’s tasks?  
+  → The design choice for where feedback data (`/api/stats`) should live: context vs local state. If chosen poorly, this could introduce re-render issues or make debugging harder down the line.  
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Merge conflict recovery is higher priority than adding new features.  
+- Incremental testing after each file restore/change will reduce wasted effort.  
+- Feedback system will likely need a **stats context** to align with MVS’s stat cards requirement.  
+- Keeping POP’s feedback promise requires making `/api/stats` resilient, so user always sees feasibility insights.  
 
 #### 🗝️ Key Decisions
-- 
+- Incrementally test files as they are created/restored.  
+- Postpone any “nice-to-have” Feedback System features until core plan submission is stable.   
 
 #### 📌 Action Items
-- 
+- [x] Rectify PR conflict resolution mistakes  
+- [ ] Feedback Sys p1  
+  - [ ] Make call to `/api/stats` on mount or date-range change?  
+    - [ ] consider combining `connectionTest` with stats retrieval and putting into separate file  
+    - [ ] handle loading + error states  
+  - [ ] Figure out how stat data will be stored  
+    - [ ] Consider storing date-range data as state or by using context provider (`filter_start_date`)  
+    - [ ] Consider storing stats data with context   
 
---- 
+---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 11 – [Standup Title]
 
 ### 🧾 Overview
 * **Date:** 
