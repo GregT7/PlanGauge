@@ -1,87 +1,42 @@
 import { toast } from 'sonner'
+import { persistentFetch } from './persistentFetch';
 
-export async function timed_fetch(url, service_str, timeoutDuration) {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    const timeout_reference = setTimeout(() => controller.abort(), timeoutDuration);
-
-    const fetch_response = await fetch(url, { signal }).then((response) => {
-        console.log(`${service_str}: fetch response received...`, response);
-        return response;
-    }).catch((error) => {
-        if (error.name === "AbortError") {
-            console.log(`${service_str}: Fetch request was aborted after ${timeoutDuration} ms`);
-        } else {
-            console.log(`${service_str}: Fetch Internal Error`);
-        }
-        return error;
-    }).finally(() => {
-        clearTimeout(timeout_reference);
-    })
-
-    return fetch_response
-}
-
-export async function persistent_fetch(url, service_str, timeoutDuration = 2500) {
-    let fetch_response;
-
-    for (let i = 1; i < 4; ++i) {
-        fetch_response = await timed_fetch(url, service_str, timeoutDuration * i)
-
-        if (fetch_response?.ok) {
-            break;
-        }
-    }
-
-    return fetch_response;
-}
-
-export async function connectionTest() {
+export default async function connectionTest() {
     const flask_url = "http://localhost:5000/api/health";
     const supabase_url = "http://localhost:5000/api/db/health";
     const notion_url = "http://localhost:5000/api/notion/health";
     try {
-        const flask_response = await persistent_fetch(flask_url, "Flask")
+        const flask_response = await persistentFetch(flask_url, "Flask")
         let supabase_response = null, notion_response = null
         
+        const pass_msg = "All Systems Online!"
+        const fail_msg = "Error: Connectivity Issues!"
+
+        let accept = false
+        let resp = {message: null, details: null}
+
         if (flask_response?.ok) {
             console.log("Flask is connected!")
-            supabase_response = await persistent_fetch(supabase_url, "Supabase");
-            if (!supabase_response?.ok) {
-                toast.error("Database (Supabase) is currently unavailable...");
-                console.log("Database (Supabase) is currently unavailable...");
-            }
-            
-            notion_response = await persistent_fetch(notion_url, "Notion");
-            if (!notion_response?.ok) {
-                toast.error("Notion is currently unavailable...");
-                console.log("Notion is currently unavailable...");
-            }
-
-            if (notion_response?.ok && supabase_response?.ok) {
-                toast.success("All systems are online!");
-                console.log("All systems are online!");
-            }
+            supabase_response = await persistentFetch(supabase_url, "Supabase");
+            notion_response = await persistentFetch(notion_url, "Notion");
+            accept = notion_response?.ok && supabase_response?.ok
         }
         
-        else {
-            toast.error("Flask is currently unavailable...")
-            console.log("Flask is currently unavailable...")
+        resp.details = {flask_response, supabase_response, notion_response}
+        if (accept) {
+            resp.message = pass_msg
+            console.log(resp);
+            return Promise.resolve(resp)
+        } else {
+            resp.message = fail_msg
+            console.log(resp);
+            return Promise.reject(resp)
         }
-
-        return {
-            'flask': flask_response,
-            'supabase': supabase_response,
-            'notion': notion_response
-        };
     } catch (error) {
-        toast.error("Internal error! App may not be fully functional...");
-        console.log("Health check failed! Internal error occured...", error);
-        return {
-            'error': error,
-            'message': toString(error)
-        }
+        const msg = "An unexpected error occured!"
+        const resp = {'message': msg, 'details': error}
+        console.log(resp);
+        return Promise.reject(resp)
     }
 
 }

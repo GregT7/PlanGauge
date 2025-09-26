@@ -1,9 +1,9 @@
 # Database Setup
 
 ## 📝 Task Overview
-* Sprint: #6-#7
-* Dates: June 24 - ... (2025)
-* Status: In Progress
+* Sprint: 6, 7
+* Dates: June 24 - August 24 (2025)
+* Status: Completed
 * Story Points: 5
 * Dependencies:
   * None
@@ -31,7 +31,7 @@
 2. The stored data can be visually expected by visiting the Supabase website and logging in
 3. The environment file contains keys that perfectly match the database keys provided on the Supabase website for the corresponding project cluster
 4. The database schema is in BCNF (Boyce Codd Normal Form)
-5. Inspect the Supabase website to ensure RSL is turned on
+5. Inspect the supabase website to ensure RSL is turned on
 6. GitHub is inspected to verify the env file is not uploaded
-7. The functional dependency diagram and the ER diagram both match and reflect Supabase's most up-to-date schema design
+7. The functional dependency diagram and the ER diagram both match and reflect supabase's most up-to-date schema design
 8. The functional dependency and ER diagrams are properly added to documentation (design.md)

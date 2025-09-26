@@ -1,7 +1,7 @@
 # Retro3: Reward System 2.0
 
 ## 📝 Task Overview
-* Sprint: 4
+* Sprint: 4, 5
 * Dates: June 12 - June 20 (2025)
 * Status: Completed
 * Story Points: 4
