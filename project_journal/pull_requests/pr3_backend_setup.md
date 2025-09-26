@@ -100,7 +100,6 @@ I'd appreciate feedback on:
 - **Base branch**: `main`
 - **Feature branch**: `backend_setup`
 
-Describe what this merges and where it fits in your release or dev cycle.
 This merges together the `backend_setup` which contains the backbone of the backend with `main` which contains the frontend. This pull request is nearing the end of the project cycle. There are just two features left to implement: `Plans Submission` and `Feedback System`
 
 --- 
