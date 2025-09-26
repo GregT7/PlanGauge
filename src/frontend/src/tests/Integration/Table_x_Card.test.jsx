@@ -5,7 +5,7 @@ import { useState, useMemo } from 'react';
 import { TaskContext } from '@/contexts/TaskContext';
 import TaskTable from '@/components/TaskTable/TaskTable';
 import StatCardSystem from '@/components/StatCardSystem/StatCardSystem';
-import cardData from "@/utils/cardData";
+import testCardData from "@/utils/testCardData";
 
 const Wrapper = ({ initialTasks, initialCardData }) => {
   const [tasks, setTasks] = useState(initialTasks);
@@ -40,14 +40,14 @@ describe('Integration: TaskTable and StatCardSystem', () => {
   ];
 
   it('renders TaskTable and StatCardSystem side by side', () => {
-    render(<Wrapper initialTasks={initialTasks} initialCardData={cardData}/>);
+    render(<Wrapper initialTasks={initialTasks} initialCardData={testCardData}/>);
 
     expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toHaveValue('Initial Task');
   });
 
   it('updates StatCard status when a new task is added', async () => {
-    render(<Wrapper initialTasks={initialTasks} initialCardData={cardData}/>);
+    render(<Wrapper initialTasks={initialTasks} initialCardData={testCardData}/>);
     const user = userEvent.setup();
 
     const footerButton = screen.getByTestId('add-task-button');
@@ -71,7 +71,7 @@ describe('Integration: TaskTable and StatCardSystem', () => {
 
   it('removes time contribution from StatCard when task is deleted', async () => {
     const user = userEvent.setup();
-    render(<Wrapper initialTasks={[...initialTasks, { ...initialTasks[0], id: 2, time_estimation: 90 }]} initialCardData={cardData}  />);
+    render(<Wrapper initialTasks={[...initialTasks, { ...initialTasks[0], id: 2, time_estimation: 90 }]} initialCardData={testCardData}  />);
 
     // Confirm initial time sum
     expect(screen.getByText('690')).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe('Integration: TaskTable and StatCardSystem', () => {
 
   it('task name edits do not affect StatCard rendering or stability', async () => {
     const user = userEvent.setup();
-    render(<Wrapper initialTasks={initialTasks} initialCardData={cardData} />);
+    render(<Wrapper initialTasks={initialTasks} initialCardData={testCardData} />);
 
     const textbox = screen.getByRole('textbox');
     await user.clear(textbox);

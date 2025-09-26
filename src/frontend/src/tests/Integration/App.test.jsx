@@ -4,7 +4,8 @@ import userEvent from '@testing-library/user-event'
 import { screen, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import { useState, act } from 'react';
 import { TaskContext } from '@/contexts/TaskContext';
-import * as connect from '@/utils/connectionTest';
+import * as connectionTest from '@/utils/connectionTest';
+import { persistentFetch, timedFetch } from '@/utils/persistentFetch';
 import { vi } from 'vitest'
 import default_tasks from '@/utils/default_tasks';
 import App from "../../App";
@@ -36,11 +37,11 @@ describe("App", () => {
   });
 
   it("calls connectionTest only once at launch", async () => {
-    const connectSpy = vi.spyOn(connect, 'connectionTest');
+    const connectionTestSpy = vi.spyOn(connectionTest, 'default');
     const { container } = render(
       <AppWithContextWrapper initialTasks={default_tasks}/> 
     );
-    expect(connectSpy).toHaveBeenCalledTimes(1);
+    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
 
     const user = userEvent.setup();
 
@@ -48,18 +49,18 @@ describe("App", () => {
     const checkboxes = await screen.findAllByRole('checkbox')
     await user.click(checkboxes[0]);
     await user.keyboard('{Backspace}');
-    expect(connectSpy).toHaveBeenCalledTimes(1);
+    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
 
     // only called once: after modifying an existing row
     const inputToModify = await screen.getByDisplayValue("Plan Japan trip p2")
     await user.clear(inputToModify);
     await user.type(inputToModify, "New text!!!!")
-    expect(connectSpy).toHaveBeenCalledTimes(1);
+    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
 
     // only called once: after creating a new row
     const addButton = await screen.findByTestId("add-task-button");
     await user.click(addButton);
-    expect(connectSpy).toHaveBeenCalledTimes(1);
+    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
   });
 
   it("displays Toaster component when toast is invoked", async () => {
@@ -88,7 +89,7 @@ describe("App", () => {
 
 
   it("doesn't crash when connectionTest fails", () => {
-    const connectSpy = vi.spyOn(connect, 'connectionTest').mockImplementationOnce(() => {
+    const connectionTestSpy = vi.spyOn(connectionTest, 'default').mockImplementationOnce(() => {
       throw new Error("forced failure");
     });
 
