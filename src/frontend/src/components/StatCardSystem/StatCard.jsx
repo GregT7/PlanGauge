@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import toLocalMidnight from "@/utils/toLocalMidnight";
-import styleData from "@/utils/styleData.json"
 import { format } from "date-fns";
 
 const today = new Date();
@@ -22,10 +21,17 @@ function capitalizeFirstLetter(str) {
 }
 
 function determineStatusStyle(status) {
-    if (styleData?.[status]) {
-        return styleData[status].base
-    } else {
-        return styleData.error.base
+    switch (status) {
+        case "neutral":
+            return "bg-zinc-900";
+        case "good":
+            return "bg-emerald-900 border-2 border-emerald-500"
+        case "moderate":
+            return "bg-amber-900 border-2 border-amber-500"
+        case "poor":
+            return "bg-rose-900 border-2 border-rose-500";
+        default:
+            return "bg-red-900 border-2 border-red-500"
     }
 }
 

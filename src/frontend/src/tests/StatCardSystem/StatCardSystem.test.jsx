@@ -21,7 +21,7 @@ const ContextWrapper = ({ initial_tasks, children }) => {
 
 
 // Mock cardData imported inside StatCardSystem
-vi.mock('@/utils/testCardData', () => {
+vi.mock('@/utils/cardData', () => {
     const today = new Date();
     return {
         default: [
@@ -50,11 +50,9 @@ describe('StatCardSystem', () => {
     vi.clearAllMocks();
   });
 
-
   it('renders the StatCardSystem component', () => {
     setup();
-    // expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
-    screen.debug()
+    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
   });
 
     it("passes a snapshot test", () => {

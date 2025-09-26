@@ -45,7 +45,7 @@ const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName, cardData) 
 );
 
 
-function StatCardSystem({cardData = testCardData}) {
+function StatCardSystem({cardData}) {
   const { tasks } = useContext(TaskContext);
 
   const evaluatedCardSums = useMemo(() =>
