@@ -9,23 +9,9 @@ export function verify_task(task) {
     time_estimation: "number"
   };
 
-  const hasKeys = Object.entries(expected).every(([key, type]) =>
+  return Object.entries(expected).every(([key, type]) =>
     task.hasOwnProperty(key) && typeof task[key] === type
   );
-
-  if (!hasKeys) {
-    return false;
-  }
-
-  const regex = /^\d{4}-\d{2}-\d{2}$/
-  const due_formatted = regex.test(task["due_date"])
-  const start_formatted = regex.test(task["start_date"])
-
-  if (!due_formatted || !start_formatted) {
-    return false;
-  }
-
-  return true
 }
 
 
