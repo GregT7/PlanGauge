@@ -1,4 +1,3 @@
-import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
 
 export default async function connectionTest() {
@@ -18,8 +17,10 @@ export default async function connectionTest() {
         if (flask_response?.ok) {
             console.log("Flask is connected!")
             supabase_response = await persistentFetch(supabase_url, "Supabase");
-            notion_response = await persistentFetch(notion_url, "Notion");
-            accept = notion_response?.ok && supabase_response?.ok
+            if (supabase_response?.ok) {
+                notion_response = await persistentFetch(notion_url, "Notion");
+                accept = notion_response?.ok
+            }
         }
         
         resp.details = {flask_response, supabase_response, notion_response}

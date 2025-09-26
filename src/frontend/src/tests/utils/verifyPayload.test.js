@@ -39,14 +39,21 @@ describe('verify_task', () => {
     expect(verify_task(wrong)).toBe(false);
   });
 
-  it('does not validate date format here (only type); date as string passes', () => {
-    const weirdDates = {
-      ...validTask(),
-      due_date: '09/30/2025',
-      start_date: '09-24-2025',
-    };
-    // verify_task only checks "string" type, not format, so this is true
-    expect(verify_task(weirdDates)).toBe(true);
+  it('returns false if due_date is not in YYYY-MM-DD format', () => {
+    const bad = { ...validTask(), due_date: '09/30/2025' };
+    expect(verify_task(bad)).toBe(false);
+  });
+
+  it('returns false if start_date is not in YYYY-MM-DD format', () => {
+    const bad = { ...validTask(), start_date: '2025-9-24' };
+    expect(verify_task(bad)).toBe(false);
+  });
+
+  it('returns false if either date is an empty string or unparsable', () => {
+    const bad1 = { ...validTask(), due_date: '' };
+    const bad2 = { ...validTask(), start_date: 'not-a-date' };
+    expect(verify_task(bad1)).toBe(false);
+    expect(verify_task(bad2)).toBe(false);
   });
 });
 
