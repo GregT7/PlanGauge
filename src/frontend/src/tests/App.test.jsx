@@ -4,11 +4,10 @@ import userEvent from '@testing-library/user-event'
 import { screen, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import { useState, act } from 'react';
 import { TaskContext } from '@/contexts/TaskContext';
-import * as connectionTest from '@/utils/connectionTest';
-import { persistentFetch, timedFetch } from '@/utils/persistentFetch';
+import * as connect from '@/utils/connectionTest';
 import { vi } from 'vitest'
 import default_tasks from '@/utils/default_tasks';
-import App from "../../App";
+import App from "../App";
 
 const AppWithContextWrapper = (initialTasks) => {
   const Wrapper = ({children}) => {
@@ -37,11 +36,11 @@ describe("App", () => {
   });
 
   it("calls connectionTest only once at launch", async () => {
-    const connectionTestSpy = vi.spyOn(connectionTest, 'default');
+    const connectSpy = vi.spyOn(connect, 'connectionTest');
     const { container } = render(
       <AppWithContextWrapper initialTasks={default_tasks}/> 
     );
-    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
+    expect(connectSpy).toHaveBeenCalledTimes(1);
 
     const user = userEvent.setup();
 
@@ -49,18 +48,18 @@ describe("App", () => {
     const checkboxes = await screen.findAllByRole('checkbox')
     await user.click(checkboxes[0]);
     await user.keyboard('{Backspace}');
-    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
+    expect(connectSpy).toHaveBeenCalledTimes(1);
 
     // only called once: after modifying an existing row
     const inputToModify = await screen.getByDisplayValue("Plan Japan trip p2")
     await user.clear(inputToModify);
     await user.type(inputToModify, "New text!!!!")
-    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
+    expect(connectSpy).toHaveBeenCalledTimes(1);
 
     // only called once: after creating a new row
     const addButton = await screen.findByTestId("add-task-button");
     await user.click(addButton);
-    expect(connectionTestSpy).toHaveBeenCalledTimes(1);
+    expect(connectSpy).toHaveBeenCalledTimes(1);
   });
 
   it("displays Toaster component when toast is invoked", async () => {
@@ -89,7 +88,7 @@ describe("App", () => {
 
 
   it("doesn't crash when connectionTest fails", () => {
-    const connectionTestSpy = vi.spyOn(connectionTest, 'default').mockImplementationOnce(() => {
+    const connectSpy = vi.spyOn(connect, 'connectionTest').mockImplementationOnce(() => {
       throw new Error("forced failure");
     });
 

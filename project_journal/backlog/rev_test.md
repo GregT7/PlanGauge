@@ -1,7 +1,7 @@
 # Intro to Code Reviews & Testing
 
 ## 📝 Task Overview
-* Sprint: 3, 4, 5
+* Sprint: 4
 * Dates: June 7 - June 19 (2025)
 * Status: Completed
 * Story Points: 6
