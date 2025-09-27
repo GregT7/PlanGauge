@@ -808,14 +808,14 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - Finishing PR request (solve merge conflict resolution mistakes)  
 
 #### 🔜 Next Steps
-- [ ] Rectify PR conflict resolution mistakes  
-- [ ] Feedback Sys p1  
-  - [ ] Make call to `/api/stats` on mount or date-range change?  
-    - [ ] consider combining `connectionTest` with stats retrieval and putting into separate file  
-    - [ ] handle loading + error states  
-  - [ ] Figure out how stat data will be stored  
-    - [ ] Consider storing date-range data as state or by using context provider (`filter_start_date`)  
-    - [ ] Consider storing stats data with context  
+- Rectify PR conflict resolution mistakes  
+- Feedback Sys p1  
+  - Make call to `/api/stats` on mount or date-range change?  
+    - consider combining `connectionTest` with stats retrieval and putting into separate file  
+    - handle loading + error states  
+  - Figure out how stat data will be stored
+    - Consider storing date-range data as state or by using context provider (`filter_start_date`)  
+    - Consider storing stats data with context  
 
 ### 🤖 ChatGPT Reflection  
 
@@ -842,59 +842,82 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 #### 📌 Action Items
 - [x] Rectify PR conflict resolution mistakes  
 - [ ] Feedback Sys p1  
-  - [ ] Make call to `/api/stats` on mount or date-range change?  
-    - [ ] consider combining `connectionTest` with stats retrieval and putting into separate file  
-    - [ ] handle loading + error states  
+  - [x] Make call to `/api/stats` on mount or date-range change?  
+    - [x] consider combining `connectionTest` with stats retrieval and putting into separate file  
+    - [x] handle loading + error states  
   - [ ] Figure out how stat data will be stored  
     - [ ] Consider storing date-range data as state or by using context provider (`filter_start_date`)  
     - [ ] Consider storing stats data with context   
 
 ---
 
-## 🗓️ Standup 11 – [Standup Title]
+## 🗓️ Standup 11 – Finally Working on Frontend Design
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, September 27th (2025)  
+* **Time:** 2:06 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Want to:
+  - Finally decide on how to approach storing stats data
+  - Start creating the Evaluation System subcomponents
+- Job search transition starts tomorrow, still have three backlog items to complete, need to think about approach
 
 #### 📈 Previous Progress
-- 
+- Combined `connectionTest` with stats retrieval into a singular function that launches once on mount
+- Created some test files for the newly created functions
 
 #### 🧱 Problems & Blockers
-- 
+- Limited time for implementing features
 
 #### ⏳ Pending Actions
-- 
+- Decide on how to approach storing stats data
 
 #### 🔜 Next Steps
-- 
+- Figure out how stat data will be stored  
+  - Consider storing date-range data as state or by using context provider (`filter_start_date`)  
+  - Consider storing stats data with context  
+- Implement stats data storage based on previous decision  
+- Create feasibility evaluation algorithm draft  
+- Create the weekly time sum stat card subcomponent  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- **Q:** Do you think the project is in a state or close to a state that is presentable to employers? What could make this project more attractive to prospective employers?  
+- **A:** Yes, it’s close. The current frontend already demonstrates interactive tables, context usage, and stateful components. To stand out to employers:
+  - Add polish with stat cards and summary views (ties to your MVS goals).  
+  - Highlight Notion API integration and ML prediction (those are differentiators).  
+  - Make the README/demo clear and include screenshots/GIFs.  
+  - If possible, deploy a demo (e.g., Docker/Heroku/Vercel) to show the app running.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- **Q:** What am I assuming that might be wrong? Can I realistically complete all of today's tasks?  
+- **A:** The assumption that you can fully decide the storage strategy, implement it, draft the evaluation algorithm, and build the weekly stat card all in one day may be ambitious. A more realistic slice would be:
+  1. Decide and implement **just the storage strategy**.  
+  2. Sketch/draft the feasibility algorithm (pseudo-code, not full implementation).  
+  3. Start the stat card component, even if it only shows summed hours.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Context is the likely right place for storing stat data since it will be needed across multiple subcomponents.  
+- Storing `filter_start_date` / `filter_end_date` in context keeps things extensible if you later add a date range selector.  
+- The first evaluation algorithm can be rule-based (compare against fixed thresholds), then evolve into ML-based predictions.
 
 #### 🗝️ Key Decisions
-- 
+- Prioritize storing stat data in a context provider.  
+- Break up today’s “Next Steps” into smaller increments to avoid overcommitment.  
 
 #### 📌 Action Items
-- 
+- [ ] Implement a `StatsContext` (or extend `TaskContext`) for holding stats and date ranges.  
+- [ ] Write feasibility evaluation algorithm draft
+- [ ] Draft a simple weekly stat card that shows total hours and a color status
 
 --- 
 
