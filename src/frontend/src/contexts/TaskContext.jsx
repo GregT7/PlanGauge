@@ -5,7 +5,7 @@ import toLocalMidnight from '@/utils/toLocalMidnight';
 
 export const TaskContext = createContext(undefined);
 
-export default function TaskContextProvider({children, starting_tasks=default_tasks}) {
+export default function TaskContextProvider({children, starting_tasks=stat_tasks}) {
     const reformattedTasks = starting_tasks.map(task => (
         {
             ...task, 
