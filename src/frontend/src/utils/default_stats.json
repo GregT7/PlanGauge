@@ -1,0 +1,15 @@
+{
+    "day": {
+        "Mon": {"ave": null, "std": null},
+        "Tue": {"ave": null, "std": null},
+        "Wed": {"ave": null, "std": null},
+        "Thu": {"ave": null, "std": null},
+        "Fri": {"ave": null, "std": null},
+        "Sat": {"ave": null, "std": null},
+        "Sun": {"ave": null, "std": null}    
+    },
+    "week": {
+        "ave": null,
+        "std": null
+    }
+}

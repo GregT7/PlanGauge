@@ -1,10 +1,10 @@
-import { useContext, useMemo } from 'react';
-import { TaskContext } from '@/contexts/TaskContext';
-import StatCard from "@/components/StatCardSystem/StatCard";
-import StatusCounter from "@/components/StatCardSystem/StatusCounter";
-import toLocalMidnight from '@/utils/toLocalMidnight';
+import { useMemo, useState, useEffect, createContext, useContext } from "react"
+import defaultThresholds from "@/utils/defaultThresholds.json" with { type: 'json'}
+import { TaskContext } from "./TaskContext"
+import { StatsContext } from "./StatsContext"
 import testCardData from "@/utils/testCardData.json" with { type: 'json'}
-
+import toLocalMidnight from "@/utils/toLocalMidnight"
+import { evaluateFeasibility } from "@/utils/evaluateFeasibility"
 
 const calcStatus = (ave, std, sum) => {
   if (std === 0) return "undetermined";
@@ -30,23 +30,12 @@ function evalStatus(zScore, _std, sum) {
   else return "undefined";
 }
 
-const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName, cardData) => (
-  <div className={`${gridClassName} gap-4`}>
-    {evaluatedCardStatus
-      .filter(card => daysRegex.test(card.name))
-      .map(card => (
-        <div key={card.date} className="flex justify-center items-center">
-          <div className="w-44 h-44 shrink-0">
-            <StatCard cardData={card} />
-          </div>
-        </div>
-      ))}
-  </div>
-);
+export const feasibilityContext = createContext(undefined);
 
-
-function StatCardSystem({cardData = testCardData}) {
-  const { tasks } = useContext(TaskContext);
+export function FeasibilityContextProvider({ children, cardData = testCardData }) {
+const statsCtx = useContext(StatsContext);
+const stats = statsCtx?.stats
+const {tasks, timeSum} = useContext(TaskContext)
 
   const evaluatedCardSums = useMemo(() =>
     cardData.map(card => {
@@ -84,18 +73,22 @@ function StatCardSystem({cardData = testCardData}) {
     }, { good: 0, moderate: 0, poor: 0 });
   }, [evaluatedCardStatus]);
 
-  return (
-    <div className="w-[73.5%] mx-auto border-2 border-dashed pt-2">
-        <h1 className="text-2xl pt-2 pb-4 text-left pl-8">Stat Card System</h1>
+const feasibility = useMemo(() => {
+  const result = evaluateFeasibility(timeSum, stats?.week, statusCount, defaultThresholds);
+  console.log("eval result:", result);
+  return result;
+}, [timeSum, statusCount, stats]);
 
-        {renderCardRow(evaluatedCardStatus, /monday|tuesday|wednesday|thursday/i, "grid grid-cols-4", cardData)}
-        {renderCardRow(evaluatedCardStatus, /friday|saturday|sunday/i, "grid grid-cols-3 mt-4", cardData)}
+  
 
-        <div>
-            <StatusCounter statusCount={statusCount} />
-        </div>
-    </div>
-  );
+//   console.log("evaluatedCardSums", evaluatedCardSums)
+  console.log("evaluatedCardSums", statusCount)
+
+
+    const test = 1
+    return (
+        <feasibilityContext.Provider value={test}>
+            {children}
+        </feasibilityContext.Provider>
+    );     
 }
-
-export default StatCardSystem;
