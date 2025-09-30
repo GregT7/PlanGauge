@@ -1,8 +1,7 @@
 {
   "zscore": {
-    "good": { "lower": -1, "upper": 1 },
-    "moderate": { "lower": -2, "upper": 2 },
-    "poor": { "lower": -3, "upper": 3 }
+    "good": { "lower": 0, "upper": 1 },
+    "moderate": { "lower": 1, "upper": 2 }
   },
   "points": {
     "good": 100,
@@ -11,8 +10,8 @@
   },
   "overall": {
     "good": { "lower": 75, "upper": 100 },
-    "moderate": { "lower": 50, "upper": 75 },
-    "poor": { "lower": 0, "upper": 50 }
+    "moderate": { "lower": 50, "upper": 75 }
   },
-  "score_weight": 0.6
+  "weight": 0.6
 }
+

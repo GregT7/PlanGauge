@@ -11,7 +11,7 @@ import { Toaster, toast } from 'sonner'
 import './App.css'
 import retrieveStats from "./utils/retrieveStats";
 import EvaluationSection from "./components/EvaluationSection/EvaluationSection";
-import { FeasibilityContextProvider } from "@/contexts/FeasibilityContext"
+import { ProcessingContextProvider } from "@/contexts/ProcessingContext"
 
 
 function App() {
@@ -28,16 +28,14 @@ function App() {
         <Toaster expand={true} richColors data-testid="toaster"/>
           <h1 className="m-0 text-4xl leading-none">PlanGauge</h1>
             <TaskContextProvider>
-              <StatsContextProvider>
-                <FeasibilityContextProvider>
+              <ProcessingContextProvider>
                   <div className="space-y-10 pt-5">
                     <TaskTable/>
                     {/* <StatCardSystem cardData={testCardData}/> */}
                     <EvaluationSection/>
                     <SubmissionButton status="neutral"/>
                   </div>
-                </FeasibilityContextProvider>
-              </StatsContextProvider>
+              </ProcessingContextProvider>
             </TaskContextProvider>   
         </ThemeProvider>
   );
