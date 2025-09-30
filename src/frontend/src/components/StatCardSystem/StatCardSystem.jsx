@@ -3,24 +3,12 @@ import { TaskContext } from '@/contexts/TaskContext';
 import StatCard from "@/components/StatCardSystem/StatCard";
 import StatusCounter from "@/components/StatCardSystem/StatusCounter";
 import toLocalMidnight from '@/utils/toLocalMidnight';
+import isSameDay from '@/utils/isSameDay';
 import testCardData from "@/utils/testCardData.json" with { type: 'json'}
+import CardRow from './CardRow';
 
 
-const calcStatus = (ave, std, sum) => {
-  if (std === 0) return "undetermined";
-
-  const zscore = Math.abs(sum - ave) / std;
-  if (zscore <= 1) return "good";
-  else if (zscore <= 2) return "moderate";
-  else return "poor";
-};
-
-function isSameDay(d1, d2) {
-  const day1 = toLocalMidnight(d1);
-  const day2 = toLocalMidnight(d2);
-  return day1.getTime() === day2.getTime();
-}
-
+//! Fix ME -- want to use threshodl values for zscore instead of hard coded ones
 function evalStatus(zScore, _std, sum) {
   zScore = Math.abs(zScore);
   if (sum === 0) return "neutral";
@@ -30,19 +18,19 @@ function evalStatus(zScore, _std, sum) {
   else return "undefined";
 }
 
-const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName, cardData) => (
-  <div className={`${gridClassName} gap-4`}>
-    {evaluatedCardStatus
-      .filter(card => daysRegex.test(card.name))
-      .map(card => (
-        <div key={card.date} className="flex justify-center items-center">
-          <div className="w-44 h-44 shrink-0">
-            <StatCard cardData={card} />
-          </div>
-        </div>
-      ))}
-  </div>
-);
+// const renderCardRow = (evaluatedCardStatus, daysRegex, gridClassName, cardData) => (
+//   <div className={`${gridClassName} gap-4`}>
+//     {evaluatedCardStatus
+//       .filter(card => daysRegex.test(card.name))
+//       .map(card => (
+//         <div key={card.date} className="flex justify-center items-center">
+//           <div className="w-44 h-44 shrink-0">
+//             <StatCard cardData={card} />
+//           </div>
+//         </div>
+//       ))}
+//   </div>
+// );
 
 
 function StatCardSystem({cardData = testCardData}) {
@@ -88,9 +76,13 @@ function StatCardSystem({cardData = testCardData}) {
     <div className="w-[73.5%] mx-auto border-2 border-dashed pt-2">
         <h1 className="text-2xl pt-2 pb-4 text-left pl-8">Stat Card System</h1>
 
-        {renderCardRow(evaluatedCardStatus, /monday|tuesday|wednesday|thursday/i, "grid grid-cols-4", cardData)}
-        {renderCardRow(evaluatedCardStatus, /friday|saturday|sunday/i, "grid grid-cols-3 mt-4", cardData)}
-
+        {/* {renderCardRow(evaluatedCardStatus, /monday|tuesday|wednesday|thursday/i, "grid grid-cols-4", cardData)}
+        {renderCardRow(evaluatedCardStatus, /friday|saturday|sunday/i, "grid grid-cols-3 mt-4", cardData)} */}
+        <CardRow evaluatedCardStatus={evaluatedCardStatus} daysRegex={/monday|tuesday|wednesday|thursday/i}
+        gridClassName = {"grid grid-cols-4"} cardData = {cardData}/>
+        <CardRow evaluatedCardStatus={evaluatedCardStatus} daysRegex={/friday|saturday|sunday/i}
+        gridClassName = {"grid grid-cols-3 mt-4"} cardData = {cardData}/>
+        
         <div>
             <StatusCounter statusCount={statusCount} />
         </div>

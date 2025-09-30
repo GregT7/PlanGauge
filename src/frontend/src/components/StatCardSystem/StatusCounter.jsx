@@ -1,8 +1,6 @@
 import CountElement from "./CountElement";
 
-const defaultCount = {"good": 0, "moderate": 0, "poor": 0};
-
-function StatusCounter({statusCount = defaultCount}) {
+function StatusCounter({statusCount = {"good": 0, "moderate": 0, "poor": 0}}) {
     // const isObject = typeof statusCount === "object";
     const hasValidkeys = Boolean(
         Number.isInteger(statusCount?.["good"]) && 
