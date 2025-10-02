@@ -80,7 +80,6 @@ Overall, velocity depends on stabilizing the schema quickly; risk is high if cha
 - Implementing Notion sync adds an external dependency; failures there could stall testing and integration late in the sprint.  
 - Burn risk: too much time could be spent restructuring docs rather than implementing/test-driving routes.  
 
----
 
 ### 🧾 Results
 
@@ -1066,56 +1065,160 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - Investigate merging `StatsContext` and `FeasibilityContext` or ensuring one consumes the other cleanly.
 
 #### 📌 Action Items
-- [ ] Add error boundaries / safe defaults to `evaluateFeasibility.js`  
-- [ ] Clean up `StatCardSystem` file structure (one component per file + shared helpers)  
-- [ ] Decide whether to merge or stack `StatsContext` + `FeasibilityContext`  
+- [x] Add error boundaries / safe defaults to `evaluateFeasibility.js`  
+- [x] Clean up `StatCardSystem` file structure (one component per file + shared helpers)  
+- [x] Decide whether to merge or stack `StatsContext` + `FeasibilityContext`  
 - [ ] Implement formatting pipeline to transform real stats data into `cardData` format  
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 14 – Nearing the End
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Tuesday, September 30th (2025)  
+* **Time:** 3:50 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Decided on combining context providers to make things simpler to implement  
+- Need to start wrapping things up documentation wise  
 
 #### 📈 Previous Progress
-- 
+- Briefly did some refactoring of StatCardSystem (moved helper functions and React subcomponents to independent files)  
+- Added error handling to `evaluateFeasibility.js`  
+- Started implementing the combined context provider  
+  - Generates default card data (dates: this week → Monday to Sunday)  
+  - Retrieves and stores stats data from Flask API  
+  - Evaluates time sums by day per card  
+  - Evaluates feasibility status by day per card  
 
 #### 🧱 Problems & Blockers
-- 
+- StatCardSystem needs additional refactoring — for now commented out in `App.jsx`  
+  - Needs to subscribe to new context provider once it’s completed  
+  - Needs regression tests rewritten so they all pass  
+  - Old code performing memoization/feasibility evaluation needs deletion  
+- Need to wrap up documentation  
 
 #### ⏳ Pending Actions
-- 
+- Continue implementing `ProcessingContext.jsx`  
+  - React updates cardData once stats data retrieved from Flask is received  
+  - Counts number of statuses per card  
+  - Processes overall feasibility  
+  - Double check that context calculates and provides all values needed for StatCardSystem  
 
 #### 🔜 Next Steps
-- 
+- Finish `ProcessingContext.jsx` implementation  
+- Final documentation pass (standups, backlog, sprint summaries, DoD notes)  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 1
-- 
+#### ❓ Question 1  
+**What assumptions am I assuming that might be wrong?**  
+- That combining contexts won’t create unnecessary re-renders — may still need memoization or selector-style hooks.  
+- That ProcessingContext will provide all data needs without introducing duplication between TaskContext and stats/feasibility logic.  
+- That regression tests will be straightforward — the new provider may change the shape of consumed props, requiring deeper test rewrites.  
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2  
+**How much longer in days do you think this project will take to conclude?**  
+- With three backlog items left (`Feedback System`, `End-to-End Testing`, `Presentation Readiness`), a realistic estimate is **5–7 working days**:  
+  - 2–3 days to complete ProcessingContext + refactor StatCardSystem + regression tests.  
+  - 1–2 days for feedback system UI/UX polish.  
+  - 2 days for end-to-end testing, documentation, and presentation prep.  
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Project has entered the “stabilization” phase: fewer new features, more polish, testing, and documentation.  
+- Risk is scope creep — need to hold back from adding features not in MVS.  
 
 #### 🗝️ Key Decisions
-- 
+- Use **ProcessingContext** as the single combined provider for stats + feasibility evaluation.  
+- Comment out old StatCardSystem logic until refactor is complete.  
+- Prioritize documentation alongside coding to avoid last-minute backlog.  
 
 #### 📌 Action Items
-- 
+- [x] Continue implementing ProcessingContext.jsx 
+  - [x] React updates cardData once stats data retrieved from flask is received 
+  - [x] Counts the number of statuses per card 
+  - [x] Processes overall feasibility 
+  - [x] Double check that context calculates and provides all values needed for StatCardSystem to function
+- [ ] Complete Retrospective Draft (in Notion)
+  - [ ] What didn't go well
+  - [ ] What went well
+  - [ ] Issue Identified
+  - [ ] Root Cause
+  - [ ] Proposed Solutions
+  - [ ] Action Plan
 
 --- 
+
+## 🗓️ Standup 15 – Late Start
+
+### 🧾 Overview
+* **Date:** Wednesday, October 1st (2025)
+* **Time:** 6:13 pm
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Feedback System`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Starting documentation & planning late but need to finish by tomorrow
+- Want to create a new presentation detailing progress
+
+#### 📈 Previous Progress
+- Got basic version of ProcessingContext to work
+- Updated StatCardSystem to work with the new context, removing old context implementation
+
+#### 🧱 Problems & Blockers
+- Regression testing may take longer
+- Will take some time to write up new tests
+
+#### ⏳ Pending Actions
+- Finish documentation for sprint 9
+- Complete plan draft for sprint 10
+
+#### 🔜 Next Steps
+- Finish documentation for sprint 9
+  - Update `Plan Submission` + `Feedback System` backlog items if necessary
+  - Complete sprint 9 retrospective
+  - Finalize sprint9.md file
+- Set things up for sprint 10
+  - Get draft of sprint10.md file up
+  - Create copies for standup log, retro, assets folder, new backlog items (End-to-End testing + Presentation Readiness)
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- **What assumptions am I making that might be incorrect?**  
+  You may be assuming regression testing will only cover `StatCardSystem` updates. In reality, changes to the ProcessingContext can ripple through other consumers (e.g., TaskTable integration, feasibility cards). Test coverage should include interactions, not just isolated unit tests.
+
+#### ❓ Question 2
+- **Are today's tasks missing any dependencies?**  
+  Yes: Sprint 10 setup depends on completing the Sprint 9 retrospective, because backlog refinements are derived from that reflection. Without that, new backlog items (`End-to-End testing`, `Presentation Readiness`) may not capture all necessary adjustments.
+
+---
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- The ProcessingContext milestone puts you closer to MVS feature parity (`Stat Cards by Day` + feedback loop).  
+- Documentation for Sprint 9 should tie progress back to the original architecture justification, showing how context refactoring supports maintainability and feasibility feedback.
+
+#### 🗝️ Key Decisions
+- Regression testing scope expanded to include all failed test cases that previously passed
+- Will create a presentation to communicate progress and remaining work
+
+#### 📌 Action Items
+- [x] Finish documentation for sprint 9
+  - [x] Update `Plan Submission` + `Feedback System` backlog items if necessary
+  - [x] Complete sprint 9 retrospective
+  - [x] Finalize sprint9.md file
+- [x] Set things up for sprint 10
+  - [x] Get draft of sprint10.md file up
+  - [x] Create copies for standup log, retro, assets folder, new backlog items (End-to-End testing + Presentation Readiness)  

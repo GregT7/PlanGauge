@@ -1,11 +1,13 @@
 import { createContext, useState, useMemo } from 'react';
 import default_tasks from "@/utils/default_tasks";
 import stat_tasks from "@/utils/stat_tasks";
+import test_tasks2 from "@/utils/test_tasks2.json" with { type: 'json' }
 import toLocalMidnight from '@/utils/toLocalMidnight';
 
 export const TaskContext = createContext(undefined);
 
-export default function TaskContextProvider({children, starting_tasks=stat_tasks}) {
+// export default function TaskContextProvider({children, starting_tasks=stat_tasks}) {
+export default function TaskContextProvider({children, starting_tasks=test_tasks2}) {
     const reformattedTasks = starting_tasks.map(task => (
         {
             ...task, 
