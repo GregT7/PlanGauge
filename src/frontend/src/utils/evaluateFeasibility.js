@@ -5,6 +5,9 @@ const toNum = (v) => (typeof v === "number" && Number.isFinite(v) ? v : null);
 
 /** Classify a sum against mean/std using z-score bands. */
 function eval_category(sum, stats, zThresholds) {
+  if (sum == null || stats == null || zThresholds == null) return "unknown"
+  if (sum < 0 ) return "unknown"
+
   const ave = toNum(stats?.ave);
   const std = toNum(stats?.std);
   const x = toNum(sum);
@@ -27,7 +30,10 @@ function eval_category(sum, stats, zThresholds) {
 function eval_score(category, scoreThresholds) {
   const score = scoreThresholds?.[category];
   if (typeof score === "number") return score;
-  console.warn("[eval_score] No score mapping for:", category, scoreThresholds);
+  if (category !== "unknown") {
+    console.warn("[eval_score] No score mapping for:", category, scoreThresholds);
+  }
+  
   return null;
 }
 
@@ -64,13 +70,14 @@ function evaluateFeasibility(
   statusCount,
   thresholds = defaultThresholds
 ) {
+
   try {
     if (!thresholds) thresholds = defaultThresholds;
 
     const weekly_score = eval_weekly_score(week_sum, week_stats, thresholds);
     const daily_score  = eval_daily_score(statusCount, thresholds?.points);
 
-    if (weekly_score == null || daily_score == null) return "unknown";
+    if (weekly_score == null || daily_score == null) return {total: -1, status: "unknown"}
 
     const w = toNum(thresholds?.score_weight) ?? toNum(thresholds?.weight) ?? 0.5;
     const total_raw = w * weekly_score + (1 - w) * daily_score;
@@ -82,12 +89,12 @@ function evaluateFeasibility(
     const mod  = ov.moderate ?? { lower: 33, upper: 66 };
     // Anything below moderate.lower is poor.
 
-    if (total >= (toNum(good.lower) ?? 66)) return "good";
-    if (total >= (toNum(mod.lower) ?? 33))  return "moderate";
-    return "poor";
+    if (total >= (toNum(good.lower) ?? 66)) return {total: total, status: "good"};
+    if (total >= (toNum(mod.lower) ?? 33))  return {total: total, status: "moderate"};
+    return {total: total, status: "poor"};
   } catch (err) {
     console.warn("[evaluateFeasibility] Failed:", err);
-    return "unknown";
+    return {total: -1, status: "unknown"}
   }
 }
 

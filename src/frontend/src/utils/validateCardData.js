@@ -1,3 +1,5 @@
+import toLocalMidnight from "./toLocalMidnight";
+
 export default function validateCardData(cardData) {
     if (typeof cardData === "object") {
         const dayRegex = /Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/i;
