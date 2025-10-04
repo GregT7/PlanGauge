@@ -1,60 +1,59 @@
 import { useContext, useMemo } from 'react';
 import { TaskContext } from '@/contexts/TaskContext';
 import { processingContext } from '@/contexts/ProcessingContext';
-import { eval_weekly_score } from '@/utils/evaluateFeasibility';
+import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
+import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
+import determineStatusStyle from '@/utils/determineStatusStyle';
+import DetailsAccordion from './DetailsAccordion';
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { addSeconds } from 'date-fns';
+
 
 
 function EvaluationSection() {
-  const { feasibility } = useContext(processingContext)
+  const { timeSum } = useContext(TaskContext)
+
+  const { feasibility, stats, statusCount, thresholds } = useContext(processingContext)
+
+  const overall_feasibility = feasibility?.status ?? "unknown"
+  let overall_score = Math.round(feasibility?.score) ?? "-"
+  if (overall_score === -1) overall_score = "-"
+  const overall_eval = (<span className="text-2xl font-medium">
+    Feasibility:{" "}
+      <span className={determineStatusStyle(overall_feasibility, "text")}>
+        {capitalizeFirstLetter(overall_feasibility)} ({overall_score} / 100 points)
+      </span>
+  </span>);
+
+
+  const dates = {
+    start: DEFAULT_PLAN_START,
+    end: DEFAULT_PLAN_END
+  }
+
 
   return (
-    <p>Feasibility: {feasibility.status}, score: {feasibility.total}</p>
-  );
+    <div className="w-[73.5%] mx-auto border-2 border-dashed pt-2">
+      <h1 className="text-2xl pt-2 pb-4 text-left pl-8">Evaluation Section</h1>
+      <Card className="mb-4 mx-4">
+        <CardContent>
+          {overall_eval}
+          {/* feasibility, stats, statusCount, thresholds */}
+          <DetailsAccordion feasibility={feasibility} stats={stats} 
+          statusCount={statusCount} thresholds={thresholds} dates={dates}/>
+        </CardContent>
+      </Card>
+
+    </div>
+  )
 }
-
-// function EvaluationSection() {
-  // return (<p>Hello</p>)
-  // const { timeSum } = useContext(TaskContext)
-  // const statsCtx = useContext(StatsContext);
-
-  // const stats = statsCtx?.stats;
-
-  // const ave = stats?.week?.ave;
-  // const std = stats?.week?.std;
-
-  // const aveStr = Number.isFinite(ave) ? Math.round(ave) : '—';
-  // const stdStr = Number.isFinite(std) ? Math.round(std) : '—';
-
-  // const hasStats = Number.isFinite(ave) && Number.isFinite(std);
-  // const hasTime = Number.isFinite(timeSum);
-
-  // const weekScore = useMemo(() => {
-  //   if (!hasStats || !hasTime) return null;
-  //   try {
-  //     // pass only what the function needs; if it expects { ave, std }, give that
-  //     return eval_weekly_score(timeSum, stats.week, thresholds);
-  //   } catch (e) {
-  //     console.error('eval_weekly_score failed:', e);
-  //     return null;
-  //   }
-  // }, [hasStats, hasTime, timeSum, ave, std]);
-
-
-
-
-  // return (
-  //   <div>
-  //     <h1>Evaluation Section</h1>
-  //     <h2>Week Time Sum Evaluation</h2>
-  //     <div>
-  //       <p>Sum: {Number.isFinite(timeSum) ? timeSum : '—'} mins</p>
-  //       <p>
-  //         Historical Ave: {aveStr} mins, Historical Std: {stdStr} mins
-  //       </p>
-  //       <p>Weekly Score: {weekScore ?? '—'}</p>
-  //     </div>
-  //   </div>
-  // );
-// }
 
 export default EvaluationSection;

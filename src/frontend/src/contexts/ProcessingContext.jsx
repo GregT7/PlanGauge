@@ -7,7 +7,7 @@ import isSameDay from "@/utils/isSameDay";
 import { evaluateFeasibility } from "@/utils/evaluateFeasibility"
 import retrieveStats from '@/utils/retrieveStats';
 import { genDefaultCardsData } from "@/utils/genDefaultCardData";
-import { eval_category } from "@/utils/evaluateFeasibility";
+import { eval_status } from "@/utils/evaluateFeasibility";
 import { toast } from 'sonner';
 import updateCardStats from "@/utils/updateCardStats";
 
@@ -70,7 +70,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
     // eval_category(sum, stats, zThresholds)
     cardData = useMemo(() =>
         cardData.map(evalCard => {
-            const newStatus = eval_category(evalCard.sum, {std: evalCard.std, ave: evalCard.ave}, thresholds.zscore)
+            const newStatus = eval_status(evalCard.sum, {std: evalCard.std, ave: evalCard.ave}, thresholds.zscore)
             return { ...evalCard, status: newStatus };
         }),
         [cardData]
@@ -102,7 +102,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
     }, [cardData, statusCount])
 
     //   const value = useMemo(() => ({ stats, setStats }), [stats]);
-    const value = useMemo(() => ({stats, cardData, statusCount, feasibility}), [stats, cardData])
+    const value = useMemo(() => ({stats, cardData, statusCount, feasibility, thresholds}), [stats, cardData])
 
     return (
         <processingContext.Provider value={value}>

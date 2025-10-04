@@ -1,9 +1,9 @@
 import styleData from "@/utils/styleData.json" with { type: 'json' }
 
-export default function determineStatusStyle(status) {
-    if (styleData?.[status]) {
-        return styleData[status].base
+export default function determineStatusStyle(status, type) {
+    if (styleData?.[status] && styleData?.[status]?.[type]) {
+        return styleData[status]?.[type]
     } else {
-        return styleData.error.base
+        return styleData.unknown.base
     }
 }
