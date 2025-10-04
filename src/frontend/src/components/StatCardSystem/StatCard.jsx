@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import toLocalMidnight from "@/utils/toLocalMidnight";
-import styleData from "@/utils/styleData.json"
 import capitalizeFirstLetter from "@/utils/capitalizeFirstLetter"
 import determineStatusStyle from "@/utils/determineStatusStyle"
 import validateCardData from "@/utils/validateCardData"
@@ -23,7 +22,7 @@ const StatCard = ({cardData=genDefaultCardData(), className=""}) => {
     const desciptStr = format(cardDate, 'MMMM d, yyyy')
     
     return (
-        <Card className={`${valClassName} ${determineStatusStyle(valCardData.status)} h-full overflow-hidden`} data-testid="StatCard">
+        <Card className={`${valClassName} ${determineStatusStyle(valCardData.status, "base")} h-full overflow-hidden`} data-testid="StatCard">
             <CardHeader className="space-y-1">
                 <CardTitle className="text-base truncate">{valCardData.name}</CardTitle>
                 <CardDescription className="text-sm truncate">{desciptStr}</CardDescription>
