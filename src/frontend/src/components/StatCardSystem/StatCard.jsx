@@ -14,9 +14,9 @@ import validateCardData from "@/utils/validateCardData"
 import { genDefaultCardData } from "@/utils/genDefaultCardData";
 import { format } from "date-fns";
 
-const StatCard = ({cardData=genDefaultCardData(), className=""}) => {
+const StatCard = ({cardData, className=""}) => {
     const valClassName = typeof className === "string" ? className : "";
-    const valCardData = validateCardData(cardData) ? cardData : defaultCardData;
+    const valCardData = validateCardData(cardData) ? cardData : genDefaultCardData();
 
     const cardDate = toLocalMidnight(valCardData?.date);
     const desciptStr = format(cardDate, 'MMMM d, yyyy')

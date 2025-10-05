@@ -6,6 +6,8 @@ import { TaskContext } from "@/contexts/TaskContext"
 import formatDateToYYYYMMDD from "@/utils/formatDateToYYYYMMDD"
 import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 import { toast } from 'sonner'
+import { processingContext } from "@/contexts/ProcessingContext"
+import determineStatusStyle from '@/utils/determineStatusStyle';
 
 function SubmissionButton({status = 'neutral', 
     filter_start_date = DEFAULT_PLAN_START, filter_end_date = DEFAULT_PLAN_END}) {
@@ -47,15 +49,17 @@ function SubmissionButton({status = 'neutral',
         if (styleData?.[status]) {
             return styleData[status].base + " " + styleData[status].hover
         } else {
-            return styleData.error.base + " " + styleData.error.hover
+            return styleData.unknown.base + " " + styleData.unknown.hover
         }
     }
 
-    const initialColors = handleStyling(status)
-    const [color, setColor] = useState(initialColors)
+    const { feasibility } = useContext(processingContext);
+    // const style = useMemo(() => "text-xl p-6 " + handleStyling(feasibility?.status))
+    const style = "text-xl p-6 " + handleStyling(feasibility?.status)
+
 
     return (     
-        <Button onClick={handleClick} className={`text-xl p-6 ${color}`} status={status} disabled={isDisabled}>
+        <Button onClick={handleClick} className={style} disabled={isDisabled}>
             Submit
         </Button>
     )

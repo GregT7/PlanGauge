@@ -7,12 +7,14 @@ import isSameDay from '@/utils/isSameDay';
 import testCardData from "@/utils/testCardData.json" with { type: 'json'}
 import CardRow from './CardRow';
 import { processingContext } from "@/contexts/ProcessingContext"
+import determineStatusStyle from '@/utils/determineStatusStyle';
 
 function StatCardSystem() {
-  const { cardData, statusCount } = useContext(processingContext);
-
+  const { cardData, statusCount, feasibility } = useContext(processingContext);
+  const systemStyle = determineStatusStyle(feasibility?.status, "border")
+  const styling = `w-[73.5%] mx-auto border-2 border-dashed pt-2 ${systemStyle}`
   return (
-    <div className="w-[73.5%] mx-auto border-2 border-dashed pt-2">
+    <div className={styling}>
         <h1 className="text-2xl pt-2 pb-4 text-left pl-8">Stat Card System</h1>
 
         <CardRow daysRegex={/monday|tuesday|wednesday|thursday/i}

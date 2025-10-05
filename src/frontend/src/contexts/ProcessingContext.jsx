@@ -10,6 +10,7 @@ import { genDefaultCardsData } from "@/utils/genDefaultCardData";
 import { eval_status } from "@/utils/evaluateFeasibility";
 import { toast } from 'sonner';
 import updateCardStats from "@/utils/updateCardStats";
+import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 
 export const processingContext = createContext(undefined);
 
@@ -40,7 +41,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
                 if (!cancelled && res?.data) setStats(res.data);
                 } catch (err) {
                 console.error('Stats init error:', err);
-                if (!cancelled) toast.error('Error: Unexpected Internal Error When Retrieving Stats');
+                // if (!cancelled) toast.error('Error: Unexpected Internal Error When Retrieving Stats');
                 }
             })();
     return () => { cancelled = true; };
@@ -101,8 +102,11 @@ export function ProcessingContextProvider({children, starting_stats = default_st
         return evaluateFeasibility(timeSum, stats?.week, statusCount, thresholds)
     }, [cardData, statusCount])
 
+    const initialDates = {start: DEFAULT_PLAN_START, end: DEFAULT_PLAN_END}
+    const [filterDates, setFilterDates] = useState(initialDates)
+
     //   const value = useMemo(() => ({ stats, setStats }), [stats]);
-    const value = useMemo(() => ({stats, cardData, statusCount, feasibility, thresholds}), [stats, cardData])
+    const value = useMemo(() => ({stats, cardData, statusCount, feasibility, thresholds, filterDates}), [stats, filterDates, cardData])
 
     return (
         <processingContext.Provider value={value}>

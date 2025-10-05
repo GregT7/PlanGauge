@@ -1,120 +1,119 @@
-import { expect, it, describe } from 'vitest';
-import { screen, render } from '@testing-library/react';
-import StatCardSystem from '@/components/StatCardSystem/StatCardSystem';
-import { useMemo, useState } from 'react';
-import { TaskContext } from "@/contexts/TaskContext";
-import default_tasks from '@/utils/default_tasks';
+// src/tests/StatCardSystem/StatCardSystem.test.jsx
+import { describe, it, beforeEach, expect, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import React from "react";
 
-const ContextWrapper = ({ initial_tasks, children }) => {
-    const [tasks, setTasks] = useState(initial_tasks);
-
-    const timeSum = useMemo(() => 
-        tasks.reduce((sum, task) => sum + task.time_estimation, 0),
-    [tasks]);
-
-    return (
-        <TaskContext.Provider value={{tasks, timeSum}}>
-            {children}
-        </TaskContext.Provider>
-    );
-};
-
-
-// Mock cardData imported inside StatCardSystem
-vi.mock('@/utils/testCardData', () => {
-    const today = new Date();
-    return {
-        default: [
-            { name: 'Monday', ave: 60, std: 10, sum: 0, date: today },
-            { name: 'Tuesday', ave: 30, std: 5, sum: 0, date: today },
-            { name: 'Saturday', ave: 50, std: 15, sum: 0, date: today },
-    ]
-    };
+vi.mock("@/components/StatCardSystem/StatCard", () => {
+  // Lightweight stub so StatCard's own internals don't explode these tests
+  return {
+    default: ({ cardData }) => (
+      <div data-testid="StatCard">
+        <span>{cardData?.name}</span>
+        {cardData?.status ? <em>{cardData.status}</em> : null}
+      </div>
+    ),
+  };
 });
 
-const mockTasks = [
-    { start_date: new Date(), time_estimation: 60 },
-    { start_date: new Date(), time_estimation: 30 },
+import StatCardSystem from "@/components/StatCardSystem/StatCardSystem";
+import { processingContext } from "@/contexts/ProcessingContext";
+
+function withProcessingProvider(ui, value) {
+  return render(
+    <processingContext.Provider value={value}>{ui}</processingContext.Provider>
+  );
+}
+
+const baseCardData = [
+  { name: "Monday",    ave: 60, std: 10, sum: 0,   status: "good",    date: new Date() },
+  { name: "Tuesday",   ave: 30, std:  5, sum: 0,   status: "moderate",date: new Date() },
+  { name: "Wednesday", ave: 50, std: 15, sum: 0,   status: "good",    date: new Date() },
+  { name: "Thursday",  ave: 50, std: 15, sum: 0,   status: "moderate",date: new Date() },
+  { name: "Friday",    ave: 50, std: 15, sum: 0,   status: "poor",    date: new Date() },
+  { name: "Saturday",  ave: 50, std: 15, sum: 0,   status: "good",    date: new Date() },
+  { name: "Sunday",    ave: 50, std: 15, sum: 0,   status: "moderate",date: new Date() },
 ];
 
-const setup = (tasks = mockTasks) => {
-  return render(
-    <TaskContext.Provider value={{ tasks }}>
-      <StatCardSystem />
-    </TaskContext.Provider>
-  );
+const baseStatusCount = { good: 3, moderate: 3, poor: 1, unknown: 0 };
+
+const baseFeasibility = {
+  score: 72,
+  status: "moderate", // affects border style via determineStatusStyle
+  week_eval: { score: 60, status: "moderate" },
+  days_eval: { score: 70, status: "moderate" },
 };
 
-describe('StatCardSystem', () => {
+describe("StatCardSystem", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
+  const setup = (overrides = {}) => {
+    const value = {
+      cardData: overrides.cardData ?? baseCardData,
+      statusCount: overrides.statusCount ?? baseStatusCount,
+      feasibility: overrides.feasibility ?? baseFeasibility,
+      thresholds: overrides.thresholds ?? {},
+      filterDates: overrides.filterDates ?? { start: new Date(), end: new Date() },
+    };
+    return withProcessingProvider(<StatCardSystem />, value);
+  };
 
-  it('renders the StatCardSystem component', () => {
+  it("renders the StatCardSystem component", () => {
     setup();
-    // expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
-    screen.debug()
+    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
   });
 
-    it("passes a snapshot test", () => {
-        const { container } = render(
-            <ContextWrapper initial_tasks={default_tasks}>
-                <StatCardSystem />
-            </ContextWrapper>
-        );
-
-        expect(container).toMatchSnapshot(); // <- actual snapshot test
-    });
-
-  it('renders StatCards for days matching regex (weekday and weekend rows)', () => {
-    setup();
-
-    // The cards should be rendered based on the mocked cardData
-    const cards = screen.getAllByTestId('StatCard');
-    expect(cards.length).toBeGreaterThanOrEqual(2); // at least for Mon and Tue
+  it("passes a snapshot test", () => {
+    const { container } = setup();
+    expect(container).toMatchSnapshot();
   });
 
-  it('renders the StatusCounter', () => {
+  it("renders StatCards for days matching regex (weekday and weekend rows)", () => {
     setup();
-    expect(screen.getByTestId('StatusCounter')).toBeInTheDocument();
+    const cards = screen.getAllByTestId("StatCard");
+    // Monday..Thursday (4) + Friday..Sunday (3) = 7
+    expect(cards.length).toBe(7);
   });
 
-  it('renders correct count bubbles in StatusCounter', () => {
+  it("renders the StatusCounter", () => {
     setup();
+    expect(screen.getByTestId("StatusCounter")).toBeInTheDocument();
+  });
 
-    const bubbles = screen.getAllByTestId('circle-div');
-    expect(bubbles.length).toBe(3); // good, moderate, poor
-
-    // Optionally check class names for styling
+  it("renders correct count bubbles in StatusCounter", () => {
+    setup();
+    const bubbles = screen.getAllByTestId("circle-div");
+    expect(bubbles.length).toBe(3);
     expect(bubbles[0].className).toMatch(/bg-emerald-500/);
     expect(bubbles[1].className).toMatch(/bg-amber-500/);
     expect(bubbles[2].className).toMatch(/bg-rose-500/);
   });
 
-  it('handles no tasks gracefully (no crash, all statuses should be "neutral")', () => {
-    setup([]);
-
-    const cards = screen.getAllByTestId('StatCard');
-    expect(cards.length).toBeGreaterThan(0);
-
-    const statusTexts = cards.map(card => card.textContent);
-    statusTexts.forEach(text => {
-      expect(text.toLowerCase()).toContain('status');
+  it('handles "no tasks" gracefully by showing cards and the counter', () => {
+    // Simulate unknown statuses everywhere but still a valid shape
+    const emptyCards = baseCardData.map((c) => ({ ...c, sum: 0, status: "unknown" }));
+    setup({
+      cardData: emptyCards,
+      statusCount: { good: 0, moderate: 0, poor: 0, unknown: 7 },
+      feasibility: { score: -1, status: "unknown", week_eval: null, days_eval: null },
     });
+
+    const cards = screen.getAllByTestId("StatCard");
+    expect(cards.length).toBe(7);
+    expect(screen.getByTestId("StatusCounter")).toBeInTheDocument();
   });
 
-  it('correctly applies z-score classification via integration', () => {
-    setup([
-      {
-        start_date: new Date(),
-        time_estimation: 90, // force high z-score for poor classification
-      },
-    ]);
+  it("surface-level z-status is visible via mocked StatCards content", () => {
+    // Force a 'poor' somewhere and assert text content has 'poor'
+    const cards = baseCardData.map((c) =>
+      c.name === "Friday" ? { ...c, status: "poor" } : c
+    );
+    setup({ cardData: cards });
 
-    const cards = screen.getAllByTestId('StatCard');
-    const hasPoor = cards.some(card =>
-      card.textContent.toLowerCase().includes('poor')
+    const nodes = screen.getAllByTestId("StatCard");
+    const hasPoor = nodes.some((n) =>
+      n.textContent.toLowerCase().includes("poor")
     );
     expect(hasPoor).toBe(true);
   });

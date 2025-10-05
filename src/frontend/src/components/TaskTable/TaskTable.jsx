@@ -14,6 +14,8 @@ import {
   TableRow,
 } from "../ui/table";
 import categories from "@/utils/categories";
+import determineStatusStyle from '@/utils/determineStatusStyle';
+import { processingContext } from '@/contexts/ProcessingContext';
 
 function TaskTable() {
   const { tasks, setTasks, timeSum } = useContext(TaskContext);
@@ -81,9 +83,12 @@ function TaskTable() {
   const selectColor = "bg-cyan-600/50";
   const applyHoverSelectStyles = (task) => task.selected ? selectColor : hoverColor;
 
-  // 
+  const { feasibility } = useContext(processingContext);
+  const systemStyle = determineStatusStyle(feasibility?.status, "border")
+  const styling = `w-[73.5%] mx-auto border-2 border-dashed pr-9 ${systemStyle}`
+  
   return (
-    <div className="w-[73.5%] mx-auto border-2 border-dashed pr-9">
+    <div className={styling}>
       <h1 className="text-2xl py-4 text-left pl-8">Task Table</h1>
       <Table className="w-full">
         <TableHeader>
