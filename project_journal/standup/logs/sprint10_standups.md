@@ -142,9 +142,9 @@
 - Refactor `End-to-End Testing` by removing CI related elements and moving into extra backlog item `CI Setup`
 
 #### 📌 Action Items
-- [ ] Backlog refactoring
-  - [ ] Remove CI elements from `End-to-End Testing`
-  - [ ] Move CI elements to `CI Setup`
+- [x] Backlog refactoring
+  - [x] Remove CI elements from `End-to-End Testing`
+  - [x] Move CI elements to `CI Setup`
 - [ ] Finish EvaluationSection.jsx (week + daily accordions)  
 - [ ] Add feasibility evaluation logic to handle daily aggregation  
 - [ ] Implement consistent status shading logic  

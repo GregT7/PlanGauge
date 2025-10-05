@@ -12,13 +12,13 @@ import { ProcessingContextProvider } from "@/contexts/ProcessingContext"
 
 
 function App() {
-  // useEffect(() => {
-  //   const launchSetupApp = async () => {
-  //     await setupApp()
-  //   }
+  useEffect(() => {
+    const launchSetupApp = async () => {
+      await setupApp()
+    }
 
-  //   launchSetupApp();
-  // }, []);
+    launchSetupApp();
+  }, []);
 
   return (
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme" >

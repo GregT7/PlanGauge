@@ -1,35 +1,44 @@
-// SubmissionButton.test.jsx
+// SubmissionButton.test.jsx (Vitest + RTL)
 import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 // ---------- HOISTED MOCK HELPERS (must be before any vi.mock) ----------
-const { submitPlansMock, fmtMock, MockTaskContextValue, ButtonShim, toastShim } =
-  vi.hoisted(() => {
-    const React = require('react');
-    return {
-      submitPlansMock: vi.fn(),
-      fmtMock: vi.fn((input) => (typeof input === 'string' ? `${input}_F` : 'DATE_F')),
-      MockTaskContextValue: { tasks: [] },
-      ButtonShim: (props) => React.createElement('button', { ...props }, props.children),
-      toastShim: {
-        promise: vi.fn((p) => p), // pass-through
-        error: vi.fn(),
-      },
-    };
-  });
+const {
+  submitPlansMock,
+  fmtMock,
+  MockTaskContextValue,
+  ButtonShim,
+  toastShim,
+  makeFeasibility
+} = vi.hoisted(() => {
+  const React = require('react');
+  return {
+    submitPlansMock: vi.fn(),
+    fmtMock: vi.fn((input) => (typeof input === 'string' ? `${input}_F` : 'DATE_F')),
+    MockTaskContextValue: { tasks: [] },
+    ButtonShim: (props) => React.createElement('button', { ...props }, props.children),
+    toastShim: {
+      promise: vi.fn((p) => p), // pass-through
+      error: vi.fn(),
+    },
+    makeFeasibility: (status = 'neutral') => ({
+      score: 0,
+      status,
+      week_eval: null,
+      days_eval: null,
+    }),
+  };
+});
 
 // ---------- MODULE MOCKS ----------
-vi.mock('@/components/ui/button', () => {
-  // Use createElement to avoid JSX inside hoisted factory
-  return { Button: ButtonShim };
-});
+vi.mock('@/components/ui/button', () => ({ Button: ButtonShim }));
 
 vi.mock('@/utils/styleData.json', () => ({
   default: {
     neutral: { base: 'neutral-base', hover: 'neutral-hover' },
     success: { base: 'success-base', hover: 'success-hover' },
-    error: { base: 'error-base', hover: 'error-hover' },
+    unknown: { base: 'unknown-base', hover: 'unknown-hover' }, // fallback used by component
   },
 }));
 
@@ -37,10 +46,8 @@ vi.mock('@/utils/submitPlans', () => ({
   default: (...args) => submitPlansMock(...args),
 }));
 
-// Instead of importing the real context module, provide a lightweight mock.
 vi.mock('@/contexts/TaskContext', () => {
   const React = require('react');
-  // Create a context we control; we'll replace its value per test
   const TaskContext = React.createContext(MockTaskContextValue);
   return { TaskContext };
 });
@@ -54,30 +61,32 @@ vi.mock('@/utils/planningRange', () => ({
   DEFAULT_PLAN_END: '2099-12-31',
 }));
 
-vi.mock('sonner', () => ({
-  toast: toastShim,
-}));
+vi.mock('sonner', () => ({ toast: toastShim }));
+
+// NEW: processingContext is used for styling
+vi.mock('@/contexts/ProcessingContext', () => {
+  const React = require('react');
+  const processingContext = React.createContext({ feasibility: { status: 'neutral' } });
+  return { processingContext };
+});
 
 // ---------- IMPORT AFTER MOCKS ----------
+import SubmissionButton from '@/components/SubmissionButton/SubmissionButton'; // adjust if needed
 import { TaskContext } from '@/contexts/TaskContext';
-import SubmissionButton from '@/components/SubmissionButton/SubmissionButton';
+import { processingContext } from '@/contexts/ProcessingContext';
 
-// Helper: render with our mocked TaskContext value
-function renderWithTasks(ui, tasks) {
+// Helpers
+function renderWithProviders(ui, { tasks, feasibilityStatus = 'neutral' } = {}) {
   return render(
-    <TaskContext.Provider value={{ tasks }}>
-      {ui}
-    </TaskContext.Provider>
+    <processingContext.Provider value={{ feasibility: { status: feasibilityStatus } }}>
+      <TaskContext.Provider value={{ tasks: tasks ?? [] }}>{ui}</TaskContext.Provider>
+    </processingContext.Provider>
   );
 }
 
-// controllable promise helper
 function deferred() {
   let resolve, reject;
-  const p = new Promise((res, rej) => {
-    resolve = res;
-    reject = rej;
-  });
+  const p = new Promise((res, rej) => { resolve = res; reject = rej; });
   return { promise: p, resolve, reject };
 }
 
@@ -85,63 +94,53 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-describe('SubmissionButton', () => {
+describe('SubmissionButton (updated)', () => {
   const sampleTasks = [
-    {
-      name: 'Task A',
-      category: 'School',
-      due_date: '2025-09-30',
-      start_date: '2025-09-24',
-      time_estimation: 60,
-    },
-    {
-      name: 'Task B',
-      category: 'Personal',
-      due_date: '2025-10-02',
-      start_date: '2025-09-28',
-      time_estimation: 30,
-    },
+    { name: 'Task A', category: 'School',   due_date: '2025-09-30', start_date: '2025-09-24', time_estimation: 60 },
+    { name: 'Task B', category: 'Personal', due_date: '2025-10-02', start_date: '2025-09-28', time_estimation: 30 },
   ];
 
   it('renders a button with text "Submit"', () => {
-    renderWithTasks(<SubmissionButton />, sampleTasks);
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
     expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
   });
 
-  it('applies neutral styling by default', () => {
-    renderWithTasks(<SubmissionButton />, sampleTasks);
+  it('applies styling from processingContext.feasibility.status (neutral)', () => {
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks, feasibilityStatus: 'neutral' });
     const btn = screen.getByRole('button', { name: /submit/i });
     expect(btn.className).toContain('neutral-base');
     expect(btn.className).toContain('neutral-hover');
   });
 
-  it('applies provided status styling (success)', () => {
-    renderWithTasks(<SubmissionButton status="success" />, sampleTasks);
-    const btn = screen.getByRole('button');
+  it('applies styling from processingContext.feasibility.status (success)', () => {
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks, feasibilityStatus: 'success' });
+    const btn = screen.getByRole('button', { name: /submit/i });
     expect(btn.className).toContain('success-base');
     expect(btn.className).toContain('success-hover');
   });
 
-  it('falls back to error styling for unknown status', () => {
-    renderWithTasks(<SubmissionButton status="wut" />, sampleTasks);
-    const btn = screen.getByRole('button');
-    expect(btn.className).toContain('error-base');
-    expect(btn.className).toContain('error-hover');
+  it('falls back to `unknown` styling when status not found', () => {
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks, feasibilityStatus: 'nonsense' });
+    const btn = screen.getByRole('button', { name: /submit/i });
+    expect(btn.className).toContain('unknown-base');
+    expect(btn.className).toContain('unknown-hover');
   });
 
   it('formats dates for each task (due_date and start_date)', () => {
-    renderWithTasks(<SubmissionButton />, sampleTasks);
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
     // 2 tasks * 2 fields
     expect(fmtMock).toHaveBeenCalledTimes(4);
     expect(fmtMock).toHaveBeenCalledWith('2025-09-30');
     expect(fmtMock).toHaveBeenCalledWith('2025-09-24');
+    expect(fmtMock).toHaveBeenCalledWith('2025-10-02');
+    expect(fmtMock).toHaveBeenCalledWith('2025-09-28');
   });
 
   it('disables during submission and re-enables on success', async () => {
     const d = deferred();
     submitPlansMock.mockReturnValueOnce(d.promise);
 
-    renderWithTasks(<SubmissionButton />, sampleTasks);
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
     const btn = screen.getByRole('button', { name: /submit/i });
 
     fireEvent.click(btn);
@@ -158,8 +157,8 @@ describe('SubmissionButton', () => {
     const d = deferred();
     submitPlansMock.mockReturnValueOnce(d.promise);
 
-    renderWithTasks(<SubmissionButton />, sampleTasks);
-    const btn = screen.getByRole('button');
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    const btn = screen.getByRole('button', { name: /submit/i });
 
     fireEvent.click(btn);
     expect(btn).toBeDisabled();
@@ -174,8 +173,8 @@ describe('SubmissionButton', () => {
     const d = deferred();
     submitPlansMock.mockReturnValueOnce(d.promise);
 
-    renderWithTasks(<SubmissionButton />, sampleTasks);
-    fireEvent.click(screen.getByRole('button'));
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
 
     const [tasksArg, startArg, endArg] = submitPlansMock.mock.calls[0];
     expect(Array.isArray(tasksArg)).toBe(true);
@@ -191,7 +190,7 @@ describe('SubmissionButton', () => {
     expect(tasksArg[1].due_date).toBe('2025-10-02_F');
     expect(tasksArg[1].start_date).toBe('2025-09-28_F');
 
-    d.resolve({});
+    d.resolve({ ok: true });
     await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
   });
 
@@ -199,18 +198,18 @@ describe('SubmissionButton', () => {
     const d = deferred();
     submitPlansMock.mockReturnValueOnce(d.promise);
 
-    renderWithTasks(
+    renderWithProviders(
       <SubmissionButton filter_start_date="2025-09-01" filter_end_date="2025-09-30" />,
-      sampleTasks
+      { tasks: sampleTasks }
     );
 
-    fireEvent.click(screen.getByRole('button'));
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
 
     const [, startArg, endArg] = submitPlansMock.mock.calls[0];
     expect(startArg).toBe('2025-09-01');
     expect(endArg).toBe('2025-09-30');
 
-    d.resolve({});
+    d.resolve({ ok: true });
     await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
   });
 });

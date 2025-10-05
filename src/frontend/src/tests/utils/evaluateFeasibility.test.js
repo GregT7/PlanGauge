@@ -1,42 +1,32 @@
-// tests/evaluateFeasibility.test.js
-// Adjust the import path to where your file lives.
+// evaluateFeasibility.test.js (Vitest)
+// Adjust the import path ↓ to your project structure.
 import {
-  eval_category,
+  eval_status,
   eval_score,
-  eval_weekly_score,
-  eval_dailies_score,
-  eval_feasibility,
-} from "@/utils/evaluateFeasibility"
+  eval_week,
+  eval_daily_score,
+  eval_daily_status,
+  eval_days,
+  evaluateFeasibility,
+} from "@/utils/evaluateFeasibility"; // e.g., "../src/utils/evaluateFeasibility"
 
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect } from "vitest";
 
-/**
- * Helper to build a consistent thresholds object for tests.
- * Z-bands:
- *   good:     [-0.5,  0.5)
- *   moderate: [-1.0, -0.5) ∪ [0.5, 1.0)
- *   poor:     (-∞, -1.0) ∪ [1.0, +∞)
- * Points:
- *   good=100, moderate=60, poor=0
- * Overall categories are bucketed directly on the 0–100 scale.
- */
+// Small helper to make a consistent thresholds object
 function makeThresholds(overrides = {}) {
   const base = {
     zscore: {
-      good: { lower: -0.5, upper: 0.5 },
-      moderate: { lower: -1.0, upper: 1.0 }, // we'll gate via order in eval_category tests
-      poor: { lower: -Infinity, upper: Infinity },
+      // Only "upper" bounds are used by the implementation; z uses absolute value
+      good: { upper: 0.5 },
+      moderate: { upper: 1.0 },
     },
     points: { good: 100, moderate: 60, poor: 0 },
     score_weight: 0.5,
     overall: {
       good: { lower: 80, upper: 100 },
       moderate: { lower: 50, upper: 80 },
-      poor: { lower: 0, upper: 50 },
     },
   };
-
-  // Apply any overrides shallowly
   return {
     ...base,
     ...overrides,
@@ -46,154 +36,157 @@ function makeThresholds(overrides = {}) {
   };
 }
 
-describe('eval_category()', () => {
-  const thresholds = makeThresholds({
-    // tighten moderate so it doesn't swallow "good"
-    zscore: {
-      good: { lower: -0.5, upper: 0.5 },
-      moderate: { lower: -1.0, upper: -0.5 }, // only the lower side
-      poor: { lower: -Infinity, upper: Infinity },
-    },
-  });
-
+describe("eval_status()", () => {
   const stats = { ave: 100, std: 20 };
 
-  it('returns "good" when z is within good band', () => {
-    // sum that gives z=0.0
-    expect(eval_category(100, stats, thresholds.zscore)).toBe('good');
-    // boundary just inside upper
-    expect(eval_category(109, stats, thresholds.zscore)).toBe('good'); // z=0.45
+  it("returns 'good' when |z| < good.upper", () => {
+    const th = makeThresholds();
+    // sum=101 => z = 0.05 < 0.5 ⇒ good
+    expect(eval_status(101, stats, th.zscore)).toBe("good");
   });
 
-  it('returns "moderate" when z is within moderate band', () => {
-    // sum that gives z = -0.75
-    expect(eval_category(85, stats, thresholds.zscore)).toBe('moderate');
+  it("uses half-open boundary for good: z == good.upper ⇒ moderate", () => {
+    const th = makeThresholds({ zscore: { good: { upper: 0.5 }, moderate: { upper: 1.0 } } });
+    // sum=110 => z = 0.5 ⇒ not < 0.5, but <1.0 ⇒ moderate
+    expect(eval_status(110, stats, th.zscore)).toBe("moderate");
   });
 
-  it('returns "poor" when z is outside good/moderate ranges', () => {
-    expect(eval_category(140, stats, thresholds.zscore)).toBe('poor'); // z=2
-    expect(eval_category(60, stats, thresholds.zscore)).toBe('poor');  // z=-2
+  it("classifies 'poor' when |z| ≥ moderate.upper", () => {
+    const th = makeThresholds({ zscore: { moderate: { upper: 1.0 } } });
+    // sum=140 => z = 2.0 ⇒ poor
+    expect(eval_status(140, stats, th.zscore)).toBe("poor");
   });
 
-  it('respects half-open boundaries [lower, upper) for good/moderate', () => {
-    // good upper is exclusive
-    expect(eval_category(110, stats, thresholds.zscore)).toBe('poor'); // z=0.5 falls out of good here → poor
-    // good lower is inclusive
-    expect(eval_category(90, stats, thresholds.zscore)).toBe('good'); // z=-0.5
-  });
-
-  it('returns null if no band matches (e.g., misconfigured thresholds)', () => {
-    const bad = { good: { lower: 10, upper: 11 } }; // nothing matches normal z’s
-    expect(eval_category(100, stats, bad)).toBeNull();
+  it("returns 'unknown' for invalid inputs (nulls, negative sum, std<=0)", () => {
+    const th = makeThresholds();
+    expect(eval_status(null, stats, th.zscore)).toBe("unknown");
+    expect(eval_status(10, null, th.zscore)).toBe("unknown");
+    expect(eval_status(10, { ave: 0, std: 0 }, th.zscore)).toBe("unknown");
+    expect(eval_status(-5, stats, th.zscore)).toBe("unknown");
+    expect(eval_status(10, stats, null)).toBe("unknown");
+    // zscore object present but empty ⇒ defaults kick in (0.5/1.5)
+    expect(eval_status(10, { ave: 10, std: 1 }, {})).toBe("good");
   });
 });
 
-describe('eval_score()', () => {
+describe("eval_score()", () => {
   const points = { good: 100, moderate: 60, poor: 0 };
 
-  it('maps category to the correct numeric value', () => {
-    expect(eval_score('good', points)).toBe(100);
-    expect(eval_score('moderate', points)).toBe(60);
-    expect(eval_score('poor', points)).toBe(0);
+  it("maps known statuses to numbers", () => {
+    expect(eval_score("good", points)).toBe(100);
+    expect(eval_score("moderate", points)).toBe(60);
+    expect(eval_score("poor", points)).toBe(0);
   });
 
-  it('throws if mapping is missing', () => {
-    expect(() => eval_score('unknown', points)).toThrow(/No score mapping/i);
+  it("returns null for unknown or unmapped statuses", () => {
+    expect(eval_score("unknown", points)).toBeNull();
+    expect(eval_score("n/a", points)).toBeNull();
   });
 });
 
-describe('eval_weekly_score()', () => {
-  const thresholds = makeThresholds();
+describe("eval_week()", () => {
   const stats = { ave: 100, std: 20 };
 
-  it('returns the points for the category determined by z-score', () => {
-    expect(eval_weekly_score(100, stats, thresholds)).toBe(100); // good
-    expect(eval_weekly_score(140, stats, thresholds)).toBe(0);   // poor
+  it("returns {score,status} derived from z-score + points", () => {
+    const th = makeThresholds();
+    const r1 = eval_week(100, stats, th); // z=0 ⇒ good ⇒ 100
+    expect(r1).toEqual({ score: 100, status: "good" });
+
+    const r2 = eval_week(140, stats, th); // z=2 ⇒ poor ⇒ 0
+    expect(r2).toEqual({ score: 0, status: "poor" });
+  });
+
+  it("returns {score:null,status:'unknown'} when weekly category is unknown", () => {
+    const th = makeThresholds();
+    const r = eval_week(50, { ave: 0, std: 0 }, th); // std<=0 ⇒ unknown
+    expect(r).toEqual({ score: null, status: "unknown" });
   });
 });
 
-describe('eval_dailies_score()', () => {
-  const points = { good: 100, moderate: 60, poor: 0 };
+describe("eval_daily_score()", () => {
+  const pts = { good: 100, moderate: 60, poor: 0 };
 
-  it('averages per-day points weighted by counts', () => {
+  it("returns weighted average of per-day counts", () => {
     const counts = { good: 4, moderate: 2, poor: 1 };
-    // (4*100 + 2*60 + 1*0) / 7 = (400 + 120 + 0) / 7 = 520/7 ≈ 74.2857
-    expect(eval_dailies_score(counts, points)).toBeCloseTo(74.2857, 4);
+    // (4*100 + 2*60 + 1*0) / 7 = 520/7 ≈ 74.2857
+    expect(eval_daily_score(counts, pts)).toBeCloseTo(74.2857, 4);
   });
 
-  it('ignores unknown keys in statusCount', () => {
+  it("ignores keys without point mappings", () => {
     const counts = { good: 1, wow: 3 };
-    expect(eval_dailies_score(counts, points)).toBe(100); // only the good=1 counts
+    expect(eval_daily_score(counts, pts)).toBe(100);
   });
 
-  it('returns 0 when totalCount is 0', () => {
-    const counts = { good: 0, moderate: 0, poor: 0 };
-    expect(eval_dailies_score(counts, points)).toBe(0);
+  it("returns 0 when there are no counted days", () => {
+    expect(eval_daily_score({ good: 0, moderate: 0, poor: 0 }, pts)).toBe(0);
+    expect(eval_daily_score({}, pts)).toBe(0);
   });
 });
 
-describe('eval_feasibility()', () => {
+describe("eval_daily_status()", () => {
+  const base = makeThresholds();
+
+  it("buckets scores into overall bands (inclusive good upper)", () => {
+    expect(eval_daily_status(85, base)).toBe("good");      // in [80,100]
+    expect(eval_daily_status(50, base)).toBe("moderate");  // in [50,80)
+    expect(eval_daily_status(49.999, base)).toBe("poor");
+  });
+
+  it("returns 'unknown' when score is out of range or thresholds missing", () => {
+    expect(eval_daily_status(-1, base)).toBe("unknown");
+    expect(eval_daily_status(101, base)).toBe("unknown");
+    expect(eval_daily_status(75, { ...base, overall: null })).toBe("unknown");
+  });
+});
+
+describe("eval_days()", () => {
+  it("returns {score,status} composed from daily score + bands", () => {
+    const th = makeThresholds();
+    const r = eval_days({ good: 7 }, th); // daily score=100 ⇒ status 'good'
+    expect(r.score).toBe(100);
+    expect(r.status).toBe("good");
+  });
+});
+
+describe("evaluateFeasibility()", () => {
+  const weekStats = { ave: 100, std: 20 };
   const base = makeThresholds({
-    // Define non-overlapping overall cutoffs
     overall: {
-      good: { lower: 80, upper: 101 },     // allow 100 inclusive
+      good: { lower: 80, upper: 100 },
       moderate: { lower: 50, upper: 80 },
-      poor: { lower: 0, upper: 50 },
     },
   });
-  const weekStats = { ave: 100, std: 20 };
+  
+  it("combines weekly & daily via weight and returns rich object", () => {
+    // weekly: good ⇒ 100; daily: moderate ⇒ 60; weight α=0.7
+    const th = { ...base, score_weight: 0.7 };
+    const out = evaluateFeasibility(100, weekStats, { moderate: 7 }, th);
 
-  it('combines weekly and daily via weighted average', () => {
-    // weekly good (100 pts), daily moderate (~60) with weight 0.7
-    const thresholds = makeThresholds({ ...base, score_weight: 0.7 });
-    const statusCount = { good: 0, moderate: 7, poor: 0 }; // daily score = 60
-    const weeklySum = 100; // good → 100
-    // total = 0.7*100 + 0.3*60 = 82 → "good"
-    expect(eval_feasibility(weeklySum, weekStats, statusCount, thresholds)).toBe('good');
-  });
-
-  it('lands in "moderate" when combined score falls into that bucket', () => {
-    // weekly poor (0), daily good (100), weight 0.5 → total 50 → moderate lower bound
-    const thresholds = makeThresholds({ ...base, score_weight: 0.5 });
-    const statusCount = { good: 7, moderate: 0, poor: 0 }; // 100
-    const weeklySum = 140; // poor → 0
-    expect(eval_feasibility(weeklySum, weekStats, statusCount, thresholds)).toBe('moderate');
-  });
-
-  it('returns "poor" for low combined scores', () => {
-    const thresholds = makeThresholds({ ...base, score_weight: 0.5 });
-    const statusCount = { good: 0, moderate: 0, poor: 7 }; // 0
-    const weeklySum = 140; // poor → 0
-    expect(eval_feasibility(weeklySum, weekStats, statusCount, thresholds)).toBe('poor');
-  });
-
-  it('respects custom score weights (α)', () => {
-    // Make weekly score dominate (α=0.9)
-    const thresholds = makeThresholds({ ...base, score_weight: 0.9 });
-    const statusCount = { good: 0, moderate: 7, poor: 0 }; // 60
-    const weeklySum = 140; // weekly poor = 0 → total = 0.9*0 + 0.1*60 = 6 → poor
-    expect(eval_feasibility(weeklySum, weekStats, statusCount, thresholds)).toBe('poor');
-  });
-
-  it('returns null if combined score falls outside all overall bands (misconfig)', () => {
-    const thresholds = makeThresholds({
-      overall: {
-        good: { lower: 90, upper: 95 },
-        moderate: { lower: 60, upper: 70 },
-        poor: { lower: 10, upper: 20 },
-      },
-    });
-    // produce a score like 80 which hits no band
-    const statusCount = { good: 7, moderate: 0, poor: 0 }; // 100
-    const weeklySum = 100; // 100
-    // total = 0.5*100 + 0.5*100 = 100 → not in any band → null
-    expect(eval_feasibility(weeklySum, { ave: 100, std: 1 }, statusCount, thresholds)).toBeNull();
-  });
+    expect(out.status).toBe("good");        // 88 → good
+    expect(out.score).toBeCloseTo(88, 4);   // 0.7*100 + 0.3*60 = 88
+    expect(out.week_eval).toEqual({ score: 100, status: "good" });
+    expect(out.days_eval.status).toBe("moderate");
 });
 
-/**
- * Optional: edge-condition notes
- * - If week_stats.std is 0 in production data, z = (sum - ave)/0 → +/-Infinity.
- *   You may want to guard against std<=0 in the implementation or add a policy
- *   in thresholds to catch Infinity in "poor".
- */
+  it("respects different weights", () => {
+    const th = makeThresholds({ ...base, score_weight: 0.9 });
+    // weekly poor (0) dominates ⇒ overall poor
+    const out = evaluateFeasibility(140, weekStats, { moderate: 7 }, th);
+    expect(out.status).toBe("poor");
+    expect(out.score).toBeCloseTo(6, 4); // 0.9*0 + 0.1*60
+  });
+
+  it("clamps score into [0,100]", () => {
+    // Force extreme mix: weekly 100, daily 100 ⇒ still 100
+    const th = makeThresholds({ ...base, score_weight: 1.0 });
+    const out = evaluateFeasibility(100, weekStats, { good: 7 }, th);
+    expect(out.score).toBe(100);
+  });
+
+  it("returns safe 'unknown' object when any sub-score is null", () => {
+    // Make weekly unknown by giving std<=0
+    const th = makeThresholds(base);
+    const out = evaluateFeasibility(100, { ave: 100, std: 0 }, { good: 7 }, th);
+    expect(out).toEqual({ score: -1, status: "unknown", week_eval: null, days_eval: null });
+  });
+});

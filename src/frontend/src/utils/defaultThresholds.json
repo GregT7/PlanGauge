@@ -10,7 +10,8 @@
   },
   "overall": {
     "good": { "lower": 75, "upper": 100 },
-    "moderate": { "lower": 50, "upper": 75 }
+    "moderate": { "lower": 50, "upper": 75 },
+    "poor": {"lower": 0, "upper": 50}
   },
   "weight": 0.6
 }

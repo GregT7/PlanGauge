@@ -89,106 +89,95 @@
 
 ### 📘 Definition of Done
 
-1) Global Non-Functional Criteria
-- [ ] **Types/Shapes Guarded:** Runtime validation (or robust type guards) ensures every numeric field from `/api/stats` is a number; invalid/missing → safe fallback + user-visible copy.
-- [ ] **Performance:** p50 TTFB for `/api/stats` < 300ms locally; UI first meaningful paint shows skeletons within 150ms.
-- [ ] **A11y:** Accordion triggers are buttons with `aria-expanded` and logical heading levels. Color is **not** the only status indicator (label present).
-- [ ] **Empty/Error States:** “default” and “unknown” states render with distinct copy and neutral colors.
-- [ ] **Docs:** README section updated with the equation, thresholds, and status map; link to the swimlane diagram.
-- [ ] **Screenshots:** Attached for loading, error, default, unknown, good, moderate, poor (see Evidence).
+1) Backend Support (Flask/Supabase)
+- [ ] /api/stats returns all required statistical fields for both weekly and daily evaluations (avg, std, sums).
+- [ ] Date range query parameters (start, end) are validated; invalid input returns HTTP 400 with structured error JSON.
+- [ ] Standardized JSON envelope is used for every response with:{ ok, service, now, response_time_ms, data{...}, error? }.
+- Evidence
+--- [ ] Postman or curl collection showing: valid request, invalid range, and malformed params.
+--- [ ] Example JSON payloads saved under /docs/samples/stats_*.json.
+--- [ ] Passing backend tests verifying structure and validation.
 
-2) Backend Support (Flask/Supabase)
-- [ ] `/api/stats` response includes the fields needed by UI (week avg/std, day avg/std, daily sums) and a `filter` block with the active date range.
-- [ ] Query params `start`, `end` validated; invalid → **HTTP 400** with structured error JSON.
-- [ ] Standardized envelope fields present: `ok`, `service`, `now`, `response_time_ms`, `data`, `error`.
-- **Evidence**
-  - [ ] Postman (or curl) collection with: happy path, invalid range, missing params.
-  - [ ] Saved sample JSON payloads (`/docs/samples/stats_*.json`).
-  - [ ] Unit tests for validation & envelope (green).
+2) Data Fetch & State (Frontend)
+- [ ] React app calls GET /api/stats on mount and whenever date range changes.
+- [ ] Fetched data is stored in local state and parsed safely (guards against nulls, NaN, or missing keys).
+- [ ] Loading and error states render visible feedback (skeleton + retry or fallback message).
+- [ ] Swimlane diagram updated to include “stats fetch” step during startup flow.
+- Evidence
+--- [ ] Screenshot or GIF showing loading → render → error fallback sequence.
+--- [ ] Updated swimlane diagram under /docs/diagrams/startup_swimlane.png.
 
-3) Data Fetch & State (Frontend)
-- [ ] App fetches `/api/stats` on mount and when date range changes (debounced where applicable).
-- [ ] Local state stores parsed stats; guards against `null`, `NaN`, missing keys.
-- [ ] Loading skeletons and inline error banner with retry action are rendered appropriately.
-- [ ] **Swimlane diagram updated** to reflect startup (includes stats loading).
-- **Evidence**
-  - [ ] GIF or screenshot of loading → success and loading → error.
-  - [ ] Diagram file added at `/docs/diagrams/startup_swimlane.png` (or `.svg`), referenced in README.
+3) Evaluation Section
+- [ ] Displays overall feasibility status and numerical score clearly at the top.
+- [ ] Text color reflects current feasibility (good, moderate, poor, unknown, default).
+- [ ] Uses one large shadcn <Card> within the main container for consistency.
+- [ ] “Details” section implemented using shadcn <Accordion>.
+- Evidence
+--- [ ] Screenshot of the main card in each status.
+--- [ ] Code link to EvaluationSection.jsx confirming component structure.
 
-4) Evaluation Section (Top Card)
-- [ ] Overall feasibility **label** and **numeric score** are visible at a glance.
-- [ ] Label/score text color matches status via the status map.
-- [ ] Content is presented inside a single shadcn `<Card>` within its designated container.
-- [ ] “Details” are implemented using a shadcn `<Accordion>`.
-- **Evidence**
-  - [ ] Screenshot of the card in each status.
+4) Details Accordion
+- [ ] Accordion trigger text is exactly "details".
+- [ ] Contains a short explanation of how feasibility is determined.
+- [ ] Displays the overall feasibility equation; if no “unknown” components exist, shows substituted equation with actual values.
+- [ ] Shows the date range currently used for filtering stats.
+- [ ] Contains four accordion items in this order: Week Score, Daily Score, Point Thresholds, Zscore Thresholds.
+- Evidence
+--- [ ] Screenshot of expanded accordion showing equation, date range, and four items in order.
 
-5) Details Accordion (Container)
-- [ ] Trigger text is exactly **“details”** (case/style consistent).
-- [ ] Contains a concise textual description of how feasibility is computed.
-- [ ] Shows the overall feasibility **equation**.
-- [ ] If no components are “unknown,” a substituted equation (with values) is displayed.
-- [ ] Displays the active date range used for stats filtering.
-- [ ] Contains **four** items in order: `week score`, `daily score`, `point thresholds`, `zscore thresholds`.
-- **Evidence**
-  - [ ] Screenshot of the expanded accordion showing all four items in order.
+5) Week Feasibility Accordion
+- [ ] Trigger text: Week: <Status> (Score: N.N) and colored according to feasibility.
+- [ ] Content includes: short explanation + total time, historical average, standard deviation, and zscore.
+- Evidence
+--- [ ] Screenshot of open Week accordion showing all metrics.
 
-6) Week Feasibility Accordion
-- [ ] Trigger shows: `Week: <Status> (Score: <N.N>)` with color per status.
-- [ ] Content includes a clear description.
-- [ ] Content lists: **total time**, historical **avg**, historical **std**, computed **zscore**.
-- **Evidence**
-  - [ ] Screenshot with visible numbers and status color.
+6) Daily Feasibility Accordion
+- [ ] Trigger text: Daily: <Status> (Score: N.N) and color-coded to status.
+- [ ] Content includes: description of logic + displayed per-day table (Mon–Sun) showing sum, avg, std, z, points, and status.
+- Evidence
+--- [ ] Screenshot of Daily accordion expanded with all data columns visible.
 
-7) Daily Feasibility Accordion
-- [ ] Trigger shows: `Daily: <Status> (Score: <N.N>)` (aggregation rule applied).
-- [ ] Trigger text color reflects the status.
-- [ ] Content includes a plain-English description.
-- [ ] Content shows the equation used (per-day and aggregation).
-- **Evidence**
-  - [ ] Screenshot of per-day table (Mon–Sun) including `{sum, avg, std, z, points, status}`.
+7) Point Threshold Accordion
+- [ ] Contains a short explanation of the point-to-category mapping system.
+- [ ] Displays point ranges and corresponding feasibility categories.
+- [ ] Values shown are pulled directly from the same constants used in calculations.
+- [ ] Styling matches the app’s typography and spacing.
+- Evidence
+--- [ ] Screenshot of Point Threshold accordion.
+--- [ ] Link to /src/utils/feasibilityConfig.ts constants file.
 
-8) Point Threshold Accordion
-- [ ] Contains a short description of the point system.
-- [ ] Displays **point range → category** mappings.
-- [ ] Values displayed are the **exact** constants used in calculations (single source of truth).
-- [ ] Styled consistently with the app’s design (spacing, typography, borders).
-- **Evidence**
-  - [ ] Screenshot + link to the source constants file (e.g., `/src/utils/feasibilityConfig.ts`).
+8) Zscore Threshold Accordion
+- [ ] Describes how z-score bands map to feasibility categories.
+- [ ] Displays actual z-score threshold values used in computation (including behavior for std=0 → “unknown”).
+- [ ] Uses same constants file as the point thresholds for single source of truth.
+- [ ] Cleanly styled and consistent with the rest of the UI.
+- Evidence
+--- [ ] Screenshot of expanded Zscore Threshold accordion.
+--- [ ] Code link to constants file verifying values.
 
-9) Zscore Threshold Accordion
-- [ ] Contains a short description of how zscore bands map to categories.
-- [ ] Displays zscore bands used (including behavior for `std=0` → `unknown`).
-- [ ] Values displayed are the **exact** constants used in calculations (single source of truth).
-- [ ] Styled consistently.
-- **Evidence**
-  - [ ] Screenshot + link to the same source constants file.
+9) Status-Driven UI Styling
+- [ ] A shared status map defines color classes for default, unknown, good, moderate, and poor.
+- [ ] Outer border of each subsystem container changes color based on feasibility.
+- [ ] All subsystem styling updates reactively when feasibility changes.
+- [ ] “Default” status used when data loaded but no entries exist.
+- [ ] “Unknown” status used when any component has undefined or invalid data (e.g., std=0).
+- Evidence
+--- [ ] Before/after GIF showing color changes as statuses update.
+--- [ ] Code link to status map source.
 
-10) Status-Driven UI Styling
-- [ ] A **status map** (single source of truth) defines the border/text/badge classes for:
-      `default`, `unknown`, `good`, `moderate`, `poor`.
-- [ ] The **outer border** of each subsystem container changes color based on the current status.
-- [ ] All subsystem styling updates reactively when status changes.
-- [ ] “default” used when data loaded but no task entries exist.
-- [ ] “unknown” used when any sub-status is unknown (e.g., `std=0` or missing inputs).
-- **Evidence**
-  - [ ] Code link to the status map.
-  - [ ] Before/after GIF showing live color change on status flip.
-
-11) Testing
-- **Unit**
-  - [ ] Weekly feasibility calculator (zscore, points, status).
-  - [ ] Daily feasibility calculator (per-day + aggregation).
-  - [ ] Overall calculator (combination/weighting).
-  - [ ] Color/status mapping returns expected classes for each status.
-- **Integration (Frontend)**
-  - [ ] Fetch success path populates UI (card + accordions).
-  - [ ] Fetch error shows banner + retry works.
-  - [ ] Changing date range triggers re-fetch and re-render.
-- **Integration (Backend)**
-  - [ ] `/api/stats` happy path returns expected shape.
-  - [ ] Invalid date range returns **400** with structured error.
-- **E2E**
-  - [ ] Flow: user loads → stats fetched → feasibility computed → outer borders & any relevant buttons adopt the correct color tokens.
-- **Evidence**
-  - [ ] Test results (Vitest/Pytest) green with coverage summary.
+10) Testing
+- Unit Tests
+- [ ] Feasibility calculators (weekly, daily, overall).
+- [ ] Status color mapping returns expected class names.
+- Integration Tests (Frontend)
+- [ ] Fetch success and error paths work as expected.
+- [ ] Loading skeletons and retry actions function correctly.
+- [ ] Date range change triggers new fetch and re-render.
+- Integration Tests (Backend)
+- [ ] /api/stats happy path returns correct structure.
+- [ ] Invalid date range returns HTTP 400 and error JSON.
+- E2E (Manual or Automated)
+- [ ] User loads → stats fetched → feasibility computed → borders and buttons update color according to status.
+- Evidence
+--- [ ] Passing test summary from Vitest and/or Pytest.
+--- [ ] Short screen capture of E2E flow.
