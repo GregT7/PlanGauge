@@ -145,60 +145,93 @@
 - [x] Backlog refactoring
   - [x] Remove CI elements from `End-to-End Testing`
   - [x] Move CI elements to `CI Setup`
-- [ ] Finish EvaluationSection.jsx (week + daily accordions)  
-- [ ] Add feasibility evaluation logic to handle daily aggregation  
+- [x] Finish EvaluationSection.jsx (week + daily accordions)  
+- [x] Add feasibility evaluation logic to handle daily aggregation  
 - [ ] Implement consistent status shading logic  
-- [ ] Run 5 regression tests and record results  
+- [x] Run 5 regression tests and record results  
 - [ ] Begin documentation updates (minimal draft only)
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 3 – Feedback System Testing Continued
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Sunday, October 5th (2025)  
+* **Time:** 5:03 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`  
+  - `End-to-End Testing`  
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Used ChatGPT to refactor EvaluationSection related components and to create new tests  
+- Need to continue testing to finish this backlog item  
 
 #### 📈 Previous Progress
-- 
+- Fixed all failing regression tests using ChatGPT  
+- Refactored `End-to-End Testing` to decrease scope by resolving CI elements  
+- Finished implementing the EvaluationSection and related subcomponents  
+- Added dynamic UI changes to all subsystem containers depending on the feasibility status  
+- Wrote at least one unit test for the EvaluationSystem components  
 
 #### 🧱 Problems & Blockers
-- 
+- Vibe coded the EvaluationSection refactoring, failed regression tests, and newly created unit tests  
+- Have to finish everything for `Feedback System` by the end of tomorrow  
+- Shading for the 'default' status is not defined in terms of logic and implementation  
+- Haven't written any tests for the new frontend utility scripts  
+- Learning/Setting up Playwright is part of `End-to-End Testing` & not `Feedback System`  
 
 #### ⏳ Pending Actions
-- 
+- Unit testing  
 
 #### 🔜 Next Steps
-- 
+- [ ] Handle `default` shading logic  
+  - [ ] Decide on logic  
+  - [ ] Implement with code  
+- [ ] Testing  
+  - [ ] Unit test for new util files  
+  - [ ] Complete informal e2e tests & record a gif  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**What are the biggest risks for the `Feedback System` backlog item?**
 
-#### ❓ Question 2...
-- 
+The main risks involve **incomplete test coverage** and **ambiguous logic for “default” feasibility states**. Without consistent color mapping for this case, UI feedback may appear inconsistent with the rest of the evaluation framework. There’s also the risk of **scope creep** if e2e setup (Playwright) or unplanned refactors bleed into this sprint. Time pressure is the largest non-technical risk since finishing both testing and documentation by tomorrow compresses the debugging window.
+
+#### ❓ Question 2
+**Describe the trends you've noticed from the past 5 standup logs.**
+
+Across the last five standups, several consistent trends have emerged:
+
+1. **Testing Progression:** The project evolved from debugging regression issues to achieving consistent test coverage and now toward E2E integration, showing maturation in code reliability.  
+2. **Scoping Discipline:** Repeated re-scoping (e.g., dropping CI from E2E) shows improved prioritization and practical project management.  
+3. **Refactor Cycles:** The "refactor → test → refine" loop has stabilized into a predictable workflow, mirroring industry-grade iteration patterns.  
+4. **Self-Pressure Indicators:** Frequent “vibe coding” and deadline compression highlight potential burnout; planning buffers should be integrated in future sprints.  
+5. **Document Alignment:** Frequent synchronization between POP, MVS, and backlog updates confirms strong documentation discipline and traceability.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- The **Feedback System** is nearing completion with all components integrated and regression tests passing.  
+- Most remaining issues are **testing coverage** and **UI consistency** (e.g., `default` shading logic).  
+- The **End-to-End Testing** backlog item has been **de-scoped** to focus on frontend behavior and informal runs before Playwright setup.  
+- Core functionality (task evaluation, feasibility logic, and status-based color feedback) now aligns with the **MVS**’s visual feedback goals:contentReference[oaicite:0]{index=0}and the **POP**’s frontend feasibility card description:contentReference[oaicite:1]{index=1}.  
+- The testing backlog progress parallels the structure of the **TaskTable system** (TaskContext, CategorySelector, CustomFooter, etc.), meaning unit testing here sets a precedent for other UI subsystems:contentReference[oaicite:2]{index=2}.  
 
 #### 🗝️ Key Decisions
-- 
+- Finish all **unit tests** before Playwright setup.  
+- Informal e2e validation (GIF demo) will substitute for automated Playwright coverage until Sprint 11.  
 
 #### 📌 Action Items
-- 
+- [ ] Implement `default` shading logic in feasibility color map  
+- [ ] Write missing unit tests for frontend utilities  
+- [ ] Run informal E2E test → record GIF proof  
+- [ ] Update Documentation (`Feedback System` DoD & Results)  
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
