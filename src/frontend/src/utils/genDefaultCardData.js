@@ -3,20 +3,7 @@ export function genDefaultCardData(date = new Date()) {
     return { name: dayName, ave: -1, std: -1, sum: -1, date, status: "neutral" };
 }
 
-// [
-//   { "name": "Monday",    "ave": 90, "std": 35, "date": "2025-06-16", "status": "neutral", "sum": 0 },
-//   { "name": "Tuesday",   "ave": 100, "std": 20, "date": "2025-06-17", "status": "neutral", "sum": 0 },
-//   { "name": "Wednesday", "ave": 50, "std": 30, "date": "2025-06-18", "status": "neutral", "sum": 0 },
-//   { "name": "Thursday",  "ave": 80, "std": 10, "date": "2025-06-19", "status": "neutral", "sum": 0 },
-//   { "name": "Friday",    "ave": 120, "std": 40, "date": "2025-06-20", "status": "neutral", "sum": 0 },
-//   { "name": "Saturday",  "ave": 70, "std": 15, "date": "2025-06-21", "status": "neutral", "sum": 0 },
-//   { "name": "Sunday",    "ave": 40, "std": 25, "date": "2025-06-22", "status": "neutral", "sum": 0 }
-// ]
-
-// 
-
-
-function genDaysOfCurrentWeek() {
+export function genDaysOfCurrentWeek() {
     // Get current date
     const today = new Date();
 
