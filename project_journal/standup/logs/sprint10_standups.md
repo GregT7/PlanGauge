@@ -187,12 +187,12 @@
 - Unit testing  
 
 #### 🔜 Next Steps
-- [ ] Handle `default` shading logic  
-  - [ ] Decide on logic  
-  - [ ] Implement with code  
-- [ ] Testing  
-  - [ ] Unit test for new util files  
-  - [ ] Complete informal e2e tests & record a gif  
+- Handle `default` shading logic  
+  - Decide on logic  
+  - Implement with code  
+- Testing  
+  - Unit test for new util files  
+  - Complete informal e2e tests & record a gif  
 
 ### 🤖 ChatGPT Reflection
 
@@ -218,18 +218,19 @@ Across the last five standups, several consistent trends have emerged:
 - The **Feedback System** is nearing completion with all components integrated and regression tests passing.  
 - Most remaining issues are **testing coverage** and **UI consistency** (e.g., `default` shading logic).  
 - The **End-to-End Testing** backlog item has been **de-scoped** to focus on frontend behavior and informal runs before Playwright setup.  
-- Core functionality (task evaluation, feasibility logic, and status-based color feedback) now aligns with the **MVS**’s visual feedback goals:contentReference[oaicite:0]{index=0}and the **POP**’s frontend feasibility card description:contentReference[oaicite:1]{index=1}.  
-- The testing backlog progress parallels the structure of the **TaskTable system** (TaskContext, CategorySelector, CustomFooter, etc.), meaning unit testing here sets a precedent for other UI subsystems:contentReference[oaicite:2]{index=2}.  
+- Core functionality (task evaluation, feasibility logic, and status-based color feedback) now aligns with the **MVS**’s visual feedback and the **POP**’s frontend feasibility card description.  
+- The testing backlog progress parallels the structure of the **TaskTable system** (TaskContext, CategorySelector, CustomFooter, etc.), meaning unit testing here sets a precedent for other UI subsystems.  
 
 #### 🗝️ Key Decisions
 - Finish all **unit tests** before Playwright setup.  
 - Informal e2e validation (GIF demo) will substitute for automated Playwright coverage until Sprint 11.  
 
 #### 📌 Action Items
-- [ ] Implement `default` shading logic in feasibility color map  
+- [ ] Implement `default` shading logic in feasibility color map
+  - [ ] Decide on logic
+  - [ ] Implement in code
 - [ ] Write missing unit tests for frontend utilities  
 - [ ] Run informal E2E test → record GIF proof  
-- [ ] Update Documentation (`Feedback System` DoD & Results)  
 
 ---
 
