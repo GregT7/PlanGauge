@@ -229,57 +229,90 @@ Across the last five standups, several consistent trends have emerged:
 - [ ] Implement `default` shading logic in feasibility color map
   - [ ] Decide on logic
   - [ ] Implement in code
-- [ ] Write missing unit tests for frontend utilities  
+- [x] Write missing unit tests for frontend utilities  
 - [ ] Run informal E2E test → record GIF proof  
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 4 – Still Testing `Feedback System`
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Monday, October 6th (2025)
+* **Time:** 10:11 AM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Got a little bit more testing done yesterday
+- Need to finish up `Feedback System` by the end of today if I want to be on time
 
 #### 📈 Previous Progress
-- 
+- Finished writing test files for utility scripts with most passing
+- Solved some additional failed regression tests
 
 #### 🧱 Problems & Blockers
-- 
+- Still have 3 tests failing from 2 different test files
+- Missing test coverage for frontend/backend integration testing and informal e2e testing
 
 #### ⏳ Pending Actions
-- 
+- Implement `default` shading logic in feasibility color map
+    - Decide on logic
+    - Implement in code
 
 #### 🔜 Next Steps
-- 
+- Finish updating swimlane diagram for starting up process
+- Fix unresolved regression tests
+- Implement `default` shading logic in feasibility color map  
+  - Decide on logic  
+  - Implement in code
+- Add test cases for system components correctly styling their respective container borders based on feasibility  
+  - SubmissionButton  
+  - TaskTable  
+  - EvaluationSection  
+  - StatCardSystem
+- Add test for case sensitivity handling of feasibility keys (ie "GoOd" vs "good" vs "GOOD" etc)  
+  - determineStatusStyle.js  
+  - evaluateFeasibility.js
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- **Do you still think I can finish the 3 remaining backlog items in 8 days?**  
+  Yes — it’s achievable if you focus on wrapping up testing coverage within the next two work sessions. You’ve already handled the hardest parts (backend and utility coverage). The remaining work is mostly targeted integration tests and some informal E2E validation, which are quicker to implement once structure is in place. Stay strict on scope to avoid new side tasks.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- **What is the biggest mistake I've made so far this sprint?**  
+  The main issue has been overextending the test scope before finalizing feature logic — particularly with frontend styling and color mapping. Locking down the logic earlier would have prevented some cascading test failures. Still, your test-driven approach has paid off overall by stabilizing the Feedback System for future sprints.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Progress momentum improving; regression tests mostly stable  
+- Only a few coverage areas left (frontend integration, case sensitivity)
 
 #### 🗝️ Key Decisions
-- 
+- Maintain testing scope discipline to finish on schedule  
+- Prioritize logic completion (`default` color map) before UI styling tests
 
 #### 📌 Action Items
-- 
+- [ ] Finish updating swimlane diagram for starting up process
+- [ ] Fix unresolved regression tests
+- [ ] Implement `default` shading logic in feasibility color map  
+  - [ ] Decide on logic  
+  - [ ] Implement in code
+- [ ] Add test cases for system components correctly styling their respective container borders based on feasibility  
+  - [ ] SubmissionButton  
+  - [ ] TaskTable  
+  - [ ] EvaluationSection  
+  - [ ] StatCardSystem
+- [ ] Add test for case sensitivity handling of feasibility keys (ie "GoOd" vs "good" vs "GOOD" etc)  
+  - [ ] determineStatusStyle.js  
+  - [ ] evaluateFeasibility.js
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
