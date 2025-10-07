@@ -40,15 +40,13 @@ All components were tested using:
 
 ---
 
-## 👀 Reviewers
-Tag teammates for code review and feedback.  
-Example:
-@teammate-name (for test logic review)
-
+## 👀 ChatGPT Review
 I'd appreciate feedback on:
 
 - 🧪 Test coverage
 - 🧱 Component or logic design
+- ⏱️ Pacing of work
+- 🚧 Scope creep analysis
 - 🧠 Overall quality — score 1–10 with reasoning
 
 ---
