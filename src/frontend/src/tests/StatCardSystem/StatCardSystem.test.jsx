@@ -118,3 +118,106 @@ describe("StatCardSystem", () => {
     expect(hasPoor).toBe(true);
   });
 });
+
+// --- append below your existing tests in StatCardSystem.test.jsx ---
+
+vi.mock("@/utils/determineStatusStyle", () => {
+  return {
+    default: vi.fn((status, kind) => `mock-${kind}-${status ?? "unknown"}`),
+  };
+});
+
+// IMPORTANT: this import must come *after* the vi.mock above
+import determineStatusStyle from "@/utils/determineStatusStyle";
+
+describe("StatCardSystem – outer border reflects feasibility status", () => {
+  const baseCardData = [
+    { name: "Mon", ave: 60, std: 10, sum: 0, status: "good", date: new Date() },
+  ];
+  const baseStatusCount = { good: 1, moderate: 0, poor: 0, unknown: 0 };
+  const mkFeas = (status) => ({
+    score: status === "unknown" ? -1 : 75,
+    status,
+    week_eval: { score: 70, status },
+    days_eval: { score: 70, status },
+  });
+
+  const getRoot = () => {
+    const heading = screen.getByRole("heading", { name: /stat card system/i });
+    return heading.closest("div");
+  };
+
+  it("applies the border class returned by determineStatusStyle for 'good'", () => {
+    const { unmount } = withProcessingProvider(
+      <StatCardSystem />,
+      {
+        cardData: baseCardData,
+        statusCount: baseStatusCount,
+        feasibility: mkFeas("good"),
+        thresholds: {},
+        filterDates: { start: new Date(), end: new Date() },
+      }
+    );
+
+    // Called with (status, "border")
+    expect(determineStatusStyle).toHaveBeenCalledWith("good", "border");
+
+    const root = getRoot();
+    expect(root?.className).toContain("mock-border-good");
+    unmount();
+  });
+
+  it("applies the border class for 'moderate'", () => {
+    const { unmount } = withProcessingProvider(
+      <StatCardSystem />,
+      {
+        cardData: baseCardData,
+        statusCount: baseStatusCount,
+        feasibility: mkFeas("moderate"),
+        thresholds: {},
+        filterDates: { start: new Date(), end: new Date() },
+      }
+    );
+
+    expect(determineStatusStyle).toHaveBeenCalledWith("moderate", "border");
+    const root = getRoot();
+    expect(root?.className).toContain("mock-border-moderate");
+    unmount();
+  });
+
+  it("applies the border class for 'poor'", () => {
+    const { unmount } = withProcessingProvider(
+      <StatCardSystem />,
+      {
+        cardData: baseCardData,
+        statusCount: { good: 0, moderate: 0, poor: 1, unknown: 0 },
+        feasibility: mkFeas("poor"),
+        thresholds: {},
+        filterDates: { start: new Date(), end: new Date() },
+      }
+    );
+
+    expect(determineStatusStyle).toHaveBeenCalledWith("poor", "border");
+    const root = getRoot();
+    expect(root?.className).toContain("mock-border-poor");
+    unmount();
+  });
+
+  it("handles missing/unknown feasibility.status", () => {
+    const { unmount } = withProcessingProvider(
+      <StatCardSystem />,
+      {
+        cardData: baseCardData,
+        statusCount: { good: 0, moderate: 0, poor: 0, unknown: 1 },
+        feasibility: { score: -1, status: undefined, week_eval: null, days_eval: null },
+        thresholds: {},
+        filterDates: { start: new Date(), end: new Date() },
+      }
+    );
+
+    expect(determineStatusStyle).toHaveBeenCalledWith(undefined, "border");
+    const root = getRoot();
+    expect(root?.className).toContain("mock-border-unknown");
+    unmount();
+  });
+});

@@ -177,3 +177,49 @@ describe("TaskTable Integration Tests (updated)", () => {
     expect(screen.getByText(/Task Table/i)).toBeInTheDocument();
   });
 });
+
+// --- append below your existing tests in TaskTable.test.jsx ---
+
+describe("TaskTable – selected styling & extra keyboard/mouse behavior", () => {
+  it("applies selected row styling when a task is selected", () => {
+    renderWithProviders([
+      { id: 1, name: "Sel", category: "", due_date: "", start_date: "", time_estimation: 0, selected: true },
+    ]);
+
+    // Any cell that uses applyHoverSelectStyles(task) should include the selected color
+    const selectedElems = document.querySelectorAll('[class*="bg-cyan-600/50"]');
+    expect(selectedElems.length).toBeGreaterThan(0);
+  });
+
+  it("deletes selected tasks when pressing Delete (not just Backspace)", async () => {
+    const user = userEvent.setup();
+    const mockSetTasks = vi.fn();
+    const selectedTask = { id: 1, name: "To Delete", selected: true, time_estimation: 10 };
+
+    renderWithMockSetter([selectedTask], mockSetTasks);
+    await user.keyboard("{Delete}");
+
+    expect(mockSetTasks).toHaveBeenCalledTimes(1);
+    const updater = mockSetTasks.mock.calls[0][0];
+    expect(typeof updater).toBe("function");
+    expect(updater([selectedTask])).toEqual([]);
+  });
+
+  it("deselects all selected rows when clicking outside the table controls (on the header)", async () => {
+    const user = userEvent.setup();
+    renderWithProviders([
+      { id: 1, name: "A", time_estimation: 10, selected: true },
+      { id: 2, name: "B", time_estimation: 10, selected: true },
+    ]);
+
+    const checkboxes = screen.getAllByRole("checkbox");
+    expect(checkboxes[0]).toHaveAttribute("data-state", "checked");
+    expect(checkboxes[1]).toHaveAttribute("data-state", "checked");
+
+    // Click the "Task Table" header (outside row selector & popups)
+    await user.click(screen.getByRole("heading", { name: /task table/i }));
+
+    expect(checkboxes[0]).toHaveAttribute("data-state", "unchecked");
+    expect(checkboxes[1]).toHaveAttribute("data-state", "unchecked");
+  });
+});

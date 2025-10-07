@@ -181,3 +181,7 @@
 - Evidence
 --- [ ] Passing test summary from Vitest and/or Pytest.
 --- [ ] Short screen capture of E2E flow.
+
+### Informal End-to-End Test
+#### Description: Test user loads → stats fetched → feasibility computed → outlines + button color update (informal)
+![Image](https://github.com/user-attachments/assets/72d58815-bf79-4825-b430-c3bc05b51242)

@@ -298,19 +298,19 @@ Across the last five standups, several consistent trends have emerged:
 - Prioritize logic completion (`default` color map) before UI styling tests
 
 #### 📌 Action Items
-- [ ] Finish updating swimlane diagram for starting up process
-- [ ] Fix unresolved regression tests
-- [ ] Implement `default` shading logic in feasibility color map  
-  - [ ] Decide on logic  
-  - [ ] Implement in code
-- [ ] Add test cases for system components correctly styling their respective container borders based on feasibility  
-  - [ ] SubmissionButton  
-  - [ ] TaskTable  
-  - [ ] EvaluationSection  
-  - [ ] StatCardSystem
-- [ ] Add test for case sensitivity handling of feasibility keys (ie "GoOd" vs "good" vs "GOOD" etc)  
-  - [ ] determineStatusStyle.js  
-  - [ ] evaluateFeasibility.js
+- [x] Finish updating swimlane diagram for starting up process
+- [x] Fix unresolved regression tests
+- [x] Implement `default` shading logic in feasibility color map  
+  - [x] Decide on logic  
+  - [x] Implement in code
+- [x] Add test cases for system components correctly styling their respective container borders based on feasibility  
+  - [x] SubmissionButton  
+  - [x] TaskTable  
+  - [x] EvaluationSection  
+  - [x] StatCardSystem
+- [x] Add test for case sensitivity handling of feasibility keys (ie "GoOd" vs "good" vs "GOOD" etc)  
+  - [x] determineStatusStyle.js  
+  - [x] evaluateFeasibility.js
 
 ---
 
