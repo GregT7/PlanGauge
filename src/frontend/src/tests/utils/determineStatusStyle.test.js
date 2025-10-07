@@ -42,3 +42,24 @@ describe("determineStatusStyle (integration with styleData.json)", () => {
     expect(determineStatusStyle("nope", "base")).toBe(fallback);
   });
 });
+
+// ---- Added tests for case-insensitive status handling and null args ----
+describe("determineStatusStyle (case-insensitive + null safety)", () => {
+  it("accepts mixed-case status keys", () => {
+    console.log(determineStatusStyle("GoOD", "base"))
+    expect(determineStatusStyle("GoOD", "base")).toBe(styleData.good.base);
+    expect(determineStatusStyle("GOOD", "text")).toBe(styleData.good.text);
+    expect(determineStatusStyle("MoDeRaTe", "border")).toBe(styleData.moderate.border);
+  });
+
+  it("falls back to unknown for null/empty inputs", () => {
+    expect(determineStatusStyle(null, "base")).toBe(styleData.unknown.base);
+    expect(determineStatusStyle("good", null)).toBe(styleData.unknown.base);
+    expect(determineStatusStyle("", "base")).toBe(styleData.unknown.base);
+  });
+
+  it("returns unknown when status doesn't exist even if type is valid", () => {
+    // 'type' exists for other statuses but not for an unknown one.
+    expect(determineStatusStyle("not-in-data", "base")).toBe(styleData.unknown.base);
+  });
+});

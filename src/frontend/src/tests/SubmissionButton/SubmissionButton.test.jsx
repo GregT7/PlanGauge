@@ -213,3 +213,106 @@ describe('SubmissionButton (updated)', () => {
     await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
   });
 });
+
+// --- append below your existing tests in SubmissionButton.test.jsx ---
+
+describe('SubmissionButton – extra cases', () => {
+  const sampleTasks = [
+    { name: 'T1', category: 'X', due_date: '2025-01-02', start_date: '2025-01-01', time_estimation: 10 },
+  ];
+
+  it('uses `unknown` styling when feasibility.status is undefined', () => {
+    render(
+      <processingContext.Provider value={{ feasibility: { /* status: undefined */ } }}>
+        <TaskContext.Provider value={{ tasks: sampleTasks }}>
+          <SubmissionButton />
+        </TaskContext.Provider>
+      </processingContext.Provider>
+    );
+    const btn = screen.getByRole('button', { name: /submit/i });
+    expect(btn.className).toContain('unknown-base');
+    expect(btn.className).toContain('unknown-hover');
+  });
+
+  it('submits even when tasks are empty (passes empty array + defaults)', async () => {
+    const d = ((r) => {
+      let resolve, reject;
+      const p = new Promise((res, rej) => { resolve = res; reject = rej; });
+      return { promise: p, resolve, reject };
+    })();
+    submitPlansMock.mockReturnValueOnce(d.promise);
+
+    renderWithProviders(<SubmissionButton />, { tasks: [] });
+    const btn = screen.getByRole('button', { name: /submit/i });
+    fireEvent.click(btn);
+
+    const [tasksArg, startArg, endArg] = submitPlansMock.mock.calls[0];
+    expect(Array.isArray(tasksArg)).toBe(true);
+    expect(tasksArg).toHaveLength(0);
+    expect(startArg).toBe('2000-01-01');
+    expect(endArg).toBe('2099-12-31');
+
+    d.resolve({ ok: true });
+    await waitFor(() => expect(btn).not.toBeDisabled());
+  });
+
+  it('prevents double submission while disabled (second click is ignored)', async () => {
+    const d = ((r) => {
+      let resolve, reject;
+      const p = new Promise((res, rej) => { resolve = res; reject = rej; });
+      return { promise: p, resolve, reject };
+    })();
+    submitPlansMock.mockReturnValueOnce(d.promise);
+
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    const btn = screen.getByRole('button', { name: /submit/i });
+
+    // First click kicks off the submit and disables the button
+    fireEvent.click(btn);
+    expect(btn).toBeDisabled();
+
+    // Second click while disabled should not call submit again
+    fireEvent.click(btn);
+    expect(submitPlansMock).toHaveBeenCalledTimes(1);
+
+    d.resolve({ ok: true });
+    await waitFor(() => expect(btn).not.toBeDisabled());
+  });
+
+  it('calls toast.promise with loading/success/error messages', async () => {
+    const d = ((r) => {
+      let resolve, reject;
+      const p = new Promise((res, rej) => { resolve = res; reject = rej; });
+      return { promise: p, resolve, reject };
+    })();
+    submitPlansMock.mockReturnValueOnce(d.promise);
+
+    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+    // Validate the message options passed to toast.promise
+    const [promiseArg, opts] = toastShim.promise.mock.calls[0];
+    expect(typeof promiseArg?.then).toBe('function');
+    expect(opts).toMatchObject({
+      loading: expect.stringMatching(/submitting plan records/i),
+      success: expect.stringMatching(/success/i),
+      error: expect.stringMatching(/error/i),
+    });
+
+    d.resolve({ ok: true });
+    await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
+  });
+
+  it('formats undefined dates safely (fmtMock returns DATE_F for non-strings)', () => {
+    const tasks = [
+      { name: 'No Dates', category: 'N/A', time_estimation: 5, due_date: undefined, start_date: undefined },
+    ];
+    renderWithProviders(<SubmissionButton />, { tasks });
+    // 1 task * 2 fields => 2 calls
+    expect(fmtMock).toHaveBeenCalledTimes(2);
+    // Both undefined inputs are handled by fmtMock (-> "DATE_F")
+    // The exact arguments are undefined:
+    expect(fmtMock.mock.calls[0][0]).toBeUndefined();
+    expect(fmtMock.mock.calls[1][0]).toBeUndefined();
+  });
+});

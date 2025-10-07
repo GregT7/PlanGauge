@@ -106,8 +106,6 @@ def notion_health_check():
                                  "Unexpected error", pack_exc(e), **extra_data)
         return jsonify(http_response), 500
         
-
-# curl "http://127.0.0.1:5000/api/db/stats?start=2025-06-01&end=2025-06-30"
 @app.route('/api/db/stats', methods=['GET'])
 def calc_stats():
     start_time = time.perf_counter()

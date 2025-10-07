@@ -34,7 +34,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
                 toast.promise(promise, {
                     loading: 'Retrieving statistical data...',
                     success: (r) => r?.message ?? 'Stats loaded',
-                    error:   (err) => err?.message || 'Failed to retrieve stats',
+                    error:   (err) => "Error: Stats Retrieval Failure!",
                 });
 
                 const res = await promise; // get full object back
@@ -80,21 +80,21 @@ export function ProcessingContextProvider({children, starting_stats = default_st
 
     //      C. Count the number of statuses
     const statusCount = useMemo(() => {
-        const regex = /^(good|moderate|poor|unknown)$/;
+        
+        const regex = /^(good|moderate|poor|neutral|unknown)$/;
 
         return cardData.reduce((statObj, task) => {
             const statusValue = task?.status;
             if (statusValue && regex.test(statusValue)) {
-            return {
-                ...statObj,
-                [statusValue]: statObj[statusValue] + 1,
-            };
+                return {
+                    ...statObj,
+                    [statusValue]: statObj[statusValue] + 1,
+                };
             }
             return statObj;
-        }, { good: 0, moderate: 0, poor: 0, unknown: 0});
+        }, { good: 0, moderate: 0, poor: 0, neutral: 0, unknown: 0});
     }, [cardData]);
     
-
     // 2. Process Overall Feasibility
     //      A. Calculate overall feasibility 
     //          Note: requires week_sum, week_stats, statusCount, thresholds

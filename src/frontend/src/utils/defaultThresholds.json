@@ -6,7 +6,8 @@
   "points": {
     "good": 100,
     "moderate": 60,
-    "poor": 0
+    "poor": 0,
+    "neutral": 0
   },
   "overall": {
     "good": { "lower": 75, "upper": 100 },

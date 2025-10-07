@@ -21,7 +21,7 @@ function makeThresholds(overrides = {}) {
       moderate: { upper: 1.0 },
     },
     points: { good: 100, moderate: 60, poor: 0 },
-    score_weight: 0.5,
+    weight: 0.5,
     overall: {
       good: { lower: 80, upper: 100 },
       moderate: { lower: 50, upper: 80 },
@@ -159,7 +159,7 @@ describe("evaluateFeasibility()", () => {
   
   it("combines weekly & daily via weight and returns rich object", () => {
     // weekly: good ⇒ 100; daily: moderate ⇒ 60; weight α=0.7
-    const th = { ...base, score_weight: 0.7 };
+    const th = { ...base, weight: 0.7 };
     const out = evaluateFeasibility(100, weekStats, { moderate: 7 }, th);
 
     expect(out.status).toBe("good");        // 88 → good
@@ -169,7 +169,7 @@ describe("evaluateFeasibility()", () => {
 });
 
   it("respects different weights", () => {
-    const th = makeThresholds({ ...base, score_weight: 0.9 });
+    const th = makeThresholds({ ...base, weight: 0.9 });
     // weekly poor (0) dominates ⇒ overall poor
     const out = evaluateFeasibility(140, weekStats, { moderate: 7 }, th);
     expect(out.status).toBe("poor");
@@ -178,7 +178,7 @@ describe("evaluateFeasibility()", () => {
 
   it("clamps score into [0,100]", () => {
     // Force extreme mix: weekly 100, daily 100 ⇒ still 100
-    const th = makeThresholds({ ...base, score_weight: 1.0 });
+    const th = makeThresholds({ ...base, weight: 1.0 });
     const out = evaluateFeasibility(100, weekStats, { good: 7 }, th);
     expect(out.score).toBe(100);
   });
@@ -187,6 +187,31 @@ describe("evaluateFeasibility()", () => {
     // Make weekly unknown by giving std<=0
     const th = makeThresholds(base);
     const out = evaluateFeasibility(100, { ave: 100, std: 0 }, { good: 7 }, th);
-    expect(out).toEqual({ score: -1, status: "unknown", week_eval: null, days_eval: null });
+    expect(out).toEqual({ score: 0, status: "unknown", week_eval: null, days_eval: null });
+  });
+});
+
+// ---- Added tests for 'neutral' weekly classification and propagation ----
+describe("neutral handling (sum === 0)", () => {
+  const stats = { ave: 100, std: 20 };
+  const th = makeThresholds();
+
+  it("eval_status() returns 'neutral' when weekly sum is exactly 0", () => {
+    expect(eval_status(0, stats, th.zscore)).toBe("neutral");
+  });
+
+  it("eval_score() returns null for 'neutral' (unmapped) status", () => {
+    const pts = { good: 100, moderate: 60, poor: 0 };
+    expect(eval_score("neutral", pts)).toBeNull();
+  });
+
+  it("eval_week() yields {score:null,status:'neutral'}", () => {
+    const r = eval_week(0, stats, th);
+    expect(r).toEqual({ score: null, status: "neutral" });
+  });
+
+  it("evaluateFeasibility() returns safe unknown object if weekly is neutral (null score)", () => {
+    const out = evaluateFeasibility(0, stats, { good: 7 }, th);
+    expect(out).toEqual({ score: 0, status: "unknown", week_eval: null, days_eval: null });
   });
 });

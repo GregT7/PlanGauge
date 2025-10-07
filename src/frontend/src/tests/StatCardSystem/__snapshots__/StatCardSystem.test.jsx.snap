@@ -3,7 +3,7 @@
 exports[`StatCardSystem > passes a snapshot test 1`] = `
 <div>
   <div
-    class="w-[73.5%] mx-auto border-2 border-dashed pt-2 border-amber-600"
+    class="w-[73.5%] mx-auto border-2 border-dashed pt-2 mock-border-moderate"
   >
     <h1
       class="text-2xl pt-2 pb-4 text-left pl-8"

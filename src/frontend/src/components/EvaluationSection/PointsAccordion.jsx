@@ -69,7 +69,15 @@ export default function PointsAccordion() {
   // --- DERIVED DATA -----------------------------------------------------------
   // points: { good: 100, moderate: 60, poor: 0, ... }
   const pointMapEntries = useMemo(() => {
-    const map = thresholds?.points ?? {}
+    // const evenNumbers = numbers.filter(number => number % 2 === 0);
+    let map = {}
+    if (thresholds?.points) {
+      map = {
+        "good": thresholds?.points?.good,
+        "moderate": thresholds?.points?.moderate,
+        "poor": thresholds?.points?.poor
+      }
+    }
     return Object.entries(map).sort((a, b) => b[1] - a[1]) // show highest first
   }, [thresholds])
 
