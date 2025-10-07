@@ -314,52 +314,85 @@ Across the last five standups, several consistent trends have emerged:
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 5 – Starting e2e Testing Soon!
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Tuesday, October 7th (2025)  
+* **Time:** 12:57 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
+  - `End-to-End Testing`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Done testing for `Feedback System`, just need to finish the PR request + documentation  
+- Want to finally start `End-to-End Testing`
 
 #### 📈 Previous Progress
-- 
+- Implemented logic for "default" vs "unknown" shading  
+- Added test cases for UI updating for feasibility for all subsystem components  
+- Added case-insensitive handling for frontend functions accessing feasibility category keys ("good" → "GoOd")  
+- Completed & recorded a rough e2e test: user loads → stats fetched → feasibility computed → outlines + button color update  
+- Updated subtasks + DoD of `Feedback System`  
+- Recorded GIFs for PR request and DoD evidence  
 
 #### 🧱 Problems & Blockers
-- 
+- Messed up merge request last time and it might happen again  
+- Noticed some minor bugs:  
+  - Calcs for daily evaluations organize by "Start Date" day name  
+  - However, the calc does not filter for specific dates to ensure the dates on the stat card match the "Start Date"  
+  - This means, that I could create plans across 5 weeks with tasks on Mondays and the time calcs would all count towards Monday even though the Stat Card corresponding to Monday is only for one specific date  
 
 #### ⏳ Pending Actions
-- 
+- None  
 
 #### 🔜 Next Steps
-- 
+- Update `Feedback System` backlog + Notion  
+- Complete PR request  
+  - Create GIFs  
+  - Finish PR `.md` file  
+  - Solve merge conflicts  
+  - Finalize pull request  
+  - Double check all files to ensure merge conflict resolution wasn’t messed up  
+- Start implementing `End-to-End Testing`  
+  - Download + setup Playwright  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 1
-- 
+#### ❓ Question 1  
+**If you had to choose the next feature to develop that would help my resume the most, what would you choose?**  
+Building an **end-to-end testing system** with Playwright would have the strongest resume impact right now. It demonstrates full-stack maturity (React → Flask → Supabase → Notion), test automation, and CI/CD readiness — a clear differentiator for junior developers.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2  
+**What are the biggest risks for today’s tasks? What am I assuming that might be incorrect?**  
+The main risk lies in assuming the “Monday aggregation bug” is minor — it could undermine data reliability during e2e testing. Another risk is merge conflict resolution: assuming previous PR fixes carried over without re-testing might introduce silent regressions.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Finished all `Feedback System` testing tasks  
+- e2e testing setup is the next logical milestone for validating the full frontend-backend flow  
+- Need to address date filtering bug before formal e2e tests to prevent misaligned data summaries  
 
 #### 🗝️ Key Decisions
-- 
+- Proceed with Playwright setup as the next backlog item  
+- Defer full statistical validation until after the merge fix  
+- Document the date-calculation bug in the `Feedback System` PR to maintain traceability  
 
 #### 📌 Action Items
-- 
+- [ ] Finalize and merge `Feedback System` PR
+  - [ ] Record + create all gifs
+  - [ ] Document bug in .md file
+  - [ ] Finish PR `.md` file
+  - [ ] Solve merge conflicts
+  - [ ] Finalize pull request
+- [ ] Verify merge conflict fixes did not alter test behavior  
+- [ ] Log and triage the daily evaluation date mismatch bug  
+- [ ] Initialize Playwright configuration for `End-to-End Testing`
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
