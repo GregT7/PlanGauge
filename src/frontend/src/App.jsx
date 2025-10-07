@@ -18,7 +18,7 @@ function App() {
       await setupApp()
     }
 
-    // launchSetupApp();
+    launchSetupApp();
   }, []);
 
   return (
