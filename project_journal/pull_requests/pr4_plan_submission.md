@@ -96,11 +96,7 @@ All components were tested using:
 
 ---
 
-## 👀 Reviewers
-Tag teammates for code review and feedback.  
-Example:
-@teammate-name (for test logic review)
-
+## 👀 ChatGPT Review
 I'd appreciate feedback on:
 
 - 🧪 Test coverage
