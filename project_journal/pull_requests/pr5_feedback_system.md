@@ -61,61 +61,88 @@ All components were tested using:
 
 ## 🎥 Visuals
 ### Application Startup Process Swimlane Diagram
-- Description: Shows the cross system logic for launching the app where the ui is loaded, all system connections are tested, and initial stats data is requested and hopefully received
+
+_Description:_ Shows the cross system logic for launching the app where the ui is loaded, all system connections are tested, and initial stats data is requested and hopefully received
+
 ![startup_swimlane](https://github.com/user-attachments/assets/76e31c5a-2130-40e6-b420-51ccab094d43)
 
 ### Adaptive UI
-- Description: The outer border of each subsystem container updates to reflect the current feasibility status (good - green, moderate - orange, poor - rose) based on the current state of the Task Table and retrieved statistical data
+
+_Description:_ The outer border of each subsystem container updates to reflect the current feasibility status (good - green, moderate - orange, poor - rose) based on the current state of the Task Table and retrieved statistical data
+
 ![adaptive_ui](https://github.com/user-attachments/assets/1b1b515d-7a8a-4050-9cf3-5f7494550ef3)
 
 ### Statistical Data Retrieval
-- Description: Demonstrates how the frontend requests statistical data from the backend and handles different outcomes. This includes the UI behavior during successful and failed fetches, the toast notifications that confirm request status, and terminal results from curling the /api/db/stats endpoint with both valid and invalid query parameters.
 
-**Frontend-initiated Request & Retrieval**
-- Description: Shows how the frontend responds when the backend is offline versus when it becomes active and successfully returns data. The UI transitions from an error state to a neutral gray state once stats data is retrieved, indicating that the backend is running but no tasks are currently present in the table.
+_Description:_ Demonstrates how the frontend requests statistical data from the backend and handles different outcomes. This includes the UI behavior during successful and failed fetches, the toast notifications that confirm request status, and terminal results from curling the /api/db/stats endpoint with both valid and invalid query parameters.
+
+### Frontend-initiated Request & Retrieval
+
+_Description:_ Shows how the frontend responds when the backend is offline versus when it becomes active and successfully returns data. The UI transitions from an error state to a neutral gray state once stats data is retrieved, indicating that the backend is running but no tasks are currently present in the table.
+
 ![stats_retrieval](https://github.com/user-attachments/assets/4a2bbb29-7792-4787-b8f3-12245d907431)
 
-**Frontend Retrieval Toast Notification**
-- Description: Displays the toast messages that appear on app launch, capturing both the stats retrieval attempt and the initial connection check that pings all system APIs to verify backend availability.
+### Frontend Retrieval Toast Notification
+
+_Description:_ Displays the toast messages that appear on app launch, capturing both the stats retrieval attempt and the initial connection check that pings all system APIs to verify backend availability.
+
 ![stats_toast](https://github.com/user-attachments/assets/407b4481-fe45-46b3-842d-bae8cc15bf9a)
 
-**Stats Retrieval API Endpoint (`/api/db/stats`)**
-- Description: Demonstrates terminal outputs from curling the Flask stats API using different query parameters to test both error and success cases. This includes validation feedback for malformed inputs and the structured JSON response returned when valid date ranges are provided.
+### Stats Retrieval API Endpoint (`/api/db/stats`)
+
+_Description:_ Demonstrates terminal outputs from curling the Flask stats API using different query parameters to test both error and success cases. This includes validation feedback for malformed inputs and the structured JSON response returned when valid date ranges are provided.
+
 ![stats_api](https://github.com/user-attachments/assets/d254eacf-e581-41a1-912b-4644b9f02704)
 
-**Statistical Retrieval E2E Test**
-- Description: Showcases an end-to-end test verifying the full stats retrieval workflow—from frontend request initiation to backend response and UI feedback—confirming that valid data updates visual elements and toast notifications as expected.
+### Statistical Retrieval E2E Test
+
+_Description:_ Showcases an end-to-end test verifying the full stats retrieval workflow—from frontend request initiation to backend response and UI feedback—confirming that valid data updates visual elements and toast notifications as expected.
+
 ![feedback_e2e](https://github.com/user-attachments/assets/708ef933-3a19-484e-90b6-fac08093284f)
 
 ### Evaluation Section
-- Description: Displays the results of the feasibility analysis by summarizing weekly and daily performance metrics, visual feedback colors, and categorized feasibility levels. This section integrates multiple data sources from the backend and presents a structured, readable breakdown of how the user’s plan aligns with predicted workload capacity.
+_Description:_ Displays the results of the feasibility analysis by summarizing weekly and daily performance metrics, visual feedback colors, and categorized feasibility levels. This section integrates multiple data sources from the backend and presents a structured, readable breakdown of how the user’s plan aligns with predicted workload capacity.
 
-**Component Demo**
-- Description: Provides an overview of the full Evaluation Section in action, showing how overall feasibility, daily summaries, and supporting details are visually combined into a cohesive UI.
+### Component Demo
+
+_Description:_ Provides an overview of the full Evaluation Section in action, showing how overall feasibility, daily summaries, and supporting details are visually combined into a cohesive UI.
+
 ![eval_section](https://github.com/user-attachments/assets/be3f6bf4-71e1-4316-b0c0-254570566a1a)
 
-**Details Accordion**
-- Description: Breaks down how the overall feasibility score is computed, including equations, weighting factors, and status filters used to determine the final evaluation category.
+### Details Accordion
+
+_Description:_ Breaks down how the overall feasibility score is computed, including equations, weighting factors, and status filters used to determine the final evaluation category.
+
 ![details_accordion](https://github.com/user-attachments/assets/7d251851-73c2-4c49-888a-00388da765c7)
 
-**Week Accordion**
-- Description: Summarizes weekly-level performance metrics, including average planned time, standard deviation, and feasibility points. Offers a high-level view of consistency and time distribution across the week.
+### Week Accordion
+
+_Description:_ Summarizes weekly-level performance metrics, including average planned time, standard deviation, and feasibility points. Offers a high-level view of consistency and time distribution across the week.
+
 ![week_accordion](https://github.com/user-attachments/assets/ec6e4fb2-ffb6-450d-9654-802e41b0743b)
 
-**Daily Accordion**
-- Description: Highlights per-day statistics and categorical breakdowns of statuses (Good, Moderate, Poor). Displays how each day’s workload contributes to the overall feasibility score.
+### Daily Accordion
+
+_Description:_ Highlights per-day statistics and categorical breakdowns of statuses (Good, Moderate, Poor). Displays how each day’s workload contributes to the overall feasibility score.
+
 ![daily_accordion](https://github.com/user-attachments/assets/54dd00c7-fc7b-406c-8aa5-bdf5eeeece21)
 
-**Z-Score Accordion**
-- Description: Shows how z-score thresholds are applied to categorize deviations from expected time values, forming the statistical basis for the feasibility color mapping.
+### Z-Score Accordion
+
+_Description:_ Shows how z-score thresholds are applied to categorize deviations from expected time values, forming the statistical basis for the feasibility color mapping.
+
 ![zscore_accordion](https://github.com/user-attachments/assets/02a46068-4f32-4064-9b6c-1d80b663224a)
 
-**Points Accordion**
-- Description: Defines the point ranges associated with each feasibility category (Good, Moderate, Poor) and visualizes how computed scores translate into qualitative ratings.
+### Points Accordion
+
+_Description:_ Defines the point ranges associated with each feasibility category (Good, Moderate, Poor) and visualizes how computed scores translate into qualitative ratings.
+
 ![points_accordion](https://github.com/user-attachments/assets/f7a3884d-5abb-4f16-98b0-ee27d1e253c7)
 
 ### React Testing Coverage
-- Description: Displays the Vitest coverage summary generated from running npm run test -- --coverage. The report highlights overall testing completeness across frontend components, including statements, branches, functions, and lines—providing a clear overview of which UI and logic modules have been validated through unit and integration tests.
+
+_Description:_ Displays the Vitest coverage summary generated from running `npm run test -- --coverage`. The report highlights overall testing completeness across frontend components, including statements, branches, functions, and lines—providing a clear overview of which UI and logic modules have been validated through unit and integration tests.
+
 ![vitest_coverage](https://github.com/user-attachments/assets/327e2068-d45b-42eb-8015-368a50055047)
 
 
