@@ -54,7 +54,6 @@ function SubmissionButton({status = 'neutral',
     }
 
     const { feasibility } = useContext(processingContext);
-    // const style = useMemo(() => "text-xl p-6 " + handleStyling(feasibility?.status))
     const style = "text-xl p-6 " + handleStyling(feasibility?.status)
 
 

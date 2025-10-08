@@ -463,7 +463,7 @@ The main risk lies in assuming the “Monday aggregation bug” is minor — it 
 - [ ] Finish PR documentation (add modified files + bug note)
 - [ ] Install and configure Playwright environment
 - [ ] Verify test servers start correctly via npm scripts
-- [ ] Update E2E subtasks + DoD in backlog documentation
+- [x] Update E2E subtasks + DoD in backlog documentation
 - [ ] Begin first “connection health” test run
 - [ ] Document new testing workflow for `Presentation Readiness`
 

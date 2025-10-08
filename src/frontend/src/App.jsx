@@ -9,8 +9,6 @@ import { Toaster, toast } from 'sonner'
 import './App.css'
 import EvaluationSection from "./components/EvaluationSection/EvaluationSection";
 import { ProcessingContextProvider } from "@/contexts/ProcessingContext"
-import test_tasks2 from "@/utils/test_tasks2.json" with { type: 'json' }
-
 
 function App() {
   useEffect(() => {
