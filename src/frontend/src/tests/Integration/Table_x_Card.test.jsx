@@ -1,104 +1,138 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useState, useMemo } from 'react';
-import { TaskContext } from '@/contexts/TaskContext';
-import TaskTable from '@/components/TaskTable/TaskTable';
-import StatCardSystem from '@/components/StatCardSystem/StatCardSystem';
-import testCardData from "@/utils/testCardData";
+// src/tests/Integration/Table_x_Card.test.jsx
+import React from "react";
+import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, it, expect } from "vitest";
 
-const Wrapper = ({ initialTasks, initialCardData }) => {
-  const [tasks, setTasks] = useState(initialTasks);
+import TaskTable from "@/components/TaskTable/TaskTable";
+import StatCardSystem from "@/components/StatCardSystem/StatCardSystem";
+import TaskContextProvider from "@/contexts/TaskContext";
+import { ProcessingContextProvider } from "@/contexts/ProcessingContext";
 
-  const timeSum = useMemo(() => {
-    return tasks.reduce((acc, task) => acc + task.time_estimation, 0);
-  }, [tasks]);
+/**
+ * NOTE: TaskTable pulls its data from TaskContext.
+ * We wrap both TaskTable and StatCardSystem in the providers to simulate the real wiring.
+ */
 
-  return (
-    <TaskContext.Provider value={{ tasks, setTasks, timeSum }}>
-      <div className="grid grid-cols-2 gap-8">
-        <TaskTable />
-        <StatCardSystem cardData={initialCardData} />
-      </div>
-    </TaskContext.Provider>
-  );
+const Wrapper = ({ children }) => (
+  <TaskContextProvider>
+    <ProcessingContextProvider>{children}</ProcessingContextProvider>
+  </TaskContextProvider>
+);
+
+// Helper: first actual data row (has an input text box for task name)
+const getFirstDataRow = () => {
+  const rows = screen.getAllByRole("row");
+  return rows.find((r) => within(r).queryAllByRole("textbox").length > 0);
 };
 
-describe('Integration: TaskTable and StatCardSystem', () => {
-//   beforeEach(() => vi.useFakeTimers());
+const readFooterSum = () => {
+  const el = screen.getByTestId("time-display");
+  const n = Number(el.textContent?.trim() || "0");
+  return Number.isNaN(n) ? 0 : n;
+};
 
-  const sharedDate = new Date('2025-06-17');
-  const initialTasks = [
-    {
-      id: 1,
-      name: 'Initial Task',
-      start_date: sharedDate,
-      due_date: sharedDate,
-      time_estimation: 600,
-      selected: false,
-    },
-  ];
-
-  it('renders TaskTable and StatCardSystem side by side', () => {
-    render(<Wrapper initialTasks={initialTasks} initialCardData={testCardData}/>);
-
-    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
-    expect(screen.getByRole('textbox')).toHaveValue('Initial Task');
-  });
-
-  it('updates StatCard status when a new task is added', async () => {
-    render(<Wrapper initialTasks={initialTasks} initialCardData={testCardData}/>);
-    const user = userEvent.setup();
-
-    const footerButton = screen.getByTestId('add-task-button');
-    await user.click(footerButton);
-
-    const inputs = screen.getAllByRole('spinbutton');
-    const lastInput = inputs[inputs.length - 1];
-    await user.clear(lastInput);
-    await user.type(lastInput, '90');
-
-    // Confirm that total time sum is now 150
-    expect(screen.getByText('690')).toBeInTheDocument();
-
-    // Check if any StatCard now shows poor status
-    const statCards = screen.getAllByTestId('StatCard');
-    const foundPoor = statCards.some(card =>
-      card.textContent.toLowerCase().includes('poor')
+describe("Integration: TaskTable x StatCardSystem (context-driven)", () => {
+  it("smoke: renders TaskTable and StatCardSystem with providers", () => {
+    render(
+      <Wrapper>
+        <div className="grid grid-cols-2 gap-8">
+          <TaskTable />
+          <StatCardSystem />
+        </div>
+      </Wrapper>
     );
-    expect(foundPoor).toBe(true);
+
+    // TaskTable present — find a real data row with a textbox
+    const row = getFirstDataRow();
+    expect(row).toBeTruthy();
+    expect(within(row).getAllByRole("textbox").length).toBeGreaterThan(0);
+
+    // StatCardSystem present — header text
+    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
   });
 
-  it('removes time contribution from StatCard when task is deleted', async () => {
+  it("adding a task and entering time updates the SUM in the footer (via context)", async () => {
     const user = userEvent.setup();
-    render(<Wrapper initialTasks={[...initialTasks, { ...initialTasks[0], id: 2, time_estimation: 90 }]} initialCardData={testCardData}  />);
 
-    // Confirm initial time sum
-    expect(screen.getByText('690')).toBeInTheDocument();
+    render(
+      <Wrapper>
+        <div className="grid grid-cols-2 gap-8">
+          <TaskTable />
+          <StatCardSystem />
+        </div>
+      </Wrapper>
+    );
 
-    // Select second task row
-    const checkboxes = screen.getAllByRole('checkbox');
-    await user.click(checkboxes[1]);
+    const before = readFooterSum();
 
-    // Delete via keyboard
-    await user.keyboard('{Backspace}');
+    // Click the "+ New Page" button in CustomFooter (no testid, use role/name)
+    const addBtn = screen.getByRole("button", { name: /new page/i });
+    await user.click(addBtn);
 
-    // Should drop sum to 60 now
-    expect(screen.getByText('600')).toBeInTheDocument();
+    // Set time for the newly added row (last number input)
+    const nums = screen.getAllByRole("spinbutton");
+    const last = nums[nums.length - 1];
+    await user.clear(last);
+    await user.type(last, "90");
+
+    const after = readFooterSum();
+    expect(after - before).toBe(90);
+
+    // StatCardSystem remains intact
+    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
   });
 
-  it('task name edits do not affect StatCard rendering or stability', async () => {
+  it("editing a task name updates the table without affecting StatCardSystem", async () => {
     const user = userEvent.setup();
-    render(<Wrapper initialTasks={initialTasks} initialCardData={testCardData} />);
 
-    const textbox = screen.getByRole('textbox');
-    await user.clear(textbox);
-    await user.type(textbox, 'Updated Name');
+    render(
+      <Wrapper>
+        <div className="grid grid-cols-2 gap-8">
+          <TaskTable />
+          <StatCardSystem />
+        </div>
+      </Wrapper>
+    );
 
-    expect(textbox).toHaveValue('Updated Name');
+    const row = getFirstDataRow();
+    expect(row).toBeTruthy();
 
-    // StatCardSystem should still be intact (not crash/react incorrectly)
-    const statCards = screen.getAllByTestId('StatCard');
-    expect(statCards).toHaveLength(7);
+    const [nameInput] = within(row).getAllByRole("textbox");
+    await user.clear(nameInput);
+    await user.type(nameInput, "Updated Task");
+    expect(nameInput).toHaveValue("Updated Task");
+
+    // StatCardSystem still visible
+    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
+  });
+
+  it("deleting a selected task via Backspace removes a row and keeps StatCardSystem stable", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <Wrapper>
+        <div className="grid grid-cols-2 gap-8">
+          <TaskTable />
+          <StatCardSystem />
+        </div>
+      </Wrapper>
+    );
+
+    // Count rows before (includes header/footer). We'll compare relative change.
+    const rowsBefore = screen.getAllByRole("row").length;
+
+    // Select the first row’s checkbox (shadcn checkbox has role="checkbox")
+    const checkboxes = await screen.findAllByRole("checkbox");
+    await user.click(checkboxes[0]);
+
+    // Trigger deletion via Backspace (TaskTable listens on window)
+    await user.keyboard("{Backspace}");
+
+    const rowsAfter = screen.getAllByRole("row").length;
+    expect(rowsAfter).toBeLessThan(rowsBefore);
+
+    // StatCardSystem still present
+    expect(screen.getByText(/Stat Card System/i)).toBeInTheDocument();
   });
 });

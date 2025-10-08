@@ -1,22 +1,32 @@
 {
     "neutral": {
         "base": "bg-zinc-900 border-2 border-zinc-500 text-stone-50",
-        "hover": "hover:bg-zinc-700 hover:text-stone-200"
+        "hover": "hover:bg-zinc-700 hover:text-stone-200",
+        "text": "text-zinc-500",
+        "border": "border-zinc-500"
     },
     "good": {
         "base": "bg-emerald-800 border-2 border-emerald-600 text-stone-50",
-        "hover": "hover:bg-emerald-700 hover:text-stone-200"
+        "hover": "hover:bg-emerald-700 hover:text-stone-200",
+        "text": "text-emerald-600",
+        "border": "border-emerald-600"
     },
     "moderate": {
         "base": "bg-amber-800 border-2 border-amber-600 text-stone-50",
-        "hover": "hover:bg-amber-700 hover:text-stone-200"
+        "hover": "hover:bg-amber-700 hover:text-stone-200",
+        "text": "text-amber-600",
+        "border": "border-amber-600"
     },
     "poor": {
         "base": "bg-rose-800 border-2 border-rose-600 text-stone-50",
-        "hover": "over:bg-rose-700 hover:text-stone-200"
+        "hover": "hover:bg-rose-700 hover:text-stone-200",
+        "text": "text-rose-600",
+        "border": "border-rose-600"
     },
-    "error": {
+    "unknown": {
         "base": "bg-red-800 border-2 border-red-600 text-stone-50",
-        "hover": "hover:bg-red-700 hover:text-stone-200"
+        "hover": "hover:bg-red-700 hover:text-stone-200",
+        "text": "text-red-600",
+        "border": "border-red-600"
     }
 }

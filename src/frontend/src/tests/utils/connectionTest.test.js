@@ -1,14 +1,10 @@
-// connectionTest.test.jsx
+// src/tests/utils/connectionTest.test.js
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // Mock the persistentFetch module used by connectionTest
-vi.mock("@/utils/persistentFetch", () => {
-  return { persistentFetch: vi.fn() };
-});
-// (In case your resolver uses the relative path inside the compiled module)
-vi.mock("./persistentFetch", () => {
-  return { persistentFetch: vi.fn() };
-});
+vi.mock("@/utils/persistentFetch", () => ({ persistentFetch: vi.fn() }));
+// In case the built file or resolver uses a relative import:
+vi.mock("./persistentFetch", () => ({ persistentFetch: vi.fn() }));
 
 import connectionTest from "@/utils/connectionTest";
 import { persistentFetch } from "@/utils/persistentFetch";
@@ -25,15 +21,15 @@ beforeEach(() => {
   vi.restoreAllMocks();
 });
 
-describe("connectionTest (new structure)", () => {
-  it("resolves with pass message + details when Flask, Supabase, and Notion are all OK", async () => {
-    // Flask OK, Supabase OK, Notion OK
+describe("connectionTest (matches current implementation)", () => {
+  it("resolves with ok:true, pass message, and details when all services are OK", async () => {
     persistentFetch
       .mockResolvedValueOnce(OK)   // Flask
       .mockResolvedValueOnce(OK)   // Supabase
       .mockResolvedValueOnce(OK);  // Notion
 
     await expect(connectionTest()).resolves.toEqual({
+      ok: true,
       message: "All Systems Online!",
       details: {
         flask_response: OK,
@@ -48,11 +44,11 @@ describe("connectionTest (new structure)", () => {
     expect(persistentFetch).toHaveBeenCalledTimes(3);
   });
 
-  it("rejects early when Flask is NOT ok (no Supabase/Notion calls)", async () => {
-    // Flask FAIL → should NOT call the others
-    persistentFetch.mockResolvedValueOnce(FAIL);
+  it("rejects early with ok:false when Flask is NOT ok (skips Supabase/Notion)", async () => {
+    persistentFetch.mockResolvedValueOnce(FAIL); // Flask
 
     await expect(connectionTest()).rejects.toEqual({
+      ok: false,
       message: "Error: Connectivity Issues!",
       details: {
         flask_response: FAIL,
@@ -65,14 +61,14 @@ describe("connectionTest (new structure)", () => {
     expect(persistentFetch).toHaveBeenNthCalledWith(1, FLASK, "Flask");
   });
 
-  it("rejects when Flask OK but Supabase NOT ok (Notion still attempted)", async () => {
-    // Flask OK, Supabase FAIL, Notion OK/FAIL → still reject
+  it("rejects with ok:false when Flask OK but Supabase NOT ok (Notion still attempted)", async () => {
     persistentFetch
       .mockResolvedValueOnce(OK)    // Flask
       .mockResolvedValueOnce(FAIL)  // Supabase
-      .mockResolvedValueOnce(OK);   // Notion (value doesn't matter; accept=false)
+      .mockResolvedValueOnce(OK);   // Notion (value doesn't affect accept flag)
 
     await expect(connectionTest()).rejects.toEqual({
+      ok: false,
       message: "Error: Connectivity Issues!",
       details: {
         flask_response: OK,
@@ -87,13 +83,14 @@ describe("connectionTest (new structure)", () => {
     expect(persistentFetch).toHaveBeenCalledTimes(3);
   });
 
-  it("rejects when Flask OK, Supabase OK, but Notion NOT ok", async () => {
+  it("rejects with ok:false when Flask OK, Supabase OK, but Notion NOT ok", async () => {
     persistentFetch
       .mockResolvedValueOnce(OK)    // Flask
       .mockResolvedValueOnce(OK)    // Supabase
       .mockResolvedValueOnce(FAIL); // Notion
 
     await expect(connectionTest()).rejects.toEqual({
+      ok: false,
       message: "Error: Connectivity Issues!",
       details: {
         flask_response: OK,
@@ -105,11 +102,12 @@ describe("connectionTest (new structure)", () => {
     expect(persistentFetch).toHaveBeenCalledTimes(3);
   });
 
-  it("handles unexpected exceptions by rejecting with the catch-path shape", async () => {
+  it("handles unexpected exceptions by rejecting with ok:false + catch-path shape", async () => {
     const boom = new Error("boom");
-    persistentFetch.mockRejectedValueOnce(boom); // throws on Flask
+    persistentFetch.mockRejectedValueOnce(boom); // throw on Flask
 
     await expect(connectionTest()).rejects.toEqual({
+      ok: false,
       message: "An unexpected error occured!",
       details: boom,
     });

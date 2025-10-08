@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`App > doesn't crash when connectionTest fails 1`] = `
+exports[`App (current structure) > renders without crashing and shows the title 1`] = `
 <div>
   <section
     aria-atomic="false"
@@ -18,845 +18,7 @@ exports[`App > doesn't crash when connectionTest fails 1`] = `
     class="space-y-10 pt-5"
   >
     <div
-      class="w-[73.5%] mx-auto border-2 border-dashed pr-9"
-    >
-      <h1
-        class="text-2xl py-4 text-left pl-8"
-      >
-        Task Table
-      </h1>
-      <div
-        class="relative w-full overflow-x-auto"
-        data-slot="table-container"
-      >
-        <table
-          class="caption-bottom text-sm w-full"
-          data-slot="table"
-        >
-          <thead
-            class=""
-            data-slot="table-header"
-          >
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <th
-                class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[3.5%]"
-                data-slot="table-head"
-              />
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[30%]"
-                data-slot="table-head"
-              >
-                Task Name
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
-                data-slot="table-head"
-              >
-                Category
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
-                data-slot="table-head"
-              >
-                Due Date
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
-                data-slot="table-head"
-              >
-                Start Date
-              </th>
-              <th
-                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[2.5%]"
-                data-slot="table-head"
-              >
-                Time
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            class=""
-            data-slot="table-body"
-          >
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-role="row-selector"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-checked="false"
-                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                  data-slot="checkbox"
-                  data-state="unchecked"
-                  role="checkbox"
-                  type="button"
-                  value="on"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="outline-none w-full h-full bg-transparent text-left px-2"
-                  type="text"
-                  value="Plan Tool p58"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                  class="cursor-pointer w-full h-full text-left"
-                  data-slot="dropdown-menu-trigger"
-                  data-state="closed"
-                  id="radix-:r18:"
-                  type="button"
-                >
-                  <span
-                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
-                  >
-                    Career
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1a:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 3, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1b:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    June 19, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  type="number"
-                  value="90"
-                />
-              </td>
-            </tr>
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-role="row-selector"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-checked="false"
-                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                  data-slot="checkbox"
-                  data-state="unchecked"
-                  role="checkbox"
-                  type="button"
-                  value="on"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="outline-none w-full h-full bg-transparent text-left px-2"
-                  type="text"
-                  value="Update CV p6"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                  class="cursor-pointer w-full h-full text-left"
-                  data-slot="dropdown-menu-trigger"
-                  data-state="closed"
-                  id="radix-:r1c:"
-                  type="button"
-                >
-                  <span
-                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
-                  >
-                    Career
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1e:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 25, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1f:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 22, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  type="number"
-                  value="45"
-                />
-              </td>
-            </tr>
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-role="row-selector"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-checked="false"
-                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
-                  data-slot="checkbox"
-                  data-state="unchecked"
-                  role="checkbox"
-                  type="button"
-                  value="on"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="outline-none w-full h-full bg-transparent text-left px-2"
-                  type="text"
-                  value="Plan Japan trip p2"
-                />
-              </td>
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-expanded="false"
-                  aria-haspopup="menu"
-                  class="cursor-pointer w-full h-full text-left"
-                  data-slot="dropdown-menu-trigger"
-                  data-state="closed"
-                  id="radix-:r1g:"
-                  type="button"
-                >
-                  <span
-                    class="cursor-pointer bg-teal-600 px-1.5 py-0.5 rounded-sm"
-                  >
-                    Life
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1i:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    August 6, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <button
-                  aria-controls="radix-:r1j:"
-                  aria-expanded="false"
-                  aria-haspopup="dialog"
-                  class="w-full h-full text-left cursor-pointer"
-                  data-slot="popover-trigger"
-                  data-state="closed"
-                  type="button"
-                >
-                   
-                  <span
-                    class="px-2 py-2 wrap-normal"
-                  >
-                    July 30, 2025
-                  </span>
-                </button>
-              </td>
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
-                data-slot="table-cell"
-              >
-                <input
-                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  type="number"
-                  value="90"
-                />
-              </td>
-            </tr>
-          </tbody>
-          <tfoot
-            class="font-medium"
-            data-slot="table-footer"
-          >
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                data-slot="table-cell"
-              />
-              <td
-                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 border border-stone-600"
-                colspan="5"
-                data-slot="table-cell"
-              >
-                <button
-                  class="text-left hover:bg-stone-800 w-full h-full px-2"
-                  data-testid="add-task-button"
-                >
-                  + New Page
-                </button>
-              </td>
-            </tr>
-            <tr
-              class="data-[state=selected]:bg-muted transition-colors"
-              data-slot="table-row"
-            >
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
-                colspan="5"
-                data-slot="table-cell"
-              />
-              <td
-                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
-                data-slot="table-cell"
-              >
-                <span
-                  class="text-stone-400 px-2"
-                >
-                  SUM
-                </span>
-                <span
-                  data-testid="time-display"
-                >
-                  225
-                </span>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-    <div
-      class="w-[73.5%] mx-auto border-2 border-dashed pt-2"
-    >
-      <h1
-        class="text-2xl pt-2 pb-4 text-left pl-8"
-      >
-        Stat Card System
-      </h1>
-      <div
-        class="grid grid-cols-4 gap-4"
-      >
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Monday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 16, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Tuesday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 17, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Wednesday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 18, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-emerald-800 border-2 border-emerald-600 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Thursday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 19, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Good
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 90 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="grid grid-cols-3 mt-4 gap-4"
-      >
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Friday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 20, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Saturday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 21, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="flex justify-center items-center"
-        >
-          <div
-            class="w-44 h-44 shrink-0"
-          >
-            <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
-              data-slot="card"
-              data-testid="StatCard"
-            >
-              <div
-                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
-                data-slot="card-header"
-              >
-                <div
-                  class="font-semibold text-base truncate"
-                  data-slot="card-title"
-                >
-                  Sunday
-                </div>
-                <div
-                  class="text-muted-foreground text-sm truncate"
-                  data-slot="card-description"
-                >
-                  June 22, 2025
-                </div>
-              </div>
-              <div
-                class="px-6 space-y-1 text-sm"
-                data-slot="card-content"
-              >
-                <p
-                  class="truncate"
-                >
-                  Status: Neutral
-                </p>
-                <p
-                  class="truncate"
-                >
-                  Sum: 0 mins
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div
-          class="flex justify-center gap-5 items-center py-5"
-          data-testid="StatusCounter"
-        >
-          <div
-            class="flex items-center gap-1"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-emerald-500"
-              data-testid="circle-div"
-            />
-            <span>
-              <span>
-                x1
-              </span>
-            </span>
-          </div>
-          <div
-            class="flex items-center gap-1"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-amber-500"
-              data-testid="circle-div"
-            />
-            <span>
-              <span>
-                x0
-              </span>
-            </span>
-          </div>
-          <div
-            class="flex items-center gap-1"
-          >
-            <div
-              class="w-12 h-12 rounded-full bg-rose-500"
-              data-testid="circle-div"
-            />
-            <span>
-              <span>
-                x0
-              </span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button
-      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs h-9 has-[>svg]:px-3 text-xl p-6 bg-zinc-900 border-2 border-zinc-500 text-stone-50 hover:bg-zinc-700 hover:text-stone-200"
-      data-slot="button"
-      status="neutral"
-    >
-      Submit
-    </button>
-  </div>
-</div>
-`;
-
-exports[`App > renders all components without problems 1`] = `
-<div>
-  <section
-    aria-atomic="false"
-    aria-label="Notifications alt+T"
-    aria-live="polite"
-    aria-relevant="additions text"
-    tabindex="-1"
-  />
-  <h1
-    class="m-0 text-4xl leading-none"
-  >
-    PlanGauge
-  </h1>
-  <div
-    class="space-y-10 pt-5"
-  >
-    <div
-      class="w-[73.5%] mx-auto border-2 border-dashed pr-9"
+      class="w-[73.5%] mx-auto border-2 border-dashed pr-9 border-red-600"
     >
       <h1
         class="text-2xl py-4 text-left pl-8"
@@ -985,7 +147,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    July 3, 2025
+                    September 29, 2025
                   </span>
                 </button>
               </td>
@@ -1006,7 +168,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    June 19, 2025
+                    September 29, 2025
                   </span>
                 </button>
               </td>
@@ -1087,7 +249,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    July 25, 2025
+                    September 30, 2025
                   </span>
                 </button>
               </td>
@@ -1108,7 +270,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    July 22, 2025
+                    September 30, 2025
                   </span>
                 </button>
               </td>
@@ -1189,7 +351,7 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    August 6, 2025
+                    October 1, 2025
                   </span>
                 </button>
               </td>
@@ -1210,7 +372,415 @@ exports[`App > renders all components without problems 1`] = `
                   <span
                     class="px-2 py-2 wrap-normal"
                   >
-                    July 30, 2025
+                    October 1, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Go on a run"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rc:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-indigo-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Health
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:re:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 2, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rf:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 2, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="30"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="NetraPi p2"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rg:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:ri:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 3, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rj:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 3, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="30"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="NetraPi p3"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rk:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rm:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 4, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rn:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 4, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="45"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan tool p196"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:ro:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rq:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 5, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rr:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 5, 2025
                   </span>
                 </button>
               </td>
@@ -1272,7 +842,7 @@ exports[`App > renders all components without problems 1`] = `
                 <span
                   data-testid="time-display"
                 >
-                  225
+                  420
                 </span>
               </td>
             </tr>
@@ -1281,7 +851,7 @@ exports[`App > renders all components without problems 1`] = `
       </div>
     </div>
     <div
-      class="w-[73.5%] mx-auto border-2 border-dashed pt-2"
+      class="w-[73.5%] mx-auto border-2 border-dashed pt-2 border-red-600"
     >
       <h1
         class="text-2xl pt-2 pb-4 text-left pl-8"
@@ -1298,7 +868,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1316,7 +886,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 16, 2025
+                  September 29, 2025
                 </div>
               </div>
               <div
@@ -1326,12 +896,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 90 mins
                 </p>
               </div>
             </div>
@@ -1344,7 +914,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1362,7 +932,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 17, 2025
+                  September 30, 2025
                 </div>
               </div>
               <div
@@ -1372,12 +942,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 45 mins
                 </p>
               </div>
             </div>
@@ -1390,7 +960,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1408,7 +978,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 18, 2025
+                  October 1, 2025
                 </div>
               </div>
               <div
@@ -1418,12 +988,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 90 mins
                 </p>
               </div>
             </div>
@@ -1436,7 +1006,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-emerald-800 border-2 border-emerald-600 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1454,7 +1024,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 19, 2025
+                  October 2, 2025
                 </div>
               </div>
               <div
@@ -1464,12 +1034,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Good
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 90 mins
+                  Sum: 30 mins
                 </p>
               </div>
             </div>
@@ -1486,7 +1056,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1504,7 +1074,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 20, 2025
+                  October 3, 2025
                 </div>
               </div>
               <div
@@ -1514,12 +1084,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 30 mins
                 </p>
               </div>
             </div>
@@ -1532,7 +1102,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1550,7 +1120,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 21, 2025
+                  October 4, 2025
                 </div>
               </div>
               <div
@@ -1560,12 +1130,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 45 mins
                 </p>
               </div>
             </div>
@@ -1578,7 +1148,7 @@ exports[`App > renders all components without problems 1`] = `
             class="w-44 h-44 shrink-0"
           >
             <div
-              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-zinc-900 border-2 border-zinc-500 text-stone-50 h-full overflow-hidden"
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
               data-slot="card"
               data-testid="StatCard"
             >
@@ -1596,7 +1166,7 @@ exports[`App > renders all components without problems 1`] = `
                   class="text-muted-foreground text-sm truncate"
                   data-slot="card-description"
                 >
-                  June 22, 2025
+                  October 5, 2025
                 </div>
               </div>
               <div
@@ -1606,12 +1176,12 @@ exports[`App > renders all components without problems 1`] = `
                 <p
                   class="truncate"
                 >
-                  Status: Neutral
+                  Status: Unknown
                 </p>
                 <p
                   class="truncate"
                 >
-                  Sum: 0 mins
+                  Sum: 90 mins
                 </p>
               </div>
             </div>
@@ -1632,7 +1202,7 @@ exports[`App > renders all components without problems 1`] = `
             />
             <span>
               <span>
-                x1
+                x0
               </span>
             </span>
           </div>
@@ -1665,10 +1235,2940 @@ exports[`App > renders all components without problems 1`] = `
         </div>
       </div>
     </div>
+    <section
+      class="w-[73.5%] mx-auto border-2 border-dashed rounded-xl p-3 md:p-4 space-y- border-red-600"
+    >
+      <div
+        class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm"
+        data-slot="card"
+      >
+        <div
+          class="px-6 py-4"
+          data-slot="card-content"
+        >
+          <div
+            class="flex flex-wrap items-center gap-3"
+          >
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+              >
+                Unknown
+              </span>
+              <h2
+                class="text-lg font-semibold"
+              >
+                Evaluation
+              </h2>
+              <span
+                class="text-sm text-red-600"
+              >
+                (
+                -1
+                 pts)
+              </span>
+            </div>
+            <div
+              class="flex items-center gap-4 text-sm"
+            >
+              <div
+                class="flex items-center gap-2"
+              >
+                <span
+                  class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+                >
+                  Unknown
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  Weekly:
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  —
+                   pts
+                </span>
+              </div>
+              <div
+                class="flex items-center gap-2"
+              >
+                <span
+                  class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+                >
+                  Unknown
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  Daily:
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  —
+                   pts
+                </span>
+              </div>
+            </div>
+          </div>
+          <p
+            class="text-sm text-muted-foreground mt-2"
+          >
+            Your overall label blends weekly and daily points. Open the details below for inputs, formula, thresholds, and per-band explanations.
+          </p>
+          <div
+            data-orientation="vertical"
+          >
+            <div
+              class="border-b"
+              data-orientation="vertical"
+              data-state="closed"
+            >
+              <h3
+                class="flex"
+                data-orientation="vertical"
+                data-state="closed"
+              >
+                <button
+                  aria-controls="radix-:rt:"
+                  aria-expanded="false"
+                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180 text-base"
+                  data-orientation="vertical"
+                  data-radix-collection-item=""
+                  data-state="closed"
+                  id="radix-:rs:"
+                  type="button"
+                >
+                  <span
+                    class="font-medium"
+                  >
+                    Details
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m6 9 6 6 6-6"
+                    />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                aria-labelledby="radix-:rs:"
+                class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+                data-orientation="vertical"
+                data-state="closed"
+                hidden=""
+                id="radix-:rt:"
+                role="region"
+                style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <button
-      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs h-9 has-[>svg]:px-3 text-xl p-6 bg-zinc-900 border-2 border-zinc-500 text-stone-50 hover:bg-zinc-700 hover:text-stone-200"
+      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs h-9 has-[>svg]:px-3 text-xl p-6 bg-red-800 border-2 border-red-600 text-stone-50 hover:bg-red-700 hover:text-stone-200"
       data-slot="button"
-      status="neutral"
+    >
+      Submit
+    </button>
+  </div>
+</div>
+`;
+
+exports[`App > doesn't crash when connectionTest fails 1`] = `
+<div>
+  <section
+    aria-atomic="false"
+    aria-label="Notifications alt+T"
+    aria-live="polite"
+    aria-relevant="additions text"
+    tabindex="-1"
+  />
+  <h1
+    class="m-0 text-4xl leading-none"
+  >
+    PlanGauge
+  </h1>
+  <div
+    class="space-y-10 pt-5"
+  >
+    <div
+      class="w-[73.5%] mx-auto border-2 border-dashed pr-9 border-red-600"
+    >
+      <h1
+        class="text-2xl py-4 text-left pl-8"
+      >
+        Task Table
+      </h1>
+      <div
+        class="relative w-full overflow-x-auto"
+        data-slot="table-container"
+      >
+        <table
+          class="caption-bottom text-sm w-full"
+          data-slot="table"
+        >
+          <thead
+            class=""
+            data-slot="table-header"
+          >
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <th
+                class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[3.5%]"
+                data-slot="table-head"
+              />
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[30%]"
+                data-slot="table-head"
+              >
+                Task Name
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+                data-slot="table-head"
+              >
+                Category
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+                data-slot="table-head"
+              >
+                Due Date
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+                data-slot="table-head"
+              >
+                Start Date
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[2.5%]"
+                data-slot="table-head"
+              >
+                Time
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class=""
+            data-slot="table-body"
+          >
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan Tool p58"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r2q:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r2s:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 29, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r2t:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 29, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Update CV p6"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r2u:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r30:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 30, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r31:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 30, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="45"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan Japan trip p2"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r32:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-teal-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Life
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r34:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 1, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r35:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 1, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Go on a run"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r36:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-indigo-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Health
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r38:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 2, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r39:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 2, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="30"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="NetraPi p2"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r3a:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3c:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 3, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3d:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 3, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="30"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="NetraPi p3"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r3e:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3g:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 4, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3h:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 4, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="45"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan tool p196"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r3i:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3k:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 5, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3l:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 5, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+          </tbody>
+          <tfoot
+            class="font-medium"
+            data-slot="table-footer"
+          >
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-slot="table-cell"
+              />
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 border border-stone-600"
+                colspan="5"
+                data-slot="table-cell"
+              >
+                <button
+                  class="text-left hover:bg-stone-800 w-full h-full px-2"
+                  data-testid="add-task-button"
+                >
+                  + New Page
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                colspan="5"
+                data-slot="table-cell"
+              />
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
+                data-slot="table-cell"
+              >
+                <span
+                  class="text-stone-400 px-2"
+                >
+                  SUM
+                </span>
+                <span
+                  data-testid="time-display"
+                >
+                  420
+                </span>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <div
+      class="w-[73.5%] mx-auto border-2 border-dashed pt-2 border-red-600"
+    >
+      <h1
+        class="text-2xl pt-2 pb-4 text-left pl-8"
+      >
+        Stat Card System
+      </h1>
+      <div
+        class="grid grid-cols-4 gap-4"
+      >
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Monday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  September 29, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 90 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Tuesday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  September 30, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 45 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Wednesday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 1, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 90 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Thursday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 2, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 30 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-3 mt-4 gap-4"
+      >
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Friday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 3, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 30 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Saturday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 4, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 45 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Sunday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 5, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 90 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="flex justify-center gap-5 items-center py-5"
+          data-testid="StatusCounter"
+        >
+          <div
+            class="flex items-center gap-1"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-emerald-500"
+              data-testid="circle-div"
+            />
+            <span>
+              <span>
+                x0
+              </span>
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-1"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-amber-500"
+              data-testid="circle-div"
+            />
+            <span>
+              <span>
+                x0
+              </span>
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-1"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-rose-500"
+              data-testid="circle-div"
+            />
+            <span>
+              <span>
+                x0
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section
+      class="w-[73.5%] mx-auto border-2 border-dashed rounded-xl p-3 md:p-4 space-y- border-red-600"
+    >
+      <div
+        class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm"
+        data-slot="card"
+      >
+        <div
+          class="px-6 py-4"
+          data-slot="card-content"
+        >
+          <div
+            class="flex flex-wrap items-center gap-3"
+          >
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+              >
+                Unknown
+              </span>
+              <h2
+                class="text-lg font-semibold"
+              >
+                Evaluation
+              </h2>
+              <span
+                class="text-sm text-red-600"
+              >
+                (
+                -1
+                 pts)
+              </span>
+            </div>
+            <div
+              class="flex items-center gap-4 text-sm"
+            >
+              <div
+                class="flex items-center gap-2"
+              >
+                <span
+                  class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+                >
+                  Unknown
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  Weekly:
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  —
+                   pts
+                </span>
+              </div>
+              <div
+                class="flex items-center gap-2"
+              >
+                <span
+                  class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+                >
+                  Unknown
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  Daily:
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  —
+                   pts
+                </span>
+              </div>
+            </div>
+          </div>
+          <p
+            class="text-sm text-muted-foreground mt-2"
+          >
+            Your overall label blends weekly and daily points. Open the details below for inputs, formula, thresholds, and per-band explanations.
+          </p>
+          <div
+            data-orientation="vertical"
+          >
+            <div
+              class="border-b"
+              data-orientation="vertical"
+              data-state="closed"
+            >
+              <h3
+                class="flex"
+                data-orientation="vertical"
+                data-state="closed"
+              >
+                <button
+                  aria-controls="radix-:r3n:"
+                  aria-expanded="false"
+                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180 text-base"
+                  data-orientation="vertical"
+                  data-radix-collection-item=""
+                  data-state="closed"
+                  id="radix-:r3m:"
+                  type="button"
+                >
+                  <span
+                    class="font-medium"
+                  >
+                    Details
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m6 9 6 6 6-6"
+                    />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                aria-labelledby="radix-:r3m:"
+                class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+                data-orientation="vertical"
+                data-state="closed"
+                hidden=""
+                id="radix-:r3n:"
+                role="region"
+                style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button
+      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs h-9 has-[>svg]:px-3 text-xl p-6 bg-red-800 border-2 border-red-600 text-stone-50 hover:bg-red-700 hover:text-stone-200"
+      data-slot="button"
+    >
+      Submit
+    </button>
+  </div>
+</div>
+`;
+
+exports[`App > renders all components without problems 1`] = `
+<div>
+  <section
+    aria-atomic="false"
+    aria-label="Notifications alt+T"
+    aria-live="polite"
+    aria-relevant="additions text"
+    tabindex="-1"
+  />
+  <h1
+    class="m-0 text-4xl leading-none"
+  >
+    PlanGauge
+  </h1>
+  <div
+    class="space-y-10 pt-5"
+  >
+    <div
+      class="w-[73.5%] mx-auto border-2 border-dashed pr-9 border-red-600"
+    >
+      <h1
+        class="text-2xl py-4 text-left pl-8"
+      >
+        Task Table
+      </h1>
+      <div
+        class="relative w-full overflow-x-auto"
+        data-slot="table-container"
+      >
+        <table
+          class="caption-bottom text-sm w-full"
+          data-slot="table"
+        >
+          <thead
+            class=""
+            data-slot="table-header"
+          >
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <th
+                class="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[3.5%]"
+                data-slot="table-head"
+              />
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[30%]"
+                data-slot="table-head"
+              >
+                Task Name
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+                data-slot="table-head"
+              >
+                Category
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+                data-slot="table-head"
+              >
+                Due Date
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[12.5%]"
+                data-slot="table-head"
+              >
+                Start Date
+              </th>
+              <th
+                class="text-foreground h-10 align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-left px-2 border border-stone-600 w-[2.5%]"
+                data-slot="table-head"
+              >
+                Time
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class=""
+            data-slot="table-body"
+          >
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan Tool p58"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r0:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r2:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 29, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r3:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 29, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Update CV p6"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r4:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r6:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 30, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:r7:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    September 30, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="45"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan Japan trip p2"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:r8:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-teal-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Life
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:ra:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 1, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rb:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 1, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Go on a run"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rc:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-indigo-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Health
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:re:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 2, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rf:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 2, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="30"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="NetraPi p2"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rg:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:ri:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 3, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rj:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 3, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="30"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="NetraPi p3"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:rk:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rm:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 4, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rn:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 4, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="45"
+                />
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-role="row-selector"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-checked="false"
+                  class="peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+                  data-slot="checkbox"
+                  data-state="unchecked"
+                  role="checkbox"
+                  type="button"
+                  value="on"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="outline-none w-full h-full bg-transparent text-left px-2"
+                  type="text"
+                  value="Plan tool p196"
+                />
+              </td>
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-2 border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  class="cursor-pointer w-full h-full text-left"
+                  data-slot="dropdown-menu-trigger"
+                  data-state="closed"
+                  id="radix-:ro:"
+                  type="button"
+                >
+                  <span
+                    class="cursor-pointer bg-amber-600 px-1.5 py-0.5 rounded-sm"
+                  >
+                    Career
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rq:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 5, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <button
+                  aria-controls="radix-:rr:"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="w-full h-full text-left cursor-pointer"
+                  data-slot="popover-trigger"
+                  data-state="closed"
+                  type="button"
+                >
+                   
+                  <span
+                    class="px-2 py-2 wrap-normal"
+                  >
+                    October 5, 2025
+                  </span>
+                </button>
+              </td>
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 text-left border border-stone-600 hover:bg-stone-800"
+                data-slot="table-cell"
+              >
+                <input
+                  class="text-left px-2 w-full h-full bg-transparent outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  type="number"
+                  value="90"
+                />
+              </td>
+            </tr>
+          </tbody>
+          <tfoot
+            class="font-medium"
+            data-slot="table-footer"
+          >
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                data-slot="table-cell"
+              />
+              <td
+                class="align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-10 border border-stone-600"
+                colspan="5"
+                data-slot="table-cell"
+              >
+                <button
+                  class="text-left hover:bg-stone-800 w-full h-full px-2"
+                  data-testid="add-task-button"
+                >
+                  + New Page
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="data-[state=selected]:bg-muted transition-colors"
+              data-slot="table-row"
+            >
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]"
+                colspan="5"
+                data-slot="table-cell"
+              />
+              <td
+                class="h-10 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] text-right"
+                data-slot="table-cell"
+              >
+                <span
+                  class="text-stone-400 px-2"
+                >
+                  SUM
+                </span>
+                <span
+                  data-testid="time-display"
+                >
+                  420
+                </span>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <div
+      class="w-[73.5%] mx-auto border-2 border-dashed pt-2 border-red-600"
+    >
+      <h1
+        class="text-2xl pt-2 pb-4 text-left pl-8"
+      >
+        Stat Card System
+      </h1>
+      <div
+        class="grid grid-cols-4 gap-4"
+      >
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Monday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  September 29, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 90 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Tuesday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  September 30, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 45 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Wednesday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 1, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 90 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Thursday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 2, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 30 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-3 mt-4 gap-4"
+      >
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Friday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 3, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 30 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Saturday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 4, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 45 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex justify-center items-center"
+        >
+          <div
+            class="w-44 h-44 shrink-0"
+          >
+            <div
+              class="flex flex-col gap-6 rounded-xl py-6 shadow-sm bg-red-800 border-2 border-red-600 text-stone-50 h-full overflow-hidden"
+              data-slot="card"
+              data-testid="StatCard"
+            >
+              <div
+                class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6 space-y-1"
+                data-slot="card-header"
+              >
+                <div
+                  class="font-semibold text-base truncate"
+                  data-slot="card-title"
+                >
+                  Sunday
+                </div>
+                <div
+                  class="text-muted-foreground text-sm truncate"
+                  data-slot="card-description"
+                >
+                  October 5, 2025
+                </div>
+              </div>
+              <div
+                class="px-6 space-y-1 text-sm"
+                data-slot="card-content"
+              >
+                <p
+                  class="truncate"
+                >
+                  Status: Unknown
+                </p>
+                <p
+                  class="truncate"
+                >
+                  Sum: 90 mins
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="flex justify-center gap-5 items-center py-5"
+          data-testid="StatusCounter"
+        >
+          <div
+            class="flex items-center gap-1"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-emerald-500"
+              data-testid="circle-div"
+            />
+            <span>
+              <span>
+                x0
+              </span>
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-1"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-amber-500"
+              data-testid="circle-div"
+            />
+            <span>
+              <span>
+                x0
+              </span>
+            </span>
+          </div>
+          <div
+            class="flex items-center gap-1"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-rose-500"
+              data-testid="circle-div"
+            />
+            <span>
+              <span>
+                x0
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section
+      class="w-[73.5%] mx-auto border-2 border-dashed rounded-xl p-3 md:p-4 space-y- border-red-600"
+    >
+      <div
+        class="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm"
+        data-slot="card"
+      >
+        <div
+          class="px-6 py-4"
+          data-slot="card-content"
+        >
+          <div
+            class="flex flex-wrap items-center gap-3"
+          >
+            <div
+              class="flex items-center gap-2"
+            >
+              <span
+                class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+              >
+                Unknown
+              </span>
+              <h2
+                class="text-lg font-semibold"
+              >
+                Evaluation
+              </h2>
+              <span
+                class="text-sm text-red-600"
+              >
+                (
+                -1
+                 pts)
+              </span>
+            </div>
+            <div
+              class="flex items-center gap-4 text-sm"
+            >
+              <div
+                class="flex items-center gap-2"
+              >
+                <span
+                  class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+                >
+                  Unknown
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  Weekly:
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  —
+                   pts
+                </span>
+              </div>
+              <div
+                class="flex items-center gap-2"
+              >
+                <span
+                  class="text-xs rounded-md px-2 py-0.5 bg-red-800 border-2 border-red-600 text-stone-50"
+                >
+                  Unknown
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  Daily:
+                </span>
+                <span
+                  class="text-muted-foreground"
+                >
+                  —
+                   pts
+                </span>
+              </div>
+            </div>
+          </div>
+          <p
+            class="text-sm text-muted-foreground mt-2"
+          >
+            Your overall label blends weekly and daily points. Open the details below for inputs, formula, thresholds, and per-band explanations.
+          </p>
+          <div
+            data-orientation="vertical"
+          >
+            <div
+              class="border-b"
+              data-orientation="vertical"
+              data-state="closed"
+            >
+              <h3
+                class="flex"
+                data-orientation="vertical"
+                data-state="closed"
+              >
+                <button
+                  aria-controls="radix-:rt:"
+                  aria-expanded="false"
+                  class="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180 text-base"
+                  data-orientation="vertical"
+                  data-radix-collection-item=""
+                  data-state="closed"
+                  id="radix-:rs:"
+                  type="button"
+                >
+                  <span
+                    class="font-medium"
+                  >
+                    Details
+                  </span>
+                  <svg
+                    aria-hidden="true"
+                    class="lucide lucide-chevron-down h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m6 9 6 6 6-6"
+                    />
+                  </svg>
+                </button>
+              </h3>
+              <div
+                aria-labelledby="radix-:rs:"
+                class="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+                data-orientation="vertical"
+                data-state="closed"
+                hidden=""
+                id="radix-:rt:"
+                role="region"
+                style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button
+      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive shadow-xs h-9 has-[>svg]:px-3 text-xl p-6 bg-red-800 border-2 border-red-600 text-stone-50 hover:bg-red-700 hover:text-stone-200"
+      data-slot="button"
     >
       Submit
     </button>
