@@ -28,7 +28,7 @@ The purpose of this PR is to implement the Feedback System, which evaluates the 
 
 
 ### 🔧 Modified Files
-- `frontend/src/utils/`:
+- `frontend/src/utils/`: 
 
 ---
 
@@ -145,8 +145,12 @@ _Description:_ Displays the Vitest coverage summary generated from running `npm 
 
 ![vitest_coverage](https://github.com/user-attachments/assets/327e2068-d45b-42eb-8015-368a50055047)
 
+---
+## 🐞 Unresolved Bugs
+### 
 
 ---
+
 
 ## 👀 ChatGPT Review
 I'd appreciate feedback on:
@@ -164,3 +168,95 @@ I'd appreciate feedback on:
 - **Feature branch**: `feedback_system`
 
 This merges the final feature for the MVS with the main branch. After this, e2e testing will be conducted and documentation will be finalized. 
+
+---
+
+# 📋 ChatGPT PR Review – Feedback System
+
+End-to-end “Feedback System” delivers a coherent evaluation layer that closes the loop between backend statistics and user-facing feasibility feedback. The PR successfully connects `/api/db/stats` to a dynamic `EvaluationSection` featuring color-coded cards, detailed accordions, and backend-driven categorization. The documentation and visuals clearly demonstrate UI states, error handling, and the E2E flow from API call → UI render → visual feedback.  
+
+---
+
+## 🧪 Test Coverage
+
+**What’s good**
+- Added E2E visuals verifying `/api/db/stats` success and validation error handling  
+- Regression tests for core calculation functions and color mapping  
+- Vitest coverage screenshots included with breakdown by component  
+
+**Gaps / high-leverage adds**
+1. **Frontend fetch lifecycle**
+   - Add explicit tests for loading spinner/skeleton, error toasts, and border re-color after recovery  
+   - Mock `/api/db/stats` to simulate `500` and delayed responses  
+
+2. **Feasibility color mapping**
+   - Unit tests for each possible state (`Good`, `Moderate`, `Poor`, `Default`, `Unknown`)  
+   - Verify the correct outline and border colors render dynamically  
+
+3. **Context & Prop handling**
+   - Simulate default and missing data within `ProcessingContext` and `TaskContext`  
+   - Confirm EvaluationSection gracefully handles blank stats or bad dates  
+
+4. **Integration flow**
+   - Test that a stats fetch triggers feasibility calculation  
+   - Confirm `EvaluationSection` updates the parent container color and feasibility label  
+
+5. **UI stability**
+   - Ensure accordions render accessible labels, collapse properly, and persist expanded state  
+   - Add keyboard navigation tests (Tab + Enter for expanding sections)  
+
+---
+
+## 🧱 Component / Logic Design
+
+- **Modular composition:** EvaluationSection acts as a wrapper aggregating multiple accordions (`PointsAccordion`, `DetailsAccordion`, `ZAccordion`), following single-responsibility principles.  
+- **State synchronization:** Uses consistent context-driven updates between `ProcessingContext` and task data.  
+- **Color standardization:** Centralized logic ensures consistent mapping across cards, toasts, and outlines.  
+- **Error resilience:** `/api/db/stats` endpoint responses are validated and surfaced via user toasts, reducing silent failures.  
+- **Graceful degradation:** Default and “unknown” states visually distinguish incomplete data instead of crashing or rendering null.  
+
+---
+
+## ⏱️ Pacing of Work
+
+- Scope is balanced—front-end logic, API testing, and documentation updates are cohesive.  
+- Visuals make the workflow understandable without needing to run the app.  
+- Moderate code churn (~+2.7k/−1.1k LOC estimated) is acceptable for a subsystem addition.  
+- Suggest future PRs split into:
+  - Evaluation UI / Logic (React)
+  - `/api/db/stats` Testing & Integration
+  - Visual documentation / assets  
+
+---
+
+## 🚧 Scope Creep Analysis
+
+- Stayed aligned with original backlog item “Feedback System.”  
+- Incorporated additional polish:
+  - Standardized color tokens (okLCH theme)
+  - Fixed text-image formatting issues in Markdown
+  - Resized GIFs for better loading performance  
+- Minor doc/UI adjustments beyond the DoD but all additive, not disruptive.  
+
+---
+
+## 🧠 Overall Quality — Score
+
+**8.5 / 10**
+
+**Why:**  
+Feature is cohesive, intuitive, and backed by visible testing and visuals. Strong modular design and consistent feedback handling. Points off for a few untested UI flows (loading/error), accessibility gaps, and potential keyboard event side effects in the table components.
+
+---
+
+## ✅ Recommended Next Steps
+
+- Add explicit tests for fetch lifecycle and border re-color logic  
+- Scope keyboard `Backspace` handling only to non-input elements  
+- Validate orange contrast ratio against dark backgrounds for WCAG AA  
+- Add fallback placeholder labels for empty category selections  
+- Introduce accessibility labels (`aria-live` for toast events, accordion headings)  
+- Consider persisting table state to localStorage or Supabase to preserve user entries  
+- Split future PRs to maintain a 400–800 LOC window and shorten review cycles  
+
+---

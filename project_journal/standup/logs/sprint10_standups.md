@@ -383,50 +383,63 @@ The main risk lies in assuming the “Monday aggregation bug” is minor — it 
 
 #### 📌 Action Items
 - [ ] Finalize and merge `Feedback System` PR
-  - [ ] Record + create all gifs
+  - [x] Record + create all gifs
   - [ ] Document bug in .md file
   - [ ] Finish PR `.md` file
-  - [ ] Solve merge conflicts
-  - [ ] Finalize pull request
-- [ ] Verify merge conflict fixes did not alter test behavior  
+  - [x] Solve merge conflicts
+  - [x] Finalize pull request
+- [x] Verify merge conflict fixes did not alter test behavior  
 - [ ] Log and triage the daily evaluation date mismatch bug  
 - [ ] Initialize Playwright configuration for `End-to-End Testing`
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 6 – First Day of E2E Testing
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Wednesday, October 8th (2025)
+* **Time:** 11:04 AM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
+  - `End-to-End Testing`
+  - `Presentation Readiness`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Didn't quite finish the pull request documentation so I need to finish that up
+- Can finally start E2E testing
+- Want to consider also working on documentation alongside final testing
+  - Will probably need to re-evaluate `Presentation Readiness` subtasks + DoD though
 
 #### 📈 Previous Progress
-- 
+- Finished creating all pr gifs
+- Nearly completed pr documentation
+- Successfully merged the `feedback_system` branch
 
 #### 🧱 Problems & Blockers
-- 
+- Not entirely sure which files were modified -- this is one of the remaining sections of the pr documentation that needs to be filled out
+- E2E Backlog subtasks + DoD may not be fully defined or have irrelevant objectives
 
 #### ⏳ Pending Actions
-- 
+- Finish pr documentation
 
 #### 🔜 Next Steps
-- 
+- Finish pr documentation
+  - Add details on the unresolved bug
+  - Find & document the modified files
+- E2E Testing
+  - Restructure subtasks + DoD
+  - Setup testing
 
 ### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
 
 #### ❓ Question 1
-- 
+-  What patterns or bottlenecks do you notice in my standup history?
 
 #### ❓ Question 2...
-- 
+- Which parts of the project consistently take longer than expected?
 
 ### 🧾 Results
 
