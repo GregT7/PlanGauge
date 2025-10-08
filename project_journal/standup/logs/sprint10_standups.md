@@ -408,51 +408,66 @@ The main risk lies in assuming the “Monday aggregation bug” is minor — it 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- Didn't quite finish the pull request documentation so I need to finish that up
-- Can finally start E2E testing
-- Want to consider also working on documentation alongside final testing
-  - Will probably need to re-evaluate `Presentation Readiness` subtasks + DoD though
+- Finish PR documentation, specifically the modified files section
+- Begin initial setup for E2E testing using Playwright
+- Review and refine E2E subtasks + DoD for alignment with actual test goals
+- Consider updating documentation alongside testing for smoother handoff
+- Reassess `Presentation Readiness` to ensure deliverables match updated scope
 
 #### 📈 Previous Progress
-- Finished creating all pr gifs
-- Nearly completed pr documentation
-- Successfully merged the `feedback_system` branch
+- Created all PR GIFs demonstrating system behavior
+- Nearly finished documenting the PR (only “modified files” and bug section remain)
+- Successfully merged the `feedback_system` branch into main
 
 #### 🧱 Problems & Blockers
-- Not entirely sure which files were modified -- this is one of the remaining sections of the pr documentation that needs to be filled out
-- E2E Backlog subtasks + DoD may not be fully defined or have irrelevant objectives
+- Unclear list of recently modified files for PR summary section
+- E2E backlog subtasks and DoD may contain redundant or outdated objectives
+- Not yet confirmed if test environment setup (Flask + Vite preview) will auto-synchronize for Playwright
 
 #### ⏳ Pending Actions
-- Finish pr documentation
+- Complete PR documentation
+  - Add details on unresolved bug behavior and affected components
+  - Identify all modified files from the `feedback_system` branch
+- Begin E2E testing environment configuration
 
 #### 🔜 Next Steps
-- Finish pr documentation
-  - Add details on the unresolved bug
-  - Find & document the modified files
-- E2E Testing
-  - Restructure subtasks + DoD
-  - Setup testing
+- Finalize PR documentation and submit for review
+- Initialize Playwright test suite (`npm i -D @playwright/test`, `npx playwright install`)
+- Run first test locally and confirm successful environment boot
+- Update E2E subtasks + DoD based on recent ChatGPT recommendations
+- Create seed data or test-only endpoints for deterministic testing
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
--  What patterns or bottlenecks do you notice in my standup history?
+- **What patterns or bottlenecks do you notice in my standup history?**  
+  You tend to hit small blockers near transitions between phases (e.g., documentation → testing). Each new system introduction (Feedback System, E2E, etc.) takes extra time for setup and alignment, but once it’s standardized, progress accelerates sharply. The consistent bottleneck is **scope alignment** — finalizing definitions (DoD, subtasks) before moving forward.
 
-#### ❓ Question 2...
-- Which parts of the project consistently take longer than expected?
+#### ❓ Question 2
+- **Which parts of the project consistently take longer than expected?**  
+  Documentation and integration steps. Writing detailed PR documentation, verifying modified files, and ensuring consistency across frontend/backend interfaces often extend the timeline. However, this tradeoff results in strong maintainability and review clarity.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- The E2E testing phase should start with environment reliability (Flask + frontend sync).
+- Current subtasks will be restructured to explicitly include connection health, toast verification, and Plan Submission flows.
+- Documentation updates should run in parallel to testing to minimize end-of-sprint crunch.
 
 #### 🗝️ Key Decisions
-- 
+- Begin Playwright setup before completing all test definitions — iterate as environment stabilizes.
+- Align E2E DoD with practical test coverage (connection → stats → submission).
+- Use ChatGPT-assisted refinement for PR modified file summaries to close out the backlog item faster.
 
 #### 📌 Action Items
-- 
+- [ ] Finish PR documentation (add modified files + bug note)
+- [ ] Install and configure Playwright environment
+- [ ] Verify test servers start correctly via npm scripts
+- [ ] Update E2E subtasks + DoD in backlog documentation
+- [ ] Begin first “connection health” test run
+- [ ] Document new testing workflow for `Presentation Readiness`
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
