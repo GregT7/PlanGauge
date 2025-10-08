@@ -24,11 +24,18 @@ The purpose of this PR is to implement the Feedback System, which evaluates the 
 - `frontend/src/utils/test_tasks2.json`: task data used for testing
 - `frontend/src/utils/updateCardStats.js`: function used to update card data when react receives stat data from the flask http request
 - `frontend/src/utils/validateCardData.js`: moved a local helper function from the Stat Card System into its own separate file
+- `frontend/src/utils/setupApp.js`: Launches the connection test and creates a notification toaster based on the response
+- `frontend/src/utils/evaluateFeasibility.js`: calculates the overall feasibility using values derived from the task table and comparing them with retrieved stats data
 - + all test files for newly created files
 
-
 ### 🔧 Modified Files
-- `frontend/src/utils/`: 
+- `frontend/src/App.jsx`: Added the EvaluationSection component and the ProcessingContext provider, also simplified the script launched on mount that initiates the connection test
+- `frontend/src/components/StatCardSystem/StatCardSystem`: The shading of the outer container updates to reflect feasibility status, also moved some helper functions into separate script files in the /utils directory
+- `frontend/src/components/StatCardSystem/StatCard`: Moved some helper functions into their own separate files in the /utils folder
+- `frontend/src/components/SubmissionButton/SubmissionButton.jsx`: The shading of the button changes to reflect feasibility status
+- `frontend/src/components/TaskTable/TaskTable.jsx`: The outer container has its border styling update to reflect feasibility status
+- `frontend/src/contexts/TaskContext.jsx`: Made the default task state equal an array of empty tasks for easy data entry on launch instead of using testing data
+- `frontend/src/utils/styleData.json`: Added styling for container borders, added two new statuses + styling: unknown + neutral
 
 ---
 
@@ -146,11 +153,26 @@ _Description:_ Displays the Vitest coverage summary generated from running `npm 
 ![vitest_coverage](https://github.com/user-attachments/assets/327e2068-d45b-42eb-8015-368a50055047)
 
 ---
-## 🐞 Unresolved Bugs
-### 
+## 🐞 Unresolved Bug
+**_Description_:** The Stat Card System incorrectly sums up time values when evaluating the task table entries which negatively impacts feasibility calculations and analysis
+
+**Expected Behavior:**
+For the Stat Cards & resulting day score calculations, the estimated durations for tasks in the table that correspond to the specific day are supposed to be summed up. The expected behavior can best be described through an example. Imagine the scenario where my stat cards span the dates Monday, October 6th, 2025 to Sunday, October 12th, 2025 (7 in total) and my task table contains two entries, one on Monday 6th with a time duration of 90 and one on Monday 13th with a time duration of 110. The Stat Card display for Monday the 16th should show a time sum value of ONLY 90, not 200.
+
+**Observed Behavior:**
+For the scenario listed above, the observed behavior results in the Stat Card with the date Monday, October 6th to have the time sum of 200 when it should be 90. The summation calculation filters & groups tasks based on day name, not matching dates (ie all days starting on a Monday have there time values summed)
+
+**Suspicious Files:**
+- `frontend/src/utils/updateCardStats`
+- `frontend/src/utils/genDefaultCardData.js`
+- `frontend/src/contexts/ProcessingContext`
+- `frontend/src/components/StatCardSystem/StatCardSystem`
+- `frontend/src/components/StatCardSystem/StatCard`
+
+**Priority:**
+Low priority, it will impact evaluation calcs if the plans in the task table span multiple weeks which is not likely to be managed using this tool
 
 ---
-
 
 ## 👀 ChatGPT Review
 I'd appreciate feedback on:
