@@ -24,7 +24,6 @@ describe("formatDateToYYYYMMDD", () => {
 
   it("formats a Date object", () => {
     const d = new Date("2025-09-24T00:00:00Z");
-    console.log(d)
     expect(formatDateToYYYYMMDD(d)).toBe("2025-09-24");
   });
 

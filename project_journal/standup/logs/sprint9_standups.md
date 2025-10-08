@@ -80,7 +80,6 @@ Overall, velocity depends on stabilizing the schema quickly; risk is high if cha
 - Implementing Notion sync adds an external dependency; failures there could stall testing and integration late in the sprint.  
 - Burn risk: too much time could be spent restructuring docs rather than implementing/test-driving routes.  
 
----
 
 ### 🧾 Results
 
@@ -915,149 +914,311 @@ If you dedicate the remaining week fully to this backlog item and accept a **“
 - Break up today’s “Next Steps” into smaller increments to avoid overcommitment.  
 
 #### 📌 Action Items
-- [ ] Implement a `StatsContext` (or extend `TaskContext`) for holding stats and date ranges.  
-- [ ] Write feasibility evaluation algorithm draft
+- [x] Implement a `StatsContext` (or extend `TaskContext`) for holding stats and date ranges.  
+- [x] Write feasibility evaluation algorithm draft
 - [ ] Draft a simple weekly stat card that shows total hours and a color status
 
 --- 
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 12 – MVS Detour
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Sunday, September 28th (2025)
+* **Time:** 11:40 AM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Consider creating a comprehensive summary/eval card instead of 3 in the evaluation section
+- Want to start implementing StatsContext and create at least one sub component for the EvaluationSection
+
 
 #### 📈 Previous Progress
-- 
+- Made draft for feasibility evaluation script
+- Refactored setupApp.js script -- moved stat retrieval to inside the StatsContext.jsx provider
+- Created StatsContext.jsx provider that will hold stats data
+- Started draft for `WeekEvalCard.jsx` but this component is subject to change or deletion
 
 #### 🧱 Problems & Blockers
-- 
+- Not sure how to handle feasibility evaluation
+  - All major subcomponents need access to the feasibility evaluation but the feasibility evaluation depends on stat context
+  - Only 2 major subcomponents rely on the stat context so do I have a context provider subscribe to another context provider? Seems messy/complicated
+- Want to change design from mvs proposition
+  - Want to create a singular comprehensive card, not 3 different cards with different info spread across each
+  - Simplifies things, doesn't divide users attention or confuse them, is more visually appealing
+- Running out of time to finalize features
 
 #### ⏳ Pending Actions
-- 
+- Finalize StatsContext.jsx and implement into the app
 
 #### 🔜 Next Steps
-- 
+- Decide on design changes for eval section
+- Implement StatsContext into the App and available subcomponents
+  - App
+  - StatCardSystem
+    - Has the stats data
+    - Uses the stats data for daily categorization instead of the default data
+  - EvaluationSection subcomponent drafts
+    - Displays basic info
+    - Includes a shadcn card component
+- Have EvaluationSection display stats info -- visually verify its accuracy
+- Start verifying that StatCardSystem implements stats
+  - Create test file and copy/paste stats data previously calculated and verified (on the backend) as mockup values
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- I am thinking of just making one big stat card for the evaluation section instead of creating 3 (for week eval, daily status count eval, and overall eval) but this design changes differs from the mvs. What do you think I should do?  
+**Answer:** It makes sense to consolidate into one card. The MVS (`mvs.md`) only required showing daily stats and an overall plan rating:contentReference[oaicite:0]{index=0}—it didn’t specify 3 separate cards. A single comprehensive card still satisfies the MVS while being simpler, easier to maintain, and more user-friendly. You’re not breaking the MVS, just refining its presentation.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- What assumptions am I making that might be wrong?  
+**Answer:**  
+1. Assuming feasibility must be tied directly to StatsContext — it could also be derived in a utility hook or selector function instead of a nested provider.  
+2. Assuming three separate cards were mandatory for the MVS — the spec only required “stat cards by day” and a plan summary, so consolidation is allowed.  
+3. Assuming every subcomponent needs raw stats — in reality, some may only need derived feasibility values, which could be memoized and shared globally.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Consolidating evaluation into one card aligns with both usability and MVS requirements.  
+- Feasibility evaluation does not necessarily require its own provider; could be derived from StatsContext with helper functions.  
+- Time constraints push toward simpler design decisions over maintaining multiple, redundant subcomponents.
 
 #### 🗝️ Key Decisions
-- 
+- Use a single comprehensive evaluation card for clarity and reduced complexity.  
+- Keep StatsContext as the single source of truth for stats; feasibility logic will be computed from it, not stored separately.  
+- Prioritize feature completeness (StatsContext + eval card) over perfect modularity for this sprint.
 
 #### 📌 Action Items
-- 
+- [x] Finalize StatsContext with fetch + update logic.  
+- [x] Start implementing single evaluation card (replace `WeekEvalCard.jsx` draft).  
+- [ ] Create mock test data to verify the evaluation card displays correct values.  
+- [ ] Update sprint documentation to reflect design pivot from 3-card layout to 1-card layout.
 
---- 
+---
 
-## 🗓️ Standup [#] – [Standup Title]
+
+## 🗓️ Standup 13 – Ran Into Some Bugs
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Monday, September 29th (2025)  
+* **Time:** 11:51 AM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Didn’t make a ton of progress yesterday, ran into a bunch of new bugs/problems while trying to implement `StatsContext`
+- Need to rework a lot of `StatCardSystem` and subcomponents
+- Will continue to work on implementing `StatsContext` and fixing related bugs
 
 #### 📈 Previous Progress
-- 
+- Created `EvaluationSection.jsx` to print out test data to see if `StatsContext` & `FeasibilityContext` are working
+- Started working on `FeasibilityContext.jsx`
+- Finished draft of `StatsContext.jsx`
+- Solved bugs with `evaluateFeasibility.js` — got the weekly score to display to screen
 
 #### 🧱 Problems & Blockers
-- 
+- **StatCardSystem issues**
+  - `cardData` is hardcoded testing values → no formatting pipeline for real incoming stats
+  - Some files mix multiple React components + helper functions → harder to debug & reuse
+  - Local memoization of stats conflicts with global feasibility evaluation → needs to be lifted higher in scope
+- **evaluateFeasibility.js**
+  - Very fragile; poor error handling → crashes ripple into multiple components
 
 #### ⏳ Pending Actions
-- 
+- Solve bugs surrounding `FeasibilityContext.jsx`, `EvaluationSection.jsx`, and `evaluateFeasibility.js`
 
 #### 🔜 Next Steps
-- 
+- Continue to work on `FeasibilityContext` + its implementation + solve related bugs
+- Refactor parts of `StatCardSystem` to cleanly separate components and shared helpers
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 1
-- 
+#### ❓ Question 1  
+**What am I assuming that might be wrong?**  
+- That feasibility evaluation must live in a dedicated context. It might be simpler to derive feasibility from `StatsContext` directly and only expose what’s needed to the global UI.  
+- That error handling can be bolted on later. In reality, feasibility relies on stable calculations, so robust error handling is foundational.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2  
+**What are the biggest risks in today’s tasks?**  
+- Breaking core features outlined in the **MVS** (stat cards, plan summary) by restructuring context providers incorrectly.  
+- Getting stuck in refactor loops if `StatCardSystem` isn’t modularized before adding more features.  
+- Overcomplicating feasibility calculations and delaying integration with the feedback system.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- The current bugs highlight a **tight coupling problem** between feasibility and stats logic.  
+- Context layering may need to be revisited: instead of parallel providers (`StatsContext`, `FeasibilityContext`), feasibility could be computed inside stats and memoized for global use.  
+- File hygiene is now becoming important; too many inline components + helper functions → harder to test/debug.
 
 #### 🗝️ Key Decisions
-- 
+- Error handling in `evaluateFeasibility.js` must be improved before more features depend on it.  
+- Restructure `StatCardSystem` to separate presentational and logic-heavy components.  
+- Investigate merging `StatsContext` and `FeasibilityContext` or ensuring one consumes the other cleanly.
 
 #### 📌 Action Items
-- 
+- [x] Add error boundaries / safe defaults to `evaluateFeasibility.js`  
+- [x] Clean up `StatCardSystem` file structure (one component per file + shared helpers)  
+- [x] Decide whether to merge or stack `StatsContext` + `FeasibilityContext`  
+- [ ] Implement formatting pipeline to transform real stats data into `cardData` format  
 
---- 
+---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 14 – Nearing the End
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Tuesday, September 30th (2025)  
+* **Time:** 3:50 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Feedback System`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Decided on combining context providers to make things simpler to implement  
+- Need to start wrapping things up documentation wise  
 
 #### 📈 Previous Progress
-- 
+- Briefly did some refactoring of StatCardSystem (moved helper functions and React subcomponents to independent files)  
+- Added error handling to `evaluateFeasibility.js`  
+- Started implementing the combined context provider  
+  - Generates default card data (dates: this week → Monday to Sunday)  
+  - Retrieves and stores stats data from Flask API  
+  - Evaluates time sums by day per card  
+  - Evaluates feasibility status by day per card  
 
 #### 🧱 Problems & Blockers
-- 
+- StatCardSystem needs additional refactoring — for now commented out in `App.jsx`  
+  - Needs to subscribe to new context provider once it’s completed  
+  - Needs regression tests rewritten so they all pass  
+  - Old code performing memoization/feasibility evaluation needs deletion  
+- Need to wrap up documentation  
 
 #### ⏳ Pending Actions
-- 
+- Continue implementing `ProcessingContext.jsx`  
+  - React updates cardData once stats data retrieved from Flask is received  
+  - Counts number of statuses per card  
+  - Processes overall feasibility  
+  - Double check that context calculates and provides all values needed for StatCardSystem  
 
 #### 🔜 Next Steps
-- 
+- Finish `ProcessingContext.jsx` implementation  
+- Final documentation pass (standups, backlog, sprint summaries, DoD notes)  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 1
-- 
+#### ❓ Question 1  
+**What assumptions am I assuming that might be wrong?**  
+- That combining contexts won’t create unnecessary re-renders — may still need memoization or selector-style hooks.  
+- That ProcessingContext will provide all data needs without introducing duplication between TaskContext and stats/feasibility logic.  
+- That regression tests will be straightforward — the new provider may change the shape of consumed props, requiring deeper test rewrites.  
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2  
+**How much longer in days do you think this project will take to conclude?**  
+- With three backlog items left (`Feedback System`, `End-to-End Testing`, `Presentation Readiness`), a realistic estimate is **5–7 working days**:  
+  - 2–3 days to complete ProcessingContext + refactor StatCardSystem + regression tests.  
+  - 1–2 days for feedback system UI/UX polish.  
+  - 2 days for end-to-end testing, documentation, and presentation prep.  
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Project has entered the “stabilization” phase: fewer new features, more polish, testing, and documentation.  
+- Risk is scope creep — need to hold back from adding features not in MVS.  
 
 #### 🗝️ Key Decisions
-- 
+- Use **ProcessingContext** as the single combined provider for stats + feasibility evaluation.  
+- Comment out old StatCardSystem logic until refactor is complete.  
+- Prioritize documentation alongside coding to avoid last-minute backlog.  
 
 #### 📌 Action Items
-- 
+- [x] Continue implementing ProcessingContext.jsx 
+  - [x] React updates cardData once stats data retrieved from flask is received 
+  - [x] Counts the number of statuses per card 
+  - [x] Processes overall feasibility 
+  - [x] Double check that context calculates and provides all values needed for StatCardSystem to function
+- [ ] Complete Retrospective Draft (in Notion)
+  - [ ] What didn't go well
+  - [ ] What went well
+  - [ ] Issue Identified
+  - [ ] Root Cause
+  - [ ] Proposed Solutions
+  - [ ] Action Plan
 
 --- 
+
+## 🗓️ Standup 15 – Late Start
+
+### 🧾 Overview
+* **Date:** Wednesday, October 1st (2025)
+* **Time:** 6:13 pm
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Feedback System`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Starting documentation & planning late but need to finish by tomorrow
+- Want to create a new presentation detailing progress
+
+#### 📈 Previous Progress
+- Got basic version of ProcessingContext to work
+- Updated StatCardSystem to work with the new context, removing old context implementation
+
+#### 🧱 Problems & Blockers
+- Regression testing may take longer
+- Will take some time to write up new tests
+
+#### ⏳ Pending Actions
+- Finish documentation for sprint 9
+- Complete plan draft for sprint 10
+
+#### 🔜 Next Steps
+- Finish documentation for sprint 9
+  - Update `Plan Submission` + `Feedback System` backlog items if necessary
+  - Complete sprint 9 retrospective
+  - Finalize sprint9.md file
+- Set things up for sprint 10
+  - Get draft of sprint10.md file up
+  - Create copies for standup log, retro, assets folder, new backlog items (End-to-End testing + Presentation Readiness)
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- **What assumptions am I making that might be incorrect?**  
+  You may be assuming regression testing will only cover `StatCardSystem` updates. In reality, changes to the ProcessingContext can ripple through other consumers (e.g., TaskTable integration, feasibility cards). Test coverage should include interactions, not just isolated unit tests.
+
+#### ❓ Question 2
+- **Are today's tasks missing any dependencies?**  
+  Yes: Sprint 10 setup depends on completing the Sprint 9 retrospective, because backlog refinements are derived from that reflection. Without that, new backlog items (`End-to-End testing`, `Presentation Readiness`) may not capture all necessary adjustments.
+
+---
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- The ProcessingContext milestone puts you closer to MVS feature parity (`Stat Cards by Day` + feedback loop).  
+- Documentation for Sprint 9 should tie progress back to the original architecture justification, showing how context refactoring supports maintainability and feasibility feedback.
+
+#### 🗝️ Key Decisions
+- Regression testing scope expanded to include all failed test cases that previously passed
+- Will create a presentation to communicate progress and remaining work
+
+#### 📌 Action Items
+- [x] Finish documentation for sprint 9
+  - [x] Update `Plan Submission` + `Feedback System` backlog items if necessary
+  - [x] Complete sprint 9 retrospective
+  - [x] Finalize sprint9.md file
+- [x] Set things up for sprint 10
+  - [x] Get draft of sprint10.md file up
+  - [x] Create copies for standup log, retro, assets folder, new backlog items (End-to-End testing + Presentation Readiness)  
