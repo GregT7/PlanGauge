@@ -1,9 +1,21 @@
 import importlib.metadata, time, os, requests
 from flask import jsonify, request
-from datetime import datetime, timezone
 from . import app, supabase
 from dotenv import load_dotenv
 from .utils import *
+
+# Simple in-memory “DB” for tests
+STATE = {
+    "seed": "baseline",
+    "stats": {
+        "weekly": {"points": 92},
+        "daily": {"good": 3, "moderate": 2, "poor": 2}
+    }
+}
+
+env_file = os.environ.get("ENV_FILE", ".env.test" if os.environ.get("TEST_MODE") else ".env")
+if os.path.exists(env_file):
+    load_dotenv(env_file)
 
 load_dotenv()
 
@@ -325,3 +337,20 @@ def submit_plans():
                                     message='Unexpected error occurred when trying to submit data',
                                     details=pack_exc(e))
         return jsonify(http_response), 500
+
+# --- Test-only seed/reset endpoint
+@app.post("/api/test/seed")
+def seed():
+    fixture = request.args.get("fixture", "baseline")
+    STATE["seed"] = fixture
+    # Reset deterministic payloads
+    if fixture == "baseline":
+        STATE["stats"] = {
+            "weekly": {"points": 92},
+            "daily": {"good": 3, "moderate": 2, "poor": 2}
+        }
+    elif fixture == "empty":
+        STATE["stats"] = {"weekly": None, "daily": None}
+    else:
+        STATE["stats"] = {"weekly": {"points": 50}, "daily": {"good":1,"moderate":1,"poor":5}}
+    return jsonify(ok=True, fixture=fixture)

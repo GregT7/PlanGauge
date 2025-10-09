@@ -460,61 +460,82 @@ The main risk lies in assuming the “Monday aggregation bug” is minor — it 
 - Use ChatGPT-assisted refinement for PR modified file summaries to close out the backlog item faster.
 
 #### 📌 Action Items
-- [ ] Finish PR documentation (add modified files + bug note)
-- [ ] Install and configure Playwright environment
-- [ ] Verify test servers start correctly via npm scripts
+- [x] Finish PR documentation (add modified files + bug note)
+- [x] Install and configure Playwright environment
+- [x] Verify test servers start correctly via npm scripts
 - [x] Update E2E subtasks + DoD in backlog documentation
-- [ ] Begin first “connection health” test run
-- [ ] Document new testing workflow for `Presentation Readiness`
+- [x] Begin first “connection health” test run
+- [x] Update playwright testing workflow to `Presentation Readiness` backlog tasks
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 7 – Fixing Playwright Issues
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Thursday, October 9th (2025)  
+* **Time:** 1:39 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `End-to-End Testing`  
+  - `Presentation Readiness`  
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Setup Playwright and got some basic tests to work  
+- However, ran into some bugs trying to set up app bootstrapping for tests  
+- It will probably take 3–4 days just to finish `E2E testing` unfortunately, may extend to an 11th sprint  
+- Want to start writing up documentation now  
 
 #### 📈 Previous Progress
-- 
+- Finished PR documentation (added bug acknowledgement + changed file descriptions)  
+- Downloaded & setup Playwright  
+- Passed first Playwright test  
+- Started working on app bootstrapping  
 
 #### 🧱 Problems & Blockers
-- 
+- App bootstrapping — script that launches both Flask + React servers and loads environment variables does not currently work  
 
 #### ⏳ Pending Actions
-- 
+- E2E testing: app bootstrapping  
 
 #### 🔜 Next Steps
-- 
+- **E2E Testing**  
+  - Resolve app bootstrapping issue  
+- **Presentation Readiness**  
+  - Update `design.md`  
+  - Update `mvs.md`  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**What assumptions am I making that may be incorrect?**  
+You might be assuming that the bootstrapping issue is purely a path or `cmd.exe` error, when it could actually stem from how the script invokes environment variables or subprocesses in Windows. Another assumption is that the current folder structure will support concurrent Flask and Vite launches without cross-port interference or async handling — this may need a small delay or readiness check in the script.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**What is the likelihood I complete all assigned backlog items this sprint?**  
+Moderate (~60%). The E2E bootstrapping issue may extend the sprint timeline, but documentation updates and presentation materials can progress in parallel. If the core test harness becomes stable by the weekend, finishing `Presentation Readiness` by the end of Sprint 10 is still achievable.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Playwright setup validated basic test functionality.  
+- Major blocker now lies in synchronizing environment variable loading and process management across both servers.  
+- Documentation efforts can begin concurrently to avoid idle time during troubleshooting.
 
 #### 🗝️ Key Decisions
-- 
+- Proceed with an additional sprint (Sprint 11) if E2E bootstrapping isn’t stable within three days.  
+- Begin updating presentation documents (`design.md`, `mvs.md`) alongside technical debugging.  
 
 #### 📌 Action Items
-- 
+- [ ] E2E Testing - resolve bugs
+  - [ ] Debug ENOENT and subprocess handling for app bootstrapping
+  - [ ] Verify `.env.test` variables load correctly for both Flask and Vite 
+- Presentation Readiness
+  - Update `design.md`  
+  - Update `mvs.md`  
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
