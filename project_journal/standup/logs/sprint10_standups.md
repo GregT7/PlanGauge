@@ -529,7 +529,7 @@ Moderate (~60%). The E2E bootstrapping issue may extend the sprint timeline, but
 
 #### 📌 Action Items
 - [ ] E2E Testing - resolve bugs
-  - [ ] Debug ENOENT and subprocess handling for app bootstrapping
+  - [x] Debug ENOENT and subprocess handling for app bootstrapping
   - [ ] Verify `.env.test` variables load correctly for both Flask and Vite 
 - Presentation Readiness
   - Update `design.md`  
@@ -537,52 +537,69 @@ Moderate (~60%). The E2E bootstrapping issue may extend the sprint timeline, but
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 8 – Not Making Much Progress
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Friday, October 10th (2025) 
+* **Time:** 11:31 AM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `End-to-End Testing`
+  - `Presentation Readiness`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Barely got anything done yesterday due to lack of node js + playwright knowledge
+- Want to prioritize presentation readiness
 
 #### 📈 Previous Progress
-- 
+- Got the test-boot.js script to launch both the flask and react servers
+- Briefly researched how to write a good readme.md file
 
 #### 🧱 Problems & Blockers
-- 
+- Don't know how much detail to include in documentation or if I should write multiple readmes?
 
 #### ⏳ Pending Actions
-- 
+- Update documentation
+  - mvs.md (minimum viable specifications)
+  - design.md (design specifications)
+- Finishing the boot launch code for playwright
 
 #### 🔜 Next Steps
-- 
+- Update Documentation
+  - mvs.md
+  - design.md
+  - readme
+- If time permits, work on test-boot.js
+  - imports .env.test vars
+  - explore building & launching vite preview server
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**If you were me, what would be the first thing you would alter in my work approach to improve things?**  
+→ I’d shift your immediate focus from perfecting technical bootstrapping (test-boot.js) to documenting what already works. Writing clear READMEs and design specs will reinforce your understanding and highlight missing links before debugging consumes more time.
 
-#### ❓ Question 2...
-- 
-
-### 🧾 Results
+#### ❓ Question 2
+**What assumptions am I making that may be incorrect?**  
+→ You might be assuming the documentation needs to be split across many README files. For your current scale, one **root README.md** explaining architecture, setup, and testing is sufficient—then link to `mvs.md` and `design.md`. This keeps things cohesive and easier to maintain.
 
 #### 🧠 Discussion Notes
-- 
+- Documentation doesn’t have to be exhaustive; it should communicate how to run, test, and understand the system.
+- Combining Flask and Vite servers is achievable, but prioritize reliability (launch + teardown) before Playwright automation.
 
 #### 🗝️ Key Decisions
-- 
+- Consolidate documentation into one main README.
+- Defer advanced Playwright integration until after all core docs are finalized.
 
 #### 📌 Action Items
-- 
+- [ ] Documentation
+  - [ ] Finish README with structure, setup, and test sections.
+  - [ ] Complete design.md draft
+  - [ ] Update mvs.md draft
 
---- 
+---
 
 ## 🗓️ Standup [#] – [Standup Title]
 
