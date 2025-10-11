@@ -596,6 +596,7 @@ Moderate (~60%). The E2E bootstrapping issue may extend the sprint timeline, but
 #### 📌 Action Items
 - [ ] Documentation
   - [ ] Finish README with structure, setup, and test sections.
+  - [ ] Update reqs.md
   - [ ] Complete design.md draft
   - [ ] Update mvs.md draft
 
