@@ -596,58 +596,88 @@ Moderate (~60%). The E2E bootstrapping issue may extend the sprint timeline, but
 #### 📌 Action Items
 - [ ] Documentation
   - [ ] Finish README with structure, setup, and test sections.
-  - [ ] Update reqs.md
+  - [x] Update reqs.md
   - [ ] Complete design.md draft
   - [ ] Update mvs.md draft
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 9 – Barely Getting Anything Done
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, October 11th (2025)  
+* **Time:** 12:42 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `End-to-End Testing`  
+  - `Presentation Readiness`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Work more on documentation and push off E2E testing for a little bit.  
+- Updated the requirement specifications but didn’t make much additional progress yesterday.  
+- Definitely won’t finish everything before October 13th — will need to create **Sprint 11**.
 
 #### 📈 Previous Progress
-- 
+- Finished updating the **requirement specifications (`reqs.md`)**.
 
 #### 🧱 Problems & Blockers
-- 
+- The **MVS** and **Design Specifications** both depend on finalized requirements, so they couldn’t progress until `reqs.md` was finished.  
+- The **README** structure is still undefined, which slows down content writing.  
+- Documentation interdependence is increasing the total time needed.  
+- The **testing mode** for presentation readiness lacks backend implementation (mock data retrieval route or toggled API).  
+- The current **`test-boot.js`** script runs with `npm run dev` instead of a built `vite preview` server, which will make E2E tests less reliable and realistic.
 
 #### ⏳ Pending Actions
-- 
+- Write and structure the **README**.  
+- Update **MVS (`mvs.md`)** and **Design (`design.md`)** documents.
 
 #### 🔜 Next Steps
-- 
+- **Documentation Tasks**
+  - Finish `mvs.md`.  
+  - Finish `design.md`.  
+  - Update `user-stories.md`.  
+  - Decide on final `README` structure and add placeholder sections.
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 1
-- 
+#### ❓ Question 1  
+**What assumptions am I making that may be incorrect?**
+- You might be assuming that documentation tasks are parallel when they’re actually sequential. Each depends on the previous file (`reqs.md` → `mvs.md` → `design.md`). Trying to write them in parallel can cause rework and inconsistencies.  
+- You’re also assuming the Vite dev server (`npm run dev`) is “good enough” for Playwright testing, but it’s not — dev mode uses hot reloads and looser module boundaries. Using `vite preview` (which runs a built production bundle) will give you more realistic and stable E2E test coverage.  
+- Lastly, you might be underestimating how long these final documentation and testing setup tasks take — they’re more detail-heavy than typical coding work.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2  
+**Am I missing any dependencies for today’s tasks?**
+Yes — two main ones stand out:  
+1. A **backend mock-data API route** (e.g., `/api/test/seed`) or a set of JSON fixtures is needed to simulate stats data for testing and presentation mode. Without this, frontend tests will break when backend is unavailable.  
+2. A clear **README outline** is needed before populating it. Defining sections first (“Project Description,” “Setup,” “Testing,” “Usage,” etc.) will make it easier to write concise and non-redundant content later.  
+
+A smaller dependency worth noting: your `test-boot.js` script will need environment variables for the preview server (`E2E_BASE_URL`, `FLASK_URL`) once it’s updated — planning those ahead could save troubleshooting time.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Documentation dependencies clarified — the proper order is **requirements → MVS → design**.  
+- The testing environment needs to switch to a **production-style build** to ensure accurate E2E results.  
+- Backend needs a **testing/mock mode** with consistent fake data for stable presentation demos.  
+- The README will act as the anchor for all other deliverables, so its structure should be finalized before adding text.  
 
 #### 🗝️ Key Decisions
-- 
+- Documentation will be prioritized before any further E2E setup.  
+- Switch to `vite preview` instead of `npm run dev` for testing.  
+- Add backend mock-data endpoint for testing mode.  
+- Create **Sprint 11** to accommodate documentation and final integration work.
 
 #### 📌 Action Items
-- 
+- [ ] Finalize `mvs.md` (based on finalized requirements).  
+- [ ] Finalize `design.md` (align with MVS).  
+- [ ] Define and outline README structure.  
+- [ ] Update `Presentation Readiness` to include backend implementation for the test mode 
 
---- 
+---
+
 
 ## 🗓️ Standup [#] – [Standup Title]
 
