@@ -3,120 +3,147 @@
 ## General
 ### System Implementation
 _Description:_ 
+
 ![sys_img](https://github.com/user-attachments/assets/e51df439-18e9-4a12-9e28-2dafd4680bbd)
 
 ### System Mockup
 _Description:_ 
+
 ![sys_mockup](https://github.com/user-attachments/assets/c2764c9d-7343-4896-9c93-38e93a42dbbd)
 
 ### Wireframe (ChatGPT Generated)
 _Description:_ 
+
 ![wire_frame](https://github.com/user-attachments/assets/e3c29276-e320-4ce3-b47d-7ec9d0fdc9e8)
 
 
 ## R-1. Feasibility Categorization
 ###  Category Colors (R-1.10)
 _Description:_ 
+
 ![category_colors](https://github.com/user-attachments/assets/841d9234-aec4-4563-adfd-9bb6d9592245)
 
 ### Overall Feasibility (R-1.2)
 _Description:_ 
+
 ![feas_algo]()
 
 
 ## R-2. Task Entry Table
 ### Table Structure (R-2.1, R-2.3)
 _Description:_ 
+
 ![table_struct](https://github.com/user-attachments/assets/03f35ac5-3d4b-4cd0-a318-3e116ff8a3f2)
 
 ### Add New Task (R-2.2)
 _Description:_ 
+
 ![add_task](https://github.com/user-attachments/assets/797681b5-b745-4cd4-b33f-50f6356326e2)
 
 ### Delete Tasks (R-2.2)
 _Description:_ 
+
 ![delete](https://github.com/user-attachments/assets/3ac9f21d-8127-497e-8dd8-5ffc154458c1)
 
 ### Deselect Tasks (R-2.2)
 _Description:_ 
+
 ![deselect](https://github.com/user-attachments/assets/2aa28230-b321-468b-abf2-e292568b422e)
 
 
 ## R-3. Stat Card System
 ### Default State (R-3.1)
 _Description:_ 
+
 ![default_state](https://github.com/user-attachments/assets/9efa3a1f-ad64-47f7-9c2b-b2935ec092a0)
 
 ### Populated State (R-3.1)
 _Description:_ 
+
 ![populated_state](https://github.com/user-attachments/assets/c0f22886-612f-4bf6-a314-4350565cd929)
 
 ### Adaptive Design (R-3.1)
 _Description:_ 
+
 ![adaptive_card](https://github.com/user-attachments/assets/f0efacd3-aa43-4b2c-b767-a3947097d36c)
 
 ### System demo (R-3.1)
 _Description:_ 
+
 ![stat_system_demo](https://github.com/user-attachments/assets/bc1c7eea-5a74-406e-872d-557591296ec5)
 
 ## R-4. Evaluation Section
 ### Component Demo (R-4.1)
 _Description:_ Provides an overview of the full Evaluation Section in action, showing how overall feasibility, daily summaries, and supporting details are visually combined into a cohesive UI.
+
 ![eval_section](https://github.com/user-attachments/assets/be3f6bf4-71e1-4316-b0c0-254570566a1a)
 
 ### Summary Card Screenshot (R-4.2)
 _Description:_
+
 ![summary_card](https://github.com/user-attachments/assets/3f391299-6827-4d44-9f29-3f425b1c4f51)
 
 ### Details Accordion (R-4.3)
 _Description:_ Breaks down how the overall feasibility score is computed, including equations, weighting factors, and status filters used to determine the final evaluation category.
+
 ![details_accordion](https://github.com/user-attachments/assets/7d251851-73c2-4c49-888a-00388da765c7)
 
 
 ## R-5. Submission (R-5.1)
 ### Submission Swimlane Diagram (R-5.1)
 _Description:_ Visually explains the algorithm used across systems to submit the plan records while managing errors
+
 ![submit_swimlane](https://github.com/user-attachments/assets/af1c8506-b8b6-4aa8-b8bc-66a486e7e5e2)
 
 ### Database Functional Dependency Diagram (R-5.1)
 _Description:_ Updated schema for `plan_submission` to manage synchronization handling
+
 ![fdd_schema](https://github.com/user-attachments/assets/7859ea2f-b201-4494-9fe5-1e8cd48e95ba)
 
 ### Database Entity-Relation Diagram (R-5.1)
 _Description:_ Visual of the SQL schema design for all tables in the database, image downloaded from Supabase
+
 ![ERD](https://github.com/user-attachments/assets/3a40b385-7ad4-4929-91fb-6de27db65087)
 
 ### Submission Response Toast (R-5.1)
 _Description:_ Toast notifications are sent as soon as the app launches or user clicks the submission button for improved feedback. Once launching or submission is done, the notification will update to reflect its status (success/failure)
+
 ![submit_toast](https://github.com/user-attachments/assets/6df78f6c-7f8e-4c14-b43f-25c8c500fa9e)
 
 ### Submission Demo (R-5.1, R-5.2, R-5.3)
 - Description: Demonstration showing the plan data being stored to the database and target Notion DB with notifications
+
 ![submit_gif](https://github.com/user-attachments/assets/c5f0720c-d734-42c3-827e-fa74ef04c224)
 
 ## R-6. UI/UX and Styling
 ### Adaptive Design (R-6.1)
 _Description:_ The outer border of each subsystem container updates to reflect the current feasibility status (good - green, moderate - orange, poor - rose) based on the current state of the Task Table and retrieved statistical data
+
 ![adaptive_ui](https://github.com/user-attachments/assets/1b1b515d-7a8a-4050-9cf3-5f7494550ef3)
 
 ## R-7. System Behavior
 ### Startup Process Swimlane Diagram
-_Description:_ 
-![startup_swimlane](https://github.com/user-attachments/assets/76e31c5a-2130-40e6-b420-51ccab094d43)
 _Description:_ Shows the cross system logic for launching the app where the ui is loaded, all system connections are tested, and initial stats data is requested and hopefully received
+
+![startup_swimlane](https://github.com/user-attachments/assets/76e31c5a-2130-40e6-b420-51ccab094d43)
+
 
 ### Frontend-initiated Request & Retrieval
 _Description:_ Shows how the frontend responds when the backend is offline versus when it becomes active and successfully returns data. The UI transitions from an error state to a neutral gray state once stats data is retrieved, indicating that the backend is running but no tasks are currently present in the table.
+
 ![stats_retrieval](https://github.com/user-attachments/assets/4a2bbb29-7792-4787-b8f3-12245d907431)
 
 ### Frontend Retrieval Toast Notification
 _Description:_ Displays the toast messages that appear on app launch, capturing both the stats retrieval attempt and the initial connection check that pings all system APIs to verify backend availability.
+
 ![stats_toast](https://github.com/user-attachments/assets/407b4481-fe45-46b3-842d-bae8cc15bf9a)
 
 ### Stats Retrieval API Endpoint (`/api/db/stats`)
 _Description:_ Demonstrates terminal outputs from curling the Flask stats API using different query parameters to test both error and success cases. This includes validation feedback for malformed inputs and the structured JSON response returned when valid date ranges are provided.
+
 ![stats_api](https://github.com/user-attachments/assets/d254eacf-e581-41a1-912b-4644b9f02704)
 
 ### Statistical Retrieval E2E Test
 _Description:_ Showcases an end-to-end test verifying the full stats retrieval workflow—from frontend request initiation to backend response and UI feedback—confirming that valid data updates visual elements and toast notifications as expected.
+
 ![feedback_e2e](https://github.com/user-attachments/assets/708ef933-3a19-484e-90b6-fac08093284f)
