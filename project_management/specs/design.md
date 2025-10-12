@@ -70,7 +70,7 @@ _Description:_
 ### System Demo (R-3.1)
 _Description:_ 
 
-![stat_system_demo](https://github.com/user-attachments/assets/ec990042-e762-4da2-b69b-3837b8d02b93)
+![stat_system_demo](https://github.com/user-attachments/assets/1d0fed95-ccf9-4c44-ae87-850a041b0080)
 
 ## R-4. Evaluation Section
 ### Component Demo (R-4.1)
