@@ -9,18 +9,54 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
   - [Project Structure](#project-structure)
   - [How to Install & Run](#how-to-install-&-run)
   - [How to Use Tool](#how-to-use-tool)
-  - [How to Run Tools](#how-to-run-rools)
+  - [How to Run Tests](#how-to-run-tests)
   - [Limitations](#limitations)
-  - [Motivation & Inspiration](#motivation-&-inspiration)
   - [Reflection](#reflection)
   - [Acknowledgements](#acknowledgements)
 </details>
 
 ## Overview
-Describe:
-- What the application does (task entry → feasibility categorization → Notion sync).  
-- Mention testing coverage (unit, integration, E2E).  
-- Tech Stack overview **and** brief reasoning for each major technology.  
+### Use Cases
+- UC-1: Create Weekly Plan — The user adds, edits, and deletes tasks in the Task Entry Table (R-2.10–R-2.15), filling out task names, categories, dates, and times. The Stat Card System updates automatically to reflect daily workload changes. (Ref: design.md – “Table Structure,” “Add New Task Demo”)
+- UC-2: Evaluate Plan Feasibility — The user views live feedback through the Stat Card System and Evaluation Section, which compute daily and weekly feasibility using Z-scores (R-1.22–R-1.23). The Evaluation Section provides a summary score and detailed breakdown of contributing metrics. (Ref: design.md – “Populated State,” “Evaluation Section,” “Details Accordion”)
+- UC-3: Submit Plan to External Systems — The user clicks the Submit button to send plan data to Notion and Supabase via Flask (R-5.10). A toast confirms success or failure, and the button color reflects the plan’s overall feasibility. (Ref: design.md – “Submission Swimlane Diagram,” “Submission Demo”)
+- UC-4: System Launch and Data Retrieval — On startup, the app runs connectivity checks for Flask, Supabase, and Notion (R-7.40–R-7.41) and retrieves stored stats to initialize feasibility data. Toasts indicate success or failure of retrieval operations. (Ref: design.md – “Startup Process Swimlane Diagram,” “Stats Retrieval API Endpoint”)
+
+### Testing Coverage
+- Frontend
+    - Technology: React Testing Library, Vitest, Jest
+    - Quantity: 258 tests
+    - Description: validates UI behavior, state updates, and real-time feedback
+- Backend
+    - Technology: pytest
+    - Quantity: 40 tests
+    - Description: confirms API correctness, data retrieval, and error handling
+- System
+    - Technology: Playwright
+    - Quantity: ? tests
+    - Description: simulates full user interactions, from plan creation to submission and system feedback
+
+### Architecture
+- Teck Stack
+    - Frontend: React, Tailwind CSS, Shadcn/UI
+        - React: Manages the application’s dynamic UI and state, allowing real-time updates as users modify their weekly plans.
+        - Tailwind CSS: Provides a responsive and modern utility-based styling framework for consistent, adaptive layouts.
+        - Shadcn/UI: Offers a good looking library for aesthetically pleasing dark mode styling design
+    - Backend: Flask, Notion API
+        - Flask: Implements the backend logic and HTTP endpoints that process feasibility calculations, manage plan submissions, and connect to external services.
+        - Notion API: Enables two-way synchronization of plan data between PlanGauge and the user’s Notion workspace.
+    - Database: Supabase (PostgreSQL)
+        - Supabase: Stores plan submissions and plan records created using this app. Also stores previous work/productivity records that are used for statistical metric calculations. The statistical metrics are then used to compare the current plan to previous performances.
+
+**System Architecture Diagram**
+_Description:_ The system architecture connects a React-based frontend to a Flask backend that interfaces with Supabase and the Notion API, enabling real-time plan evaluation, data synchronization, and dynamic UI feedback.
+
+![sys_architect](https://github.com/user-attachments/assets/97318bac-c3b5-407b-84d4-7f87d5691168)
+
+
+
+
+
 - High-level architecture summary (React frontend + Flask backend + Supabase + Notion API).  
 - Include a short paragraph on your **pseudo-Agile process** (Solo-Scrum).
 
