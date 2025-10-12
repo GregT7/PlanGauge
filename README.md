@@ -1,9 +1,20 @@
-# PlanGauge
-_Description_: 
+# PlanGauge - Planning Assistance Tool
+_Description_: PlanGauge is a full-stack planning assistant that helps users create, evaluate, and submit weekly plans through a clean, Notion-style interface. It visualizes plan feasibility using statistical metrics and dynamic color-coded feedback, then syncs finalized plans to connected Notion and Supabase databases via a Flask API.
 
-## Table of Contents
-- have a toggle and hide links
-- internal links to different parts of readme
+
+<details>
+  <summary>Table of Contents</summary>
+
+  - [Overview](#overview)
+  - [Project Structure](#project-structure)
+  - [How to Install & Run](#how-to-install-&-run)
+  - [How to Use Tool](#how-to-use-tool)
+  - [How to Run Tools](#how-to-run-rools)
+  - [Limitations](#limitations)
+  - [Motivation & Inspiration](#motivation-&-inspiration)
+  - [Reflection](#reflection)
+  - [Acknowledgements](#acknowledgements)
+</details>
 
 ## Overview
 Describe:
@@ -13,21 +24,7 @@ Describe:
 - High-level architecture summary (React frontend + Flask backend + Supabase + Notion API).  
 - Include a short paragraph on your **pseudo-Agile process** (Solo-Scrum).
 
-## 💡 Motivation & Inspiration
-**Problems:**
-- Difficulty estimating task durations → unrealistic weekly plans.  
-- Overreliance on GenAI for structure and accountability.  
-- Limited time during your SWE course to apply Agile practically.  
-- Desire to gain real project management experience before job hunting.
-
-**Solutions:**
-- Created your own pseudo-Agile environment (“Solo-Scrum”) to simulate a team setting.  
-- Incorporated real planning data + machine learning for feasibility evaluation.  
-- Used quizzes, documentation, and coding exercises to actively learn missing concepts.  
-
-*(Optional: include a “What inspired this idea?” subsection about combining Notion workflow with data analysis.)*
-
-## Project Storage Structure
+## Project Structure
 - have a table of contents for different files like mvs.md and design.md
     - title + embedded link, role, description
 - explain the project_management directory + the project_journal directory
@@ -40,7 +37,7 @@ Describe:
     - 2.
         - adding a dependencies section (Notion, Supabase account)
 
-## How to Use
+## How to Use tool
 - Explain the goal is to enter tasks into the task table and then use the feasibility categorizations to edit plans to make them mroe realistic and then send data to Notion DB when satisfied
 
 ## How to Run Tests

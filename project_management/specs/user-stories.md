@@ -1,7 +1,7 @@
 # User Story Compendium
 
 ## User's Perspective
-- As a student user, I want to make realistic plans for completing assignments while in school so that I can feel accomplished while achieving my goals
+- As a student user, I want to make realistic plans for completing assignments while in school so that I can lower the number of uncompleted tasks at the end of the week
 - As a student user, I want the planning process to take as little time as possible so I have time to do other things
 - As a student user, I want the application to look and feel nice to use for an enjoyable experience
 - As a student user, I want the application to be convenient to use so I don't get frustrated or stuck doing repetitive tasks
@@ -17,3 +17,4 @@
 ## Testing Perspective
 - As a testing developer, I want to ensure the API call restrictions work so I don't unknowingly or accidentally spam Notion's API
 - As a testing developer, I want to test the applications time-sum cards responsiveness to varying event durations to prevent inaccurate calculations and plans
+- As a testing developer, I want the entire system to work reliably as intended.

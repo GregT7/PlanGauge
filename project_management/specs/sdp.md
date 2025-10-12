@@ -1,4 +1,6 @@
 # Software Development Plan
+**Date:** May 9nth, 2025
+**Note:** This document details the initial plan which is since outdated. Docker and task duration prediction related features are not planned on beign completed. Additionally, it took significantly longer to complete the project than initially proposed.
 
 ## SDLC
 * Agile Methodology: Solo-scrum (made up)
