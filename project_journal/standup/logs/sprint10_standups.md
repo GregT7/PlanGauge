@@ -740,15 +740,22 @@ Yes, but only with a narrowed scope. You can likely **complete the design.md str
 - Prioritize README outline and `Presentation Readiness` backlog edits next.
 
 #### 📌 Action Items
-- [x] Define and outline **README** structure.  
-- [ ] Update `Presentation Readiness` backlog for backend test mode logic.  
-- [ ] Finalize **design.md** (align with MVS):
-  - [ ] Write component and logic descriptions.  
-  - [ ] Fix formatting inconsistencies.  
-  - [ ] Add feasibility algorithm flowchart.  
+- [x] Define and outline **README** structure.
+- [x] Update `Presentation Readiness` backlog for backend test mode logic.
+- [x] Finalize **design.md** (align with MVS):
+  - [x] Write component and logic descriptions.
+  - [x] Fix formatting inconsistencies.
+  - [x] Add feasibility algorithm flowchart.
+- [x] Update other documentation
+  - [x] user-stories
+  - [x] sdp
+  - [x] pop (just add statement saying this was done at the beginning and the design evolved over time)
+- [ ] work on readme
+  - [ ] Project Title & Description
+  - [ ] Table of Contents (Toggle)
 - [ ] Work 270 minutes today:
-  - [ ] Session 1 – 90 min  
-  - [ ] Session 2 – 90 min  
+  - [x] Session 1 – 90 min
+  - [ ] Session 2 – 90 min
   - [ ] Session 3 – 90 min
 
 ---

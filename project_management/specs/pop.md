@@ -1,4 +1,6 @@
 # Project Overview Proposal
+**Date:** March 4th, 2025
+**Note:** This document details the initial design which is since outdated. Specifically, Supabase (PostgreSQL) replaced MongoDB, Docker has yet to be used, the app is not deployed, and there is no task duration prediction feature (no scikit-learn usage). Refer to design.md, reqs.md, and mvs.md for up-to-date information on the project.
 
 ## 1. Proposed Project Name
 Planning Assistance Tool
