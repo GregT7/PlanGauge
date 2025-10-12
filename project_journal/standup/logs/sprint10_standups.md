@@ -751,11 +751,14 @@ Yes, but only with a narrowed scope. You can likely **complete the design.md str
   - [x] sdp
   - [x] pop (just add statement saying this was done at the beginning and the design evolved over time)
 - [ ] work on readme
-  - [ ] Project Title & Description
-  - [ ] Table of Contents (Toggle)
+  - [x] Project Title & Description
+  - [x] Table of Contents (Toggle)
+  - [ ] Overview
+    - [ ] What the application does
+    - [ ] Testing coverage
 - [ ] Work 270 minutes today:
   - [x] Session 1 – 90 min
-  - [ ] Session 2 – 90 min
+  - [x] Session 2 – 90 min
   - [ ] Session 3 – 90 min
 
 ---
