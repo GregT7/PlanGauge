@@ -31,46 +31,46 @@ _Description:_ Flowchart depicting the logic used to evaluate feasibility using 
 
 ## R-2. Task Entry Table
 ### Table Structure (R-2.1, R-2.3)
-_Description:_ 
+_Description:_ Image showing how the task table appears when some data populates it
 
 ![table_struct](https://github.com/user-attachments/assets/03f35ac5-3d4b-4cd0-a318-3e116ff8a3f2)
 
-### Add New Task (R-2.2)
-_Description:_ 
+### Add New Task Demo (R-2.2)
+_Description:_ Shows how to add a new task to the table and the resulting change
 
 ![add_task](https://github.com/user-attachments/assets/797681b5-b745-4cd4-b33f-50f6356326e2)
 
-### Delete Tasks (R-2.2)
-_Description:_ 
+### Delete Tasks Demo (R-2.2)
+_Description:_ Shows multiple entries in the table being selected and then deleted
 
 ![delete](https://github.com/user-attachments/assets/3ac9f21d-8127-497e-8dd8-5ffc154458c1)
 
-### Deselect Tasks (R-2.2)
-_Description:_ 
+### Deselect Tasks Demo (R-2.2)
+_Description:_ Shows how rows are deselected when anything other than a selection checkbox is clicked. This mimics the behavior experienced when selecting items in a Notion database.
 
 ![deselect](https://github.com/user-attachments/assets/2aa28230-b321-468b-abf2-e292568b422e)
 
 
 ## R-3. Stat Card System
-### Default State (R-3.1)
-_Description:_ 
+### Default/Neutral State (R-3.1)
+_Description:_ Visually depicts the stat card system appearance when the app is launched successfully and no data has been entered yet.
 
 ![default_state](https://github.com/user-attachments/assets/8937ab55-1d47-4663-976f-e646ccb247eb)
 
 ### Populated State (R-3.1)
-_Description:_ 
+_Description:_ Visually depicts the stat card system appearance when plan data has been entered into the Task Table and categorizations have been completed using the statistical metric data
 
 ![populated_state](https://github.com/user-attachments/assets/5a5837b1-524a-4f46-bfc6-2c036cd5d861)
 
-### Adaptive Design (R-3.1)
-_Description:_ 
+### Adaptive Cards Demo (R-3.1)
+_Description:_ Demo showing the stat card cycling through different states
 
 ![adaptive_card](https://github.com/user-attachments/assets/f0efacd3-aa43-4b2c-b767-a3947097d36c)
 
 ### System Demo (R-3.1)
-_Description:_ 
+_Description:_ Demo showing how the stat card system changes as data in the task table is modified
 
-![stat_system_demo](https://github.com/user-attachments/assets/1d0fed95-ccf9-4c44-ae87-850a041b0080)
+![stat_demo](https://github.com/user-attachments/assets/cd47e58d-93dc-470a-b667-d598ef58b822)
 
 ## R-4. Evaluation Section
 ### Component Demo (R-4.1)
@@ -79,7 +79,7 @@ _Description:_ Provides an overview of the full Evaluation Section in action, sh
 ![eval_section](https://github.com/user-attachments/assets/be3f6bf4-71e1-4316-b0c0-254570566a1a)
 
 ### Summary Card Screenshot (R-4.2)
-_Description:_
+_Description:_ Displays the summary card with updated categorization and score values after successfully retrieving stats data and inputting valid plan entries into the table.
 
 ![summary_card](https://github.com/user-attachments/assets/3f391299-6827-4d44-9f29-3f425b1c4f51)
 
@@ -111,7 +111,7 @@ _Description:_ Toast notifications are sent as soon as the app launches or user 
 ![submit_toast](https://github.com/user-attachments/assets/6df78f6c-7f8e-4c14-b43f-25c8c500fa9e)
 
 ### Submission Demo (R-5.1, R-5.2, R-5.3)
-- Description: Demonstration showing the plan data being stored to the database and target Notion DB with notifications
+_Description:_ Demonstration showing the plan data being stored to the database and target Notion DB with notifications
 
 ![submit_gif](https://github.com/user-attachments/assets/c5f0720c-d734-42c3-827e-fa74ef04c224)
 
@@ -122,28 +122,28 @@ _Description:_ The outer border of each subsystem container updates to reflect t
 ![adaptive_ui](https://github.com/user-attachments/assets/1b1b515d-7a8a-4050-9cf3-5f7494550ef3)
 
 ## R-7. System Behavior
-### Startup Process Swimlane Diagram
+### Startup Process Swimlane Diagram (R-7.1, R-7.2, R-7.3, R-7.4)
 _Description:_ Shows the cross system logic for launching the app where the ui is loaded, all system connections are tested, and initial stats data is requested and hopefully received
 
 ![startup_swimlane](https://github.com/user-attachments/assets/76e31c5a-2130-40e6-b420-51ccab094d43)
 
 
-### Frontend-initiated Request & Retrieval
+### Frontend-initiated Request & Retrieval (R-7.1, R-7.2)
 _Description:_ Shows how the frontend responds when the backend is offline versus when it becomes active and successfully returns data. The UI transitions from an error state to a neutral gray state once stats data is retrieved, indicating that the backend is running but no tasks are currently present in the table.
 
 ![stats_retrieval](https://github.com/user-attachments/assets/4a2bbb29-7792-4787-b8f3-12245d907431)
 
-### Frontend Retrieval Toast Notification
+### Frontend Retrieval Toast Notification (R-7.3)
 _Description:_ Displays the toast messages that appear on app launch, capturing both the stats retrieval attempt and the initial connection check that pings all system APIs to verify backend availability.
 
 ![stats_toast](https://github.com/user-attachments/assets/407b4481-fe45-46b3-842d-bae8cc15bf9a)
 
-### Stats Retrieval API Endpoint (`/api/db/stats`)
+### Stats Retrieval API Endpoint (`/api/db/stats`) (R-7.2)
 _Description:_ Demonstrates terminal outputs from curling the Flask stats API using different query parameters to test both error and success cases. This includes validation feedback for malformed inputs and the structured JSON response returned when valid date ranges are provided.
 
 ![stats_api](https://github.com/user-attachments/assets/d254eacf-e581-41a1-912b-4644b9f02704)
 
-### Statistical Retrieval E2E Test
+### Statistical Retrieval E2E Test (R-7.1, R-7.2, R-7.3)
 _Description:_ Showcases an end-to-end test verifying the full stats retrieval workflow—from frontend request initiation to backend response and UI feedback—confirming that valid data updates visual elements and toast notifications as expected.
 
 ![feedback_e2e](https://github.com/user-attachments/assets/708ef933-3a19-484e-90b6-fac08093284f)
