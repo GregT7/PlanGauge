@@ -26,7 +26,7 @@ _Description:_ Screenshot of the 5 different stylings the stat cards can have re
 ### Overall Feasibility (R-1.2)
 _Description:_ Flowchart depicting the logic used to evaluate feasibility using the current data in the task table and historical metrics
 
-![feas_algo](https://github.com/user-attachments/assets/718a42a9-9fdd-4643-a058-8a6939f1e1c2)
+![feas_algo](https://github.com/user-attachments/assets/f616c2b1-5d93-4308-99ae-057298af430d)
 
 
 ## R-2. Task Entry Table
