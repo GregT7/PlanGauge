@@ -24,11 +24,25 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
 
 ### System Demo
 
-_Description_: Demo showing the user launching the app and then entering plans into the table. During this period a health check is conducted to see if Flask, Notion, and Supabase APIs are accessible. Simultaneously, the app successfully requests and receives statistical metric data. The appearance
-
- As the user enters new records, the outline of all subsystems changes to reflect the overall feasibility. Additionally, the stat card system below will update
+_Description_: This demo shows the app launching, performing API health checks, retrieving stats, and updating its UI from “unknown” to “good.” As the user enters plans, metrics and statuses update in real time, and new records are successfully synced to Supabase and Notion upon submission.
 
 ![system_demo](https://github.com/user-attachments/assets/23625c7a-682c-43c6-a5a8-9ebac076261f)
+
+
+<details>
+    <summary>
+        More Details
+    </summary>
+
+This demo showcases the user launching the application and entering plans into the table interface.
+During the launch process, the system performs a health check to verify connectivity with the Flask, Notion, and Supabase APIs. At the same time, the app successfully requests and receives statistical metric data. Once the data is retrieved, the interface updates accordingly — the styling transitions from red (indicating an “unknown” status) to grey (signifying “neutral”). The stat cards are then populated with average and standard deviation time values, and the evaluation section dynamically updates with these new metrics.
+
+As the user adds new records, the outlines of all subsystems adjust to reflect overall feasibility. The stat card system also updates in real time, calculating total time values for tasks that share the same start date. The user continues to input plans for the following week until the overall status indicator turns green, representing a “good” state.
+
+The demo continues with the user scrolling through the updated interface, showing how both the stat cards and evaluation sections appear when the system is in its optimal state. Finally, the user opens the Supabase and Notion databases — initially empty — then submits the new plan. After submission, both databases display the newly created records, confirming a successful sync between the app and the Notion productivity environment.
+</details>
+
+
 
 ### Architecture
 #### Teck Stack
