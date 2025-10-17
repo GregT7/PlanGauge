@@ -713,9 +713,9 @@ A smaller dependency worth noting: your `test-boot.js` script will need environm
 - Create feasibility algorithm flowchart before final draft.  
 - Revise `Presentation Readiness` backlog and connect backend test toggles.  
 - Work **270 minutes total today**:
-  - [ ] 90 min (Session 1)  
-  - [ ] 90 min (Session 2)  
-  - [ ] 90 min (Session 3)
+  - 90 min (Session 1)  
+  - 90 min (Session 2)  
+  - 90 min (Session 3)
 
 ### 🤖 ChatGPT Reflection
 
@@ -750,62 +750,13 @@ Yes, but only with a narrowed scope. You can likely **complete the design.md str
   - [x] user-stories
   - [x] sdp
   - [x] pop (just add statement saying this was done at the beginning and the design evolved over time)
-- [ ] work on readme
+- [x] work on readme
   - [x] Project Title & Description
   - [x] Table of Contents (Toggle)
-  - [ ] Overview
-    - [ ] What the application does
-    - [ ] Testing coverage
-- [ ] Work 270 minutes today:
+  - [x] Overview
+    - [x] What the application does
+    - [x] Testing coverage
+- [x] Work 270 minutes today:
   - [x] Session 1 – 90 min
   - [x] Session 2 – 90 min
-  - [ ] Session 3 – 90 min
-
----
-
-## 🗓️ Standup [#] – [Standup Title]
-
-### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
-* **Discussed Backlog Items:**  
-  - 
-
-### 📋 Contents
-
-#### ✅ Planned Agenda
-- 
-
-#### 📈 Previous Progress
-- 
-
-#### 🧱 Problems & Blockers
-- 
-
-#### ⏳ Pending Actions
-- 
-
-#### 🔜 Next Steps
-- 
-
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
-
-#### ❓ Question 1
-- 
-
-#### ❓ Question 2...
-- 
-
-### 🧾 Results
-
-#### 🧠 Discussion Notes
-- 
-
-#### 🗝️ Key Decisions
-- 
-
-#### 📌 Action Items
-- 
-
---- 
+  - [x] Session 3 – 90 min
