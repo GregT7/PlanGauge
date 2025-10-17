@@ -62,9 +62,47 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
 
 ## Project Structure
-- have a table of contents for different files like mvs.md and design.md
-    - title + embedded link, role, description
-- explain the project_management directory + the project_journal directory
+- `/project_journal`: solo-Scrum documents showing my evolution through implementing an agile environment
+    - `/assets`: stores diagrams, mockups, quiz docs, demo gifs, and other docs created during sprints
+    - `/backlog`: backlog item documentation for features implemented in this project
+    - `/professional_review`: presentation and notes from project pitch to CS professor
+    - `/pull_requests`: docs for completed pull requests demoing the features developed and merged
+    - `/retrospective`: reflections completed for reviewing and improving sprint approach for each sprint
+    - `/sprints`: docs for sprints including the goal, assigned backlog items, subtasks, and DoD
+    - `/standup`: logs for daily standups documenting previous progress, next steps, problems, ChatGPT review
+- `/project_management`: stores documents used to design & maintain the technical aspects of the project
+    - `/api/flask_apis.xlsx`: excel document that details the flask api including example http responses, response key explanations, and http response code clarifications
+    - `/diagrams`: mockups, architecture diagram, FDD, ERD, and swimlane diagrams used in the current design
+    - `/specs`: This directory contains all formal software engineering documentation written throughout the development of PlanGauge. Each file defines the project’s requirements, rationale, and design decisions used to guide implementation.
+        - `/design.md`: The Design Specification document defines the structural, visual, and behavioral blueprint for PlanGauge, bridging the project’s requirements with its implemented architecture. It includes annotated diagrams, UI mockups, and flow representations that capture how each subsystem functions and interacts.
+        - `/mvs.md`: Defines the Minimum Viable Specification for PlanGauge—listing the essential features (task table, stat cards, plan summary, submission flow) required for a functioning prototype and mapping them to their requirement IDs.
+        - `/pop.md`: The Project Overview Proposal detailing the motivation, scope, and predicted architecture of PlanGauge. It covers complexity across system layers, technology stack choices, and methodology (Solo-Scrum).
+        - `/reqs.md`: The Requirement Specifications document defining all functional and non-functional requirements (R-X.Y) including frontend behavior, backend logic, security, and usability standards.
+        - `/sdp.md`: The Software Development Plan describing lifecycle phases, sprint schedules, testing strategy, risk assessment, and documentation control procedures.
+        - `timeline.xlsx`: Spreadsheet outlining the chronological schedule of development milestones, sprint durations, and deliverable deadlines. Stopped using/updating this half way through project development.
+        - `/user-stories.md`: Lists user stories that express functional goals from the perspective of an end user, forming the basis for requirement traceability and backlog creation.
+- `/src`: Contains all source code for the PlanGauge application, organized into frontend, backend, and database subsystems.
+    - `/backend`: Implements the Flask API server responsible for handling data transactions, performing validation, and bridging between the React frontend and Supabase database.
+        - `/app/__init__.py`: Initializes the Flask app instance and loads configuration (e.g., environment variables, API keys).
+        - `/app/routes.py`: Defines RESTful API endpoints for CRUD operations, plan submission, and Notion synchronization.
+        - `/app/utils.py`: Contains helper functions for validation, data formatting, and Notion API communication.
+        - `/tests/`: Houses backend unit and integration tests written with pytest.
+        - `pytest.ini`: Configures test discovery paths and environment markers for pytest.
+        - `run.py`: Entry point to launch the Flask development server.
+    - `/database`: Contains SQL scripts and schema configuration for the project’s Supabase (PostgreSQL) layer.
+        - `db_setup.sql`: Creates database tables, relations, and constraints aligned with the BCNF-compliant schema defined in the design specs.
+        - `row_security.sql`: Defines row-level security policies to control user access and protect plan submission records.
+    - `/frontend`: Implements the React + Tailwind + Shadcn/UI interface that allows users to input, visualize, and submit their weekly plans.
+        - `/e2e/`: End-to-end tests using Playwright to verify full-stack functionality.
+        - `/src/components/`: Stores the react components for all subsystems
+        - `/src/contexts/`: Context providers like TaskContext.jsx managing global state for task data
+        - `/src/tests/`: Frontend unit and integration tests written with Vitest + React Testing Library.
+        - `/src/utils/`: Utility functions supporting calculations, formatting, or API requests.
+        - `/src/App.jsx`: Root React component that renders the main task table and theme provider
+        - `/src/App.css`: Base styling and layout rules.
+        - `/src/index.css`: Tailwind + custom theme variables defining color palettes and dark mode support.
+        - `/src/main.jsx`: Application entry point rendering the React root node.
+- `/templates`: scaffolding for scrum documents stored in the `/project_journal/` directory
 
 ## How to Install & Run
 - consider:
