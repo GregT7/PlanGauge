@@ -23,6 +23,13 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
 - UC-4: System Launch and Data Retrieval — On startup, the app runs connectivity checks for Flask, Supabase, and Notion (R-7.40–R-7.41) and retrieves stored stats to initialize feasibility data. Toasts indicate success or failure of retrieval operations. (Ref: design.md – “Startup Process Swimlane Diagram,” “Stats Retrieval API Endpoint”)
 ### System Demo
 
+_Description_:
+
+<!-- <video src="assets/demo.mp4" controls width="640" muted playsinline> -->
+<video src="/project_journal/assets/s11_assets/PlanGauge_Demo.mp4" controls width="640" muted playsinline>
+  Sorry, your browser doesn’t support embedded videos.
+</video>
+
 ### Testing Coverage
 - Frontend
     - Technology: React Testing Library, Vitest, Jest
@@ -59,8 +66,6 @@ _Description:_ The system architecture connects a React-based frontend to a Flas
 PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, tailored for individual development. The project was organized into time-boxed sprints, each focused on specific backlog items derived from user stories that captured functional goals and user needs. Daily standups were documented to track progress, identify blockers, and plan next actions, while retrospectives were held at the end of each sprint to reflect on what worked well and what needed improvement. The product backlog was continuously refined to maintain alignment between requirements, testing, and implementation, ensuring steady, iterative progress toward a functional and user-centered planning assistant. Refer to the `project_journal` directory for agile documentation created throughout the development of this project.
 
 
-
-<!-- <code>/src</code>: -->
 ## Project Structure
 <details>
     <summary>
