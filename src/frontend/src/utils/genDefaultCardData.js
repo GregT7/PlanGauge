@@ -23,10 +23,25 @@ export function genDaysOfCurrentWeek() {
     return days
 }
 
+function getTestCardsData() {
+    let days = []
+    
+    days.push(new Date(2025, 9, 20));
+    days.push(new Date(2025, 9, 21));
+    days.push(new Date(2025, 9, 22));
+    days.push(new Date(2025, 9, 23));
+    days.push(new Date(2025, 9, 24));
+    days.push(new Date(2025, 9, 25));
+    days.push(new Date(2025, 9, 26));
+
+    return days
+}
+
 
 export function genDefaultCardsData() {
     let cardData = []
-    const days = genDaysOfCurrentWeek()
+    // const days = genDaysOfCurrentWeek()
+    const days = getTestCardsData()
 
     for (const day of days) {
         cardData.push(genDefaultCardData(day));
