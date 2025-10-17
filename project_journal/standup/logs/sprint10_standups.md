@@ -2,6 +2,16 @@
 * **Dates:** October 2nd (2025) - October 13th (2025)
 
 ---
+## 🗓️ Standup 1 – First Day
+
+### 🧾 Overview
+* **Date:** Thursday, October 2nd (2025)
+* **Time:** ?
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Feedback System`
+  - `End-to-End Testing`
+  - `Presentation Readiness`
 
 ### 📋 Contents
 

@@ -2,8 +2,8 @@
 
 ## 📝 Overview
 * Dates: October 2nd (2025) - October 13th (2025)
-* Status: In Progress
-* Backlog Progress: # backlogs completed / # backlogs assigned ( X% )
+* Status: Completed
+* Backlog Progress: 1 backlogs completed / 3 backlogs assigned ( 33% )
 * Tasks Assigned:
     * `Feedback System`
     * `End-to-End Testing`
@@ -29,5 +29,6 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: insert text here...
-* Retrospective Notes: insert text here...
+* Major Feedback: Sprint 10 was productive in terms of refinement and polish, marking significant progress toward completing the project’s final deliverables. The Feedback System was successfully finished with comprehensive regression and component testing, supported by clear pull request documentation and evidence. The End-to-End Testing backlog was reworked to prevent scope creep, removing premature CI integration and focusing on achievable goals. A major strength of this sprint was the decision to prioritize documentation and presentation readiness over additional testing, which was the right choice given the upcoming focus on professional presentation and portfolio quality. Feedback from Uncle Steve helped improve the tone, structure, and clarity of written materials, highlighting the importance of technical communication. Overall, the sprint demonstrated strong adaptability and self-awareness—refocusing on documentation quality rather than unchecked feature expansion. Additionally, several usability challenges were identified, such as the complexity of installation and the lack of clarity in explaining the project’s purpose, which will be addressed in the next sprint.
+
+* Retrospective Notes: Sprint 10 revealed a strong organizational foundation but also exposed the impact of shifting priorities and fatigue as attention transitioned toward job applications. While 76% of key decisions were successfully carried out, overall progress slowed due to reduced work hours and difficulty maintaining momentum during the second half of the sprint. The Feedback System was a highlight, showing thorough testing and functional completion, but End-to-End Testing stalled because of unclear subtasks and a steep learning curve with Node.js and Playwright. Documentation efforts were consistent, yet the project’s README and installation process remained incomplete and confusing for new users. This sprint emphasized the importance of maintaining focus and defining realistic scope near project completion. A key lesson was that clarity and documentation quality are as essential as technical implementation, especially when preparing a project for external review. Moving forward, Sprint 11 will prioritize finalizing the README, simplifying E2E test coverage, creating tutorial and demo materials, and improving presentation readiness. “Hanging features” such as incomplete button disable logic and potential Supabase automation enhancements will be logged separately for future improvement rather than added to the current sprint scope.

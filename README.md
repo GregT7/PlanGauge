@@ -39,15 +39,15 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
 
 ### Architecture
 #### Teck Stack
-    - Frontend: React, Tailwind CSS, Shadcn/UI
-        - React: Manages the application’s dynamic UI and state, allowing real-time updates as users modify their weekly plans.
-        - Tailwind CSS: Provides a responsive and modern utility-based styling framework for consistent, adaptive layouts.
-        - Shadcn/UI: Offers a good looking library for aesthetically pleasing dark mode styling design
-    - Backend: Flask, Notion API
-        - Flask: Implements the backend logic and HTTP endpoints that process feasibility calculations, manage plan submissions, and connect to external services.
-        - Notion API: Enables two-way synchronization of plan data between PlanGauge and the user’s Notion workspace.
-    - Database: Supabase (PostgreSQL)
-        - Supabase: Stores plan submissions and plan records created using this app. Also stores previous work/productivity records that are used for statistical metric calculations. The statistical metrics are then used to compare the current plan to previous performances.
+- Frontend: React, Tailwind CSS, Shadcn/UI
+    - React: Manages the application’s dynamic UI and state, allowing real-time updates as users modify their weekly plans.
+    - Tailwind CSS: Provides a responsive and modern utility-based styling framework for consistent, adaptive layouts.
+    - Shadcn/UI: Offers a good looking library for aesthetically pleasing dark mode styling design
+- Backend: Flask, Notion API
+    - Flask: Implements the backend logic and HTTP endpoints that process feasibility calculations, manage plan submissions, and connect to external services.
+    - Notion API: Enables two-way synchronization of plan data between PlanGauge and the user’s Notion workspace.
+- Database: Supabase (PostgreSQL)
+    - Supabase: Stores plan submissions and plan records created using this app. Also stores previous work/productivity records that are used for statistical metric calculations. The statistical metrics are then used to compare the current plan to previous performances.
 
 #### System Architecture Diagram
 
