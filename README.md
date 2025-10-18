@@ -7,7 +7,7 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
 
   - [Overview](#overview)
   - [Project Structure](#project-structure)
-  - [How to Install & Run](#how-to-install-&-run)
+  - [How to Install](#how-to-install)
   - [How to Use Tool](#how-to-use-tool)
   - [How to Run Tests](#how-to-run-tests)
   - [Limitations](#limitations)
@@ -148,32 +148,308 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
 - `/templates`: scaffolding for scrum documents stored in the `/project_journal/` directory
 
-## How to Install & Run
-1. 
+## How to Install
 
-### Demo Mode
+> **Note:**  
+> The steps in this section are all that’s required to **demo and run PlanGauge locally** without setting up Notion or Supabase integration.  
+> If you want to fully connect external services and enable plan synchronization, continue to the **Full Mode** section below.
 
-### 
-- python requirements?
-- consider:
-    - 1. creating a separate file
-        - writing a brief description in place here
-        - add a link to detailed file
-    - 2.
-        - adding a dependencies section (Notion, Supabase account)
+<details>
+<summary><b>Click to expand installation steps</b></summary>
+
+### Installation
+1. **Clone the repository**
+   ```
+   git clone https://github.com/GregT7/PlanGauge.git
+   ```
+
+2. **Install frontend dependencies**
+   ```
+   cd PlanGauge/src/frontend
+   npm install
+   npm audit fix
+   ```
+
+3. **Install backend dependencies**
+   ```
+   cd PlanGauge/src/backend
+   python -m venv venv
+   .\venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+</details>
+
+### Full Mode
+> **Note:**  
+> Complete setup for integrating Notion, Supabase, and environment configuration.
+
+<details>
+<summary><b>Click to expand installation steps</b></summary>
+
+1. **Setup Notion**
+   1. Create or log into your Notion account.
+   2. Create a new page.
+   3. Add a database within that page.
+   4. Create a new integration under [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations).
+   5. Grant the integration full access to your database.
+   6. Copy and store your Notion API key for later use.
+
+2. **Setup Supabase**
+   1. Create a free account at [https://app.supabase.com](https://app.supabase.com).
+   2. Run the SQL scripts in `/PlanGauge/src/database/`:
+      - `db_setup.sql` — Initializes database tables.  
+      - `row_security.sql` — Enables row-level security (prevents unauthorized access).  
+      - `init_records.sql` — Populates dummy records (optional).
+   3. Note your **Project URL** and **anon public key** for the `.env` file.
+
+3. **Setup frontend environment files**
+
+   1. **`.env`** – Date ranges for retrieving data in statistical calculations:
+      ```
+      cd /PlanGauge/src/frontend
+      echo VITE_DEFAULT_PLAN_START=2025-06-01> .env && echo VITE_DEFAULT_PLAN_END=2025-06-30>> .env
+      ```
+
+   2. **`.env.test`** – Playwright testing configuration  
+      **Windows**
+      ```
+      cd /PlanGauge/src/frontend
+      (echo # Base URL that Playwright uses for page.goto("/") && echo VITE_E2E_BASE_URL=http://localhost:4173 && echo. && echo # Frontend uses this to call Flask && echo VITE_API_URL=http://localhost:5001) > .env.test
+      ```
+
+      **Linux / macOS**
+      ```
+      cd /PlanGauge/src/frontend
+      echo -e "# Base URL that Playwright uses for page.goto(\"/\")\nVITE_E2E_BASE_URL=http://localhost:4173\n\n# Frontend uses this to call Flask\nVITE_API_URL=http://localhost:5001" > .env.test
+      ```
+
+4. **Setup backend environment files**
+
+   1. **`.env`** – Stores API keys for Supabase and Notion.  
+      **Windows**
+      ```
+      cd /PlanGauge/src/backend
+      (echo SUPABASE_URL=&& echo SUPABASE_KEY=&& echo NOTION_API_KEY=&& echo NOTION_PAGE_ID=&& echo NOTION_DB_ID=&& echo NOTION_VERSION="2022-06-28") > .env
+      ```
+
+      **Linux / macOS**
+      ```
+      cd /PlanGauge/src/backend
+      echo -e "SUPABASE_URL=\nSUPABASE_KEY=\nNOTION_API_KEY=\nNOTION_PAGE_ID=\nNOTION_DB_ID=\nNOTION_VERSION=\"2022-06-28\"" > .env
+      ```
+
+   2. **`.env.test`** – For backend testing (used by Playwright).  
+      **Windows**
+      ```
+      cd /PlanGauge/src/backend
+      (echo # Ports && echo PORT=5001 && echo. && echo # Toggleable test modes && echo TEST_MODE=true && echo STATS_MODE=ok ^# ok ^| error ^| empty ^| unknown && echo NOTION_MODE=up ^# up ^| down && echo DB_MODE=up ^# up ^| down && echo. && echo # Use a dedicated test DB or in-memory store && echo USE_IN_MEMORY_DB=true) > .env.test
+      ```
+
+      **Linux / macOS**
+      ```
+      cd /PlanGauge/src/backend
+      echo -e "# Ports\nPORT=5001\n\n# Toggleable test modes\nTEST_MODE=true\nSTATS_MODE=ok       # ok | error | empty | unknown\nNOTION_MODE=up      # up | down\nDB_MODE=up          # up | down\n\n# Use a dedicated test DB or in-memory store\nUSE_IN_MEMORY_DB=true" > .env.test
+      ```
+
+5. **Find API keys / info for Notion & Supabase and update backend `.env` file**
+   - `SUPABASE_URL`  
+     - _Description_: The unique base URL endpoint for your Supabase project.  
+     - How to find:
+       1. Log in to [https://app.supabase.com](https://app.supabase.com)
+       2. Select your project.
+       3. Go to **Project Settings → API**.
+       4. Copy the **Project URL**.
+     - Example:
+       ```
+       SUPABASE_URL=https://abcde12345.supabase.co
+       ```
+
+   - `SUPABASE_KEY`  
+     - _Description_: Your Supabase authentication key — typically the “anon public” key.  
+     - How to find:
+       1. In **Project Settings → API**, scroll to **Project API Keys**.
+       2. Copy the **anon public key**.
+     - Example:
+       ```
+       SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+       ```
+
+   - `NOTION_API_KEY`  
+     - _Description_: The token for your internal integration used to access Notion’s API.  
+     - How to find:
+       1. Go to [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations)
+       2. Create a new integration (e.g., “PlanGauge”).
+       3. Copy the **Internal Integration Token**.
+       4. Share your Notion page/database with this integration.
+     - Example:
+       ```
+       NOTION_API_KEY=secret_qwerty123456789abcdef
+       ```
+
+   - `NOTION_PAGE_ID`  
+     - _Description_: The 32-character ID for the Notion page you want PlanGauge to sync.  
+     - How to find:
+       1. Open the Notion page in your browser.
+       2. Copy the 32-character string at the end of the URL.
+     - Example:
+       ```
+       NOTION_PAGE_ID=abcdef1234567890abcdef1234567890
+       ```
+
+   - `NOTION_DB_ID`  
+     - _Description_: The ID of your Notion database used for plan synchronization.  
+     - How to find:
+       1. Open your Notion database in your browser.
+       2. Copy the 32-character string before `?v=` in the URL.
+     - Example:
+       ```
+       NOTION_DB_ID=1234567890abcdef1234567890abcdef
+       ```
+
+   - `NOTION_VERSION` = "2022-06-28"  
+     - _Description_: Specifies the Notion API version for compatibility.  
+     - How to find:
+       - Refer to [Notion’s API versioning documentation](https://developers.notion.com/reference/versioning)
+     - Example:
+       ```
+       NOTION_VERSION="2022-06-28"
+       ```
+</details>
 
 ## How to Use tool
-- Explain the goal is to enter tasks into the task table and then use the feasibility categorizations to edit plans to make them mroe realistic and then send data to Notion DB when satisfied
+### Demo Mode
+
+### Full Mode
+
+
+#### 1️⃣ Launch the Application
+
+1. **Start the Flask backend**
+   ```
+   cd PlanGauge/src/backend
+   .\venv\Scripts\activate
+   python run.py
+   ```
+
+2. **Start the React frontend**
+   ```
+   cd PlanGauge/src/frontend
+   npm run dev
+   ```
+
+3. Open your browser and navigate to:
+   ```
+   http://localhost:5173
+   ```
+
+#### 2️⃣ Create or Edit Weekly Tasks
+
+1. Use the **Notion-like task table** to enter your weekly goals.  
+   Each row represents a task with the following fields:
+   - **Task Name** – Short description of your task.
+   - **Category** – Choose from pre-defined options (e.g., Health, Career, School).
+   - **Start / Due Date** – Select using the date picker.
+   - **Estimated Time** – Enter manually or let the backend predict time (future feature).
+
+2. Add new tasks using the **“+ New Page”** button at the bottom of the table.
+
+3. Tasks update automatically as you edit fields — no need to manually save.
+
+#### 3️⃣ Review Daily and Weekly Feasibility
+
+- Each day displays a **stat card** showing:
+  - The **total planned time** for that day.
+  - A **color-coded status**:
+    - 🟢 **Good** – Within target range.
+    - 🟡 **Moderate** – Under or near threshold.
+    - 🔴 **Poor** – Exceeds predicted workload limit.
+
+- At the bottom, a **Plan Summary** indicator shows the overall feasibility rating for the week.
+
+#### 4️⃣ Submit Your Plan
+
+When satisfied with your plan, click the **Submit** button.  
+This will:
+1. Send your plan data to the **Flask backend**.  
+2. The backend will:
+   - Store your plan data in **Supabase** for long-term tracking.
+   - Sync your updated plan to **Notion**, ensuring your Notion workspace stays up-to-date.
+3. A temporary status message will confirm if the sync succeeded or failed.
+
+#### 5️⃣ Adjust, Track, and Improve
+
+- You can adjust your plan anytime; simply edit the table and re-submit.
+- Future versions will incorporate your Supabase data to refine **time predictions** for similar task types.
+- Use color trends and stats to track planning consistency week-to-week.
+
+#### 🧠 Tips
+- Ensure your `.env` files are properly configured for Supabase and Notion before launching.  
+- Keep your **Flask server** running while using the frontend — it handles database communication.  
+- If the **Submit button** doesn’t update colors or show feedback, check backend logs for any API key issues.
+
+#### ✅ Example Workflow
+
+1. Launch both servers.  
+2. Open the app in your browser.  
+3. Add your weekly school and career tasks.  
+4. Check the daily time indicators to balance workload.  
+5. Click **Submit** to sync your plan.  
+6. Verify your plan appears in Notion under your linked database.
+
+---
+
+PlanGauge helps you plan smarter — not harder — by combining planning, feasibility analysis, and workflow synchronization into one cohesive system.
+
 
 ## How to Run Tests
-- pytest, vitest, playwright
-- snapshot tests likely to fail
-- need to install playwright, install and run from right location
+
+### 1️⃣ Frontend (Vitest)
+> **Note:** This does **not** include Playwright E2E tests — see the next section for setup.
+
+```
+cd PlanGauge/src/frontend  
+npm run test
+```
+
+### 2️⃣ (Optional) End-to-End Testing with Playwright
+
+**Step 1 – Install Playwright**  
+cd PlanGauge/src/frontend  
+```npm init playwright@latest```
+
+**Step 2 – Follow setup prompts**  
+Answer the following during setup:  
+- ✔ Language: JavaScript  
+- ✔ Test directory: `tests`  
+- ✔ Add GitHub Actions workflow: No (optional)  
+- ✔ Install browsers: Yes  
+
+**Step 3 – Verify installation**  
+You should see a version number like `Version 1.48.0`:
+```npx playwright test --version```
+
+**Step 4 – Run default Playwright tests**  
+Run the sample tests provided by Playwright (all six should pass):  
+```npx playwright test```
+
+### 3️⃣ Backend (pytest)
+```
+cd PlanGauge/src/backend  
+.\venv\Scripts\activate  
+pytest -q
+```
 
 ## Limitations
-- a lot of the database schema currently has no use
-- everything is done through testing servers / no deployment
-- etc
+- Unused DB: 
+    - the database doesn't really do a lot at this point aside from holding work records
+    - However, the ground work is laid for editing/viewing/deleting previous plan submissions & corresponding plan records alongside other stats processing
+    - work is not being differentiated into assigned_work and general_work, same thing with plans
+    - assignment records aren't being used for anything and there is no way to assign plan records to them
+- Not Deployed: Using flask & vite servers
 
-## Acknowledgements
-- parents, Dr. Raymer, uncle steve, Cogan Shimizu, swe peers
+
+## 🙏 Acknowledgements
+- Dr. Raymer for giving me feedback on my early project design
+- Uncle Steve for reviewing project from both an end user & tech writer perspective
+- Intro to SWE Course: Dr. Shimizu + swe peers for learning the basics of SWE and how to implement an Agile methodology
+- Parents for giving me feedback from the perspective of an engineering project manager
