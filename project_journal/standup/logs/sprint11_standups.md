@@ -92,61 +92,82 @@ A 10-day window allows realistic pacing without burnout or neglecting job applic
 - Continue using ChatGPT as a reflection and planning tool post-Sprint 11 for project wrap-up review.
 
 #### 📌 Action Items
-- [ ] Wrap up remaining Sprint 10 deliverables:
-  - [ ] Write Sprint 10 retrospective (`sprint10.md`)
-  - [ ] Update sprint10.md
-- [ ] Begin Sprint 11 planning and documentation:
-  - [ ] Define sprint goals and estimated duration
-  - [ ] Add `sprint11.md` based on `sprint_template.md`
-
+- [x] Wrap up remaining Sprint 10 deliverables:
+  - [x] Write Sprint 10 retrospective (`sprint10.md`)
+  - [x] Update sprint10.md
+- [x] Begin Sprint 11 planning and documentation:
+  - [x] Define sprint goals and estimated duration
+  - [x] Add `sprint11.md` based on `sprint_template.md`
+- [x] Work on readme
+  - [x]  Create system demo
+  - [x]  Define project structure items
 
 ---
 
-
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 2 – Install & Run
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, October 18th (2025)
+* **Time:** 11:42 AM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Presentation Readiness`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Finished sprint 10 and started sprint 11  
+- Want to continue working on README
 
 #### 📈 Previous Progress
-- 
+- Sprint 10 documentation completed: `sprint10.md` + `sprint10_retro.md`  
+- Sprint 11 documentation draft: `sprint11.md`  
+- Continued working on README  
+  - Created a demo  
+  - Finished **Project Structure** section describing each folder and its contents
 
 #### 🧱 Problems & Blockers
-- 
+- Need to install the project on Raspberry Pi to confirm it runs properly  
+- Unsure if the installation tutorial covers every dependency and setup step  
 
 #### ⏳ Pending Actions
-- 
+- Continue writing and refining the README  
 
 #### 🔜 Next Steps
-- 
+- Expand the README sections:  
+  - How to install  
+  - How to use the tool  
+  - How to run tests  
+  - Limitations  
+  - Acknowledgements  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- **What is most risky about today's tasks?**  
+  The Raspberry Pi installation process — platform-specific dependency issues may arise, especially with Node or Python versions.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+- **What assumptions am I making that may be incorrect?**  
+  Assuming the current README installation steps are complete without having tested them on a clean environment yet.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Installation verification on Raspberry Pi is essential before finalizing the README setup tutorial.  
+- Testing cross-platform compatibility will improve the documentation’s completeness and credibility for presentation.  
 
 #### 🗝️ Key Decisions
-- 
+- Postpone polishing of non-essential README sections until installation testing confirms that the project runs end-to-end.  
 
 #### 📌 Action Items
-- 
+- [ ] Test installation on Raspberry Pi
+- [ ] Work on Readme
+  - [ ] Installation tutorial draft
+  - [ ] How to use tool draft
+  - [ ] How to run tests
+  - [ ] Limitations
+  - [ ] Acknowledgements
 
 ---
 

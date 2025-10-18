@@ -11,7 +11,6 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
   - [How to Use Tool](#how-to-use-tool)
   - [How to Run Tests](#how-to-run-tests)
   - [Limitations](#limitations)
-  - [Reflection](#reflection)
   - [Acknowledgements](#acknowledgements)
 </details>
 
@@ -150,6 +149,12 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 - `/templates`: scaffolding for scrum documents stored in the `/project_journal/` directory
 
 ## How to Install & Run
+1. 
+
+### Demo Mode
+
+### 
+- python requirements?
 - consider:
     - 1. creating a separate file
         - writing a brief description in place here
