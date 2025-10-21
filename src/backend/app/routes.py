@@ -3,19 +3,8 @@ from flask import jsonify, request
 from . import app, supabase
 from dotenv import load_dotenv
 from .utils import *
-
-# # Simple in-memory “DB” for tests
-# STATE = {
-#     "seed": "baseline",
-#     "stats": {
-#         "weekly": {"points": 92},
-#         "daily": {"good": 3, "moderate": 2, "poor": 2}
-#     }
-# }
-
-# env_file = os.environ.get("ENV_FILE", ".env.test" if os.environ.get("TEST_MODE") else ".env")
-# if os.path.exists(env_file):
-#     load_dotenv(env_file)
+from .demo_stats import demo_stats
+import asyncio
 
 load_dotenv()
 
@@ -338,19 +327,12 @@ def submit_plans():
                                     details=pack_exc(e))
         return jsonify(http_response), 500
 
-# # --- Test-only seed/reset endpoint
-# @app.post("/api/test/seed")
-# def seed():
-#     fixture = request.args.get("fixture", "baseline")
-#     STATE["seed"] = fixture
-#     # Reset deterministic payloads
-#     if fixture == "baseline":
-#         STATE["stats"] = {
-#             "weekly": {"points": 92},
-#             "daily": {"good": 3, "moderate": 2, "poor": 2}
-#         }
-#     elif fixture == "empty":
-#         STATE["stats"] = {"weekly": None, "daily": None}
-#     else:
-#         STATE["stats"] = {"weekly": {"points": 50}, "daily": {"good":1,"moderate":1,"poor":5}}
-#     return jsonify(ok=True, fixture=fixture)
+@app.route('/api/demo/stats', methods=['GET'])
+async def retrieve_dummy_stats():
+    start_time = time.perf_counter()
+    await asyncio.sleep(3)  # ⏳ non-blocking delay
+    extra_data = {
+        "data": demo_stats
+    }
+    http_response = ok_resp(["flask"], start_time, **extra_data)
+    return jsonify(http_response)

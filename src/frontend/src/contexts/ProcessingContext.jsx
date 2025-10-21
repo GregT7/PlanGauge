@@ -14,7 +14,7 @@ import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 
 export const processingContext = createContext(undefined);
 
-export function ProcessingContextProvider({children, starting_stats = default_stats, thresholds = defaultThresholds}) {
+export function ProcessingContextProvider({children, starting_stats = default_stats, thresholds = defaultThresholds, IS_DEMO}) {
     const {tasks, timeSum} = useContext(TaskContext)
 
     // Generate starting card data for each day of the week
@@ -28,7 +28,12 @@ export function ProcessingContextProvider({children, starting_stats = default_st
         let cancelled = false;
             (async () => {
                 try {
-                const promise = retrieveStats(); // resolves to { message, details, data }
+
+                const baseURL = "http://127.0.0.1:5000"
+                const flaskURL = "/api/db/stats"
+                const endpointURL = baseURL + flaskURL
+                const promise = retrieveStats(DEFAULT_PLAN_START, DEFAULT_PLAN_END, 
+                    endpointURL, IS_DEMO); // resolves to { message, details, data }
 
                 // bind toast to the same promise (don’t await the toast)
                 toast.promise(promise, {
