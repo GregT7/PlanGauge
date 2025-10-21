@@ -1,22 +1,23 @@
-import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 import verifyStatsData from "./verifyStatsData";
 
 // # curl "http://127.0.0.1:5000/api/db/stats?start=2025-06-01&end=2025-06-30"
-const baseURL = "http://127.0.0.1:5000"
-const flaskURL = "/api/db/stats"
-const endpointURL = baseURL + flaskURL
-export default async function retrieveStats(start = DEFAULT_PLAN_START, end = DEFAULT_PLAN_END, url=endpointURL) {
-    const regex = /^\d{4}-\d{2}-\d{2}$/
-    const start_ok = regex.test(start)
-    const end_ok = regex.test(end)
-    if (!start_ok || !end_ok) {
-        throw new Error("Invalid arguments passed to retrieveStats")
+export default async function retrieveStats(start, end, url, IS_DEMO) {
+
+    let finalURL;
+    if (IS_DEMO) {
+        finalURL = import.meta.env.VITE_STATS_TESTING_ROUTE
+    } else {
+        const regex = /^\d{4}-\d{2}-\d{2}$/
+        const start_ok = regex.test(start)
+        const end_ok = regex.test(end)
+        if (!start_ok || !end_ok) {
+            throw new Error("Invalid arguments passed to retrieveStats")
+        }
+
+        const query_str = `start=${start}&end=${end}`
+        finalURL = `${url}?${query_str}`
     }
 
-    const query_str = `start=${start}&end=${end}`
-    const finalURL = `${url}?${query_str}`
-    // console.log("url string: ", finalURL)
-   
     let resp = {
         message: "Error: Received no response from database!",
         details: null,
@@ -52,4 +53,5 @@ export default async function retrieveStats(start = DEFAULT_PLAN_START, end = DE
 
     console.log("Stats access attempt was successful: ", resp)
     return Promise.resolve(resp)
+    
 }

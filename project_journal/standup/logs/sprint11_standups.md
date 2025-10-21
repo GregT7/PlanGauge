@@ -161,62 +161,106 @@ A 10-day window allows realistic pacing without burnout or neglecting job applic
 - Postpone polishing of non-essential README sections until installation testing confirms that the project runs end-to-end.  
 
 #### 📌 Action Items
-- [ ] Test installation on Raspberry Pi
-- [ ] Work on Readme
-  - [ ] Installation tutorial draft
-  - [ ] How to use tool draft
-  - [ ] How to run tests
-  - [ ] Limitations
-  - [ ] Acknowledgements
+- [x] Test installation via github download link
+- [x] Work on Readme
+  - [x] Installation tutorial draft
+  - [x] How to use tool draft
+  - [x] How to run tests
+  - [x] Limitations
+  - [x] Acknowledgements
+- [x] Create launch script
+  - [x] launches flask
+  - [x] launches react
+  - [x] opens web browser
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 3 – Progress Consolidation & Readme Updates
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Tuesday, October 21st, 2025  
+* **Time:** 6:16 PM  
+* **Attendees:** Self (Solo)  
 * **Discussed Backlog Items:**  
-  - 
+  - `Presentation Readiness`
+  - `End-to-End Testing`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Further updated README & created script aliases for demoing and starting the app with one command.  
+- Need to redefine backlog subtasks for `End-to-End Testing`.  
+- Need to update README with recent changes.
 
 #### 📈 Previous Progress
-- 
+- Created two new launch scripts in `package.json`:  
+  - `npm run start`: launches both servers and opens the browser for *Full Mode* usage.  
+  - `npm run start:demo`: launches both servers and opens the browser for *Demo Mode*, allowing users to explore a functional version of the project without requiring setup.  
+- Finished an outdated draft of the README that now needs revisions to reflect recent architecture and feature changes.
 
 #### 🧱 Problems & Blockers
-- 
+- When downloading the project, asset files take up significant memory and are unnecessary for users simply testing the demo version.  
+  - These assets remain on GitHub for documentation purposes (tracking progress across sprint cycles).  
 
 #### ⏳ Pending Actions
-- 
+- Continue improving README.  
+- Update `End-to-End Testing` subtasks and associated Definition of Done (DoD).  
 
 #### 🔜 Next Steps
-- 
+- **Update README:**
+  - Resize the system architecture diagram.  
+  - Add a short overview for the Use Case section, moving existing content into a toggle.  
+  - Add a Dependencies section.  
+  - Revise “How to Use Tool” section:
+    - Add detailed explanations for *Demo Mode* and *Full Mode*.  
+    - Simplify demo setup steps.  
+    - Clarify full mode installation and API integration steps.  
+    - Place current detailed instructions in collapsible toggles.  
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+- **Update `End-to-End Testing`:**
+  - Redefine subtasks for Playwright coverage.  
+  - Update DoD to include test completeness and trace/screenshot verification.  
+
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**What are the biggest risks in today’s tasks? What assumptions am I making that may be incorrect?**  
+- The biggest risk is over-prioritizing documentation refinement over practical testing progress. I’m assuming all current test cases will integrate smoothly with the new dual-mode launch scripts, but environment variable handling between *demo* and *full* modes could create inconsistent test outcomes if not mocked correctly.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**Is my approach truly Agile, or is it more reminiscent of waterfall or another methodology?**  
+- It’s still mostly Agile (iterative cycles, incremental improvements, reflection), but the documentation-heavy phase feels more like a brief Waterfall interlude — focused on stabilizing and finalizing deliverables before new iterations of functionality.  
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Creating demo launch scripts increased accessibility for reviewers and simplified showcasing the system.  
+- README refinement will directly improve project presentation and reduce onboarding friction for future users or recruiters.
 
 #### 🗝️ Key Decisions
-- 
+- Keep large asset files on GitHub for transparency but mark them as optional.  
+- Prioritize usability polish (README clarity, mode instructions) before returning to testing.  
 
 #### 📌 Action Items
-- 
+- [ ] Update README
+  - [ ] Resize the system architecture diagram.  
+  - [ ] Add a short overview for the Use Case section, moving existing content into a toggle.  
+  - [ ] Add a Dependencies section.  
+  - [ ] Revise “How to Use Tool” section:  
+    - [ ] Add detailed explanations for *Demo Mode* and *Full Mode*.  
+    - [ ] Simplify demo setup steps.  
+    - [ ] Clarify full mode installation and API integration steps.  
+    - [ ] Place current detailed instructions in collapsible toggles.  
+- [ ] Update `End-to-End Testing`
+  - [ ] Redefine subtasks for Playwright coverage.  
+  - [ ] Update DoD to include test completeness and trace/screenshot verification.  
+- [ ] Update `Presentation Readiness`
+  - [ ] Move assets to google drive
+  - [ ] Keep necessary assets if necessary
+  - [ ] Add link + note to readme
 
 ---
+
 
 ## 🗓️ Standup [#] – [Standup Title]
 

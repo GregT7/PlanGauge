@@ -40,8 +40,8 @@ function getTestCardsData() {
 
 export function genDefaultCardsData() {
     let cardData = []
-    // const days = genDaysOfCurrentWeek()
-    const days = getTestCardsData()
+    const days = genDaysOfCurrentWeek()
+    // const days = getTestCardsData()
 
     for (const day of days) {
         cardData.push(genDefaultCardData(day));

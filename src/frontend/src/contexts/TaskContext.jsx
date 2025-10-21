@@ -1,21 +1,75 @@
 import { createContext, useState, useMemo } from 'react';
 import toLocalMidnight from '@/utils/toLocalMidnight';
 import emptyTasks from "@/utils/emptyTasks.json" with { type: 'json' }
-
+import demoTasks from "@/utils/demoTasks.json" with { type: 'json' }
+import {genDaysOfCurrentWeek} from "@/utils/genDefaultCardData"
 export const TaskContext = createContext(undefined);
 
-export default function TaskContextProvider({children, starting_tasks}) {
+function reformat(tasks) {
+    return tasks.map(task => (
+        {
+            ...task, 
+            "start_date": toLocalMidnight(task["start_date"]),
+            "due_date": toLocalMidnight(task["due_date"])
+        }
+    ))
+}
+
+function parseDate(date, days) {
+    const dayMap = {
+        Monday: 0,
+        Tuesday: 1,
+        Wednesday: 2,
+        Thursday: 3,
+        Friday: 4,
+        Saturday: 5,
+        Sunday: 6
+    };
+    const index = dayMap[date]
+
+    const newDate = days[index]
+    const year = newDate.getFullYear();
+    const month = String(newDate.getMonth() + 1).padStart(2, '0');
+    const day = String(newDate.getDate()).padStart(2, '0');
+
+    const formatted = `${year}-${month}-${day}`
+    return formatted
+}
+
+function parseTaskDates(tasks) {
+    const days = genDaysOfCurrentWeek()
+
+    
+
+    // parse the task date from "Monday" to "2025-10-13"
+    return tasks.map(task => {
+        const startDate = parseDate(task["start_date"], days)
+        const dueDate = parseDate(task["due_date"], days)
+
+        return {
+            ...task,
+            "start_date": toLocalMidnight(startDate),
+            "due_date": toLocalMidnight(dueDate)
+        }
+    })
+
+}
+
+export default function TaskContextProvider({children, starting_tasks, IS_DEMO}) {
     let reformattedTasks
-    if (starting_tasks == null) reformattedTasks = emptyTasks
-    else {
-        reformattedTasks = starting_tasks.map(task => (
-            {
-                ...task, 
-                "start_date": toLocalMidnight(task["start_date"]),
-                "due_date": toLocalMidnight(task["due_date"])
-            }
-        ))
+    if (IS_DEMO) {
+        const parsedTasks = parseTaskDates(demoTasks)
+        // reformattedTasks = reformat(demoTasks)
+        reformattedTasks = reformat(parsedTasks)
+    } else {
+        if (starting_tasks == null) reformattedTasks = emptyTasks
+        else {
+            reformattedTasks = reformat(starting_tasks)
+        }
     }
+    
+    
+
     const [tasks, setTasks] = useState(reformattedTasks);
 
     const timeSum = useMemo(() =>

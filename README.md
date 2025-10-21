@@ -151,8 +151,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 ## How to Install
 
 > **Note:**  
-> The steps in this section are all that’s required to **demo and run PlanGauge locally** without setting up Notion or Supabase integration.  
-> If you want to fully connect external services and enable plan synchronization, continue to the **Full Mode** section below.
+> The steps in this section are all that’s required to **demo and run PlanGauge locally** without setting up Notion or Supabase integration. If you want to fully connect external services and enable plan synchronization, continue to the **Full Mode** section below.
 
 <details>
 <summary><b>Click to expand installation steps</b></summary>
@@ -431,6 +430,8 @@ You should see a version number like `Version 1.48.0`:
 **Step 4 – Run default Playwright tests**  
 Run the sample tests provided by Playwright (all six should pass):  
 ```npx playwright test```
+
+
 
 ### 3️⃣ Backend (pytest)
 ```
