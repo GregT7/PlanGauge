@@ -59,7 +59,6 @@ export default function TaskContextProvider({children, starting_tasks, IS_DEMO})
     let reformattedTasks
     if (IS_DEMO) {
         const parsedTasks = parseTaskDates(demoTasks)
-        // reformattedTasks = reformat(demoTasks)
         reformattedTasks = reformat(parsedTasks)
     } else {
         if (starting_tasks == null) reformattedTasks = emptyTasks
