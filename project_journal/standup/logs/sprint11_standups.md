@@ -242,70 +242,96 @@ A 10-day window allows realistic pacing without burnout or neglecting job applic
 - Prioritize usability polish (README clarity, mode instructions) before returning to testing.  
 
 #### 📌 Action Items
-- [ ] Update README
-  - [ ] Resize the system architecture diagram.  
-  - [ ] Add a short overview for the Use Case section, moving existing content into a toggle.  
-  - [ ] Add a Dependencies section.  
-  - [ ] Revise “How to Use Tool” section:  
-    - [ ] Add detailed explanations for *Demo Mode* and *Full Mode*.  
-    - [ ] Simplify demo setup steps.  
-    - [ ] Clarify full mode installation and API integration steps.  
-    - [ ] Place current detailed instructions in collapsible toggles.  
+- [x] Update README
+  - [x] Resize the system architecture diagram.  
+  - [x] Add a short overview for the Use Case section, moving existing content into a toggle.  
+  - [x] Add a Dependencies section.  
+  - [x] Revise “How to Use Tool” section:  
+    - [x] Add detailed explanations for *Demo Mode* and *Full Mode*.  
+    - [x] Simplify demo setup steps.  
+    - [x] Clarify full mode installation and API integration steps.  
+    - [x] Place current detailed instructions in collapsible toggles.  
 - [ ] Update `End-to-End Testing`
   - [ ] Redefine subtasks for Playwright coverage.  
   - [ ] Update DoD to include test completeness and trace/screenshot verification.  
 - [ ] Update `Presentation Readiness`
   - [ ] Move assets to google drive
-  - [ ] Keep necessary assets if necessary
+  - [ ] Keep necessary assets
   - [ ] Add link + note to readme
 
 ---
 
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 4 – Resume E2E testing
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Wednesday, October 22nd (2025)
+* **Time:** 4:40 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Presentation Readiness`
+  - `End-to-End Testing`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Finish backlog doc updates
+- Start E2E testing again
 
 #### 📈 Previous Progress
-- 
+- Updated readme again: how to install & use + other things
 
 #### 🧱 Problems & Blockers
-- 
+- Had problems with building the web app `vite build` and writing the test launch script
 
 #### ⏳ Pending Actions
-- 
+  - Update `Presentation Readiness` documentation
+  - Update `End-to-End Testing` documentation
 
 #### 🔜 Next Steps
-- 
+- Update `End-to-End Testing`
+  - Redefine subtasks for Playwright coverage.  
+  - Update DoD to include test completeness and trace/screenshot verification.  
+- Update `Presentation Readiness`
+  - Move assets to google drive
+  - Keep necessary assets
+  - Add link + note to readme
+- Resume E2E Testing
+  - Figure out how to build & access web page (`vite build`)
+  - Fix testing launch script
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
-#### ❓ Question 1
-- 
+#### ❓ Question 1  
+**If you had to create a system for prioritizing new tasks to add to this project, what would you create?**  
+I would create a lightweight **priority matrix** that ranks new tasks by *impact vs. effort*. High-impact and low-effort tasks (e.g., documentation clarity, test coverage) would take priority. Tasks with high effort but low immediate impact would be deferred to post-presentation cleanup. This structure would ensure progress aligns with both presentation goals and technical stability.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2  
+**What am I assuming that may be incorrect?**  
+I may be assuming that the E2E build issues stem entirely from the Vite configuration rather than from cross-environment inconsistencies in the Playwright test runner. It’s possible the issue lies in the output directory mapping or test environment setup rather than the build process itself. Testing a manual static server launch before debugging the build script could confirm this.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Recognized the need for clearer task prioritization to prevent burnout during final testing.
+- Identified that some E2E failures are environment-related rather than due to component logic.
+- Noted the benefit of temporarily simplifying the build flow to isolate core test failures.
 
 #### 🗝️ Key Decisions
-- 
+- Adopt a two-tier test launch approach: first confirm static server accessibility, then automate with Playwright.
+- Finalize backlog documentation before continuing test automation to maintain accurate project state.
 
 #### 📌 Action Items
-- 
+- [x] Update `End-to-End Testing`
+  - [x] Redefine subtasks for Playwright coverage.  
+  - [x] Update DoD to include test completeness and trace/screenshot verification.  
+- [x] Update `Presentation Readiness`
+  - [x] Move assets to google drive
+  - [x] Keep necessary assets
+  - [x] Add link + note to readme
+- [ ] Resume E2E Testing
+  - [ ] Figure out how to build & access web page (`vite build`)
+  - [ ] Fix testing launch script
 
 ---
 
