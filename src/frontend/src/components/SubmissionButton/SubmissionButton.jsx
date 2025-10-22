@@ -9,11 +9,10 @@ import { toast } from 'sonner'
 import { processingContext } from "@/contexts/ProcessingContext"
 import determineStatusStyle from '@/utils/determineStatusStyle';
 
-function SubmissionButton({status = 'neutral', 
+function SubmissionButton({IS_DEMO, status = 'neutral', 
     filter_start_date = DEFAULT_PLAN_START, filter_end_date = DEFAULT_PLAN_END}) {
 
     const { tasks } = useContext(TaskContext);
-
     const [isDisabled, setIsDisabled] = useState(false)
     
     function formatDates(records) {
@@ -25,7 +24,7 @@ function SubmissionButton({status = 'neutral',
     let tasksCopy = structuredClone(tasks)
     formatDates(tasksCopy);
 
-    const handleClick = async () => {
+    const handleClickSubmit = async () => {
         setIsDisabled(true);
         try {
             const resp = submitPlans(tasksCopy, filter_start_date, filter_end_date);
@@ -44,6 +43,26 @@ function SubmissionButton({status = 'neutral',
         }
     };
 
+    const handleClickDemo = async () => {
+        setIsDisabled(true);
+        try {
+            const promise = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Sonner' }), 4000));
+
+            toast.promise(promise, {
+            loading: 'Mocking plan submission...',
+            success: (data) => {
+                return `Mock submission successful!`;
+            },
+            error: 'Error: Mock submission failed!',
+            });
+        } catch (err) {
+            console.log("Submission exception caught: ", err);
+            toast.error(err.message || 'Error: There Was An Unexpected Issue!');
+        } finally {
+            setIsDisabled(false);
+        }
+    }
+
 
     function handleStyling(status) {
         if (styleData?.[status]) {
@@ -56,6 +75,7 @@ function SubmissionButton({status = 'neutral',
     const { feasibility } = useContext(processingContext);
     const style = "text-xl p-6 " + handleStyling(feasibility?.status)
 
+    const handleClick = IS_DEMO ? handleClickDemo : handleClickSubmit
 
     return (     
         <Button onClick={handleClick} className={style} disabled={isDisabled}>

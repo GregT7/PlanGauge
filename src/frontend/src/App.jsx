@@ -32,7 +32,7 @@ function App() {
                     <TaskTable/>
                     <StatCardSystem/>
                     <EvaluationSection/>
-                    <SubmissionButton status="neutral"/>
+                    <SubmissionButton IS_DEMO={IS_DEMO} status="neutral"/>
                   </div>
               </ProcessingContextProvider>
             </TaskContextProvider>   
