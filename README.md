@@ -9,9 +9,7 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
   - [Project Structure](#project-structure)
   - [How to Install](#how-to-install)
   - [How to Use Tool](#how-to-use-tool)
-  - [How to Run Tests](#how-to-run-tests)
-  - [Limitations](#limitations)
-  - [Acknowledgements](#acknowledgements)
+  - [Other](#other)
 </details>
 
 ---
@@ -23,6 +21,7 @@ _Description:_ The system allows users to create, evaluate, and submit weekly pl
     <summary>
         More Details
     </summary>
+    
 - UC-1: Create Weekly Plan — The user adds, edits, and deletes tasks in the Task Entry Table (R-2.10–R-2.15), filling out task names, categories, dates, and times. The Stat Card System updates automatically to reflect daily workload changes. (Ref: design.md – “Table Structure,” “Add New Task Demo”)
 - UC-2: Evaluate Plan Feasibility — The user views live feedback through the Stat Card System and Evaluation Section, which compute daily and weekly feasibility using Z-scores (R-1.22–R-1.23). The Evaluation Section provides a summary score and detailed breakdown of contributing metrics. (Ref: design.md – “Populated State,” “Evaluation Section,” “Details Accordion”)
 - UC-3: Submit Plan to External Systems — The user clicks the Submit button to send plan data to Notion and Supabase via Flask (R-5.10). A toast confirms success or failure, and the button color reflects the plan’s overall feasibility. (Ref: design.md – “Submission Swimlane Diagram,” “Submission Demo”)
@@ -171,19 +170,19 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 <details>
   <summary>More Details</summary>
 
-1. Clone the repository
+1️⃣ Clone the repository
    ```
    git clone https://github.com/GregT7/PlanGauge.git
    ```
 
-2. Install frontend dependencies
+2️⃣ Install frontend dependencies
    ```
    cd PlanGauge/src/frontend
    npm install
    npm audit fix
    ```
 
-3. Install backend dependencies
+3️⃣ Install backend dependencies
    ```
    cd PlanGauge/src/backend
    python -m venv venv
@@ -198,7 +197,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 <details>
   <summary>More Details</summary>
 
-1. Setup Notion
+1️⃣ Setup Notion
    1. Create or log into your Notion account.
    2. Create a new page.
    3. Add a database within that page.
@@ -206,7 +205,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
    5. Grant the integration full access to your database.
    6. Copy and store your Notion API key for later use.
 
-2. Setup Supabase
+2️⃣ Setup Supabase
    1. Create a free account at [https://app.supabase.com](https://app.supabase.com).
    2. Run the SQL scripts in `/PlanGauge/src/database/`:
       - `db_setup.sql` — Initializes database tables.  
@@ -214,47 +213,52 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
       - `init_records.sql` — Populates dummy records (optional).
    3. Note your Project URL and anon public key for the `.env` file.
 
-3. Setup environment files
+3️⃣ Setup environment files
+<details>
+  <summary>Windows</summary>
+
   1. `/src/.env`
-  Windows
   ```
   cd /PlanGauge/src
   echo FLASK_BASE_URL=http://127.0.0.1:^ FLASK_DEFAULT_PORT=5000^ FLASK_TESTING_PORT=5001^ FLASK_HEALTH_ROUTE=/api/health > .env
   ```
 
-  Linux/macOS
+  2. `/src/backend/.env`
+  ```
+  cd /PlanGauge/src/backend
+  (echo SUPABASE_URL=&& echo SUPABASE_KEY=&& echo NOTION_API_KEY=&& echo NOTION_PAGE_ID=&& echo NOTION_DB_ID=&& echo NOTION_VERSION="2022-06-28") > .env
+  ```
+
+  3. `/src/frontend/.env.demo`
+  ```
+  cd /PlanGauge/src/frontend
+  echo VITE_DEMO=1^ VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats^ VITE_DEFAULT_ROUTE=http://localhost:5173/^ VITE_TESTING_ROUTE=http://localhost:4173/^ VITE_DEFAULT_PLAN_START=2025-06-01^ VITE_DEFAULT_PLAN_END=2025-06-30 > .env
+  ```
+</details>
+
+<details>
+  <summary>Linux/macOS</summary>
+
+  1. `/src/.env`
   ```
   cd /PlanGauge/src
   echo "FLASK_BASE_URL=http://127.0.0.1: FLASK_DEFAULT_PORT=5000 FLASK_TESTING_PORT=5001 FLASK_HEALTH_ROUTE=/api/health" > .env
   ```
 
   2. `/src/backend/.env`
-  Windows
-  ```
-  cd /PlanGauge/src/backend
-  (echo SUPABASE_URL=&& echo SUPABASE_KEY=&& echo NOTION_API_KEY=&& echo NOTION_PAGE_ID=&& echo NOTION_DB_ID=&& echo NOTION_VERSION="2022-06-28") > .env
-  ```
-
-  Linux/macOS
   ```
   cd /PlanGauge/src/backend
   echo -e "SUPABASE_URL=\nSUPABASE_KEY=\nNOTION_API_KEY=\nNOTION_PAGE_ID=\nNOTION_DB_ID=\nNOTION_VERSION=\"2022-06-28\"" > .env
   ```
 
   3. `/src/frontend/.env.demo`
-  Windows
-  ```
-  cd /PlanGauge/src/frontend
-  echo VITE_DEMO=1^ VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats^ VITE_DEFAULT_ROUTE=http://localhost:5173/^ VITE_TESTING_ROUTE=http://localhost:4173/^ VITE_DEFAULT_PLAN_START=2025-06-01^ VITE_DEFAULT_PLAN_END=2025-06-30 > .env
-  ```
-
-  Linux
   ```
   cd /PlanGauge/src/frontend
   echo "VITE_DEMO=1 VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats VITE_DEFAULT_ROUTE=http://localhost:5173/ VITE_TESTING_ROUTE=http://localhost:4173/ VITE_DEFAULT_PLAN_START=2025-06-01 VITE_DEFAULT_PLAN_END=2025-06-30" > .env
   ```
+</details>
 
-4. Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env` file
+4️⃣ Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env` file
    - `SUPABASE_URL`  
      - _Description_: The unique base URL endpoint for your Supabase project.  
      - How to find:
