@@ -50,9 +50,6 @@ async function main() {
         await open("http://localhost:5173/");
         }, 8000); // adjust delay if needed
     });
-
-
-
 }
 
 await main();
