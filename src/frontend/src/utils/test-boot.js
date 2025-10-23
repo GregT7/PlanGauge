@@ -1,46 +1,73 @@
+// test-boot.js
 import { spawn } from "child_process";
+import { config } from "dotenv";
+import { fileURLToPath } from "url";
 import path from "node:path";
-import open from "open"; // npm install open
-
-const FRONTEND_DIR = process.cwd();                  // assume running from /frontend
-const BACKEND_DIR  = path.resolve(FRONTEND_DIR, "..", "backend");
-const ACTIVATE = path.join("venv", "Scripts", "activate.bat");
+import killTree from "tree-kill";            // npm i tree-kill
+import waitOn from "wait-on";                // npm i wait-on
 
 async function main() {
-  // Start Flask backend
-  const flask_child = spawn(`call "${ACTIVATE}" && python run.py`, {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const envPath = path.resolve(__dirname, "../../../.env");
+  config({ path: envPath });
+
+  const FRONTEND_DIR = process.cwd();                 // assume running from /frontend
+  const BACKEND_DIR  = path.resolve(FRONTEND_DIR, "..", "backend");
+
+  // --- Start Flask backend (run venv python directly; no "activate", no shell) ---
+  const PYTHON = path.join(BACKEND_DIR, "venv", "Scripts", "python.exe"); // on Windows
+  const flask = spawn(PYTHON, ["run.py"], {
     cwd: BACKEND_DIR,
-    shell: true,
-    stdio: "inherit"
+    stdio: "inherit",
+    shell: false
   });
 
-  const HEALTH_URL = "http://127.0.0.1:5000/api/health";
-
-  // Wait for Flask to be ready
-  const waiter = spawn('npx', ['wait-on', HEALTH_URL, '-t', '60000', '-i', '500'], {
-    shell: true,
-    stdio: 'inherit'
-  });
-
-  waiter.on("exit", async (code) => {
-    console.log("✅ Flask API reached. Launching frontend...");
-
-    // Start Vite frontend
-    const react_child = spawn("npm", ["run", "dev"], {
+  // Build frontend (blocking until finish)
+  await new Promise((resolve, reject) => {
+    const build = spawn("npm", ["run", "build"], {
       cwd: FRONTEND_DIR,
-      shell: true,
-      stdio: "inherit"
+      stdio: "inherit",
+      shell: true
     });
-
-    // Wait a moment for Vite to start, then open browser
-    setTimeout(async () => {
-      console.log("🌐 Opening browser to http://localhost:5173/");
-      await open("http://localhost:5173/");
-    }, 8000); // adjust delay if needed
+    build.on("exit", code => code === 0 ? resolve() : reject(new Error(`Build failed (${code})`)));
   });
 
-  // optional: kill Flask after certain time
-  // setTimeout(() => { flask_child.kill() }, 60000);
+  // Start preview server
+  const preview = spawn("npm", ["run", "preview"], {
+    cwd: FRONTEND_DIR,
+    stdio: "inherit",
+    shell: true
+  });
+
+  // Wait for preview to be reachable
+  const PREVIEW_URL = "http://localhost:4173/";
+  await waitOn({
+    resources: [PREVIEW_URL],
+    timeout: 60_000,
+    interval: 500
+  });
+
+  // Run Playwright tests
+  const exitCode = await new Promise(resolve => {
+    const tests = spawn("npx", ["playwright", "test"], {
+      cwd: FRONTEND_DIR,
+      stdio: "inherit",
+      shell: true
+    });
+    tests.on("exit", code => resolve(code ?? 1));
+  });
+
+  // --- Teardown (kill process trees, then exit) ---
+  await Promise.all([
+    new Promise(res => { try { killTree(flask.pid,  'SIGINT', () => res()); } catch { res(); } }),
+    new Promise(res => { try { killTree(preview.pid, 'SIGINT', () => res()); } catch { res(); } }),
+  ]);
+
+  process.exit(exitCode);
 }
 
-await main();
+main().catch(err => {
+  console.error("Boot script failed:", err);
+  process.exit(1);
+});

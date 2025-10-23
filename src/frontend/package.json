@@ -10,11 +10,9 @@
     "test": "vitest",
     "lint": "eslint .",
     "preview": "vite preview",
-    "preview:test": "vite preview --port 4173 --strictPort",
     "start": "node src/utils/boot.js",
     "start:demo": "node src/utils/boot.js -demo",
-    "e2e": "playwright test",
-    "e2e:dev": "node src/utils/test-boot.js",
+    "e2e": "node src/utils/test-boot.js",
     "e2e:report": "playwright show-report"
   },
   "dependencies": {
@@ -37,7 +35,8 @@
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
     "sonner": "^2.0.7",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.0",
+    "tree-kill": "^1.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

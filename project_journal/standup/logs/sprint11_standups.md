@@ -329,58 +329,87 @@ I may be assuming that the E2E build issues stem entirely from the Vite configur
   - [x] Move assets to google drive
   - [x] Keep necessary assets
   - [x] Add link + note to readme
-- [ ] Resume E2E Testing
-  - [ ] Figure out how to build & access web page (`vite build`)
-  - [ ] Fix testing launch script
+- [x] Resume E2E Testing
+  - [x] Figure out how to build & access web page (`vite build`)
+  - [x] Fix testing launch script
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 5 – E2E Test Writing part 1
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Thursday, October 23th (2025)
+* **Time:** 12:29 PM
+* **Attendees:** Greg T.
 * **Discussed Backlog Items:**  
-  - 
+  - `Presentation Readiness`
+  - `End-to-End Testing`
+
+---
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Got a basic testing boot script (builds frontend, launches servers, and starts e2e tests)
+- Finally ready to work on writing end-to-end tests
 
 #### 📈 Previous Progress
-- 
+- Figured out how to build and access app
+- Got basic `test-boot.js` script to work
+- Updated `Presentation Readiness` and `End-to-End Testing`
 
 #### 🧱 Problems & Blockers
-- 
+- Moving assets folder to Google Drive could complicate the merge process
+- `.env` file placement is confusing and not sure if all variables are being used
+- Newly created scripts sometimes use hard-coded values instead of `.env` variables
+- E2E test coverage doesn’t include retrieving actual stats data — only interfaces with static demo API
 
 #### ⏳ Pending Actions
-- 
+- None at the moment
 
 #### 🔜 Next Steps
-- 
+- Write E2E tests:
+  - Cold launch → stats render  
+  - Enter tasks → per-day totals & summary  
+  - Verify footer SUM updates dynamically
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**What assumptions am I making that may be incorrect? What dependencies am I missing?**  
+- Assuming that the `vite preview` server starts immediately after build completion — in practice, it takes a few seconds, which can cause race conditions if the tests begin too early.  
+- Assuming all `.env` variables are correctly loaded for both Flask and Vite; they might not be when using `spawn`.  
+- Missing a dependency between the backend mock route setup and the frontend waiting logic in `test-boot.js`.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**What's a SMALL change that would be EASY for me to implement today that could improve my approach?**  
+- Add a short delay (e.g., `setTimeout`) or use a `wait-on` check for the preview URL before starting Playwright tests.  
+- Replace hard-coded URLs in `test-boot.js` with `process.env.BASE_URL` and `process.env.API_URL`.  
+- Add a visible test-only “demo mode” badge to differentiate real vs mock routes during test runs.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Focus shifted from backend data integration to ensuring the frontend and backend both launch deterministically in test mode.  
+- Realized that modularizing the orchestration logic will simplify test writing — e.g., separating build, launch, and teardown into helper functions.  
+- Confirmed that core E2E coverage should validate UI flow correctness (header load, stat render, user task input, total recalculation).  
 
 #### 🗝️ Key Decisions
-- 
+- Move assets to Google Drive **after** the pull request is finalized to avoid merge conflicts.  
+- Keep E2E tests demo-based for now (mocked static data).  
+- Postpone testing of live database/API stats retrieval until after presentation readiness.  
+- Add `.env.demo` to explicitly separate demo/test credentials.  
+- Will use Playwright’s `trace:on` for debugging failed tests.
 
 #### 📌 Action Items
-- 
+- [ ] Write E2E tests:
+  - [ ] Cold launch → stats render  
+  - [ ] Enter tasks → per-day totals & summary  
+  - [ ] Verify footer SUM updates dynamically
+- [ ] Write out desired .env placement structure
 
 ---
+
 
 ## 🗓️ Standup [#] – [Standup Title]
 
