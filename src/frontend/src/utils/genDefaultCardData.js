@@ -23,6 +23,27 @@ export function genDaysOfCurrentWeek() {
     return days
 }
 
+export function parseDate(date, days) {
+    const dayMap = {
+        Monday: 0,
+        Tuesday: 1,
+        Wednesday: 2,
+        Thursday: 3,
+        Friday: 4,
+        Saturday: 5,
+        Sunday: 6
+    };
+    const index = dayMap[date]
+
+    const newDate = days[index]
+    const year = newDate.getFullYear();
+    const month = String(newDate.getMonth() + 1).padStart(2, '0');
+    const day = String(newDate.getDate()).padStart(2, '0');
+
+    const formatted = `${year}-${month}-${day}`
+    return formatted
+}
+
 function getTestCardsData() {
     let days = []
     

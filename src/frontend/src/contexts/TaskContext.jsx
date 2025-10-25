@@ -2,7 +2,7 @@ import { createContext, useState, useMemo } from 'react';
 import toLocalMidnight from '@/utils/toLocalMidnight';
 import emptyTasks from "@/utils/emptyTasks.json" with { type: 'json' }
 import demoTasks from "@/utils/demoTasks.json" with { type: 'json' }
-import {genDaysOfCurrentWeek} from "@/utils/genDefaultCardData"
+import { genDaysOfCurrentWeek, parseDate } from "@/utils/genDefaultCardData"
 export const TaskContext = createContext(undefined);
 
 function reformat(tasks) {
@@ -15,31 +15,9 @@ function reformat(tasks) {
     ))
 }
 
-function parseDate(date, days) {
-    const dayMap = {
-        Monday: 0,
-        Tuesday: 1,
-        Wednesday: 2,
-        Thursday: 3,
-        Friday: 4,
-        Saturday: 5,
-        Sunday: 6
-    };
-    const index = dayMap[date]
-
-    const newDate = days[index]
-    const year = newDate.getFullYear();
-    const month = String(newDate.getMonth() + 1).padStart(2, '0');
-    const day = String(newDate.getDate()).padStart(2, '0');
-
-    const formatted = `${year}-${month}-${day}`
-    return formatted
-}
 
 function parseTaskDates(tasks) {
     const days = genDaysOfCurrentWeek()
-
-    
 
     // parse the task date from "Monday" to "2025-10-13"
     return tasks.map(task => {
@@ -67,8 +45,6 @@ export default function TaskContextProvider({children, starting_tasks, IS_DEMO})
         }
     }
     
-    
-
     const [tasks, setTasks] = useState(reformattedTasks);
 
     const timeSum = useMemo(() =>

@@ -22,6 +22,10 @@ notion_header = {
 def index():
     return 'Home Web Page'
 
+@app.before_request
+def log_origin():
+    print("Origin:", request.headers.get("Origin"))
+
 @app.route('/api/health', methods=['GET'])
 def determine_health():
     start_time = time.perf_counter()

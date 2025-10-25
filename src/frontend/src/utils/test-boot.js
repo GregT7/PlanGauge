@@ -41,7 +41,7 @@ async function main() {
   });
 
   // Wait for preview to be reachable
-  const PREVIEW_URL = "http://localhost:4173/";
+  const PREVIEW_URL = "http://localhost:4173";
   await waitOn({
     resources: [PREVIEW_URL],
     timeout: 60_000,
@@ -50,7 +50,7 @@ async function main() {
 
   // Run Playwright tests
   const exitCode = await new Promise(resolve => {
-    const tests = spawn("npx", ["playwright", "test"], {
+    const tests = spawn("npx", ["playwright", "test", "--ui"], {
       cwd: FRONTEND_DIR,
       stdio: "inherit",
       shell: true

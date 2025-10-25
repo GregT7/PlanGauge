@@ -13,8 +13,6 @@
   - `Presentation Readiness`
   - `End-to-End Testing`
 
----
-
 ### 📋 Contents
 
 #### ✅ Planned Agenda
@@ -47,8 +45,6 @@
   - Add `sprint11.md` based on `sprint_template.md`
 - Run final debugging on the Playwright configuration and test server script.
 
----
-
 ### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
@@ -59,8 +55,6 @@ Based on the current workload and reduced daily focus, Sprint 11 should span **7
 - The `End-to-End Testing` backlog involves multiple subtasks (Playwright setup, selectors, accessibility checks, and test server orchestration) that will each require focused but short working sessions.  
 - The `Presentation Readiness` backlog (from `pres.md`) will primarily involve finishing documentation (`README`, `sdp.md`, `pop.md`, etc.) and adding evidence/screenshots for completeness.  
 A 10-day window allows realistic pacing without burnout or neglecting job applications.
-
----
 
 #### ❓ Question 2
 > Summarize Sprint 10 for me. What were my greatest weaknesses and strengths exemplified through my performance?
@@ -77,8 +71,6 @@ A 10-day window allows realistic pacing without burnout or neglecting job applic
 - **Time management:** Overestimated available focus time due to job application workload.
 - **E2E implementation delays:** Progress on automated Playwright testing stalled midway due to complexity of concurrent server management and debugging.
 - **Sprint boundary awareness:** Some Sprint 10 goals (notably the demo and script automation) rolled over into Sprint 11.
-
----
 
 ### 🧾 Results
 
@@ -402,8 +394,8 @@ I may be assuming that the E2E build issues stem entirely from the Vite configur
 - Will use Playwright’s `trace:on` for debugging failed tests.
 
 #### 📌 Action Items
-- [ ] Write E2E tests:
-  - [ ] Cold launch → stats render  
+- [x] Write E2E tests:
+  - [x] Cold launch → stats render  
   - [ ] Enter tasks → per-day totals & summary  
   - [ ] Verify footer SUM updates dynamically
 - [ ] Write out desired .env placement structure
@@ -411,97 +403,160 @@ I may be assuming that the E2E build issues stem entirely from the Vite configur
 ---
 
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 6 – E2E Test Writing part 2
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Friday, October 24th
+* **Time:** 10:10 AM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `End-to-End Testing`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Continue working on `End-to-End Testing`
 
 #### 📈 Previous Progress
-- 
+- Finished first playwright test
+- Started working on second test
 
 #### 🧱 Problems & Blockers
-- 
+- Some of the tests have repetitive setups
+- Didn't focus at all on the .env problem yesterday
 
 #### ⏳ Pending Actions
-- 
+- Write out desired .env placement structure
+- E2E tests 
+  - Enter tasks → per-day totals & summary
+  - Verify footer SUM updates dynamically
 
 #### 🔜 Next Steps
-- 
+- Research fixtures for simplifying things
+- Combine e2e tests into one and complete them
+  - Enter tasks → per-day totals & summary
+  - Footer SUM accuracy
+- Complete this test: Category & Date inputs basic UX
+- .env handling
+  - Write out desired .env structure (where its stored + its contents)
+  - List out files that need to be modified so that .env handling is updated
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- What assumptions am I making that may be incorrect?  
+  → Assuming `.env` structure can be unified between frontend and backend even though their runtime environments differ (Vite vs Flask). This may need partial duplication instead.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 3
+- Are there any better questions to ask in this ChatGPT question section?  
+  → Yes. Instead of only reflecting on assumptions, consider adding meta-questions that encourage deeper project alignment, such as:  
+    * “What can I automate or refactor to make testing faster or more reliable?”  
+    * “How can I validate that each test aligns with user-facing functionality, not just internal logic?”  
+    * “Is there documentation or code clarity I can improve alongside testing progress?”
+
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Continued progress on the `End-to-End Testing` backlog item — completed the first Playwright test and began developing the second.  
+- Recognized that several test cases share repetitive setup steps, suggesting the need for a shared fixture or reusable setup function.  
+- Noted that `.env` handling was neglected in the previous session and must be addressed soon to ensure consistent configuration across `dev`, `demo`, and `test` modes.  
+- Planned to merge related E2E subtasks (task entry, daily summary verification, footer SUM accuracy, and input UX) into one consolidated test for efficiency.
+
 
 #### 🗝️ Key Decisions
-- 
+- Research fixtures to optimize test setup
+- Define `.env.demo`, `.env.test`, and `.env.local` separation explicitly.
+- Create a file documenting .env storage & usage
 
 #### 📌 Action Items
-- 
+- [x] Combine e2e tests into one and complete them
+  - [x] Enter tasks → per-day totals & summary
+  - [x] Footer SUM accuracy
+- [x] Complete this test: Category & Date inputs basic UX
+- [ ] Research fixtures
+- [x] .env handling
+  - [x] Write out desired .env structure (where its stored + its contents)
+  - [x] List out files that need to be modified so that .env handling is updated
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 7 – Wrapping Up!
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, October 25th (2025)
+* **Time:** 12:01 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Presentation Readiness`
+  - `End-to-End Testing`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Finish up project
+  - Clean up code from yesterday (uncomment + move helpers to separate file + etc)
+  - Refine README
 
 #### 📈 Previous Progress
-- 
+- Documented current & desired `.env` configuration + impacted files
+- Finished almost all end-to-end tests
+- Completed helper functions for E2E tests
+- Got plan submission test working
 
 #### 🧱 Problems & Blockers
-- 
+- The README dependencies section needs to be updated (git, npm, python, Google account)
 
 #### ⏳ Pending Actions
-- 
+- Research Playwright fixtures and test data reuse
 
 #### 🔜 Next Steps
-- 
+- Fix README  
+  - Add dependencies  
+- Resolve submission test structure  
+  - Move helpers to dedicated file  
+  - Isolate submission test  
+  - Clean up `app.spec.js`  
+- Finish final E2E test  
+- Complete pull request  
+  - Update documentation  
+  - Resolve merge conflicts  
+- Final check for “start:demo” mode setup and test
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+**Do you think I can complete all of these tasks today?**  
+It’s ambitious but possible if you focus on documentation and cleanup rather than adding new features. Prioritize README completion and PR cleanup first since those are required for presentation readiness. If time allows, move on to refactoring helpers and tests afterward.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**Do you think I've adequately prioritized tasks to complete for today?**  
+Yes — your priorities align well with the project’s current phase. Presentation readiness should come before deep refactors, so starting with README fixes, dependency documentation, and Notion setup clarity is exactly right. Code cleanup can follow once the presentation materials are solid.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Focus remains on final polish for public/demo readiness.
+- Testing pipeline is functional; remaining refinements are structural.
+- README will serve as the final artifact linking all major project components.
 
 #### 🗝️ Key Decisions
-- 
+- Finalize README before additional refactors.
+- Prioritize clear installation/setup steps for demo and testing reviewers.
 
 #### 📌 Action Items
-- 
+- [x] Fix README
+  - [x] Add dependencies
+- [ ] Resolve submission test structure
+  - [ ] Move helpers to dedicated file
+  - [ ] Isolate submission test
+  - [ ] Clean up `app.spec.js`
+- [ ] Finish final E2E test
+- [ ] Complete pull request
+  - [ ] Update documentation
+  - [ ] Resolve merge conflicts
+- [ ] Final check for “start:demo” mode setup and test
 
 ---
 

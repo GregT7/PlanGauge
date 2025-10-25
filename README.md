@@ -85,15 +85,45 @@ _Description:_ The system architecture connects a React-based frontend to a Flas
 ![sys_architect](https://github.com/user-attachments/assets/a2dceaf5-68dd-4d71-98f7-460ba8fe95a9)
 
 #### Dependencies
-- Notion API Integration
-  A Notion account is required with a database and an internal integration token.  
-  - Grant full access to the integration for read/write permissions.  
-  - Used for syncing weekly plan data between PlanGauge and Notion.  
+**Demo Mode**
+
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+**Full Mode**
+
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Google](https://img.shields.io/badge/Google-4285F4?style=for-the-badge&logo=google&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
+
+
+
+<details>
+  <summary>More Details</summary>
+
+- Git  
+  Git is required for version control and cloning the PlanGauge repository.  
+  - Install from [https://git-scm.com/](https://git-scm.com/).  
+  - Used for managing commits, branches, and synchronizing local changes with GitHub.  
+
+- Node.js & NPM  
+  Node.js and its package manager (NPM) are required to run the React frontend.  
+  - Download from [https://nodejs.org/](https://nodejs.org/) (LTS version recommended).  
+  - Used to install dependencies, run development servers, and execute build/test scripts.  
+
+- Python  
+  Python (version 3.10 or later) is required to run the Flask backend.  
+  - Install from [https://www.python.org/downloads/](https://www.python.org/downloads/).  
+  - Used to launch the API, handle predictions, and manage database requests.  
+
+- Google Account  
+  A Google account is required to access Notion authentication setup and any integrated cloud services (if applicable).  
+  - Used for identity verification, environment configuration syncing, and potential API access (e.g., Google Drive or OAuth).  
+ 
 
 - Supabase Account (Free Tier)
   A Supabase account is needed to store and retrieve data.  
   - Create a new Supabase project and note the API URL and anon key.  
-  - Used by the Flask backend to persist plan statistics and user data.  
+  - Used by the Flask backend to persist plan statistics and user data.
+
+</details>
 
 ### Project Methodology
 PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, tailored for individual development. The project was organized into time-boxed sprints, each focused on specific backlog items derived from user stories that captured functional goals and user needs. Daily standups were documented to track progress, identify blockers, and plan next actions, while retrospectives were held at the end of each sprint to reflect on what worked well and what needed improvement. The product backlog was continuously refined to maintain alignment between requirements, testing, and implementation, ensuring steady, iterative progress toward a functional and user-centered planning assistant. Refer to the `project_journal` directory for agile documentation created throughout the development of this project.
@@ -325,7 +355,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
 ---
 
-## How to Use tool
+## How to Use Tool
 <details>
   <summary>Demo Mode</summary>
 
