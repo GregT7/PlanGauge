@@ -103,7 +103,7 @@ function TaskTable() {
         </TableHeader>
         <TableBody>
           {tasks.map((task) => (
-            <TableRow key={task.id}>
+            <TableRow key={task.id} data-testid="task-row">
               <RowSelector
                 selected={task.selected}
                 onCheckedChange={(val) => updateTaskField(task.id, "selected", val)}
