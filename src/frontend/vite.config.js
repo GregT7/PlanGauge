@@ -15,16 +15,20 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setupTests.js',
+    include: ['src/**/*.{test,spec}.{js,jsx,ts,tsx}'],
     coverage: {
           provider: 'v8',
           exclude: [
-            // Existing excludes...
-            'src/components/TestTable2.jsx',
             './eslint.config.js',
             './tailwind.config.js',
             './vite.config.js',
             './src/main.jsx',
-            'src/components/ui/**'
+            'src/components/ui/**',
+            'e2e/**',
+            'node_modules/**',
+            'dist/**',
+            'playwright-report/**',
+            'test-results/**'
           ],
         },
       },

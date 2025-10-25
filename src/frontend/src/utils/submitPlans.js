@@ -1,7 +1,6 @@
 import { verify_task, verify_payload } from "./verifyPayload";
 
 export default async function submitPlans(tasks, filter_start_date, filter_end_date) {
-  console.log("inside submitplans")
   const submit_url = "http://localhost:5000/api/plan-submissions";
   let resp = {
     message: "Error: Invalid Plan Data!",
@@ -34,6 +33,5 @@ export default async function submitPlans(tasks, filter_start_date, filter_end_d
     }
   }
 
-  console.log("submit plans fail resp: ", resp)
   return Promise.reject(resp)
 }
