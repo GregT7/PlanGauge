@@ -28,8 +28,6 @@ _Description:_ The system allows users to create, evaluate, and submit weekly pl
 - UC-4: System Launch and Data Retrieval — On startup, the app runs connectivity checks for Flask, Supabase, and Notion (R-7.40–R-7.41) and retrieves stored stats to initialize feasibility data. Toasts indicate success or failure of retrieval operations. (Ref: design.md – “Startup Process Swimlane Diagram,” “Stats Retrieval API Endpoint”)
 </details>
 
-
-
 ### System Demo
 
 _Description_: This demo shows the app launching, performing API health checks, retrieving stats, and updating its UI from “unknown” to “good.” As the user enters plans, metrics and statuses update in real time, and new records are successfully synced to Supabase and Notion upon submission.
@@ -465,7 +463,7 @@ _Description:_ This section provides additional project details, including testi
     - Description: confirms API correctness, data retrieval, and error handling
 - System
     - Technology: Playwright
-    - Quantity: ? tests
+    - Quantity: 5 tests
     - Description: simulates full user interactions, from plan creation to submission and system feedback
 </details>
 
@@ -480,7 +478,14 @@ cd PlanGauge/src/frontend
 npm run test
 ```
 
-#### 2️⃣ (Optional) End-to-End Testing with Playwright
+#### 2️⃣ Backend (pytest)
+```
+cd PlanGauge/src/backend  
+.\venv\Scripts\activate  
+pytest -q
+```
+
+#### 3️⃣ (Optional) End-to-End Testing with Playwright
 
 Step 1 – Install Playwright  
 cd PlanGauge/src/frontend  
@@ -500,13 +505,6 @@ You should see a version number like `Version 1.48.0`:
 Step 4 – Run default Playwright tests  
 Run the sample tests provided by Playwright (all six should pass):  
 ```npx playwright test```
-
-#### 3️⃣ Backend (pytest)
-```
-cd PlanGauge/src/backend  
-.\venv\Scripts\activate  
-pytest -q
-```
 </details>
 
 
@@ -519,6 +517,9 @@ pytest -q
     - assignment records aren't being used for anything and there is no way to assign plan records to them
 - Not Deployed: Using flask & vite servers
 
+### Assets Relocation
+Assets stored on the repo was taking up too much memory so they were moved to a public google drive folder.
+- link: https://drive.google.com/drive/folders/1ylNBF8Pxizt8jqIWyW43tcWaGgYTfZv_?usp=sharing
 
 ### 🙏 Acknowledgements
 - Dr. Raymer for giving me feedback on my early project design
