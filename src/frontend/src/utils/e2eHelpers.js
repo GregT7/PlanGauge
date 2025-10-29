@@ -34,8 +34,27 @@ export async function selectDate(date, page) {
     await page.getByRole('button', { name: /next month/i }).click();
   }
 
+  const inactiveClass = "day-outside"
   const dateNumber = date.getDate();
-  await page.getByRole('gridcell', { name: dateNumber }).click();
+  const dateCells = page.getByRole('gridcell', { name: dateNumber });
+
+  const count = await dateCells.count();
+
+  for (let i = 0; i < count; i++) {
+    const cell = dateCells.nth(i);
+
+    // Wait for element to be stable
+    await cell.waitFor({ state: 'visible' });
+
+    const hasOutside = await cell.evaluate(el => 
+      el.classList.contains('day-outside')
+    );
+
+    if (!hasOutside) {
+      await cell.click({ force: true }); // force in case of overlay issues
+      break;
+    }
+  }
 }
 
 async function populateRow(row, task, page, days) {
