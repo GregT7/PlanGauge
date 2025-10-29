@@ -20,7 +20,8 @@ async function main() {
     
     // Start Flask backend
     const ACTIVATE = path.join("venv", "Scripts", "activate.bat");
-    const flask_child = spawn(`call "${ACTIVATE}" && python run.py`, {
+    const RUN = isDemo ? "run.py -t" : "run.py"
+    const flask_child = spawn(`call "${ACTIVATE}" && python ${RUN}`, {
         cwd: BACKEND_DIR,
         shell: true,
         stdio: "inherit"

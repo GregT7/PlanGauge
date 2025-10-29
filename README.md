@@ -85,13 +85,11 @@ _Description:_ The system architecture connects a React-based frontend to a Flas
 #### Dependencies
 **Demo Mode**
 
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pip](https://img.shields.io/badge/pip-3775A9?style=for-the-badge&logo=pypi&logoColor=white)
 
 **Full Mode**
 
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Google](https://img.shields.io/badge/Google-4285F4?style=for-the-badge&logo=google&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
-
-
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pip](https://img.shields.io/badge/pip-3775A9?style=for-the-badge&logo=pypi&logoColor=white) ![Google](https://img.shields.io/badge/Google-4285F4?style=for-the-badge&logo=google&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
 
 <details>
   <summary>More Details</summary>
@@ -198,25 +196,58 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 <details>
   <summary>More Details</summary>
 
+
 1️⃣ Clone the repository
    ```
    git clone https://github.com/GregT7/PlanGauge.git
    ```
 
-2️⃣ Install frontend dependencies
+2️⃣ Install frontend dependencies (run these lines individually)
    ```
    cd PlanGauge/src/frontend
    npm install
    npm audit fix
    ```
 
-3️⃣ Install backend dependencies
+3️⃣ Install backend dependencies (run these lines individually)
    ```
    cd PlanGauge/src/backend
    python -m venv venv
    .\venv\Scripts\activate
    pip install -r requirements.txt
    ```
+
+4️⃣ Setup necessary environment files
+  1. Create general env file (`/PlanGauge/src/.env`)
+      1. Navigate to `/PlanGauge/src/.env`
+      ```
+      cd /PlanGauge/src
+      ```
+
+      2. Copy & paste into new .env file
+      ```
+      FLASK_BASE_URL=http://127.0.0.1:
+      FLASK_DEFAULT_PORT=5000
+      FLASK_TESTING_PORT=5001
+      FLASK_HEALTH_ROUTE=/api/health
+      ```
+
+  2. Create frontend env file (`/PlanGauge/src/frontend/.env.demo`)
+      1. Navigate to `/PlanGauge/src/frontend`
+      ```
+      cd /PlanGauge/src/frontend
+      ```
+
+      2. Copy & paste into new `.env.demo` file
+      ```
+      VITE_DEMO=1
+      VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats
+      VITE_DEFAULT_ROUTE=http://localhost:5173/
+      VITE_TESTING_ROUTE=http://localhost:4173/
+      VITE_DEFAULT_PLAN_START=2025-06-01
+      VITE_DEFAULT_PLAN_END=2025-06-30
+      ```
+
 </details>
 
 ### Full Mode
@@ -242,51 +273,24 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
    3. Note your Project URL and anon public key for the `.env` file.
 
 3️⃣ Setup environment files
-<details>
-  <summary>Windows</summary>
+  1. Ensure the general env files are already setup
+  2. Create backend .env file (for api keys)
+      1. Navigate to `/PlanGauge/src/backend`
+      ```
+      cd /PlanGauge/src/backend
+      ```
 
-  1. `/src/.env`
-  ```
-  cd /PlanGauge/src
-  echo FLASK_BASE_URL=http://127.0.0.1:^ FLASK_DEFAULT_PORT=5000^ FLASK_TESTING_PORT=5001^ FLASK_HEALTH_ROUTE=/api/health > .env
-  ```
+      2. Copy & paste into new `.env` file
+      ```
+      SUPABASE_URL = 
+      SUPABASE_KEY = 
+      NOTION_API_KEY = 
+      NOTION_PAGE_ID = 
+      NOTION_DB_ID = 
+      NOTION_VERSION = "2022-06-28"
+      ```
 
-  2. `/src/backend/.env`
-  ```
-  cd /PlanGauge/src/backend
-  (echo SUPABASE_URL=&& echo SUPABASE_KEY=&& echo NOTION_API_KEY=&& echo NOTION_PAGE_ID=&& echo NOTION_DB_ID=&& echo NOTION_VERSION="2022-06-28") > .env
-  ```
-
-  3. `/src/frontend/.env.demo`
-  ```
-  cd /PlanGauge/src/frontend
-  echo VITE_DEMO=1^ VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats^ VITE_DEFAULT_ROUTE=http://localhost:5173/^ VITE_TESTING_ROUTE=http://localhost:4173/^ VITE_DEFAULT_PLAN_START=2025-06-01^ VITE_DEFAULT_PLAN_END=2025-06-30 > .env
-  ```
-</details>
-
-<details>
-  <summary>Linux/macOS</summary>
-
-  1. `/src/.env`
-  ```
-  cd /PlanGauge/src
-  echo "FLASK_BASE_URL=http://127.0.0.1: FLASK_DEFAULT_PORT=5000 FLASK_TESTING_PORT=5001 FLASK_HEALTH_ROUTE=/api/health" > .env
-  ```
-
-  2. `/src/backend/.env`
-  ```
-  cd /PlanGauge/src/backend
-  echo -e "SUPABASE_URL=\nSUPABASE_KEY=\nNOTION_API_KEY=\nNOTION_PAGE_ID=\nNOTION_DB_ID=\nNOTION_VERSION=\"2022-06-28\"" > .env
-  ```
-
-  3. `/src/frontend/.env.demo`
-  ```
-  cd /PlanGauge/src/frontend
-  echo "VITE_DEMO=1 VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats VITE_DEFAULT_ROUTE=http://localhost:5173/ VITE_TESTING_ROUTE=http://localhost:4173/ VITE_DEFAULT_PLAN_START=2025-06-01 VITE_DEFAULT_PLAN_END=2025-06-30" > .env
-  ```
-</details>
-
-4️⃣ Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env` file
+  3. Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env` file
    - `SUPABASE_URL`  
      - _Description_: The unique base URL endpoint for your Supabase project.  
      - How to find:
@@ -518,8 +522,8 @@ Run the sample tests provided by Playwright (all six should pass):
 - Not Deployed: Using flask & vite servers
 
 ### Assets Relocation
-Assets stored on the repo was taking up too much memory so they were moved to a public google drive folder.
-- link: https://drive.google.com/drive/folders/1ylNBF8Pxizt8jqIWyW43tcWaGgYTfZv_?usp=sharing
+_Description:_ Assets stored on the repo was taking up too much memory so they were moved to a public google drive folder.
+link: https://drive.google.com/drive/folders/1ylNBF8Pxizt8jqIWyW43tcWaGgYTfZv_?usp=sharing
 
 ### 🙏 Acknowledgements
 - Dr. Raymer for giving me feedback on my early project design
