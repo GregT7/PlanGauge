@@ -287,7 +287,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
       NOTION_API_KEY = 
       NOTION_PAGE_ID = 
       NOTION_DB_ID = 
-      NOTION_VERSION = "2022-06-28"
+      NOTION_VERSION = "2025-09-03"
       ```
 
   3. Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env` file
@@ -345,13 +345,13 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
        NOTION_DB_ID=1234567890abcdef1234567890abcdef
        ```
 
-   - `NOTION_VERSION` = "2022-06-28"  
+   - `NOTION_VERSION` = "2025-09-03"  
      - _Description_: Specifies the Notion API version for compatibility.  
      - How to find:
        - Refer to [Notion’s API versioning documentation](https://developers.notion.com/reference/versioning)
      - Example:
        ```
-       NOTION_VERSION="2022-06-28"
+       NOTION_VERSION="2025-09-03"
        ```
 </details>
 
@@ -489,26 +489,17 @@ cd PlanGauge/src/backend
 pytest -q
 ```
 
-#### 3️⃣ (Optional) End-to-End Testing with Playwright
+#### 3️⃣ End-to-End Testing with Playwright
+Step 1 – Navigate to `/PlanGauge/src/frontend`
+```cd /PlanGauge/src/frontend```
 
-Step 1 – Install Playwright  
-cd PlanGauge/src/frontend  
-```npm init playwright@latest```
-
-Step 2 – Follow setup prompts  
-Answer the following during setup:  
-- ✔ Language: JavaScript  
-- ✔ Test directory: `tests`  
-- ✔ Add GitHub Actions workflow: No (optional)  
-- ✔ Install browsers: Yes  
-
-Step 3 – Verify installation  
+Step 2 – Verify installation  
 You should see a version number like `Version 1.48.0`:
 ```npx playwright test --version```
 
-Step 4 – Run default Playwright tests  
-Run the sample tests provided by Playwright (all six should pass):  
-```npx playwright test```
+Step 3 – Run the e2e script
+Uses nodejs to launch frontend + backend servers and then launch playwright testing
+```npm run e2e``
 </details>
 
 
@@ -522,7 +513,7 @@ Run the sample tests provided by Playwright (all six should pass):
 - Not Deployed: Using flask & vite servers
 
 ### Assets Relocation
-_Description:_ Assets stored on the repo was taking up too much memory so they were moved to a public google drive folder.
+_Description:_ Assets stored on the repo were taking up too much memory so they were moved to a public google drive folder.
 link: https://drive.google.com/drive/folders/1ylNBF8Pxizt8jqIWyW43tcWaGgYTfZv_?usp=sharing
 
 ### 🙏 Acknowledgements

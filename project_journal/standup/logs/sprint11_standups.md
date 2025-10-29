@@ -548,62 +548,121 @@ Yes — your priorities align well with the project’s current phase. Presentat
 #### 📌 Action Items
 - [x] Fix README
   - [x] Add dependencies
-- [ ] Resolve submission test structure
-  - [ ] Move helpers to dedicated file
-  - [ ] Isolate submission test
-  - [ ] Clean up `app.spec.js`
-- [ ] Finish final E2E test
-- [ ] Complete pull request
-  - [ ] Update documentation
-  - [ ] Resolve merge conflicts
-- [ ] Final check for “start:demo” mode setup and test
+- [x] Resolve submission test structure
+  - [x] Move helpers to dedicated file
+  - [x] Isolate submission test
+  - [x] Clean up `app.spec.js`
+- [x] Finish final E2E test
+- [x] Complete pull request
+  - [x] Update documentation
+  - [x] Resolve merge conflicts
+- [x] Final check for “start:demo” mode setup and test
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 8 – Cleaning up...
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Wednesday, October 29th (2025)
+* **Time:** 4:53 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Presentation Readiness`
+  - `End-to-End Testing`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Add final touches to base project: documentation & refactoring
+- Mostly done, finished e2e testing issues
 
 #### 📈 Previous Progress
-- 
+- Downloaded and tested repo to see if I could set it up
+  - resolved unaccounted for issues
+  - updated documentation
+- Finished pull request + merged branches
+- Finished final e2e test
+- Fixed date selection bug encountered in 2 e2e tests
 
 #### 🧱 Problems & Blockers
-- 
+- .env disorganization
+- code disorganization: some files aren't used, aren't documented adequately, have weird formatting issues
 
 #### ⏳ Pending Actions
-- 
+- resolve .env disorganization issues
 
 #### 🔜 Next Steps
-- 
-
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+- .env fixing
+  - Ensure placement of variables & files makes sense
+  - Replace any remaining hard-coded ports/URLs with environment variables
+  - Ensure modes still work
+    - dev
+    - dev:demo
+    - test
+    - start
+    - start:demo
+    - e2e
+  - Update readme
+- init_records.sql
+    - Write up script
+    - Test & ensure it works
+- Update docs
+  - Recent backlog items
+    - Presentation Readiness
+    - End-to-End Testing
+  - Previous backlog items
+- Reach out to Dr. Raymer (he is on leave though)
+- Start creating excel automation script : Create a button
 
 #### ❓ Question 1
-- 
+**Answer:** Make it a **separate backlog**: `Excel → SQL Tooling (DevX)`. It’s a self-contained workflow enhancer with its own scope, risks, and tests; keeping it separate avoids bloating `Presentation Readiness` and lets you track ROI clearly.
 
-#### ❓ Question 2...
-- 
+#### ❓ Question 2
+**Answer (timeboxed estimates, assuming current repo structure & envs ready):**
+- **Vercel (frontend only, envs set):** ~1–2 hours  
+  _Build settings, env vars, preview/prod branches, basic rewrites if needed._
+- **Render (Flask API):** ~2–4 hours  
+  _Dockerless or Docker, health check, Gunicorn, CORS, `/api/*` routes, Supabase/Notion envs._
+- **Docker (local parity + optional Compose):** ~4–8 hours  
+  _Two images (frontend, backend), multi-stage builds, `.env`/secrets handling, `docker-compose.yml`, readme updates._
+
+> If you want full Docker-first cloud deploy (e.g., Fly.io/Render with images), budget closer to a day including CI.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- The Excel tool is valuable beyond the presentation: faster seed data, safer inserts, and reproducible migrations for demos/tests.
+- Separate backlog clarifies ownership and prevents scope creep in `Presentation Readiness`.
+- Deployment path of least resistance: **Vercel (frontend)** + **Render (Flask)** + **Supabase**. Keep Docker for local parity and optional containerized deploy later.
 
 #### 🗝️ Key Decisions
-- 
+- Create new backlog: **`Excel → SQL Tooling (DevX)`** with the sub-tasks above.
+- Deploy strategy for demo: **Vercel (frontend)** + **Render (backend)**; keep **Docker** for local parity and future container deploys.
+- Use docker for local deployment + testing and deployment
+
 
 #### 📌 Action Items
-- 
+- [ ]  .env fixing
+  - [ ]  Ensure placement of variables & files makes sense
+  - [ ]  Replace any remaining hard-coded ports/URLs with environment variables
+  - [ ]  Ensure modes still work
+    - [ ]  dev
+    - [ ]  dev:demo
+    - [ ]  test
+    - [ ]  start
+    - [ ]  start:demo
+    - [ ]  e2e
+  - [ ] Update readme
+- [ ]  init_records.sql
+    - [ ]  Write up script
+    - [ ]  Test & ensure it works
+- [ ]  Update docs
+  - [ ]  Recent backlog items
+    - [ ]  Presentation Readiness
+    - [ ]  End-to-End Testing
+  - [ ]  Previous backlog items
+- [ ]  Reach out to Dr. Raymer (he is on leave though)
+- [ ]  Start creating excel automation script : Create a button
 
 ---
 
