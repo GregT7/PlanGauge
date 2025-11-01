@@ -15,35 +15,35 @@
 ## 🔧 Work
 
 ### ✅ Subtasks
-1. Create new Git branch: feature/datatable
-2. Delete empty test files from main (optional)
-3. Research Vitest + React Testing Library best practices
-4. Write unit tests:
-    1. Render rows with mock data
-    2. Test click events on row selectors
-    3. Test edge cases: empty table, long strings
-5. Research integration testing
-6. Create a pull request on GitHub with summary and scope
-7. Leave self-review comments simulating real feedback
-8. Commit code changes in response to feedback
-9. Document what changed, why the issue existed, and how it was fixed
-10. Merge the PR into main once everything is complete and reviewed
+- [x] Create new Git branch: feature/datatable
+- [x] Delete empty test files from main (optional)
+- [x] Research Vitest + React Testing Library best practices
+- [x] Write unit tests:
+    - [x] Render rows with mock data
+    - [x] Test click events on row selectors
+    - [x] Test edge cases: empty table, long strings
+- [x] Research integration testing
+- [x] Create a pull request on GitHub with summary and scope
+- [x] Leave self-review comments simulating real feedback
+- [x] Commit code changes in response to feedback
+- [x] Document what changed, why the issue existed, and how it was fixed
+- [x] Merge the PR into main once everything is complete and reviewed
 
 ### 📘 Definition of Done
-- A separate feature branch named feature/datatable has been created from main
-- All essential unit tests for the DataTable component are implemented using Vitest and React Testing Library
-- Tests pass locally via npm run test without errors or warnings
-- A GitHub pull request is created with:
-    * A clear title and summary of changes
-    * A checklist of what is tested
-    * Notes simulating code review comments (can be self-authored)
-- The pull request contains follow-up commits that respond to review feedback
-- Each follow-up commit includes a message explaining what was changed and why
-- PR is reviewed and merged into main
-- A short changelog is written explaining:
-    * What issues were discovered during testing
-    * Why they occurred
-    * How they were resolved
-- Two individual quizzes for the following topics are created, taken, and passed with at a score of 75% or greater
-    * Unit testing
-    * Integration testing
+- [x] A separate feature branch named feature/datatable has been created from main
+- [x] All essential unit tests for the DataTable component are implemented using Vitest and React Testing Library
+- [x] Tests pass locally via npm run test without errors or warnings
+- [x] A GitHub pull request is created with:
+    - [x] A clear title and summary of changes
+    - [x] A checklist of what is tested
+    - [x] Notes simulating code review comments (can be self-authored)
+- [x] The pull request contains follow-up commits that respond to review feedback
+- [x] Each follow-up commit includes a message explaining what was changed and why
+- [x] PR is reviewed and merged into main
+- [x] A short changelog is written explaining:
+    - [x] What issues were discovered during testing
+    - [x] Why they occurred
+    - [x] How they were resolved
+- [x] Two individual quizzes for the following topics are created, taken, and passed with at a score of 75% or greater
+    - [x] Unit testing
+    - [x] Integration testing

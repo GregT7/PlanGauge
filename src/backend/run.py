@@ -1,20 +1,19 @@
 # run.py
-from app import app
+from app import app, DEMO_MODE
 from dotenv import load_dotenv
-import sys, os
+import os
 
 env_path = "../.env"
 load_dotenv(dotenv_path=env_path)
-port = os.getenv("FLASK_DEFAULT_PORT")
-print(f"🚀 Running Flask in TEST mode on port {port}")
 
-# if "-t" in sys.argv:
-#     port = os.getenv("FLASK_TESTING_PORT")
-#     print(f"🚀 Running Flask in TEST mode on port {port}")
-# else:
-#     port = os.getenv("FLASK_DEFAULT_PORT")
-#     print(f"🚀 Running Flask in NORMAL mode on port {port}")
+if DEMO_MODE:
+    port = os.getenv("VITE_FLASK_TESTING_PORT")
+    mode = "DEMO"
+else:
+    port = os.getenv("VITE_FLASK_DEFAULT_PORT")
+    mode = "NORMAL"
 
+print(f"🚀 Running Flask in {mode} mode on port {port}")
 
 if __name__ == "__main__":
     app.run(port=port, debug=True)

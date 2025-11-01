@@ -1,38 +1,28 @@
+// retrieveStats.test.js
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import retrieveStats from "@/utils/retrieveStats";
 
-// mock dependencies
-vi.mock("@/utils/planningRange", () => ({
-  DEFAULT_PLAN_START: "2025-06-01",
-  DEFAULT_PLAN_END: "2025-06-30",
-}));
-
+// Only mock verifyStatsData now — planningRange is no longer used
 vi.mock("@/utils/verifyStatsData", () => ({
   default: vi.fn(),
 }));
 
 const verifyStatsData = (await import("@/utils/verifyStatsData")).default;
 
-describe("retrieveStats", () => {
+describe("retrieveStats (URL-based version)", () => {
   const mockFetch = vi.fn();
   global.fetch = mockFetch;
+
+  const url =
+    "http://localhost:5000/api/db/stats?start=2025-06-01&end=2025-06-30";
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("throws an error if start or end date format is invalid", async () => {
-    await expect(retrieveStats("invalid-date", "2025-06-30")).rejects.toThrow(
-      "Invalid arguments passed to retrieveStats"
-    );
-    await expect(retrieveStats("2025-06-01", "not-a-date")).rejects.toThrow(
-      "Invalid arguments passed to retrieveStats"
-    );
-  });
-
   it("rejects if fetch returns null", async () => {
     mockFetch.mockResolvedValueOnce(null);
-    await expect(retrieveStats("2025-06-01", "2025-06-30")).rejects.toEqual(
+    await expect(retrieveStats(url)).rejects.toEqual(
       expect.objectContaining({
         message: "Error: Received no response from database!",
         data: null,
@@ -44,7 +34,7 @@ describe("retrieveStats", () => {
     mockFetch.mockResolvedValueOnce({
       json: vi.fn().mockResolvedValueOnce(null),
     });
-    await expect(retrieveStats("2025-06-01", "2025-06-30")).rejects.toEqual(
+    await expect(retrieveStats(url)).rejects.toEqual(
       expect.objectContaining({
         message: "Error: Received no response from database!",
         data: null,
@@ -59,7 +49,7 @@ describe("retrieveStats", () => {
         error: { message: "Database failed" },
       }),
     });
-    await expect(retrieveStats("2025-06-01", "2025-06-30")).rejects.toEqual(
+    await expect(retrieveStats(url)).rejects.toEqual(
       expect.objectContaining({
         message: "Database failed",
       })
@@ -75,7 +65,7 @@ describe("retrieveStats", () => {
       }),
     });
 
-    await expect(retrieveStats("2025-06-01", "2025-06-30")).rejects.toEqual(
+    await expect(retrieveStats(url)).rejects.toEqual(
       expect.objectContaining({
         message: "Error: Stats Data Is Invalid!",
       })
@@ -93,7 +83,7 @@ describe("retrieveStats", () => {
       }),
     });
 
-    const result = await retrieveStats("2025-06-01", "2025-06-30");
+    const result = await retrieveStats(url);
     expect(result).toEqual(
       expect.objectContaining({
         message: "Data Successfully Retrieved And Processed!",
@@ -103,17 +93,14 @@ describe("retrieveStats", () => {
     expect(verifyStatsData).toHaveBeenCalledWith(fakeData);
   });
 
-  it("constructs the correct final URL", async () => {
+  it("calls fetch with the provided URL (no internal construction)", async () => {
     verifyStatsData.mockReturnValueOnce(true);
     mockFetch.mockResolvedValueOnce({
       json: vi.fn().mockResolvedValueOnce({ ok: true, data: {} }),
     });
 
-    const customUrl = "http://localhost:8080/api/db/stats";
-    await retrieveStats("2025-06-01", "2025-06-30", customUrl);
+    await retrieveStats(url);
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      `${customUrl}?start=2025-06-01&end=2025-06-30`
-    );
+    expect(mockFetch).toHaveBeenCalledWith(url);
   });
 });

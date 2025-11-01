@@ -1,7 +1,10 @@
 import { verify_task, verify_payload } from "./verifyPayload";
 
 export default async function submitPlans(tasks, filter_start_date, filter_end_date) {
-  const submit_url = "http://localhost:5000/api/plan-submissions";
+  const submit_url = (import.meta.env.VITE_BASE_ROUTE + 
+                     import.meta.env.VITE_FLASK_DEFAULT_PORT + 
+                     import.meta.env.VITE_SUBMISSION_ROUTE);
+                     
   let resp = {
     message: "Error: Invalid Plan Data!",
     details: null

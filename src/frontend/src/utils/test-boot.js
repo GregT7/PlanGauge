@@ -41,7 +41,7 @@ async function main() {
   });
 
   // Wait for preview to be reachable
-  const PREVIEW_URL = "http://localhost:4173";
+  const PREVIEW_URL = process.env.VITE_BASE_ROUTE + process.env.VITE_DEFAULT_PORT;
   await waitOn({
     resources: [PREVIEW_URL],
     timeout: 60_000,

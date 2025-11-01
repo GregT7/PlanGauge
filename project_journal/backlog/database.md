@@ -15,23 +15,23 @@
 ## 🔧 Work
 
 ### ✅ Subtasks
-1. Design SQL schema
-2. Create Supabase account and project cluster
-3. Design an ER diagram
-4. Design relational schemas using a functional dependency diagram
-5. Define the corresponding schemas on the Supabase cluster
-6. Establish Row Level Security (RLS) with existing tables
-7. Update excel sheet storing data with most recent timesheets
-8. Clean and insert data to cluster
-9. Store environment keys in a local environment file
-10. Add environment file to .gitignore file
+- [x] Design SQL schema
+- [x] Create Supabase account and project cluster
+- [x] Design an ER diagram
+- [x] Design relational schemas using a functional dependency diagram
+- [x] Define the corresponding schemas on the Supabase cluster
+- [x] Establish Row Level Security (RLS) with existing tables
+- [x] Update excel sheet storing data with most recent timesheets
+- [x] Clean and insert data to cluster
+- [x] Store environment keys in a local environment file
+- [x] Add environment file to .gitignore file
 
 ### 📘 Definition of Done
-1. All data stored in the comprehensive excel data file is stored onto the Supabase cluster after cleaning
-2. The stored data can be visually expected by visiting the Supabase website and logging in
-3. The environment file contains keys that perfectly match the database keys provided on the Supabase website for the corresponding project cluster
-4. The database schema is in BCNF (Boyce Codd Normal Form)
-5. Inspect the supabase website to ensure RSL is turned on
-6. GitHub is inspected to verify the env file is not uploaded
-7. The functional dependency diagram and the ER diagram both match and reflect supabase's most up-to-date schema design
-8. The functional dependency and ER diagrams are properly added to documentation (design.md)
+- [x] All data stored in the comprehensive excel data file is stored onto the Supabase cluster after cleaning
+- [x] The stored data can be visually expected by visiting the Supabase website and logging in
+- [x] The environment file contains keys that perfectly match the database keys provided on the Supabase website for the corresponding project cluster
+- [x] The database schema is in BCNF (Boyce Codd Normal Form)
+- [x] Inspect the supabase website to ensure RSL is turned on
+- [x] GitHub is inspected to verify the env file is not uploaded
+- [x] The functional dependency diagram and the ER diagram both match and reflect supabase's most up-to-date schema design
+- [x] The functional dependency and ER diagrams are properly added to documentation (design.md)

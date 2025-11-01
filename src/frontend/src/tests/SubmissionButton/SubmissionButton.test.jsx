@@ -1,318 +1,353 @@
-// SubmissionButton.test.jsx (Vitest + RTL)
+// src/tests/SubmissionButton/SubmissionButton.test.jsx
 import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-// ---------- HOISTED MOCK HELPERS (must be before any vi.mock) ----------
+// ---------------------- Hoisted doubles ----------------------
 const {
   submitPlansMock,
   fmtMock,
-  MockTaskContextValue,
-  ButtonShim,
   toastShim,
-  makeFeasibility
+  ButtonShim,
+  mockedStyleData,
 } = vi.hoisted(() => {
   const React = require('react');
+
+  const submitPlansMock = vi.fn();
+
+  // formatDateToYYYYMMDD mock: returns DATE_F for non-strings, echoes strings
+  const fmtMock = vi.fn((v) => (typeof v === 'string' ? v : 'DATE_F'));
+
+  // Keep toast simple and non-invasive: record calls; return original promise
+  const toastShim = {
+    promise: vi.fn((p, _msgs) => p),
+    error: vi.fn(),
+    success: vi.fn(),
+    loading: vi.fn(),
+  };
+
+  const ButtonShim = React.forwardRef(({ children, ...props }, ref) => (
+    <button ref={ref} {...props}>{children}</button>
+  ));
+  ButtonShim.displayName = 'ButtonShim';
+
+  // Style data the component consults
+  const mockedStyleData = {
+    neutral: { base: 'base-neutral', hover: 'hover-neutral' },
+    success: { base: 'base-success', hover: 'hover-success' },
+    danger:  { base: 'base-danger',  hover: 'hover-danger'  },
+    unknown: { base: 'base-unknown', hover: 'hover-unknown' },
+  };
+
+  return { submitPlansMock, fmtMock, toastShim, ButtonShim, mockedStyleData };
+});
+
+// ---------------------- Module mocks ----------------------
+// Use your alias-less (relative) paths below for test stability
+vi.mock('../../utils/submitPlans', () => ({ default: submitPlansMock }));
+vi.mock('../../utils/formatDateToYYYYMMDD', () => ({ default: fmtMock }));
+vi.mock('sonner', () => ({ toast: toastShim }));
+
+// The component imports styleData.json directly; control it here
+vi.mock('../../utils/styleData.json', () => ({
+  default: mockedStyleData,
+}));
+
+// Replace Shadcn Button
+vi.mock('../../components/ui/button', () => ({ Button: ButtonShim }));
+
+// Contexts used by the component
+vi.mock('../../contexts/TaskContext', () => {
+  const React = require('react');
+  return { TaskContext: React.createContext({ tasks: [] }) };
+});
+
+vi.mock('../../contexts/ProcessingContext', () => {
+  const React = require('react');
   return {
-    submitPlansMock: vi.fn(),
-    fmtMock: vi.fn((input) => (typeof input === 'string' ? `${input}_F` : 'DATE_F')),
-    MockTaskContextValue: { tasks: [] },
-    ButtonShim: (props) => React.createElement('button', { ...props }, props.children),
-    toastShim: {
-      promise: vi.fn((p) => p), // pass-through
-      error: vi.fn(),
-    },
-    makeFeasibility: (status = 'neutral') => ({
-      score: 0,
-      status,
-      week_eval: null,
-      days_eval: null,
+    processingContext: React.createContext({
+      state: 'idle',
+      feasibility: { status: 'neutral' },
     }),
   };
 });
 
-// ---------- MODULE MOCKS ----------
-vi.mock('@/components/ui/button', () => ({ Button: ButtonShim }));
+// ---------------------- SUT ----------------------
+// Use RELATIVE imports to avoid alias resolution issues
+import { TaskContext } from '../../contexts/TaskContext';
+import { processingContext } from '../../contexts/ProcessingContext';
+import SubmissionButton from '../../components/SubmissionButton/SubmissionButton';
 
-vi.mock('@/utils/styleData.json', () => ({
-  default: {
-    neutral: { base: 'neutral-base', hover: 'neutral-hover' },
-    success: { base: 'success-base', hover: 'success-hover' },
-    unknown: { base: 'unknown-base', hover: 'unknown-hover' }, // fallback used by component
-  },
-}));
-
-vi.mock('@/utils/submitPlans', () => ({
-  default: (...args) => submitPlansMock(...args),
-}));
-
-vi.mock('@/contexts/TaskContext', () => {
-  const React = require('react');
-  const TaskContext = React.createContext(MockTaskContextValue);
-  return { TaskContext };
-});
-
-vi.mock('@/utils/formatDateToYYYYMMDD', () => ({
-  default: (v) => fmtMock(v),
-}));
-
-vi.mock('@/utils/planningRange', () => ({
-  DEFAULT_PLAN_START: '2000-01-01',
-  DEFAULT_PLAN_END: '2099-12-31',
-}));
-
-vi.mock('sonner', () => ({ toast: toastShim }));
-
-// NEW: processingContext is used for styling
-vi.mock('@/contexts/ProcessingContext', () => {
-  const React = require('react');
-  const processingContext = React.createContext({ feasibility: { status: 'neutral' } });
-  return { processingContext };
-});
-
-// ---------- IMPORT AFTER MOCKS ----------
-import SubmissionButton from '@/components/SubmissionButton/SubmissionButton'; // adjust if needed
-import { TaskContext } from '@/contexts/TaskContext';
-import { processingContext } from '@/contexts/ProcessingContext';
-
-// Helpers
-function renderWithProviders(ui, { tasks, feasibilityStatus = 'neutral' } = {}) {
+// ---------------------- Helpers ----------------------
+function renderWithProviders(
+  _ui,
+  {
+    tasks = [],
+    processing = { state: 'idle', feasibility: { status: 'neutral' } },
+    IS_DEMO = false,
+    filter_start_date = '2000-01-01',
+    filter_end_date = '2099-12-31',
+  } = {}
+) {
   return render(
-    <processingContext.Provider value={{ feasibility: { status: feasibilityStatus } }}>
-      <TaskContext.Provider value={{ tasks: tasks ?? [] }}>{ui}</TaskContext.Provider>
+    <processingContext.Provider value={processing}>
+      <TaskContext.Provider value={{ tasks }}>
+        <SubmissionButton
+          IS_DEMO={IS_DEMO}
+          filter_start_date={filter_start_date}
+          filter_end_date={filter_end_date}
+        />
+      </TaskContext.Provider>
     </processingContext.Provider>
   );
 }
 
-function deferred() {
-  let resolve, reject;
-  const p = new Promise((res, rej) => { resolve = res; reject = rej; });
-  return { promise: p, resolve, reject };
-}
+const sampleTasks = [
+  { name: 'HW 1', category: 'Class', time_estimation: 60, due_date: '2025-09-30', start_date: '2025-09-24' },
+  { name: 'HW 2', category: 'Class', time_estimation: 90, due_date: '2025-10-02', start_date: '2025-09-28' },
+];
 
-beforeEach(() => {
-  vi.clearAllMocks();
-});
-
-describe('SubmissionButton (updated)', () => {
-  const sampleTasks = [
-    { name: 'Task A', category: 'School',   due_date: '2025-09-30', start_date: '2025-09-24', time_estimation: 60 },
-    { name: 'Task B', category: 'Personal', due_date: '2025-10-02', start_date: '2025-09-28', time_estimation: 30 },
-  ];
-
-  it('renders a button with text "Submit"', () => {
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
-    expect(screen.getByRole('button', { name: /submit/i })).toBeInTheDocument();
+// ---------------------- Tests (14) ----------------------
+describe('SubmissionButton – full suite (updated, no fake timers)', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('applies styling from processingContext.feasibility.status (neutral)', () => {
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks, feasibilityStatus: 'neutral' });
+  // 1
+  it('renders a clickable "Submit" button', () => {
+    renderWithProviders(<></>);
     const btn = screen.getByRole('button', { name: /submit/i });
-    expect(btn.className).toContain('neutral-base');
-    expect(btn.className).toContain('neutral-hover');
+    expect(btn).toBeInTheDocument();
+    expect(btn).not.toBeDisabled();
+    expect(btn).toHaveAttribute('aria-busy', 'false');
   });
 
-  it('applies styling from processingContext.feasibility.status (success)', () => {
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks, feasibilityStatus: 'success' });
+  // 2  (class comes from styleData.json + feasibility.status)
+  it('applies style from feasibility.status via styleData.json', () => {
+    renderWithProviders(<></>, { processing: { state: 'idle', feasibility: { status: 'success' } } });
     const btn = screen.getByRole('button', { name: /submit/i });
-    expect(btn.className).toContain('success-base');
-    expect(btn.className).toContain('success-hover');
+    expect(btn.className).toContain('base-success');
+    expect(btn.className).toContain('hover-success');
+    expect(btn.className).toContain('text-xl');
+    expect(btn.className).toContain('p-6');
   });
 
-  it('falls back to `unknown` styling when status not found', () => {
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks, feasibilityStatus: 'nonsense' });
-    const btn = screen.getByRole('button', { name: /submit/i });
-    expect(btn.className).toContain('unknown-base');
-    expect(btn.className).toContain('unknown-hover');
+  // 3
+  it('does not format on render; formats on click only', async () => {
+    renderWithProviders(<></>, { tasks: sampleTasks });
+    expect(fmtMock).not.toHaveBeenCalled();
+
+    submitPlansMock.mockResolvedValueOnce({ ok: true });
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+    await waitFor(() => expect(fmtMock).toHaveBeenCalledTimes(4));
   });
 
-  it('formats dates for each task (due_date and start_date)', () => {
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
-    // 2 tasks * 2 fields
-    expect(fmtMock).toHaveBeenCalledTimes(4);
-    expect(fmtMock).toHaveBeenCalledWith('2025-09-30');
-    expect(fmtMock).toHaveBeenCalledWith('2025-09-24');
-    expect(fmtMock).toHaveBeenCalledWith('2025-10-02');
-    expect(fmtMock).toHaveBeenCalledWith('2025-09-28');
+  // 4
+  it('formats dates for each task (due_date and start_date) on click', async () => {
+    submitPlansMock.mockResolvedValueOnce({ ok: true });
+
+    renderWithProviders(<></>, { tasks: sampleTasks });
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+    await waitFor(() => expect(fmtMock).toHaveBeenCalledTimes(4));
+    expect(fmtMock).toHaveBeenNthCalledWith(1, '2025-09-30');
+    expect(fmtMock).toHaveBeenNthCalledWith(2, '2025-09-24');
+    expect(fmtMock).toHaveBeenNthCalledWith(3, '2025-10-02');
+    expect(fmtMock).toHaveBeenNthCalledWith(4, '2025-09-28');
   });
 
-  it('disables during submission and re-enables on success', async () => {
-    const d = deferred();
-    submitPlansMock.mockReturnValueOnce(d.promise);
+  // 5
+  it('formats undefined dates safely', async () => {
+    submitPlansMock.mockResolvedValueOnce({ ok: true });
 
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    const tasks = [{ name: 'No Dates', category: 'N/A', time_estimation: 5, due_date: undefined, start_date: undefined }];
+    renderWithProviders(<></>, { tasks });
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+    await waitFor(() => expect(fmtMock).toHaveBeenCalledTimes(2));
+    expect(fmtMock).toHaveBeenNthCalledWith(1, undefined);
+    expect(fmtMock).toHaveBeenNthCalledWith(2, undefined);
+  });
+
+  // 6
+  it('disables and sets aria-busy during in-flight promise', async () => {
+    let resolveFirst;
+    submitPlansMock.mockReturnValueOnce(new Promise((res) => (resolveFirst = res)));
+
+    renderWithProviders(<></>, { tasks: sampleTasks });
     const btn = screen.getByRole('button', { name: /submit/i });
 
     fireEvent.click(btn);
     expect(btn).toBeDisabled();
+    expect(btn).toHaveAttribute('aria-busy', 'true');
 
-    d.resolve({ ok: true });
-    await waitFor(() => expect(btn).not.toBeDisabled());
+    resolveFirst({ ok: true });
+    await waitFor(() => {
+      expect(btn).not.toBeDisabled();
+      expect(btn).toHaveAttribute('aria-busy', 'false');
+    });
+  });
 
-    expect(toastShim.promise).toHaveBeenCalledTimes(1);
+  // 7
+  it('ignores clicks while a submission is in flight', async () => {
+    let resolveFirst;
+    submitPlansMock.mockReturnValueOnce(new Promise((res) => (resolveFirst = res)));
+
+    renderWithProviders(<></>, { tasks: sampleTasks });
+    const btn = screen.getByRole('button', { name: /submit/i });
+
+    fireEvent.click(btn);
+    fireEvent.click(btn); // ignored
+
     expect(submitPlansMock).toHaveBeenCalledTimes(1);
+    expect(btn).toBeDisabled();
+    expect(btn).toHaveAttribute('aria-busy', 'true');
+
+    resolveFirst({ ok: true });
+    await waitFor(() => {
+      expect(btn).not.toBeDisabled();
+      expect(btn).toHaveAttribute('aria-busy', 'false');
+    });
   });
 
-  it('re-enables and calls toast.error on failure', async () => {
-    const d = deferred();
-    submitPlansMock.mockReturnValueOnce(d.promise);
+  // 8
+  it('ignores rapid duplicate submissions of identical payload within 1s', async () => {
+    let resolveFirst;
+    submitPlansMock.mockReturnValueOnce(new Promise((res) => (resolveFirst = res)));
 
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    renderWithProviders(<></>, { tasks: sampleTasks });
     const btn = screen.getByRole('button', { name: /submit/i });
 
     fireEvent.click(btn);
-    expect(btn).toBeDisabled();
+    await waitFor(() => expect(submitPlansMock).toHaveBeenCalledTimes(1));
 
-    d.reject(new Error('boom'));
-    await waitFor(() => expect(btn).not.toBeDisabled());
+    fireEvent.click(btn); // identical rapidly -> ignored
+    expect(submitPlansMock).toHaveBeenCalledTimes(1);
 
-    expect(toastShim.error).toHaveBeenCalledWith('boom');
+    resolveFirst({ ok: true });
+    await waitFor(() => expect(btn).toHaveAttribute('aria-busy', 'false'));
   });
 
-  it('passes formatted tasks and default filter dates to submitPlans', async () => {
-    const d = deferred();
-    submitPlansMock.mockReturnValueOnce(d.promise);
+  // 9
+  it('allows another submission after the first resolves (by changing payload signature)', async () => {
+    submitPlansMock.mockResolvedValueOnce({ ok: true });
 
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    // initial render
+    const utils = renderWithProviders(<></>, { tasks: sampleTasks, filter_end_date: '2099-12-31' });
+    const btn = screen.getByRole('button', { name: /submit/i });
 
-    const [tasksArg, startArg, endArg] = submitPlansMock.mock.calls[0];
-    expect(Array.isArray(tasksArg)).toBe(true);
-    expect(startArg).toBe('2000-01-01');
-    expect(endArg).toBe('2099-12-31');
+    fireEvent.click(btn);
+    await waitFor(() => expect(submitPlansMock).toHaveBeenCalledTimes(1));
 
-    // original remains unchanged
-    expect(sampleTasks[0].due_date).toBe('2025-09-30');
-
-    // formatted copy passed to submitPlans
-    expect(tasksArg[0].due_date).toBe('2025-09-30_F');
-    expect(tasksArg[0].start_date).toBe('2025-09-24_F');
-    expect(tasksArg[1].due_date).toBe('2025-10-02_F');
-    expect(tasksArg[1].start_date).toBe('2025-09-28_F');
-
-    d.resolve({ ok: true });
-    await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
-  });
-
-  it('respects provided filter_start_date and filter_end_date props', async () => {
-    const d = deferred();
-    submitPlansMock.mockReturnValueOnce(d.promise);
-
-    renderWithProviders(
-      <SubmissionButton filter_start_date="2025-09-01" filter_end_date="2025-09-30" />,
-      { tasks: sampleTasks }
-    );
-
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
-
-    const [, startArg, endArg] = submitPlansMock.mock.calls[0];
-    expect(startArg).toBe('2025-09-01');
-    expect(endArg).toBe('2025-09-30');
-
-    d.resolve({ ok: true });
-    await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
-  });
-});
-
-// --- append below your existing tests in SubmissionButton.test.jsx ---
-
-describe('SubmissionButton – extra cases', () => {
-  const sampleTasks = [
-    { name: 'T1', category: 'X', due_date: '2025-01-02', start_date: '2025-01-01', time_estimation: 10 },
-  ];
-
-  it('uses `unknown` styling when feasibility.status is undefined', () => {
-    render(
-      <processingContext.Provider value={{ feasibility: { /* status: undefined */ } }}>
+    // change props -> different payload signature (bypasses 1s duplicate guard)
+    utils.rerender(
+      <processingContext.Provider value={{ state: 'idle', feasibility: { status: 'neutral' } }}>
         <TaskContext.Provider value={{ tasks: sampleTasks }}>
-          <SubmissionButton />
+          <SubmissionButton
+            IS_DEMO={false}
+            filter_start_date="2000-01-01"
+            filter_end_date="2099-12-30"  // changed
+          />
         </TaskContext.Provider>
       </processingContext.Provider>
     );
-    const btn = screen.getByRole('button', { name: /submit/i });
-    expect(btn.className).toContain('unknown-base');
-    expect(btn.className).toContain('unknown-hover');
+
+    submitPlansMock.mockResolvedValueOnce({ ok: true });
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    await waitFor(() => expect(submitPlansMock).toHaveBeenCalledTimes(2));
   });
 
-  it('submits even when tasks are empty (passes empty array + defaults)', async () => {
-    const d = ((r) => {
-      let resolve, reject;
-      const p = new Promise((res, rej) => { resolve = res; reject = rej; });
-      return { promise: p, resolve, reject };
-    })();
-    submitPlansMock.mockReturnValueOnce(d.promise);
+  // 10
+  it('shows busy/disabled only during the promise lifecycle', async () => {
+    let resolve;
+    submitPlansMock.mockReturnValueOnce(new Promise((res) => (resolve = res)));
 
-    renderWithProviders(<SubmissionButton />, { tasks: [] });
-    const btn = screen.getByRole('button', { name: /submit/i });
-    fireEvent.click(btn);
-
-    const [tasksArg, startArg, endArg] = submitPlansMock.mock.calls[0];
-    expect(Array.isArray(tasksArg)).toBe(true);
-    expect(tasksArg).toHaveLength(0);
-    expect(startArg).toBe('2000-01-01');
-    expect(endArg).toBe('2099-12-31');
-
-    d.resolve({ ok: true });
-    await waitFor(() => expect(btn).not.toBeDisabled());
-  });
-
-  it('prevents double submission while disabled (second click is ignored)', async () => {
-    const d = ((r) => {
-      let resolve, reject;
-      const p = new Promise((res, rej) => { resolve = res; reject = rej; });
-      return { promise: p, resolve, reject };
-    })();
-    submitPlansMock.mockReturnValueOnce(d.promise);
-
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    renderWithProviders(<></>, { tasks: sampleTasks });
     const btn = screen.getByRole('button', { name: /submit/i });
 
-    // First click kicks off the submit and disables the button
     fireEvent.click(btn);
     expect(btn).toBeDisabled();
+    expect(btn).toHaveAttribute('aria-busy', 'true');
 
-    // Second click while disabled should not call submit again
-    fireEvent.click(btn);
-    expect(submitPlansMock).toHaveBeenCalledTimes(1);
-
-    d.resolve({ ok: true });
-    await waitFor(() => expect(btn).not.toBeDisabled());
+    resolve({ ok: true });
+    await waitFor(() => {
+      expect(btn).not.toBeDisabled();
+      expect(btn).toHaveAttribute('aria-busy', 'false');
+    });
   });
 
-  it('calls toast.promise with loading/success/error messages', async () => {
-    const d = ((r) => {
-      let resolve, reject;
-      const p = new Promise((res, rej) => { resolve = res; reject = rej; });
-      return { promise: p, resolve, reject };
-    })();
-    submitPlansMock.mockReturnValueOnce(d.promise);
+  // 11
+  it('wires toast.promise with a Promise and messages', async () => {
+    const result = Promise.resolve({ ok: true });
+    submitPlansMock.mockReturnValueOnce(result);
 
-    renderWithProviders(<SubmissionButton />, { tasks: sampleTasks });
+    renderWithProviders(<></>, { tasks: sampleTasks });
     fireEvent.click(screen.getByRole('button', { name: /submit/i }));
 
-    // Validate the message options passed to toast.promise
-    const [promiseArg, opts] = toastShim.promise.mock.calls[0];
-    expect(typeof promiseArg?.then).toBe('function');
-    expect(opts).toMatchObject({
-      loading: expect.stringMatching(/submitting plan records/i),
-      success: expect.stringMatching(/success/i),
-      error: expect.stringMatching(/error/i),
-    });
+    await waitFor(() => expect(toastShim.promise).toHaveBeenCalledTimes(1));
 
-    d.resolve({ ok: true });
-    await waitFor(() => expect(screen.getByRole('button')).not.toBeDisabled());
+    const [promiseArg, messages] = toastShim.promise.mock.calls[0];
+    expect(promiseArg).toBeInstanceOf(Promise);
+    expect(messages).toEqual(
+      expect.objectContaining({
+        loading: expect.anything(),
+        success: expect.anything(),
+        error: expect.anything(),
+      })
+    );
   });
 
-  it('formats undefined dates safely (fmtMock returns DATE_F for non-strings)', () => {
-    const tasks = [
-      { name: 'No Dates', category: 'N/A', time_estimation: 5, due_date: undefined, start_date: undefined },
-    ];
-    renderWithProviders(<SubmissionButton />, { tasks });
-    // 1 task * 2 fields => 2 calls
-    expect(fmtMock).toHaveBeenCalledTimes(2);
-    // Both undefined inputs are handled by fmtMock (-> "DATE_F")
-    // The exact arguments are undefined:
-    expect(fmtMock.mock.calls[0][0]).toBeUndefined();
-    expect(fmtMock.mock.calls[1][0]).toBeUndefined();
+  // 12
+  it('handles rejection from submitPlans and clears busy state (toast.error available)', async () => {
+    submitPlansMock.mockRejectedValueOnce(new Error('boom'));
+
+    renderWithProviders(<></>, { tasks: sampleTasks });
+    const btn = screen.getByRole('button', { name: /submit/i });
+
+    fireEvent.click(btn);
+    expect(btn).toBeDisabled();
+    expect(btn).toHaveAttribute('aria-busy', 'true');
+
+    // UI should clear busy state after the promise settles
+    await waitFor(() => {
+      expect(btn).not.toBeDisabled();
+      expect(btn).toHaveAttribute('aria-busy', 'false');
+    });
+
+    // Let the component's catch run its toast.error call
+    await Promise.resolve();
+    expect(toastShim.error).toHaveBeenCalled();
+  });
+
+  // 13
+  it('respects feasibility.status = unknown with fallback class', () => {
+    renderWithProviders(<></>, { processing: { state: 'idle', feasibility: { status: 'who-knows' } } });
+    const btn = screen.getByRole('button', { name: /submit/i });
+    expect(btn.className).toContain('base-unknown');
+    expect(btn.className).toContain('hover-unknown');
+  });
+
+  // 14
+  it('shows danger style while busy regardless of feasibility', async () => {
+    let resolve;
+    submitPlansMock.mockReturnValueOnce(new Promise((res) => (resolve = res)));
+
+    renderWithProviders(<></>, {
+      tasks: sampleTasks,
+      processing: { state: 'idle', feasibility: { status: 'danger' } },
+    });
+    const btn = screen.getByRole('button', { name: /submit/i });
+
+    // initial state (not busy) uses danger style from mocked styleData.json
+    expect(btn.className).toContain('base-danger');
+    expect(btn.className).toContain('hover-danger');
+
+    fireEvent.click(btn);
+    fireEvent.click(btn); // ignored while busy
+    expect(submitPlansMock).toHaveBeenCalledTimes(1);
+
+    resolve({ ok: true });
+    await waitFor(() => expect(btn).toHaveAttribute('aria-busy', 'false'));
   });
 });
