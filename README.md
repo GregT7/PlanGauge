@@ -226,26 +226,20 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
       2. Copy & paste into new .env file
       ```
-      FLASK_BASE_URL=http://127.0.0.1:
-      FLASK_DEFAULT_PORT=5000
-      FLASK_TESTING_PORT=5001
-      FLASK_HEALTH_ROUTE=/api/health
-      ```
-
-  2. Create frontend env file (`/PlanGauge/src/frontend/.env.demo`)
-      1. Navigate to `/PlanGauge/src/frontend`
-      ```
-      cd /PlanGauge/src/frontend
-      ```
-
-      2. Copy & paste into new `.env.demo` file
-      ```
-      VITE_DEMO=1
-      VITE_STATS_TESTING_ROUTE=http://127.0.0.1:5000/api/demo/stats
-      VITE_DEFAULT_ROUTE=http://localhost:5173/
-      VITE_TESTING_ROUTE=http://localhost:4173/
+      VITE_FLASK_BASE_ROUTE=http://127.0.0.1:
+      VITE_FLASK_DEFAULT_PORT=5000
+      VITE_FLASK_TESTING_PORT=5001
+      VITE_FLASK_HEALTH_ROUTE=/api/health
+      VITE_FLASK_STATS_ROUTE=/api/db/stats
+      VITE_FLASK_DEMO_STATS_ROUTE =/api/demo/stats
+      VITE_BASE_ROUTE=http://localhost:
+      VITE_DEFAULT_PORT=5173
+      VITE_TESTING_PORT=4173
       VITE_DEFAULT_PLAN_START=2025-06-01
       VITE_DEFAULT_PLAN_END=2025-06-30
+      VITE_NOTION_HEALTH_ROUTE=/api/notion/health
+      VITE_SUPABASE_HEALTH_ROUTE=/api/db/health
+      VITE_SUBMISSION_ROUTE=/api/plan-submissions
       ```
 
 </details>
@@ -280,7 +274,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
       cd /PlanGauge/src/backend
       ```
 
-      2. Copy & paste into new `.env` file
+      2. Copy & paste into new `.env.local` file
       ```
       SUPABASE_URL = 
       SUPABASE_KEY = 
@@ -290,7 +284,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
       NOTION_VERSION = "2025-09-03"
       ```
 
-  3. Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env` file
+  3. Find API keys / info for Notion & Supabase and update `/PlanGauge/src/backend/.env.local` file
    - `SUPABASE_URL`  
      - _Description_: The unique base URL endpoint for your Supabase project.  
      - How to find:

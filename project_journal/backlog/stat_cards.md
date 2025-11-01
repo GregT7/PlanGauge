@@ -16,51 +16,51 @@
 ## 🔧 Work
 
 ### ✅ Subtasks
-1. Create new Git branch: feature/stat-cards
-2. Create a master container component titled "Stat Cards System"
-3. Define and store mock test data locally for development and testing
-4. Build React components for individual Stat Cards displaying:
-    * Day of the week + date (e.g., Monday 6/9)
-    * Current plan's time sum
-    * Average time
-    * Standard deviation
-    * Status (e.g., Good, Moderate, Poor)
-5. Implement default "no data" UI for missing metrics or table data
-6. Apply dynamic color styling to each card based on status:
-    * Good → green
-    * Moderate → yellow/orange
-    * Poor → red
-7. Add a component or section that counts total statuses (e.g., 3 good, 2 moderate)
-8. Write unit tests for:
-    * Correct rendering with test data
-    * Proper color changes based on status
-    * Fallback/default rendering when no data is present
-9. Open a pull request with summary and test coverage checklist
-10. Simulate a code review (self or with ChatGPT):
-    * Leave 2–3 comments about areas for improvement
-11. Apply code review changes:
-    * Refactor, fix, or expand tests based on comments
-12. Conduct a final review and merge the branch into main
+- [x] Create new Git branch: feature/stat-cards
+- [x] Create a master container component titled "Stat Cards System"
+- [x] Define and store mock test data locally for development and testing
+- [x] Build React components for individual Stat Cards displaying:
+    - [x] Day of the week + date (e.g., Monday 6/9)
+    - [x] Current plan's time sum
+    - [x] Average time
+    - [x] Standard deviation
+    - [x] Status (e.g., Good, Moderate, Poor)
+- [x] Implement default "no data" UI for missing metrics or table data
+- [x] Apply dynamic color styling to each card based on status:
+    - [x] Good → green
+    - [x] Moderate → yellow/orange
+    - [x] Poor → red
+- [x] Add a component or section that counts total statuses (e.g., 3 good, 2 moderate)
+- [x] Write unit tests for:
+    - [x] Correct rendering with test data
+    - [x] Proper color changes based on status
+    - [x] Fallback/default rendering when no data is present
+- [x] Open a pull request with summary and test coverage checklist
+- [x] Simulate a code review (self or with ChatGPT):
+    - [x] Leave 2–3 comments about areas for improvement
+- [x] Apply code review changes:
+    - [x] Refactor, fix, or expand tests based on comments
+- [x] Conduct a final review and merge the branch into main
 
 
 ### 📘 Definition of Done
-- A new feature branch named feature/stat-cards has been created from main
-- The "Stat Cards System" container component is implemented and renders properly
-- Each stat card displays:
-    * Day of the week and date
-    * Current plan's time sum
-    * Average time
-    * Standard deviation
-    * Status label (e.g., Good, Moderate, Poor)
-- Cards dynamically change color based on status: green (good), yellow/orange (moderate), red (poor)
-- A default/fallback UI is displayed when data is missing
-- A visible status count feature is added below the cards (e.g., 3 Good, 2 Poor)
-- Mock test data is used to populate and verify component functionality
-- Unit tests cover:
-    * Correct rendering with mock data
-    * Color logic based on status
-    * Fallback behavior when no data is present
-- A GitHub pull request is created with a summary, screenshots (optional), and a test checklist
-- A code review is conducted (self-review or simulated)
-- Feedback from the review is addressed through follow-up commits
-- The branch passes all tests and is merged into main
+- [x] A new feature branch named feature/stat-cards has been created from main
+- [x] The "Stat Cards System" container component is implemented and renders properly
+- [x] Each stat card displays:
+    - [x] Day of the week and date
+    - [x] Current plan's time sum
+    - [x] Average time
+    - [x] Standard deviation
+    - [x] Status label (e.g., Good, Moderate, Poor)
+- [x] Cards dynamically change color based on status: green (good), yellow/orange (moderate), red (poor)
+- [x] A default/fallback UI is displayed when data is missing
+- [x] A visible status count feature is added below the cards (e.g., 3 Good, 2 Poor)
+- [x] Mock test data is used to populate and verify component functionality
+- [x] Unit tests cover:
+    - [x] Correct rendering with mock data
+    - [x] Color logic based on status
+    - [x] Fallback behavior when no data is present
+- [x] A GitHub pull request is created with a summary, screenshots (optional), and a test checklist
+- [x] A code review is conducted (self-review or simulated)
+- [x] Feedback from the review is addressed through follow-up commits
+- [x] The branch passes all tests and is merged into main

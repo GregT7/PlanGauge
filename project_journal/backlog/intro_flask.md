@@ -15,22 +15,22 @@
 ## 🔧 Work
 
 ### ✅ Subtasks
-1. Take Coursera course on Flask
+- [x] Take Coursera course on Flask
 -------- Title: Create Your First Web App with Python and Flask
 -------- Time: Less than 2 hours
 -------- Link: https://www.coursera.org/projects/python-flask
-2. Read article on Flask API design
+- [x] Read article on Flask API design
 ------- Title: Best Practices for Flask API Development
 ------- Link: https://auth0.com/blog/best-practices-for-flask-api-development/
-3. Create brief quiz covering the flask basics (10 questions)
-4. Take flask basics quiz
-5. Create quiz covering flask and its bigger picture use in the project + some web architecture
-6. Take bigger picture flask quiz
+- [x] Create brief quiz covering the flask basics (10 questions)
+- [x] Take flask basics quiz
+- [x] Create quiz covering flask and its bigger picture use in the project + some web architecture
+- [x] Take bigger picture flask quiz
 
 ### 📘 Definition of Done
-1. Coursera course is 100% completed
-2. The flask basics quiz has exactly 10 questions
-3. A score of 70% or greater is achieved on the flask basics quiz
-4. The bigger picture flask quiz has at least 20 questions
-5. The bigger picture flask quiz includes at least 3 questions derived from the article
-6. A score of 70% or greater is achieved on the bigger picture flask quiz
+- [x] Coursera course is 100% completed
+- [x] The flask basics quiz has exactly 10 questions
+- [x] A score of 70% or greater is achieved on the flask basics quiz
+- [x] The bigger picture flask quiz has at least 20 questions
+- [x] The bigger picture flask quiz includes at least 3 questions derived from the article
+- [x] A score of 70% or greater is achieved on the bigger picture flask quiz

@@ -11,8 +11,7 @@ import EvaluationSection from "./components/EvaluationSection/EvaluationSection"
 import { ProcessingContextProvider } from "@/contexts/ProcessingContext"
 
 function App() {
-  const IS_DEMO = import.meta.env.VITE_DEMO === '1';
-
+  const IS_DEMO = import.meta.env.MODE === "demo";
 
   useEffect(() => {
     const launchSetupApp = async () => {

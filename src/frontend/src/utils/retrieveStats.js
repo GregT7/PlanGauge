@@ -1,29 +1,14 @@
 import verifyStatsData from "./verifyStatsData";
 
 // # curl "http://127.0.0.1:5000/api/db/stats?start=2025-06-01&end=2025-06-30"
-export default async function retrieveStats(start, end, url, IS_DEMO) {
-
-    let finalURL;
-    if (IS_DEMO) {
-        finalURL = import.meta.env.VITE_STATS_TESTING_ROUTE
-    } else {
-        const regex = /^\d{4}-\d{2}-\d{2}$/
-        const start_ok = regex.test(start)
-        const end_ok = regex.test(end)
-        if (!start_ok || !end_ok) {
-            throw new Error("Invalid arguments passed to retrieveStats")
-        }
-
-        const query_str = `start=${start}&end=${end}`
-        finalURL = `${url}?${query_str}`
-    }
-
+export default async function retrieveStats(url, IS_DEMO) {
     let resp = {
         message: "Error: Received no response from database!",
         details: null,
         data: null
     }
-    const dbResp = await fetch(finalURL)
+
+    const dbResp = await fetch(url)
     if (dbResp === null) {
         console.log(resp.message)
         return Promise.reject(resp)

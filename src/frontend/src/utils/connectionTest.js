@@ -2,9 +2,10 @@ import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
 
 export default async function connectionTest() {
-    const flask_url = "http://localhost:5000/api/health";
-    const supabase_url = "http://localhost:5000/api/db/health";
-    const notion_url = "http://localhost:5000/api/notion/health";
+    const baseRoute = import.meta.env.VITE_BASE_ROUTE + import.meta.env.VITE_FLASK_DEFAULT_PORT;
+    const flask_url = baseRoute + import.meta.env.VITE_FLASK_HEALTH_ROUTE
+    const supabase_url = baseRoute + import.meta.env.VITE_SUPABASE_HEALTH_ROUTE
+    const notion_url = baseRoute + import.meta.env.VITE_NOTION_HEALTH_ROUTE
     try {
         const flask_response = await persistentFetch(flask_url, "Flask")
         let supabase_response = null, notion_response = null

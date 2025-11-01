@@ -77,6 +77,7 @@ CREATE TABLE plan (
   plan_name VARCHAR(255) NOT NULL,
   start_date DATE,
   due_date DATE,
+  time_estimation INT4 DEFAULT 0 CHECK (time_estimation >= 0),
   submission_id UUID,
   CONSTRAINT FK_plan_submission_id
     FOREIGN KEY (submission_id)

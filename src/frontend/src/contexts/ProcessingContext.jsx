@@ -22,18 +22,32 @@ export function ProcessingContextProvider({children, starting_stats = default_st
 
     // Retrieve stats data
     const [stats, setStats] = useState(starting_stats);
-    // const [cardData, setCardData] = useState(genDefaultCardsData())
 
     useEffect(() => {
         let cancelled = false;
             (async () => {
                 try {
+                let flaskURL = import.meta.env.VITE_FLASK_BASE_ROUTE
+                if (IS_DEMO) {
+                    flaskURL += import.meta.env.VITE_FLASK_TESTING_PORT;
+                    flaskURL += import.meta.env.VITE_FLASK_DEMO_STATS_ROUTE
+                } else {
+                    flaskURL += import.meta.env.VITE_FLASK_DEFAULT_PORT
+                    flaskURL += import.meta.env.VITE_FLASK_STATS_ROUTE
 
-                const baseURL = "http://127.0.0.1:5000"
-                const flaskURL = "/api/db/stats"
-                const endpointURL = baseURL + flaskURL
-                const promise = retrieveStats(DEFAULT_PLAN_START, DEFAULT_PLAN_END, 
-                    endpointURL, IS_DEMO); // resolves to { message, details, data }
+                    console.log("flaskURL", flaskURL)
+                    const regex = /^\d{4}-\d{2}-\d{2}$/
+                    const start_ok = regex.test(DEFAULT_PLAN_START)
+                    const end_ok = regex.test(DEFAULT_PLAN_END)
+                    if (!start_ok || !end_ok) {
+                        throw new Error("Invalid arguments passed to retrieveStats")
+                    }
+
+                    const query_str = `start=${DEFAULT_PLAN_START}&end=${DEFAULT_PLAN_END}`
+                    flaskURL += `?${query_str}`
+                }
+
+                const promise = retrieveStats(flaskURL, IS_DEMO); // resolves to { message, details, data }
 
                 // bind toast to the same promise (don’t await the toast)
                 toast.promise(promise, {
@@ -45,7 +59,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
                 const res = await promise; // get full object back
                 if (!cancelled && res?.data) setStats(res.data);
                 } catch (err) {
-                console.error('Stats init error:', err);
+                    console.error('Stats init error:', err);
                 // if (!cancelled) toast.error('Error: Unexpected Internal Error When Retrieving Stats');
                 }
             })();

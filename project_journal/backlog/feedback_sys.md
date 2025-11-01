@@ -2,8 +2,8 @@
 
 ## 📝 Task Overview
 * Sprint: 9, 10
-* Dates: September 17 - Month day (2025)
-* Status: In Progress
+* Dates: September 17 - October 7 (2025)
+* Status: Completed
 * Story Points: #8
 * Dependencies:
   * `Backend Setup`
@@ -71,7 +71,7 @@
 - [x] Values printed are the same ones being used during calculations
 - [x] Is cleanly styled
 
-9) Status-Driven UI Styling]
+9) Status-Driven UI Styling
 - [x] Uses a status map to create a single source of truth for color shading
 - [x] The outer border for each subsystem container changes color to reflect feasibility status
 - [x] All subsystem styling reflects the current feasibility by coloring the outer border of the container holding the subsystem component
@@ -177,7 +177,6 @@
 
 #E2E (Manual or Automated)
 - [x] User loads → stats fetched → feasibility computed → borders and buttons update color according to status.
-
 Evidence
 - [x] Passing test summary from Vitest and/or Pytest.
 - [x] Short screen capture of E2E flow.
