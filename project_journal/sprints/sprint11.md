@@ -3,7 +3,7 @@
 ## 📝 Overview
 * Dates: October 17th - October 31st (2025)
 * Status: In Progress
-* Backlog Progress: 0 backlogs completed / 2 backlogs assigned ( X% )
+* Backlog Progress: 2 backlogs completed / 2 backlogs assigned ( 100% )
 * Tasks Assigned:
     * `Presentation Readiness`
     * `End-to-End Testing`

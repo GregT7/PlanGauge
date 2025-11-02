@@ -260,10 +260,10 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
 2️⃣ Setup Supabase
    1. Create a free account at [https://app.supabase.com](https://app.supabase.com).
-   2. Run the SQL scripts in `/PlanGauge/src/database/`:
-      - `db_setup.sql` — Initializes database tables.  
-      - `row_security.sql` — Enables row-level security (prevents unauthorized access).  
-      - `init_records.sql` — Populates dummy records (optional).
+   2. Run the SQL scripts in `/PlanGauge/src/database/` in order:
+      1. `db_setup.sql` — Initializes database tables.  
+      2. `row_security.sql` — Enables row-level security (prevents unauthorized access).  
+      3. `init_records.sql` — Populates dummy records (optional).
    3. Note your Project URL and anon public key for the `.env` file.
 
 3️⃣ Setup environment files

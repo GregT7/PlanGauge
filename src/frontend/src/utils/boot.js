@@ -1,71 +1,130 @@
+// boot.js (robust version)
 import { spawn } from "child_process";
 import { config } from "dotenv";
 import { fileURLToPath } from "url";
 import path from "node:path";
-import open from "open"; // npm install open
+import killTree from "tree-kill";
+import waitOn from "wait-on";
+import open from "open";
 
-async function main() {
-    // parse argument values to differentiate between default and testing mode
-    const args = process.argv.slice(2); // skip node + script path
-    const isDemo = args.includes("-demo")
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    // resolve the directory of the current file
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const envPath = path.resolve(__dirname, "../../../.env");
-    config({ path: envPath });
+// Load root .env (same as before)
+config({ path: path.resolve(__dirname, "../../../.env") });
 
-    const FRONTEND_DIR = process.cwd();                  // assume running from /frontend
-    const BACKEND_DIR  = path.resolve(FRONTEND_DIR, "..", "backend");
+// Track child PIDs for teardown
+const children = new Set();
+const add = (cp) => cp && cp.pid && children.add(cp);
+const killAll = () =>
+  Promise.all(
+    Array.from(children).map(
+      (cp) =>
+        new Promise((res) => {
+          try {
+            killTree(cp.pid, "SIGINT", () => res());
+          } catch {
+            res();
+          }
+        })
+    )
+  );
 
-    let RUN, FLASK_PORT, REACT_PORT, REACT_ARGS
-    if (isDemo) {
-        RUN = "run.py -demo"
-        FLASK_PORT = process.env.VITE_FLASK_TESTING_PORT
-        REACT_PORT = process.env.VITE_TESTING_PORT
-        REACT_ARGS = ["vite", "--port", REACT_PORT, "--mode", "demo"]
-    } else {
-        RUN = "run.py"
-        FLASK_PORT = process.env.VITE_FLASK_DEFAULT_PORT
-        REACT_PORT = process.env.VITE_DEFAULT_PORT
-        REACT_ARGS = ["vite", "--port", REACT_PORT]
-    }
-    
-    // Start Flask backend
-    const ACTIVATE = path.join("venv", "Scripts", "activate.bat");
-    const flask_child = spawn(`call "${ACTIVATE}" && python ${RUN}`, {
-        cwd: BACKEND_DIR,
-        shell: true,
-        stdio: "inherit"
-    });
-
-    // Wait for Flask to be ready
-    const HEALTH_URL = process.env.VITE_FLASK_BASE_ROUTE + FLASK_PORT + process.env.VITE_FLASK_HEALTH_ROUTE
-
-    const waiter = spawn('npx', ['wait-on', HEALTH_URL, '-t', '60000', '-i', '500'], {
-        shell: true,
-        stdio: 'inherit'
-    });
-    waiter.on("exit", async (code) => {
-        console.log("✅ Flask API reached. Launching frontend...");
-
-        const viteProcess = spawn("npx", REACT_ARGS, {
-            cwd: FRONTEND_DIR,
-            stdio: "inherit",
-            shell: true
-        });
-
-        viteProcess.on("close", (code) => {
-            console.log(`Vite exited with code ${code}`);
-        });
-
-        // Wait a moment for Vite to start, then open browser
-        const REACT_ROUTE = process.env.VITE_BASE_ROUTE + REACT_PORT
-        setTimeout(async () => {
-        console.log(`🌐 Opening browser to ${REACT_ROUTE}`);
-        await open(REACT_ROUTE);
-        }, 8000); // adjust delay if needed
-    });
+let exiting = false;
+async function safeExit(code = 0) {
+  if (exiting) return;
+  exiting = true;
+  await killAll();
+  console.log("All child processes terminated.");
+  process.exit(code);
 }
 
-await main();
+function onFatal(err, code = 1) {
+  if (err) console.error(err instanceof Error ? err.stack ?? err.message : err);
+  safeExit(code);
+}
+
+function getArgFlag(name) {
+  return process.argv.slice(2).includes(name);
+}
+
+async function main() {
+  const isDemo = getArgFlag("-demo");
+
+  const FRONTEND_DIR = process.cwd(); // assume /frontend
+  const BACKEND_DIR = path.resolve(FRONTEND_DIR, "..", "backend");
+
+  // Ports & args based on mode
+  const FLASK_PORT = isDemo
+    ? process.env.VITE_FLASK_TESTING_PORT
+    : process.env.VITE_FLASK_DEFAULT_PORT;
+  const REACT_PORT = isDemo
+    ? process.env.VITE_TESTING_PORT
+    : process.env.VITE_DEFAULT_PORT;
+
+  const HEALTH_URL =
+    process.env.VITE_FLASK_BASE_ROUTE +
+    FLASK_PORT +
+    process.env.VITE_FLASK_HEALTH_ROUTE;
+
+  const REACT_URL = process.env.VITE_BASE_ROUTE + REACT_PORT;
+
+  // --- Start Flask without activating shell (avoids orphan shells on Windows)
+  const PYTHON = path.join(BACKEND_DIR, "venv", "Scripts", "python.exe"); // Windows
+  const runArgs = isDemo ? ["run.py", "-demo"] : ["run.py"];
+  const flask = spawn(PYTHON, runArgs, {
+    cwd: BACKEND_DIR,
+    stdio: "inherit",
+    shell: false,
+  });
+  add(flask);
+
+  flask.on("exit", (code) => {
+    // If Flask dies early, bail and cleanup
+    console.error(`Flask exited with code ${code}`);
+    onFatal(null, code ?? 1);
+  });
+
+  // --- Wait for Flask to be reachable
+  try {
+    await waitOn({ resources: [HEALTH_URL], timeout: 60_000, interval: 500 });
+    console.log("✅ Flask API reached.");
+  } catch (e) {
+    console.error("❌ Flask API did not become ready in time.");
+    return onFatal(e, 1);
+  }
+
+  // --- Start Vite
+  const viteArgs = isDemo ? ["vite", "--port", REACT_PORT, "--mode", "demo"] : ["vite", "--port", REACT_PORT];
+  const vite = spawn("npx", viteArgs, {
+    cwd: FRONTEND_DIR,
+    stdio: "inherit",
+    shell: true,
+  });
+  add(vite);
+
+  vite.on("exit", (code) => {
+    console.log(`Vite exited with code ${code}`);
+    // If vite closes (e.g., the user closed it), exit and cleanup
+    safeExit(code ?? 0);
+  });
+
+  // --- Wait for Vite to be reachable, then open browser
+  try {
+    await waitOn({ resources: [REACT_URL], timeout: 60_000, interval: 500 });
+    console.log(`🌐 Opening browser: ${REACT_URL}`);
+    await open(REACT_URL);
+  } catch (e) {
+    console.error("⚠️ Frontend did not become ready in time.");
+    // Still exit—tests or dev can retry; we clean up nicely
+    return onFatal(e, 1);
+  }
+}
+
+// Global safety nets
+process.on("SIGINT", () => safeExit(130));   // Ctrl-C
+process.on("SIGTERM", () => safeExit(143)); // kill
+process.on("uncaughtException", (err) => onFatal(err, 1));
+process.on("unhandledRejection", (reason) => onFatal(reason, 1));
+
+main().catch(onFatal);
