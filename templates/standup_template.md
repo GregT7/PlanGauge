@@ -31,11 +31,10 @@
 
 ### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
 
-#### ❓ Question 1
+#### ❓ Question 1 (OPTIONAL)
 - 
 
-#### ❓ Question 2...
-- 
+
 
 ### 🧾 Results
 

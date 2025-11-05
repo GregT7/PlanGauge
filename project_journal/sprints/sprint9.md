@@ -22,7 +22,7 @@
 
 ## 🔍 Review
 * Major Sprint Feedback  
-This sprint demonstrated strong consistency in daily standups and steady feature implementation, especially with the ProcessingContext refactor and evaluation/summary section design. The team followed through on most key decisions (72.7%), but slipped on documentation and incremental testing, which caused bugs to ripple late in the sprint. Overreliance on AI-generated test cases also highlighted the need for stronger test discipline. Overall, the sprint made big strides in functionality but lacked balance in planning and documentation.
+This sprint demonstrated strong consistency in daily standups and steady feature implementation, especially with the ProcessingContext refactor and evaluation/summary section design. I followed through on most key decisions (72.7%), but slipped on documentation and incremental testing, which caused bugs to ripple late in the sprint. Overreliance on AI-generated test cases also highlighted the need for stronger test discipline. Overall, the sprint made big strides in functionality but lacked balance in planning and documentation.
 
 * Retro Notes  
 The sprint succeeded in implementing new features, maintaining work consistency, and improving UI clarity, but it fell short in upfront planning and use of diagrams. Documentation was delayed to the last minute, and incremental testing was skipped, leading to compounded bugs. Root causes were avoiding diagrams due to time overhead and procrastinating on tests due to tedium. Next steps are to create lightweight diagrams before coding, integrate iterative testing into development, and prioritize documentation in parallel with feature work.
