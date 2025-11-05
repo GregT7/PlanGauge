@@ -1,4 +1,4 @@
-# Sprint X - Insert Title here
+# Sprint 11 - Project Polishing
 
 ## 📝 Overview
 * Dates: October 17th - October 31st (2025)
@@ -32,5 +32,6 @@
 --- 
 
 ## 🔍 Review
-* Major Feedback: insert text here...
-* Retrospective Notes: insert text here...
+* Major Feedback: Sprint 11 demonstrated strong progress despite reduced time availability. You successfully re-scoped the backlog to focus on documentation, testing, and presentation readiness while maintaining consistency in daily reflections. The most recurring feedback centers on idea overload and unclear prioritization. Establishing a lightweight, repeatable prioritization system will help convert creativity into focused execution. Maintaining a smaller, well-defined sprint goal was effective and should continue.
+
+* Retrospective Notes: This sprint marked a turning point from feature building to process refinement. You managed competing priorities between job applications and project closure without sacrificing output quality. However, scope creep and accumulating ideas created friction in decision-making. The new minimal Impact–Effort prioritization framework directly addresses this by giving a clear, low-effort structure for deciding what matters each sprint. Overall, Sprint 11 showed maturity in balancing reflection, discipline, and adaptability.

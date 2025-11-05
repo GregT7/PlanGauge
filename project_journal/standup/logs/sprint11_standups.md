@@ -642,24 +642,23 @@ Yes — your priorities align well with the project’s current phase. Presentat
 
 
 #### 📌 Action Items
-- [ ]  .env fixing
-  - [ ]  Ensure placement of variables & files makes sense
-  - [ ]  Replace any remaining hard-coded ports/URLs with environment variables
-  - [ ]  Ensure modes still work
-    - [ ]  dev
-    - [ ]  dev:demo
-    - [ ]  test
-    - [ ]  start
-    - [ ]  start:demo
-    - [ ]  e2e
-  - [ ] Update readme
-- [ ]  init_records.sql
-    - [ ]  Write up script
-    - [ ]  Test & ensure it works
-- [ ]  Update docs
-  - [ ]  Recent backlog items
-    - [ ]  Presentation Readiness
-    - [ ]  End-to-End Testing
-  - [ ]  Previous backlog items
-- [ ]  Reach out to Dr. Raymer (he is on leave though)
-- [ ]  Start creating excel automation script : Create a button
+- [x]  .env fixing
+  - [x]  Ensure placement of variables & files makes sense
+  - [x]  Replace any remaining hard-coded ports/URLs with environment variables
+  - [x]  Ensure modes still work
+    - [x]  dev
+    - [x]  dev:demo
+    - [x]  test
+    - [x]  start
+    - [x]  start:demo
+    - [x]  e2e
+  - [x] Update readme
+- [x]  init_records.sql
+    - [x]  Write up script
+    - [x]  Test & ensure it works
+- [x]  Update docs
+  - [x]  Recent backlog items
+    - [x]  Presentation Readiness
+    - [x]  End-to-End Testing
+  - [x]  Previous backlog items
+- [x]  Reach out to CS Professor
