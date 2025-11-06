@@ -4,6 +4,7 @@ from . import app, supabase, DEMO_MODE
 from dotenv import load_dotenv
 from .utils import *
 from .demo_stats import demo_stats
+from .auth import require_owner
 import asyncio
 
 load_dotenv()
@@ -51,6 +52,7 @@ if not DEMO_MODE:
 
 
     @app.route('/api/db/health', methods=['GET'])
+    @require_owner
     def db_health_check():
         start_time = time.perf_counter()
         try:
