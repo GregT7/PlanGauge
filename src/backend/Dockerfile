@@ -21,4 +21,4 @@ COPY app ./app
 EXPOSE 8080
 
 # Start Flask via gunicorn inside container
-CMD ["gunicorn", "app.app:app", "-b", "0.0.0.0:8080"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8080"]
