@@ -81,6 +81,7 @@ if not DEMO_MODE:
 
 
     @app.route('/api/notion/health', methods=['GET'])
+    @require_owner
     def notion_health_check():
         start_time = time.perf_counter()
 
@@ -126,6 +127,7 @@ if not DEMO_MODE:
             return jsonify(http_response), 500
             
     @app.route('/api/db/stats', methods=['GET'])
+    @require_owner
     def calc_stats():
         start_time = time.perf_counter()
         try:
@@ -197,6 +199,7 @@ if not DEMO_MODE:
             return jsonify(http_response), 500
         
     @app.route('/api/plan-submissions', methods=['POST'])
+    @require_owner
     def submit_plans():
         start_time = time.perf_counter()
         try:
