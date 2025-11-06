@@ -5,3 +5,4 @@ python-dotenv>=1.0.1
 requests>=2.31.0
 pytest>=8.0.0
 asgiref>=3.10.0
+gunicorn==23.0.0

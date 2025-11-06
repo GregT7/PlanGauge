@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: plangauge-backend:dev
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../.env
+      - .env.local            # optional: if you have secrets for prod/dev
+      
+    # For live-reload in dev you could mount code and tweak the CMD to use --reload
+    # volumes:
+    #   - ./app:/app/app:ro

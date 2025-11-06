@@ -11,10 +11,10 @@ DEMO_MODE = "-demo" in sys.argv
 
 app = Flask(__name__)
 
-base_url = os.getenv("VITE_BASE_ROUTE")
+base_url = os.getenv("VITE_BASE_ROUTE", "http://localhost:")
 allowed_urls = [
-    base_url + os.getenv("VITE_DEFAULT_PORT"),
-    base_url + os.getenv("VITE_TESTING_PORT")
+    base_url + os.getenv("VITE_DEFAULT_PORT", "5173"),
+    base_url + os.getenv("VITE_TESTING_PORT", "4173")
 ]
 
 CORS(app, resources={r"/api/*": {"origins": allowed_urls}}, supports_credentials=False)
