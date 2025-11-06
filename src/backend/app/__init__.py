@@ -11,13 +11,14 @@ DEMO_MODE = "-demo" in sys.argv
 
 app = Flask(__name__)
 
-base_url = os.getenv("VITE_BASE_ROUTE", "http://localhost:")
-allowed_urls = [
-    base_url + os.getenv("VITE_DEFAULT_PORT", "5173"),
-    base_url + os.getenv("VITE_TESTING_PORT", "4173")
-]
+# Comma-separated list in env
+allowed_origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "").split(",") if o.strip()]
 
-CORS(app, resources={r"/api/*": {"origins": allowed_urls}}, supports_credentials=False)
+# Fallback to localhost only if not set (safer than wildcard)
+if not allowed_origins:
+    allowed_origins = ["http://localhost:5173", "http://localhost:4173"]
+
+CORS(app, resources={r"/api/*": {"origins": allowed_origins}}, supports_credentials=False)
 
 # Only import & init Supabase when NOT in demo
 supabase = None
