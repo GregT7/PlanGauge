@@ -2,12 +2,6 @@ import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
 
 export default async function connectionTest() {
-    // const baseRoute = import.meta.env.VITE_BASE_ROUTE + import.meta.env.VITE_FLASK_DEFAULT_PORT;
-    // const flask_url = baseRoute + import.meta.env.VITE_FLASK_HEALTH_ROUTE
-    // const supabase_url = baseRoute + import.meta.env.VITE_SUPABASE_HEALTH_ROUTE
-    // const notion_url = baseRoute + import.meta.env.VITE_NOTION_HEALTH_ROUT  
-    // const apiBase = import.meta.env.VITE_API_URL; // works in dev/preview/prod if set per env
-    // VITE_RENDER_URL
     // const apiBase = import.meta.env.VITE_BASE_ROUTE + import.meta.env.VITE_FLASK_DEFAULT_PORT;
     const apiBase = import.meta.env.VITE_RENDER_URL;
     const flask_url = apiBase + import.meta.env.VITE_FLASK_HEALTH_ROUTE;
