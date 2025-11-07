@@ -28,7 +28,8 @@ export function ProcessingContextProvider({children, starting_stats = default_st
             (async () => {
                 try {
                 // let flaskURL = import.meta.env.VITE_FLASK_BASE_ROUTE
-                let flaskURL = import.meta.env.VITE_RENDER_URL;
+                let flaskURL = import.meta.env.VITE_RENDER_URL + import.meta.env.VITE_FLASK_STATS_ROUTE;
+                // VITE_FLASK_STATS_ROUTE=/api/db/stats
                 if (IS_DEMO) {
                     // flaskURL += import.meta.env.VITE_FLASK_TESTING_PORT;
                     // flaskURL += import.meta.env.VITE_FLASK_DEMO_STATS_ROUTE
