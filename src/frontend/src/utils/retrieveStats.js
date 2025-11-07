@@ -8,7 +8,13 @@ export default async function retrieveStats(url, IS_DEMO) {
         data: null
     }
 
-    const dbResp = await fetch(url)
+    const dbResp = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.VITE_OWNER_TOKEN}`
+        }
+    })
     if (dbResp === null) {
         console.log(resp.message)
         return Promise.reject(resp)

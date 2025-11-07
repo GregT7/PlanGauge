@@ -1,10 +1,16 @@
-export async function timedFetch(url, service_str, timeoutDuration) {
+export async function timedFetch(url, fetchHeaders, service_str, timeoutDuration) {
     const controller = new AbortController();
     const signal = controller.signal;
 
     const timeout_reference = setTimeout(() => controller.abort(), timeoutDuration);
 
-    const fetch_response = await fetch(url, { signal }).then((response) => {
+    // const fetch_response = await fetch(url, { signal }).then((response) => {
+    const fetch_response = await fetch(url, {
+      method: "GET",
+      signal,
+      headers: fetchHeaders,
+      // mode: "cors" // optional; browser default is fine
+    }).then((response) => {
         console.log(`${service_str}: fetch response received...`, response);
         return response;
     }).catch((error) => {
@@ -21,11 +27,11 @@ export async function timedFetch(url, service_str, timeoutDuration) {
     return fetch_response
 }
 
-export async function persistentFetch(url, service_str, timeoutDuration = 2500) {
+export async function persistentFetch(url, headers, service_str, timeoutDuration = 2500) {
     let fetch_response;
 
     for (let i = 1; i < 4; ++i) {
-        fetch_response = await timedFetch(url, service_str, timeoutDuration * i)
+        fetch_response = await timedFetch(url, headers, service_str, timeoutDuration * i)
 
         if (fetch_response?.ok) {
             break;

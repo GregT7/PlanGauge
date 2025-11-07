@@ -3,7 +3,6 @@ from flask import jsonify, request
 from . import app, supabase, DEMO_MODE
 from dotenv import load_dotenv
 from .utils import *
-from .demo_stats import demo_stats
 from .auth import require_owner
 import asyncio
 
@@ -15,7 +14,7 @@ def index():
 
 @app.before_request
 def log_origin():
-    print("Origin:", request.headers.get("Origin"))
+    print("Origin:", request.headers)
 
 @app.route('/api/health', methods=['GET'])
 def determine_health():
@@ -28,16 +27,6 @@ def determine_health():
         http_response = err_resp(["flask"], start_time, code="internal_error",
                                 message="Flask internal error", details=pack_exc(e))
         return jsonify(http_response), 500
-    
-@app.route('/api/demo/stats', methods=['GET'])
-async def retrieve_dummy_stats():
-    start_time = time.perf_counter()
-    await asyncio.sleep(3)  # ⏳ non-blocking delay
-    extra_data = {
-        "data": demo_stats
-    }
-    http_response = ok_resp(["flask"], start_time, **extra_data)
-    return jsonify(http_response)
 
 if not DEMO_MODE:
     notion_key = os.getenv("NOTION_API_KEY")
