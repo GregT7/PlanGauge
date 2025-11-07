@@ -28,13 +28,14 @@ export function ProcessingContextProvider({children, starting_stats = default_st
             (async () => {
                 try {
                 // let flaskURL = import.meta.env.VITE_FLASK_BASE_ROUTE
+                let flaskURL = import.meta.env.VITE_RENDER_URL;
                 if (IS_DEMO) {
                     // flaskURL += import.meta.env.VITE_FLASK_TESTING_PORT;
                     // flaskURL += import.meta.env.VITE_FLASK_DEMO_STATS_ROUTE
                 } else {
                     // flaskURL += import.meta.env.VITE_FLASK_DEFAULT_PORT
                     // flaskURL += import.meta.env.VITE_FLASK_STATS_ROUTE
-                    let flaskURL = import.meta.env.VITE_RENDER_URL;
+                    
 
                     const regex = /^\d{4}-\d{2}-\d{2}$/
                     const start_ok = regex.test(DEFAULT_PLAN_START)
