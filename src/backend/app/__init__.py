@@ -16,7 +16,7 @@ allowed_origins = [o.strip() for o in os.getenv("ALLOWED_ORIGINS", "").split(","
 
 # Fallback to localhost only if not set (safer than wildcard)
 if not allowed_origins:
-    allowed_origins = ["http://localhost:5173", "http://localhost:4173"]
+    allowed_origins = ["http://localhost:5173/", "http://localhost:4173/"]
 
 CORS(app, resources={r"/api/*": {"origins": allowed_origins}}, supports_credentials=False)
 

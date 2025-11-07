@@ -12,6 +12,9 @@ import { ProcessingContextProvider } from "@/contexts/ProcessingContext"
 
 function App() {
   const IS_DEMO = import.meta.env.MODE === "demo";
+  const isDev = import.meta.env.DEV;   // true in `vite` dev
+  const isProd = import.meta.env.PROD; // true in preview/prod builds
+
 
   useEffect(() => {
     const launchSetupApp = async () => {

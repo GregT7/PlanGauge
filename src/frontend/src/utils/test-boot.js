@@ -34,14 +34,15 @@ async function main() {
   });
 
   // Start preview server
-  const preview = spawn("npm", ["run", "preview"], {
+  const preview = spawn("npx", ["vite", "preview", "--port", process.env.VITE_TESTING_PORT], {
+  // const preview = spawn("npm", ["run", "preview", "--port", process.env.VITE_DEFAULT_PORT], {
     cwd: FRONTEND_DIR,
     stdio: "inherit",
     shell: true
   });
 
   // Wait for preview to be reachable
-  const PREVIEW_URL = process.env.VITE_BASE_ROUTE + process.env.VITE_DEFAULT_PORT;
+  const PREVIEW_URL = process.env.VITE_BASE_ROUTE + process.env.VITE_TESTING_PORT;
   await waitOn({
     resources: [PREVIEW_URL],
     timeout: 60_000,

@@ -129,63 +129,75 @@ You may be assuming that simply running Flask with Gunicorn will be enough for p
 
 #### 🗝️ Key Decisions
 - Keep Gunicorn as the app’s production entry point.
-- Separate .env.local and .env.deploy for environment configuration.
 - Use Docker Compose only for local development; deploy with a single Dockerfile.
 - Evaluate Render first as the preferred free host for deployment testing.
 
 #### 📌 Action Items
-- [ ] Create .env.deploy file with only essential variables.
-- [ ] Test running the app locally using --env-file .env.deploy.
-- [ ] Update Deployment backlog subtasks to include Render/Railway alternatives.
-- [ ] Write a short quiz for Docker and Gunicorn concepts.
-- [ ] Verify Docker container responds at /api/health using the new env file.
+- [x] Update Deployment backlog subtasks to include Render/Railway alternatives.
+- [x] Write a short quiz for Docker and Gunicorn concepts.
+- [x] Verify Docker container responds at /api/health using the new env file.
+- [x] Deploy to vercel
+- [x] Deploy to render with docker container
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 3 – Full vs Partial Access Redesign
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Friday, November 7th (2025)
+* **Time:** 5:07 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Deployment`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Deployed both the backend & frontend
+- Design issues with full vs demo mode -- very confusing implementation
+- Added some last minute security changes: added a local token that is required
 
 #### 📈 Previous Progress
-- 
+- Deployed to render
+  - Docker container linked & works
+  - Successfully curled endpoints
+  - Added security change: requires a token in the request header
+- Deployed to vercel
 
 #### 🧱 Problems & Blockers
-- 
+- e2e testing script no longer works
+- some frontend unit + integration tests fail now
+- full vs demo mode problems
+  - confusing scripts
+  - confusing .env use
+- frontend and backend are not connected
+- will need to update the readme
 
 #### ⏳ Pending Actions
-- 
+- connecting frontend and backend deployment
 
 #### 🔜 Next Steps
-- 
-
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
-
-#### ❓ Question 1
-- 
-
-#### ❓ Question 2...
-- 
+- Connect frontend with backend
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- The separation between full access (Supabase + Notion enabled) and partial/demo access (mock data only) caused confusion in how .env files and Docker environment variables are handled.
+- The Flask app dynamically switches based on DEMO_MODE, but React’s environment loading wasn’t aligned, breaking the test and build scripts.
+- The new local token header for backend endpoints successfully improves security but requires frontend updates to inject the token at runtime.
+- Render deployment was successful — all Flask routes (including /api/health) return expected responses.
+- Vercel build succeeded, but environment variables for demo vs full deployment need clearer separation.
 
 #### 🗝️ Key Decisions
-- 
+- Consolidate environment management into two .env files:
+- .env.local → for local/demo testing
+- .env → for production/Render + Vercel builds
+- Standardize Flask mode switching logic using a single flag: DEMO_MODE=1 or 0.
+- Add a deployment connection test script to validate CORS and token configuration post-build.
+- Rewrite the README deployment section to clarify the new workflow for full vs demo mode.
 
 #### 📌 Action Items
-- 
+- [ ] Validate cross-origin access between Render backend and Vercel frontend.
 
 ---
 
