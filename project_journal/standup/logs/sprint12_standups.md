@@ -141,7 +141,7 @@ You may be assuming that simply running Flask with Gunicorn will be enough for p
 
 ---
 
-## 🗓️ Standup 3 – Full vs Partial Access Redesign
+## 🗓️ Standup 3 – Connect Frontend & Backend Deployment
 
 ### 🧾 Overview
 * **Date:** Friday, November 7th (2025)
@@ -189,62 +189,87 @@ You may be assuming that simply running Flask with Gunicorn will be enough for p
 - Vercel build succeeded, but environment variables for demo vs full deployment need clearer separation.
 
 #### 🗝️ Key Decisions
-- Consolidate environment management into two .env files:
-- .env.local → for local/demo testing
-- .env → for production/Render + Vercel builds
-- Standardize Flask mode switching logic using a single flag: DEMO_MODE=1 or 0.
-- Add a deployment connection test script to validate CORS and token configuration post-build.
-- Rewrite the README deployment section to clarify the new workflow for full vs demo mode.
+- Postpone readme updates
+- Need to list out all functions that need to be refactored (too confusing, doing too much)
 
 #### 📌 Action Items
-- [ ] Validate cross-origin access between Render backend and Vercel frontend.
+- [x] Validate cross-origin access between Render backend and Vercel frontend.
+- [x] List out all files impacted/related to env management, demo vs full mode, and confusing scripts that do too much
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 4 – [Standup Title]
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, November 8th (2025)
+* **Time:** 1:38 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Deployment`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Connected render with vercel albeit with a lot of issues
+- Code is confusing, tech debt is starting to accumulate, need to fix things now
+- Will continue working on refactoring things, although it's a bit overwhelming. There are so many changes that need to be implemented.
 
 #### 📈 Previous Progress
-- 
+- Connected render with vercel
+- Listed out all the impacted files related to env management, env vs demo mode
 
 #### 🧱 Problems & Blockers
-- 
+- persistentFetch is sometimes used and sometimes not, need to decide on when and where to use it if at all
+  - may want to replace with some type of fetch that wakes up render
+- application is very insecure, tokens are loaded on as VITE environment variables
 
 #### ⏳ Pending Actions
-- 
+- env + script management refactoring
 
 #### 🔜 Next Steps
-- 
+- Define & use a context api object for configuration management
+- Look into inconsistent persistentFetch usage & consider an awake fetch function for accessing render
+- Create local env files
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- Is there anything I am missing here?
 
-#### ❓ Question 2...
-- 
+**Answer:**
+You’re not missing anything major — focus next on refactoring configuration and fetch handling before continuing deployment.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Current setup mixes frontend and backend env management, exposing sensitive VITE_ tokens — must be refactored.
+- Will implement a config singleton + Context API to replace IS_DEMO prop drilling and unify config handling.
+- Need a standardized fetch wrapper to replace inconsistent persistentFetch usage and wake Render when idle.
+- Demo routes should move frontend-side with mock data to simplify deployment.
+- Will standardize .env files (dev, test, prod) for predictable behavior across environments.
 
 #### 🗝️ Key Decisions
-- 
+- Create a lingering problems toggle under sprint 12's Notion page
+  - Append readme updates here, postpone this until design is more complete
+- Stop prop drilling with IS_DEMO, instead use a configuration singleton and context api
+- Don't store tokens as environment variables, especially with `VITE_` prefix because these are all exposed to the browser
+- Create a script that centralizes url/path creation logic (ie returns `/localhost:5173/api/health`)
+- Remove the demo api routes, just serve example/mock data from the frontend
+- For managing demo vs test vs prod modes, rely on vite flags (`--mode`), env variables are fine for default values on launch but not good for runtime execution
+- .env management
+  - local: separate into development, testing, and production
+  - deployment: use only one set of env variables (one file)
 
 #### 📌 Action Items
-- 
+- [ ] Use a config singleton + context api instead of prop drilling with 
+  - [ ] Define a config object
+  - [ ] Create config context with config object
+  - [ ] Wrap app with context
+  - [ ] use context in relevant files
+- [ ] Fetch management
+  - [ ] Create a function that attaches headers with tokens
+  - [ ] iron out inconsistent use of persistentFetch, timedFetch and this new fetch function
+- [ ] Create local env files on the frontend: dev, demo, test, prod
 
 ---
 

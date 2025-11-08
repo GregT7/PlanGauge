@@ -1,5 +1,4 @@
 import connectionTest from "./connectionTest";
-import retrieveStats from "./retrieveStats";
 import { toast } from "sonner";
 
 export default async function setupApp(IS_DEMO) {
