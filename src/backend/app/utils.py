@@ -356,6 +356,3 @@ def mark_submission_failed(supabase, submission_id):
         .eq("submission_id", submission_id)
         .execute()
     )
-
-
-    

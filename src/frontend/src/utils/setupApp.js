@@ -5,12 +5,12 @@ export default async function setupApp(config) {
     if (config.isDemo) {
         const demoPromise = new Promise((resolve) => {
         setTimeout(() => {
-            resolve({ message: "Demo mode active — system connections simulated successfully!" });
+            resolve({ message: "Simulated connection tests were successful!" });
         }, 3000);
         });
 
         await toast.promise(demoPromise, {
-        loading: "Simulating system connections...",
+        loading: "Simulating system connection tests...",
         success: (resp) => resp.message,
         error: "Demo failed (this should never happen)",
         });

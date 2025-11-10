@@ -16,8 +16,10 @@ __pycache__
 /coverage
 
 # environment variables
-.env
-.env.*
+.env*.local
+
+
+
 
 # IDE files
 .vscode/
