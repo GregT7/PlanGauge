@@ -8,15 +8,16 @@ import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 import { toast } from "sonner";
 import styleData from "@/utils/styleData.json";
 import { processingContext } from "@/contexts/ProcessingContext";
+import { ConfigContext } from "@/contexts/ConfigContext"
 
 function SubmissionButton({
-  IS_DEMO,
   status = "neutral",
   filter_start_date = DEFAULT_PLAN_START,
   filter_end_date = DEFAULT_PLAN_END,
 }) {
   const { tasks } = useContext(TaskContext);
   const { feasibility } = useContext(processingContext);
+  const config = useContext(ConfigContext)
 
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -109,7 +110,7 @@ function SubmissionButton({
   }
 
   const style = "text-xl p-6 " + handleStyling(feasibility?.status);
-  const handleClick = IS_DEMO ? handleClickDemo : handleClickSubmit;
+  const handleClick = config.isDemo ? handleClickDemo : handleClickSubmit;
 
   return (
     <Button

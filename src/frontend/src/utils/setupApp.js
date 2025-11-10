@@ -1,8 +1,8 @@
 import connectionTest from "./connectionTest";
 import { toast } from "sonner";
 
-export default async function setupApp(IS_DEMO) {
-    if (IS_DEMO) {
+export default async function setupApp(config) {
+    if (config.isDemo) {
         const demoPromise = new Promise((resolve) => {
         setTimeout(() => {
             resolve({ message: "Demo mode active — system connections simulated successfully!" });
@@ -17,7 +17,7 @@ export default async function setupApp(IS_DEMO) {
     }
     else {
         try {
-            const connectResp = connectionTest();
+            const connectResp = connectionTest(config);
             await toast.promise(connectResp, {
             loading: 'Testing system connections...',
             success: (connectResp) => `${connectResp.message}`,

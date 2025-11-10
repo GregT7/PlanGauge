@@ -3,10 +3,8 @@ from flask import jsonify, request
 from . import app, supabase, DEMO_MODE
 from dotenv import load_dotenv
 from .utils import *
-from .auth import require_owner
+# from .auth import require_owner
 import asyncio
-
-load_dotenv()
 
 @app.route('/')
 def index():
@@ -14,7 +12,7 @@ def index():
 
 @app.before_request
 def log_origin():
-    print("Origin:", request.headers)
+    print("Headers:", request.headers)
 
 @app.route('/api/health', methods=['GET'])
 def determine_health():
@@ -41,7 +39,7 @@ if not DEMO_MODE:
 
 
     @app.route('/api/db/health', methods=['GET'])
-    @require_owner
+    # @require_owner
     def db_health_check():
         start_time = time.perf_counter()
         try:
@@ -70,7 +68,7 @@ if not DEMO_MODE:
 
 
     @app.route('/api/notion/health', methods=['GET'])
-    @require_owner
+    # @require_owner
     def notion_health_check():
         start_time = time.perf_counter()
 
@@ -116,7 +114,7 @@ if not DEMO_MODE:
             return jsonify(http_response), 500
             
     @app.route('/api/db/stats', methods=['GET'])
-    @require_owner
+    # @require_owner
     def calc_stats():
         start_time = time.perf_counter()
         try:
@@ -188,7 +186,7 @@ if not DEMO_MODE:
             return jsonify(http_response), 500
         
     @app.route('/api/plan-submissions', methods=['POST'])
-    @require_owner
+    # @require_owner
     def submit_plans():
         start_time = time.perf_counter()
         try:
