@@ -11,11 +11,13 @@ import { eval_status } from "@/utils/evaluateFeasibility";
 import { toast } from 'sonner';
 import updateCardStats from "@/utils/updateCardStats";
 import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
+import { ConfigContext } from "@/contexts/ConfigContext"
 
 export const processingContext = createContext(undefined);
 
-export function ProcessingContextProvider({children, starting_stats = default_stats, thresholds = defaultThresholds, IS_DEMO}) {
+export function ProcessingContextProvider({children, starting_stats = default_stats, thresholds = defaultThresholds}) {
     const {tasks, timeSum} = useContext(TaskContext)
+    const config = useContext(ConfigContext)
 
     // Generate starting card data for each day of the week
     let cardData = genDefaultCardsData()
@@ -27,29 +29,19 @@ export function ProcessingContextProvider({children, starting_stats = default_st
         let cancelled = false;
             (async () => {
                 try {
-                // let flaskURL = import.meta.env.VITE_FLASK_BASE_ROUTE
-                let flaskURL = import.meta.env.VITE_RENDER_URL + import.meta.env.VITE_FLASK_STATS_ROUTE;
-                // VITE_FLASK_STATS_ROUTE=/api/db/stats
-                if (IS_DEMO) {
-                    // flaskURL += import.meta.env.VITE_FLASK_TESTING_PORT;
-                    // flaskURL += import.meta.env.VITE_FLASK_DEMO_STATS_ROUTE
-                } else {
-                    // flaskURL += import.meta.env.VITE_FLASK_DEFAULT_PORT
-                    // flaskURL += import.meta.env.VITE_FLASK_STATS_ROUTE
-                    
-
-                    const regex = /^\d{4}-\d{2}-\d{2}$/
-                    const start_ok = regex.test(DEFAULT_PLAN_START)
-                    const end_ok = regex.test(DEFAULT_PLAN_END)
-                    if (!start_ok || !end_ok) {
-                        throw new Error("Invalid arguments passed to retrieveStats")
-                    }
-
-                    const query_str = `start=${DEFAULT_PLAN_START}&end=${DEFAULT_PLAN_END}`
-                    flaskURL += `?${query_str}`
+                let flaskURL = config.flaskUrl.db.stats
+                const regex = /^\d{4}-\d{2}-\d{2}$/
+                const start_ok = regex.test(DEFAULT_PLAN_START)
+                const end_ok = regex.test(DEFAULT_PLAN_END)
+                if (!start_ok || !end_ok) {
+                    throw new Error("Invalid arguments passed to retrieveStats")
                 }
 
-                const promise = retrieveStats(flaskURL, IS_DEMO); // resolves to { message, details, data }
+                const query_str = `start=${DEFAULT_PLAN_START}&end=${DEFAULT_PLAN_END}`
+                flaskURL += `?${query_str}`
+                
+
+                const promise = retrieveStats(flaskURL, config.isDemo); // resolves to { message, details, data }
 
                 // bind toast to the same promise (don’t await the toast)
                 toast.promise(promise, {
@@ -62,7 +54,6 @@ export function ProcessingContextProvider({children, starting_stats = default_st
                 if (!cancelled && res?.data) setStats(res.data);
                 } catch (err) {
                     console.error('Stats init error:', err);
-                // if (!cancelled) toast.error('Error: Unexpected Internal Error When Retrieving Stats');
                 }
             })();
     return () => { cancelled = true; };

@@ -1,18 +1,13 @@
 import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
 
-export default async function connectionTest() {
-    // const apiBase = import.meta.env.VITE_BASE_ROUTE + import.meta.env.VITE_FLASK_DEFAULT_PORT;
-    const apiBase = import.meta.env.VITE_RENDER_URL;
-    const flask_url = apiBase + import.meta.env.VITE_FLASK_HEALTH_ROUTE;
-    const supabase_url = apiBase + import.meta.env.VITE_SUPABASE_HEALTH_ROUTE;
-    const notion_url = apiBase + import.meta.env.VITE_NOTION_HEALTH_ROUTE;    
+export default async function connectionTest(config) {
     try {
         const fetchHeaders = {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${import.meta.env.VITE_OWNER_TOKEN}`
+            "Authorization": `Bearer ${config.ownerToken}`
         }
-        const flask_response = await persistentFetch(flask_url, fetchHeaders, "Flask")
+        const flask_response = await persistentFetch(config.flaskUrl.health, fetchHeaders, "Flask")
         let supabase_response = null, notion_response = null
         
         const pass_msg = "All Systems Online!"
@@ -23,8 +18,8 @@ export default async function connectionTest() {
 
         if (flask_response?.ok) {
             console.log("Flask is connected!")
-            supabase_response = await persistentFetch(supabase_url, fetchHeaders, "Supabase");
-            notion_response = await persistentFetch(notion_url, fetchHeaders, "Notion");
+            supabase_response = await persistentFetch(config.flaskUrl.db.health, fetchHeaders, "Supabase");
+            notion_response = await persistentFetch(config.flaskUrl.notion.health, fetchHeaders, "Notion");
             accept = notion_response?.ok && supabase_response?.ok
         }
         

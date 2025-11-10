@@ -198,7 +198,7 @@ You may be assuming that simply running Flask with Gunicorn will be enough for p
 
 ---
 
-## 🗓️ Standup 4 – [Standup Title]
+## 🗓️ Standup 4 – Refactoring Continued p1
 
 ### 🧾 Overview
 * **Date:** Saturday, November 8th (2025)
@@ -261,62 +261,85 @@ You’re not missing anything major — focus next on refactoring configuration 
   - deployment: use only one set of env variables (one file)
 
 #### 📌 Action Items
-- [ ] Use a config singleton + context api instead of prop drilling with 
-  - [ ] Define a config object
-  - [ ] Create config context with config object
-  - [ ] Wrap app with context
-  - [ ] use context in relevant files
+- [x] Use a config singleton + context api instead of prop drilling with 
+  - [x] Define a config object
+  - [x] Create config context with config object
+  - [x] Wrap app with context
+  - [x] use context in relevant files
 - [ ] Fetch management
   - [ ] Create a function that attaches headers with tokens
   - [ ] iron out inconsistent use of persistentFetch, timedFetch and this new fetch function
-- [ ] Create local env files on the frontend: dev, demo, test, prod
+- [x] Create local env files on the frontend: dev, demo, test, prod
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 5 – Refactoring Continued p2
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Sunday, November 9th (2025)
+* **Time:** 5:53 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Deployment`
+  - `Security Setup`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Worked on refactoring code to get rid of hard coded routes & to support demo vs full mode
+  - Still needs a lot of work & is very confusing
+- Not going to commit anything to GitHub, may need to restart at some point
 
 #### 📈 Previous Progress
-- 
+- Implemented config script with a context handler for easy route management
+  - removed IS_DEMO prop drilling and replaced with config
+- Populated frontend and backend .env files again
+- Started working on getting the backend working again
 
 #### 🧱 Problems & Blockers
-- 
+- Backend loads supabase client only if not in demo mode
+  - This causes runtime errors because other scripts depend on the supabase object
+  - Also want to dynamically grant access to supabase object- demo mode: no access, full mode: access
+- Backend doesn't properly load in the right .env files
+- Learning that it's difficult to make changes to code that is heavily interconnected
 
 #### ⏳ Pending Actions
-- 
+- Refactoring env management & demo/full mode implementation
+- Creating a header appending fetch script
 
 #### 🔜 Next Steps
-- 
-
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+- Remove authentication based code for now
+  - Comment out code on frontend and backend
+  - Document which scripts are impacted for later updates
+- Pause deployment on render and vercel
+- Decide on approach for solving supabase loading issue on the backend for demo v full mode
 
 #### ❓ Question 1
-- 
-
-#### ❓ Question 2...
-- 
+- How would you go about changing/refactoring code that is complicated and heavily connected with each other?
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Refactor risk is coming from module-level side effects (env loads, conditional SDK imports) and cross-module Supabase coupling.
+- A Service Layer + Null Object will stop demo-mode crashes and let routes remain identical while the data source swaps under them.
+- Consolidating env loading removes “which .env won?” ambiguity and makes bug reports reproducible.
+- Short-term removal of auth reduces scope so env/mode refactor can land cleanly.
 
 #### 🗝️ Key Decisions
-- 
+- Remove authentication based code for now, deter until local implementation works again
+- Pause deployment for now
+- Finish these tasks before redeploying
+  - Get e2e testing working again
+  - All tests cases pass (including playwright e2e tests)
+  - Get basic authentication working locally
 
 #### 📌 Action Items
-- 
+- [ ] Remove authentication based code for now
+  - [ ] Comment out code on frontend and backend
+  - [ ] Document which scripts are impacted for later updates
+- [ ] Pause deployment on render and vercel
+- [ ] Decide on approach for solving supabase loading issue on the backend for demo v full mode
+- [ ] Frontend: locally serve stats data for demo mode
 
 ---
 

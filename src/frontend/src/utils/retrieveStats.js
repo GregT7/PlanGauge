@@ -44,5 +44,4 @@ export default async function retrieveStats(url, IS_DEMO) {
 
     console.log("Stats access attempt was successful: ", resp)
     return Promise.resolve(resp)
-    
 }

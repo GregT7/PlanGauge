@@ -4,21 +4,19 @@ import TaskTable from "./components/TaskTable/TaskTable"
 import StatCardSystem from "./components/StatCardSystem/StatCardSystem";
 import SubmissionButton from "./components/SubmissionButton/SubmissionButton";
 import setupApp from "./utils/setupApp";
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Toaster, toast } from 'sonner'
 import './App.css'
 import EvaluationSection from "./components/EvaluationSection/EvaluationSection";
 import { ProcessingContextProvider } from "@/contexts/ProcessingContext"
+import { ConfigContext } from "@/contexts/ConfigContext"
 
 function App() {
-  const IS_DEMO = import.meta.env.MODE === "demo";
-  const isDev = import.meta.env.DEV;   // true in `vite` dev
-  const isProd = import.meta.env.PROD; // true in preview/prod builds
-
+  const config = useContext(ConfigContext)
 
   useEffect(() => {
     const launchSetupApp = async () => {
-      await setupApp(IS_DEMO)
+      await setupApp(config)
     }
 
     launchSetupApp();
@@ -28,13 +26,13 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme" >
         <Toaster expand={true} richColors data-testid="toaster"/>
           <h1 className="m-0 text-4xl leading-none">PlanGauge</h1>
-            <TaskContextProvider IS_DEMO={IS_DEMO}>
-              <ProcessingContextProvider IS_DEMO={IS_DEMO}>
+            <TaskContextProvider>
+              <ProcessingContextProvider>
                   <div className="space-y-10 pt-5">
                     <TaskTable/>
                     <StatCardSystem/>
                     <EvaluationSection/>
-                    <SubmissionButton IS_DEMO={IS_DEMO} status="neutral"/>
+                    <SubmissionButton/>
                   </div>
               </ProcessingContextProvider>
             </TaskContextProvider>   

@@ -1,8 +1,9 @@
-import { createContext, useState, useMemo } from 'react';
+import { createContext, useState, useMemo, useContext } from 'react';
 import toLocalMidnight from '@/utils/toLocalMidnight';
 import emptyTasks from "@/utils/emptyTasks.json" with { type: 'json' }
 import demoTasks from "@/utils/demoTasks.json" with { type: 'json' }
 import { genDaysOfCurrentWeek, parseDate } from "@/utils/genDefaultCardData"
+import { ConfigContext } from "@/contexts/ConfigContext"
 export const TaskContext = createContext(undefined);
 
 function reformat(tasks) {
@@ -33,9 +34,10 @@ function parseTaskDates(tasks) {
 
 }
 
-export default function TaskContextProvider({children, starting_tasks, IS_DEMO}) {
+export default function TaskContextProvider({children, starting_tasks}) {
     let reformattedTasks
-    if (IS_DEMO) {
+    const config = useContext(ConfigContext)
+    if (config.isDemo) {
         const parsedTasks = parseTaskDates(demoTasks)
         reformattedTasks = reformat(parsedTasks)
     } else {
