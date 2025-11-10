@@ -1,7 +1,7 @@
 import verifyStatsData from "./verifyStatsData";
 
 // # curl "http://127.0.0.1:5000/api/db/stats?start=2025-06-01&end=2025-06-30"
-export default async function retrieveStats(url, IS_DEMO) {
+export default async function retrieveStats(url, config) {
     let resp = {
         message: "Error: Received no response from database!",
         details: null,
@@ -12,7 +12,7 @@ export default async function retrieveStats(url, IS_DEMO) {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${import.meta.env.VITE_OWNER_TOKEN}`
+            // "Authorization": `Bearer ${import.meta.env.VITE_OWNER_TOKEN}`
         }
     })
     if (dbResp === null) {

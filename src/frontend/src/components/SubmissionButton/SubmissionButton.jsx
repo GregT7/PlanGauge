@@ -65,7 +65,8 @@ function SubmissionButton({
       const promise = submitPlans(
         payload.tasks,
         payload.filter_start_date,
-        payload.filter_end_date
+        payload.filter_end_date,
+        config.flaskUrl.plan_submissions
       ); // this does a single fetch POST:contentReference[oaicite:1]{index=1}
       inFlightRef.current = promise;
 

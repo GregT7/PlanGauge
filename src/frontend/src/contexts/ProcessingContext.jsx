@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import updateCardStats from "@/utils/updateCardStats";
 import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 import { ConfigContext } from "@/contexts/ConfigContext"
+import demoStats from "@/utils/demoStats.json" with { type: 'json' }
 
 export const processingContext = createContext(undefined);
 
@@ -29,29 +30,47 @@ export function ProcessingContextProvider({children, starting_stats = default_st
         let cancelled = false;
             (async () => {
                 try {
-                let flaskURL = config.flaskUrl.db.stats
-                const regex = /^\d{4}-\d{2}-\d{2}$/
-                const start_ok = regex.test(DEFAULT_PLAN_START)
-                const end_ok = regex.test(DEFAULT_PLAN_END)
-                if (!start_ok || !end_ok) {
-                    throw new Error("Invalid arguments passed to retrieveStats")
-                }
+                    if (config.isDemo) {
+                        const demoPromise = new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve({ message: "Mock statistical data retrieved!",
+                                data: demoStats
+                             });
+                        }, 2000);
+                        });
 
-                const query_str = `start=${DEFAULT_PLAN_START}&end=${DEFAULT_PLAN_END}`
-                flaskURL += `?${query_str}`
-                
+                        await toast.promise(demoPromise, {
+                        loading: "Simulating statistical data retrieval...",
+                        success: (resp) => {
+                            setStats(resp.data)
+                            return resp.message},
+                        error: "Demo failed (this should never happen)",
+                        });
+                        return
+                    }
+                    let flaskURL = config.flaskUrl.db.stats
+                    const regex = /^\d{4}-\d{2}-\d{2}$/
+                    const start_ok = regex.test(DEFAULT_PLAN_START)
+                    const end_ok = regex.test(DEFAULT_PLAN_END)
+                    if (!start_ok || !end_ok) {
+                        throw new Error("Invalid arguments passed to retrieveStats")
+                    }
 
-                const promise = retrieveStats(flaskURL, config.isDemo); // resolves to { message, details, data }
+                    const query_str = `start=${DEFAULT_PLAN_START}&end=${DEFAULT_PLAN_END}`
+                    flaskURL += `?${query_str}`
+                    
 
-                // bind toast to the same promise (don’t await the toast)
-                toast.promise(promise, {
-                    loading: 'Retrieving statistical data...',
-                    success: (r) => r?.message ?? 'Stats loaded',
-                    error:   (err) => "Error: Stats Retrieval Failure!",
-                });
+                    const promise = retrieveStats(flaskURL, config); // resolves to { message, details, data }
 
-                const res = await promise; // get full object back
-                if (!cancelled && res?.data) setStats(res.data);
+                    // bind toast to the same promise (don’t await the toast)
+                    toast.promise(promise, {
+                        loading: 'Retrieving statistical data...',
+                        success: (r) => r?.message ?? 'Stats loaded',
+                        error:   (err) => "Error: Stats Retrieval Failure!",
+                    });
+
+                    const res = await promise; // get full object back
+                    if (!cancelled && res?.data) setStats(res.data);
                 } catch (err) {
                     console.error('Stats init error:', err);
                 }

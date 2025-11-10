@@ -334,60 +334,87 @@ You’re not missing anything major — focus next on refactoring configuration 
   - Get basic authentication working locally
 
 #### 📌 Action Items
-- [ ] Remove authentication based code for now
-  - [ ] Comment out code on frontend and backend
-  - [ ] Document which scripts are impacted for later updates
-- [ ] Pause deployment on render and vercel
-- [ ] Decide on approach for solving supabase loading issue on the backend for demo v full mode
-- [ ] Frontend: locally serve stats data for demo mode
+- [x] Remove authentication based code for now
+  - [x] Comment out code on frontend and backend
+  - [x] Document which scripts are impacted for later updates
+- [x] Pause deployment on render and vercel
+- [x] Decide on approach for solving supabase loading issue on the backend for demo v full mode
+- [x] Frontend: locally serve stats data for demo mode
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 6 – Refactoring Continued p3
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Monday, November 10 (2025)
+* **Time:** 1:32 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Deployment`
+  - `Security Setup`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Paused deployment on vercel + render
+- Will continue to fix things until the project is ready to deploy again
 
 #### 📈 Previous Progress
-- 
+- Frontend serves static mock data for stats retrieval
+- Backend now loads sensitive env data/models individually for each api request
+- Vercel deployment deleted (couldn't find a pause option)
+- Render deployment paused
+- Temporarily commented out authorization code
 
 #### 🧱 Problems & Blockers
-- 
+- `Deployment` and `Security Setup` definition
+  - Have overlapping tasks
+  - `Security Setup` is not clearly defined
+  - Not sure about design implementation -- signing in approach, staying logged in
+- Demo mode locally doesn't work: `npm run dev:demo`
 
 #### ⏳ Pending Actions
-- 
+- [ ] Test local npm run dev / dev:demo login flows.
 
 #### 🔜 Next Steps
-- 
+- Redefine backlog items
+- Fix demo vs full mode issues
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- Is there anything I am missing for today's tasks?
 
-#### ❓ Question 2...
-- 
+**Answer**:
+No, I think you’ve covered everything for today — the main focus is clarifying the overlap between Deployment and Security Setup, defining login and token handling, and preparing for testing both modes before redeploying.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Reviewed current backend and frontend setup to identify where security and deployment overlap.  
+- Decided to clearly separate concerns: deployment handles infrastructure and connectivity, while security covers authentication, authorization, and secret management.  
+- Discussed approaches for simulating sign-in locally to streamline testing versus requiring real authentication in production.  
+- Noted the need to redefine `Security Setup` backlog items to include session tokens, demo mode restrictions, and updated test coverage across all layers.
 
 #### 🗝️ Key Decisions
-- 
+- Make `npm run dev` automatically sign me in for convenience when locally testing
+- Make `npm run dev:demo` load the normal version where the person is logged out
+- Need to add unit, integration, and e2e tests for both deploying and security -- will take a while
+- Need to redefine `Security Setup` backlog subtasks + DoD
+- Before redeploying, add in + test security features
 
 #### 📌 Action Items
-- 
-
+- [ ] Update vite command aliases
+  - [ ] `npm run dev` automatically "signs" me in
+  - [ ] `npm run dev:demo` loads the default version where the person is logged out
+- [ ] Redefine backlog items
+  - [ ] `Security Setup` backlog
+  - [ ] `Deployment` backlog
+- [ ] Add non-sensitive env files for tracking + delete .prod files
+- [ ] Research
+  - [ ] Session tokens, username + password login, cookies?
+  - [ ] Look into creating a new api route `/api/auth/login`
+ 
 ---
 
 ## 🗓️ Standup [#] – [Standup Title]
