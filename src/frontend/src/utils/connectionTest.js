@@ -1,13 +1,16 @@
 import { toast } from 'sonner'
 import { persistentFetch } from './persistentFetch';
+import { timedFetch } from './persistentFetch';
 
+// timedFetch(url, fetchHeaders, service_str, timeoutDuration)
 export default async function connectionTest(config) {
     try {
         const fetchHeaders = {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${config.ownerToken}`
         }
-        const flask_response = await persistentFetch(config.flaskUrl.health, fetchHeaders, "Flask")
+
+        const flask_response = await timedFetch(config.flaskUrl.health, fetchHeaders, "Flask", 12000)
         let supabase_response = null, notion_response = null
         
         const pass_msg = "All Systems Online!"

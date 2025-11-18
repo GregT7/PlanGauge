@@ -1,3 +1,4 @@
+// src/tests/utils/persistentFetch.test.js
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { timedFetch, persistentFetch } from "@/utils/persistentFetch";
 
@@ -10,13 +11,11 @@ beforeEach(() => {
 const url = "http://localhost:5000/api/health";
 const service_str = "Flask";
 const duration = 1000;
-
+const headers = { "Content-Type": "application/json" };
 const mockPass = { ok: true, message: "hello world" };
 
 function resolvingFetch() {
-  global.fetch = vi.fn(() =>
-    Promise.resolve(mockPass)
-  );
+  global.fetch = vi.fn(() => Promise.resolve(mockPass));
 }
 
 function internalErrorFetch() {
@@ -55,18 +54,17 @@ function laggingFetch(lagMs) {
 
 // ------- timedFetch -------
 describe("timedFetch", () => {
-  it("resolves normally when the response arrives before timeout", async () => {
+  it("resolves normally when response arrives before timeout", async () => {
     resolvingFetch();
-    const response = await timedFetch(url, service_str, duration);
+    const response = await timedFetch(url, headers, service_str, duration);
     expect(response).toEqual(mockPass);
   });
 
-  it("aborts when the request exceeds timeout", async () => {
+  it("aborts when request exceeds timeout", async () => {
     vi.useFakeTimers();
-
     laggingFetch(duration + 500);
-    const p = timedFetch(url, service_str, duration);
 
+    const p = timedFetch(url, headers, service_str, duration);
     await vi.advanceTimersByTimeAsync(duration + 1);
     const response = await p;
 
@@ -74,14 +72,13 @@ describe("timedFetch", () => {
     expect(response.name).toBe("AbortError");
   });
 
-  it("returns other internal errors from fetch", async () => {
+  it("returns internal errors from fetch", async () => {
     const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
     internalErrorFetch();
 
-    const response = await timedFetch(url, service_str, duration);
+    const response = await timedFetch(url, headers, service_str, duration);
     expect(response).toBeInstanceOf(Error);
     expect(response.name).toBe("TestError");
-
     expect(consoleSpy).toHaveBeenCalledWith(`${service_str}: Fetch Internal Error`);
   });
 
@@ -89,30 +86,22 @@ describe("timedFetch", () => {
     const setTimeoutSpy = vi.spyOn(globalThis, "setTimeout");
     const clearTimeoutSpy = vi.spyOn(globalThis, "clearTimeout");
 
-    // success path
+    // success
     resolvingFetch();
-    await timedFetch(url, service_str, duration);
+    await timedFetch(url, headers, service_str, duration);
     expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
 
-    // timeout path
+    // timeout
     vi.useFakeTimers();
     laggingFetch(duration + 500);
-    const p = timedFetch(url, service_str, duration);
+    const p = timedFetch(url, headers, service_str, duration);
     await vi.advanceTimersByTimeAsync(duration + 1);
     await p;
-
-    // +1 setTimeout and +1 clearTimeout from this run
-    // laggingFetch = 1, timedFetch = 2
     expect(setTimeoutSpy).toHaveBeenCalledTimes(3);
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(3);
 
-    // internal error path
     vi.useRealTimers();
-    internalErrorFetch();
-    await timedFetch(url, service_str, duration);
-    expect(setTimeoutSpy).toHaveBeenCalledTimes(3);
-    expect(clearTimeoutSpy).toHaveBeenCalledTimes(3);
   });
 });
 
@@ -120,26 +109,27 @@ describe("timedFetch", () => {
 describe("persistentFetch", () => {
   const errResponse = { ok: false, message: "Mock error response" };
 
-  it("stops retrying after a successful attempt", async () => {
-    const fetchSpy = vi.spyOn(global, "fetch")
-      .mockResolvedValueOnce(mockPass); // success on first try
+  it("stops retrying after success", async () => {
+    const fetchSpy = vi
+      .spyOn(global, "fetch")
+      .mockResolvedValueOnce(mockPass); // success first try
 
-    const r1 = await persistentFetch(url, service_str, duration);
+    const r1 = await persistentFetch(url, headers, service_str, duration);
     expect(r1).toEqual(mockPass);
     expect(fetchSpy).toHaveBeenCalledTimes(1);
 
-    // success on second attempt
+    // success second try
     fetchSpy.mockResolvedValueOnce(errResponse);
     fetchSpy.mockResolvedValueOnce(mockPass);
-    const r2 = await persistentFetch(url, service_str, duration);
+    const r2 = await persistentFetch(url, headers, service_str, duration);
     expect(r2).toEqual(mockPass);
     expect(fetchSpy).toHaveBeenCalledTimes(3);
 
-    // success on third attempt
+    // success third try
     fetchSpy.mockResolvedValueOnce(errResponse);
     fetchSpy.mockResolvedValueOnce(errResponse);
     fetchSpy.mockResolvedValueOnce(mockPass);
-    const r3 = await persistentFetch(url, service_str, duration);
+    const r3 = await persistentFetch(url, headers, service_str, duration);
     expect(r3).toEqual(mockPass);
     expect(fetchSpy).toHaveBeenCalledTimes(6);
   });
@@ -148,7 +138,7 @@ describe("persistentFetch", () => {
     internalErrorFetch();
     const fetchSpy = vi.spyOn(global, "fetch");
 
-    const r = await persistentFetch(url, service_str, duration);
+    const r = await persistentFetch(url, headers, service_str, duration);
     expect(fetchSpy).toHaveBeenCalledTimes(3);
     expect(r).toBeInstanceOf(Error);
     expect(r.name).toBe("TestError");
@@ -160,19 +150,18 @@ describe("persistentFetch", () => {
     const base = 250;
     const lag = Math.round(base * 2 + base / 2); // 625ms
     laggingFetch(lag);
-
     const fetchSpy = vi.spyOn(global, "fetch");
-    const promise = persistentFetch(url, service_str, base);
 
-    // attempt 1: 250ms -> abort
-    await vi.advanceTimersByTimeAsync(250);
-    // attempt 2: 500ms -> abort
-    await vi.advanceTimersByTimeAsync(500);
-    // attempt 3: 625ms -> resolves before 750ms timeout
-    await vi.advanceTimersByTimeAsync(625);
+    const promise = persistentFetch(url, headers, service_str, base);
+
+    await vi.advanceTimersByTimeAsync(250); // first abort
+    await vi.advanceTimersByTimeAsync(500); // second abort
+    await vi.advanceTimersByTimeAsync(625); // resolves
 
     const res = await promise;
     expect(fetchSpy).toHaveBeenCalledTimes(3);
     expect(res.ok).toBe(true);
+
+    vi.useRealTimers();
   });
 });

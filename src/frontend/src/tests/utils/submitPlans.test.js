@@ -42,7 +42,7 @@ describe("submitPlans", () => {
 
     const tasks = [{ id: 1 }, { id: 2 }];
     await expect(
-      submitPlans(tasks, "2025-06-01", "2025-06-30")
+      submitPlans(tasks, "2025-06-01", "2025-06-30", OK_URL)
     ).rejects.toEqual({
       message: "Error: Invalid Plan Data!",
       details: null,
@@ -78,7 +78,7 @@ describe("submitPlans", () => {
 
     global.fetch.mockResolvedValueOnce(fetchResp);
 
-    const result = await submitPlans(tasks, start, end);
+    const result = await submitPlans(tasks, start, end, OK_URL);
 
     // Returned object
     expect(result).toEqual({
@@ -120,7 +120,7 @@ describe("submitPlans", () => {
     global.fetch.mockResolvedValueOnce(fetchResp);
 
     await expect(
-      submitPlans([{ a: 1 }], "2025-06-01", "2025-06-30")
+      submitPlans([{ a: 1 }], "2025-06-01", "2025-06-30", OK_URL)
     ).rejects.toEqual({
       message: "Submission Failed",
       details: fetchResp,
@@ -140,7 +140,7 @@ describe("submitPlans", () => {
     global.fetch.mockRejectedValueOnce(boom);
 
     await expect(
-      submitPlans([{ z: 1 }], "2025-06-01", "2025-06-30")
+      submitPlans([{ z: 1 }], "2025-06-01", "2025-06-30", OK_URL)
     ).rejects.toThrow("boom");
   });
 
@@ -154,7 +154,7 @@ describe("submitPlans", () => {
     const fetchResp = mkFetchResponse(true, {});
     global.fetch.mockResolvedValueOnce(fetchResp);
 
-    await submitPlans([], "2025-06-01", "2025-06-30");
+    await submitPlans([], "2025-06-01", "2025-06-30", OK_URL);
 
     const [url, opts] = global.fetch.mock.calls[0];
     expect(url).toBe(OK_URL);
@@ -173,7 +173,7 @@ describe("submitPlans", () => {
     const tasks = [{ n: 1 }, { n: 2 }];
     global.fetch.mockResolvedValueOnce(mkFetchResponse(true, {}));
 
-    await submitPlans(tasks, "2024-01-01", "2024-01-31");
+    await submitPlans(tasks, "2024-01-01", "2024-01-31", OK_URL);
 
     const [, opts] = global.fetch.mock.calls[0];
     const body = JSON.parse(opts.body);
@@ -192,7 +192,7 @@ describe("submitPlans", () => {
 
     const tasks = Array.from({ length: 5 }, (_, i) => ({ id: i + 1 }));
     await expect(
-      submitPlans(tasks, "2025-06-01", "2025-06-30")
+      submitPlans(tasks, "2025-06-01", "2025-06-30", OK_URL)
     ).rejects.toBeTruthy();
 
     expect(verify_task).toHaveBeenCalledTimes(tasks.length);
@@ -209,7 +209,7 @@ describe("submitPlans", () => {
     global.fetch.mockResolvedValueOnce(mkFetchResponse(true, {}));
 
     const tasks = [];
-    const res = await submitPlans(tasks, "2025-07-01", "2025-07-31");
+    const res = await submitPlans(tasks, "2025-07-01", "2025-07-31", OK_URL);
     expect(res.message).toBe("Submission was successful");
 
     expect(global.fetch).toHaveBeenCalledTimes(1);
@@ -227,7 +227,7 @@ describe("submitPlans", () => {
 
     global.fetch.mockResolvedValueOnce(mkFetchResponse(true, {}));
 
-    await submitPlans([{ t: 1 }], "2025-06-01", "2025-06-30");
+    await submitPlans([{ t: 1 }], "2025-06-01", "2025-06-30", OK_URL);
     const [url] = global.fetch.mock.calls[0];
     expect(url).toBe("http://localhost:5000/api/plan-submissions");
   });

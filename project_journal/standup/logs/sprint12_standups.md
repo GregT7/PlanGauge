@@ -402,54 +402,91 @@ No, I think you’ve covered everything for today — the main focus is clarifyi
 - Need to add unit, integration, and e2e tests for both deploying and security -- will take a while
 - Need to redefine `Security Setup` backlog subtasks + DoD
 - Before redeploying, add in + test security features
+- Only keep the boot script that is needed for e2e testing with playwright
 
 #### 📌 Action Items
-- [ ] Update vite command aliases
-  - [ ] `npm run dev` automatically "signs" me in
-  - [ ] `npm run dev:demo` loads the default version where the person is logged out
-- [ ] Redefine backlog items
-  - [ ] `Security Setup` backlog
-  - [ ] `Deployment` backlog
-- [ ] Add non-sensitive env files for tracking + delete .prod files
-- [ ] Research
-  - [ ] Session tokens, username + password login, cookies?
-  - [ ] Look into creating a new api route `/api/auth/login`
+- [x]  Update vite command aliases
+  - [x]  `npm run dev` automatically "signs" me in
+  - [x]  `npm run dev:demo` loads the default version where the person is logged out
+- [x]  Redefine backlog items
+  - [x]  `Security Setup` backlog
+  - [x]  `Deployment` backlog
+- [x]  Add non-sensitive env files for tracking + delete .prod files
+- [x]  Research
+  - [x]  Session tokens, username + password login, cookies?
+  - [x]  Look into creating a new api route `/api/auth/login`
+- [x] Delete unnecessary boot scripts
+  - [x] Delete boot.js
+  - [x] Remove corresponding package.json script commands
  
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 7 – Security Setup p1
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Monday, November 17th (2025)
+* **Time:** 11;25 PM
+* **Attendees:** Self
 * **Discussed Backlog Items:**  
-  - 
+  - `Deployment Prep`
+  - `Security Setup`
+  - `Deployment Launch`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Started implementing security features but am not super knowledgeable
+- Separated deployment into two separate backlog items to make things more palatable
+- Want to append new user stories used to design the `Security Setup` backlog item subtasks
+- Almost done with `Deployment Prep`
 
 #### 📈 Previous Progress
-- 
+- Separated `Deployment` into `Deployment Prep` and `Deployment Launch` to make the work more approachable
+  - `Deployment Prep` pretty much was just `Deployment` but renamed
+  - `Deployment Launch` will encompass the logistics around actually launching the product on vercel and render for public use
+- Vibe coded a lot of code that I still need to review on the backend
+  - `src/backend/app/auth_utils.py` -- utility functions used for defining security routes
+  - `src/backend/app/clients.py` -- creates temporary supabase object in python and headers for notion api requests to help limit access to other routes
+  - `src/backend/app/routes.py` -- added login and logout routes and then tested them using curl
+  - `db_setup.sql` -- created new sql tables for app_user (app users) and sessions
+  - `row_security.sql` -- added lines to add security to the two newly created tables
+  - `src/backend/app/cj.txt` -- stores cookies, not entirely sure how this works
+  - `src/backend/.env` -- appended new variables for cookie + security management
+  - `src/frontend/.env` -- simplified routing variables
+  - `src/frontend/package.json` -- deleted script aliases linking boot.js script
+  - `src/frontend/e2e` -- updated e2e tests to account for all the major changes and to ensure they still all pass
+  - `src/frontend/src/utils/config.js` -- creates an object that determines and stores the api routes depending on the current mode (development or prod)
+  - `src/frontend/src/utils/connectionTest.js` -- uses the new config object passed as a parameter
+  - `src/frontend/src/utils/test-boot.js` -- updated some env variable access after changes were made to the env file
+  - `src/frontend/src/contexts/ProcessingContext.jsx` -- subscribes to the new config context and uses the config object to determine whether to serve mock data or retrieve real data
+  - `src/frontend/src/contexts/ConfigContext.jsx` -- created a config context to easily pass in a config object without prop drilling to other subcomponents of the app to streamline frontend/backend connections
+  - `src/frontend/src/tests` -- updated existing tests so they all pass
+- Ended up just deleting the complicated port swap configurations for testing vs local development -- not worth the headache
+  - Also deleted the boot.js script -- not worth managing this, I'll just launch the servers independently when working locally
+  - Updated all related files that depended/expected a specific port to be called on frontend and the backend
 
 #### 🧱 Problems & Blockers
-- 
+- Don't fully understand the newly code generated -- need to potentially make quizzes for the new content
+  - files: `auth_utils.py`, `clients.py`, `db_setup.sql`, `routes.py`, `cj.txt`
+  - Appending on new quizzes onto backlog items will just further the scope and time for completion so I will need to consider this
+- It appears the vercel deployment only temporarily deleted and now is online -- not great...
+- Not sure what files were modified from previous attempts at token management
+- Testing all these new features is going to take a long time if I do it thoroughly
 
 #### ⏳ Pending Actions
-- 
+- Completing the review quizzes
 
 #### 🔜 Next Steps
-- 
-
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+- Review newly created files to gain a better understanding
+  - files: `auth_utils.py`, `clients.py`, `db_setup.sql`, `routes.py`, `cj.txt`
+- Take both the quizzes generated for `Deployment Setup`
+- Create sessions table with user_id, created_at, expires_at, revoked, last_seen.
+- Implement cookie-based session system (pg_sid):
+  - HttpOnly, Secure, SameSite=Lax cookie.
+  - Sliding TTL refresh (extend expires_at on activity).
 
 #### ❓ Question 1
-- 
-
-#### ❓ Question 2...
-- 
+- What do you think is the biggest whole in my security design? Would my app be easy to hack?
 
 ### 🧾 Results
 

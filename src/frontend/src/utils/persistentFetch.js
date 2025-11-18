@@ -4,7 +4,6 @@ export async function timedFetch(url, fetchHeaders, service_str, timeoutDuration
 
     const timeout_reference = setTimeout(() => controller.abort(), timeoutDuration);
 
-    // const fetch_response = await fetch(url, { signal }).then((response) => {
     const fetch_response = await fetch(url, {
       method: "GET",
       signal,

@@ -18,9 +18,6 @@ __pycache__
 # environment variables
 .env*.local
 
-
-
-
 # IDE files
 .vscode/
 .idea/

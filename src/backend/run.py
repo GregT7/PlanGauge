@@ -1,7 +1,7 @@
 # run.py
-from app import app, port, mode
+from app import app, port
 
 if __name__ == "__main__":
-    print(f"🚀 Running Flask in {mode} mode on port {port}")
+    print(f"🚀 Running Flask on port {port}")
     
     app.run(port=port, debug=True)

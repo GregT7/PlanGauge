@@ -1,8 +1,9 @@
 import importlib.metadata, time, os, requests, sys
 from flask import jsonify, request
-from . import app, mode
+from . import app
 from .utils import *
 from .clients import get_supabase, get_notion_headers, get_notion_ids
+from .auth_utils import verify_password, set_session_cookie, clear_session_cookie, current_session_id, SESSION_TTL_HOURS
 from .auth import require_owner
 import asyncio
 
@@ -324,3 +325,97 @@ def submit_plans():
                                     message='Unexpected error occurred when trying to submit data',
                                     details=pack_exc(e))
         return jsonify(http_response), 500
+    
+
+
+
+
+def _iso_utc(dt: datetime) -> str:
+    # Supabase/Postgres accept ISO8601 timestamps; ensure tz-aware UTC
+    return dt.astimezone(timezone.utc).isoformat()
+
+# at top of your file (if not already present)
+from datetime import datetime, timedelta, timezone
+import os
+
+SESSION_TTL_HOURS = int(os.getenv("SESSION_TTL_HOURS", "12"))
+
+def _iso_utc(dt: datetime) -> str:
+    # if you already have this helper, keep yours and remove this one
+    return dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+@app.post("/auth/login")
+def auth_login():
+    data = request.get_json(silent=True) or {}
+    email = (data.get("email") or "").strip().lower()
+    password = data.get("password") or ""
+    if not email or not password:
+        return jsonify({"error": "missing email or password"}), 400
+
+    supabase = get_supabase()
+
+    # 1) Lookup user
+    user_resp = (
+        supabase.table("app_user")
+        .select("id,email,password_hash,role")
+        .eq("email", email)
+        .limit(1)
+        .execute()
+    )
+    rows = user_resp.data or []
+    if not rows:
+        return jsonify({"error": "invalid credentials"}), 401
+
+    user = rows[0]
+    if not verify_password(user["password_hash"], password):
+        return jsonify({"error": "invalid credentials"}), 401
+
+    # 2) Create session row
+    expires_at = datetime.now(timezone.utc) + timedelta(hours=SESSION_TTL_HOURS)
+
+    # Try to get the inserted row back directly
+    sess_resp = supabase.table("session").insert(
+        {
+            "user_id": user["id"],
+            "expires_at": _iso_utc(expires_at),
+            "revoked": False,
+        },
+        returning="representation",   # works on PostgREST; python client passes it through
+    ).execute()
+
+    sid_rows = (sess_resp.data or [])
+
+    # Fallback: if insert didn't return data, fetch newest session for this user
+    if not sid_rows:
+        sid_resp = (
+            supabase.table("session")
+            .select("id")
+            .eq("user_id", user["id"])
+            .order("created_at", desc=True)  # requires a created_at column
+            .limit(1)
+            .execute()
+        )
+        sid_rows = sid_resp.data or []
+
+    if not sid_rows:
+        return jsonify({"error": "failed to create session"}), 500
+
+    sid = sid_rows[0]["id"]
+
+    # 3) Set cookie + return
+    resp = jsonify({"ok": True, "user": {"email": user["email"], "role": user["role"]}})
+    return set_session_cookie(resp, sid), 200
+
+
+
+@app.post("/auth/logout")
+def auth_logout():
+    sid = current_session_id()
+    supabase = get_supabase()
+
+    if sid:
+        # Mark server-side session revoked
+        supabase.table("session").update({"revoked": True}).eq("id", sid).execute()
+
+    resp = jsonify({"ok": True})
+    return clear_session_cookie(resp), 200

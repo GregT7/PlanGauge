@@ -1,11 +1,9 @@
+// src/tests/utils/setupApp.test.js
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import setupApp from "@/utils/setupApp";
 
-// 🧩 Mock dependencies
+// 🔧 Mocks
 vi.mock("@/utils/connectionTest", () => ({
-  default: vi.fn(),
-}));
-vi.mock("@/utils/retrieveStats", () => ({
   default: vi.fn(),
 }));
 vi.mock("sonner", () => ({
@@ -18,21 +16,28 @@ vi.mock("sonner", () => ({
 const connectionTest = (await import("@/utils/connectionTest")).default;
 const { toast } = await import("sonner");
 
+const nonDemoCfg = { isDemo: false };
+const demoCfg = { isDemo: true };
+
 describe("setupApp", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("calls connectionTest and wraps it with toast.promise", async () => {
-    const mockResponse = Promise.resolve({ message: "Connection OK" });
-    connectionTest.mockReturnValueOnce(mockResponse);
-    toast.promise.mockResolvedValueOnce({});
+  it("non-demo: calls connectionTest(config) and wraps it with toast.promise", async () => {
+    const mockResp = { message: "All Systems Online!" };
+    const connectPromise = Promise.resolve(mockResp);
 
-    await setupApp();
+    connectionTest.mockReturnValueOnce(connectPromise);
+    toast.promise.mockResolvedValueOnce({}); // resolve toast wrapper
+
+    await setupApp(nonDemoCfg);
 
     expect(connectionTest).toHaveBeenCalledTimes(1);
+    expect(connectionTest).toHaveBeenCalledWith(nonDemoCfg);
+
     expect(toast.promise).toHaveBeenCalledWith(
-      mockResponse,
+      connectPromise,
       expect.objectContaining({
         loading: "Testing system connections...",
         success: expect.any(Function),
@@ -41,46 +46,65 @@ describe("setupApp", () => {
     );
   });
 
-  it("uses toast.success and toast.error message functions correctly", async () => {
-    const connectResp = { message: "Everything works!" };
+  it("non-demo: success/error formatters return the backend message", async () => {
+    const connectResp = { message: "Connection OK" };
     connectionTest.mockReturnValueOnce(Promise.resolve(connectResp));
+    toast.promise.mockResolvedValueOnce({});
 
-    await setupApp();
+    await setupApp(nonDemoCfg);
 
-    const toastArgs = toast.promise.mock.calls[0][1];
-    expect(toastArgs.success(connectResp)).toBe("Everything works!");
-    expect(toastArgs.error(connectResp)).toBe("Everything works!");
+    const args = toast.promise.mock.calls[0][1];
+    expect(args.success(connectResp)).toBe("Connection OK");
+    expect(args.error(connectResp)).toBe("Connection OK");
   });
 
-  it("handles thrown errors gracefully and shows toast.error", async () => {
-    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+  it("non-demo: synchronous throw from connectionTest triggers toast.error", async () => {
+    const spy = vi.spyOn(console, "log").mockImplementation(() => {});
     connectionTest.mockImplementationOnce(() => {
-      throw new Error("connection failure");
+      throw new Error("boom");
     });
 
-    await setupApp();
+    await setupApp(nonDemoCfg);
 
-    expect(consoleSpy).toHaveBeenCalledWith(
+    expect(spy).toHaveBeenCalledWith(
       expect.stringMatching(/internal error/i),
       expect.any(Error)
     );
     expect(toast.error).toHaveBeenCalledWith(
       "Error: There was an unexpected problem testing system connections!"
     );
-
-    consoleSpy.mockRestore();
+    spy.mockRestore();
   });
 
-  it("handles rejection from toast.promise gracefully", async () => {
-    const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-    connectionTest.mockReturnValueOnce(Promise.reject(new Error("toast failed")));
-    toast.promise.mockRejectedValueOnce(new Error("toast failed"));
+  it("non-demo: rejection from toast.promise triggers toast.error", async () => {
+    const spy = vi.spyOn(console, "log").mockImplementation(() => {});
+    // connectionTest returns a (rejected) promise
+    connectionTest.mockReturnValueOnce(Promise.reject(new Error("reject")));
+    // toast.promise also rejects
+    toast.promise.mockRejectedValueOnce(new Error("reject"));
 
-    await setupApp();
+    await setupApp(nonDemoCfg);
 
     expect(toast.error).toHaveBeenCalledWith(
       "Error: There was an unexpected problem testing system connections!"
     );
-    consoleSpy.mockRestore();
+    spy.mockRestore();
+  });
+
+  it("demo: uses simulated promise, correct loading text, and does NOT call connectionTest", async () => {
+    toast.promise.mockResolvedValueOnce({});
+
+    await setupApp(demoCfg);
+
+    expect(connectionTest).not.toHaveBeenCalled();
+    expect(toast.promise).toHaveBeenCalledTimes(1);
+
+    const [demoPromiseArg, opts] = toast.promise.mock.calls[0];
+    // quick sanity: it's a thenable
+    expect(typeof demoPromiseArg.then).toBe("function");
+
+    expect(opts.loading).toBe("Simulating system connection tests...");
+    expect(opts.success({ message: "Simulated!" })).toBe("Simulated!");
+    expect(opts.error).toBe("Demo failed (this should never happen)");
   });
 });
