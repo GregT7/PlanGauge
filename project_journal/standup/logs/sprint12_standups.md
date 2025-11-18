@@ -481,6 +481,7 @@ No, I think you’ve covered everything for today — the main focus is clarifyi
   - files: `auth_utils.py`, `clients.py`, `db_setup.sql`, `routes.py`, `cj.txt`
 - Take both the quizzes generated for `Deployment Setup`
 - Create sessions table with user_id, created_at, expires_at, revoked, last_seen.
+- Append security user stories to user_stories.md document
 - Implement cookie-based session system (pg_sid):
   - HttpOnly, Secure, SameSite=Lax cookie.
   - Sliding TTL refresh (extend expires_at on activity).
