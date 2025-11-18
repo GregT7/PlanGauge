@@ -26,7 +26,7 @@ test.afterEach(async ({ page }) => {
 });
 
 test('app loads home (stable)', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(process.env.VITE_REACT_ROUTE || 'http://localhost:5173/');
 
   const taskHeading = page.getByRole('heading', { name: 'Task Table' });
   const taskContainer = taskHeading.locator('..');
@@ -54,7 +54,7 @@ test('app loads home (stable)', async ({ page }) => {
 
 test('Enter tasks → per-day totals & summary', async ({ page }) => {
   test.setTimeout(60_000); // 60s for THIS test
-  await page.goto('/');
+  await page.goto(process.env.VITE_REACT_ROUTE || 'http://localhost:5173/');
   await populateTable(demoTasks, page);
 
   // Wait for at least one StatCard to appear
@@ -90,7 +90,7 @@ test('Enter tasks → per-day totals & summary', async ({ page }) => {
 // - Change Category via dropdown; pill color updates.
 // - Pick Start/Due via calendar; formatted date appears and popover closes.
 test('Category & Date inputs basic UX', async ({ page }) => {
-  await page.goto('/');
+  await page.goto(process.env.VITE_REACT_ROUTE || 'http://localhost:5173/');
   const rows = page.getByTestId('task-row'); 
   const row = rows.nth(0);  
 
@@ -118,6 +118,6 @@ test('shows error when /stats fails', async ({ page }) => {
       route.fulfill({ status: 500, body: 'Server Error' });
   });
 
-  await page.goto('http://localhost:4173/');
+  await page.goto(process.env.VITE_REACT_ROUTE || 'http://localhost:5173/');
   await expect(page.getByText("Error: Stats Retrieval Failure!")).toBeVisible();
 });

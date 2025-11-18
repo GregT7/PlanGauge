@@ -6,10 +6,12 @@ import path from "node:path";
 import killTree from "tree-kill";            // npm i tree-kill
 import waitOn from "wait-on";                // npm i wait-on
 
+// VITE_REACT_ROUTE=http://localhost:5173
+// VITE_FLASK_ROUTE=http://127.0.0.1:5000
 async function main() {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-  const envPath = path.resolve(__dirname, "../../../.env");
+  const envPath = path.resolve(__dirname, "../../.env");
   config({ path: envPath });
 
   const FRONTEND_DIR = process.cwd();                 // assume running from /frontend
@@ -34,7 +36,8 @@ async function main() {
   });
 
   // Start preview server
-  const preview = spawn("npx", ["vite", "preview", "--port", process.env.VITE_TESTING_PORT], {
+  const vite_port = String(process.env.VITE_REACT_ROUTE).slice(-4);
+  const preview = spawn("npx", ["vite", "preview", "--port", vite_port], {
   // const preview = spawn("npm", ["run", "preview", "--port", process.env.VITE_DEFAULT_PORT], {
     cwd: FRONTEND_DIR,
     stdio: "inherit",
@@ -42,7 +45,7 @@ async function main() {
   });
 
   // Wait for preview to be reachable
-  const PREVIEW_URL = process.env.VITE_BASE_ROUTE + process.env.VITE_TESTING_PORT;
+  const PREVIEW_URL = process.env.VITE_REACT_ROUTE
   await waitOn({
     resources: [PREVIEW_URL],
     timeout: 60_000,

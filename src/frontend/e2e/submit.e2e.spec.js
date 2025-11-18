@@ -21,7 +21,7 @@ test('Submit plan → success toast; no duplicate POSTs on double-click', async 
   );
 
     try {
-        await page.goto('/');
+        await page.goto(process.env.VITE_REACT_ROUTE || 'http://localhost:5173/');
         await expectToast(page, 'Data Successfully Retrieved And Processed!');
         await expectToast(page, 'All Systems Online!');
         await populateTable(demoTasks.slice(0,3), page);

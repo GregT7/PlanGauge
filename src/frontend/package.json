@@ -10,8 +10,6 @@
     "test": "vitest",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node src/utils/boot.js",
-    "start:demo": "node src/utils/boot.js -demo",
     "e2e": "node src/utils/test-boot.js",
     "e2e:report": "playwright show-report"
   },

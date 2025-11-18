@@ -60,7 +60,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
                     flaskURL += `?${query_str}`
                     
 
-                    const promise = retrieveStats(flaskURL, config); // resolves to { message, details, data }
+                    const promise = retrieveStats(flaskURL); // resolves to { message, details, data }
 
                     // bind toast to the same promise (don’t await the toast)
                     toast.promise(promise, {

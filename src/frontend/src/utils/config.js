@@ -9,9 +9,10 @@ function join(base = '', path = '') {
   return `${base.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
 }
 
+const mode = import.meta.env.MODE || 'development'
 const config = {
-  isDemo: toBool(import.meta.env.VITE_DEMO),
-  mode: import.meta.env.MODE || 'development',
+  mode: mode,
+  isDemo: mode === "demo",
   reactUrl: import.meta.env.VITE_REACT_ROUTE,
   flaskUrl: {
     base: import.meta.env.VITE_FLASK_ROUTE,

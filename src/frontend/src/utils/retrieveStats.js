@@ -1,7 +1,7 @@
 import verifyStatsData from "./verifyStatsData";
 
 // # curl "http://127.0.0.1:5000/api/db/stats?start=2025-06-01&end=2025-06-30"
-export default async function retrieveStats(url, config) {
+export default async function retrieveStats(url) {
     let resp = {
         message: "Error: Received no response from database!",
         details: null,

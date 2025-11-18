@@ -112,3 +112,21 @@ CREATE TABLE general_plan (
     REFERENCES category(cat_id)
     ON DELETE RESTRICT
 );
+
+-- Users
+CREATE TABLE app_user (
+  id uuid primary key default gen_random_uuid(),
+  email text not null unique,
+  password_hash text not null,
+  role text not null check (role in ('owner','guest')) default 'owner',
+  created_at timestamptz not null default now()
+);
+
+-- Sessions
+CREATE TABLE session (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references app_user(id) on delete cascade,
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null,
+  revoked boolean not null default false
+);
