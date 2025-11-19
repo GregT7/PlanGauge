@@ -489,16 +489,51 @@ No, I think you’ve covered everything for today — the main focus is clarifyi
 #### ❓ Question 1
 - What do you think is the biggest whole in my security design? Would my app be easy to hack?
 
+**Answer:** Your biggest gap right now is **incomplete and unvalidated session management**:
+
+- No real enforcement of session expiration or TTL refresh  
+- Session cookie can be set but isn't required for protected routes  
+- No route protection middleware (e.g., @require_auth) guarding API endpoints  
+- No verification that the cookie you receive is tied to a valid, unrevoked session  
+- No hashing or secure comparison of session IDs in queries  
+- No rate limiting, brute-force prevention, or lockout protection  
+- Row-level security is incomplete without a strong session binding
+
+Right now, **yes — an attacker could make requests freely** because:
+
+- Nothing verifies user identity before accessing /api routes  
+- Missing token/session validation means any request looks “authenticated”  
+- No access control around plan-submission, stats retrieval, health checks, etc.
+
+The good news: this is very normal at this stage. You’ve laid the foundation — you now need to connect the parts (session creation → cookie → middleware → route protection → revocation + TTL refresh).
+
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Realized that my deployment and security systems are tightly coupled, so splitting them reduced cognitive load.
+- Security setup is turning out to be more complex than expected — cookie flags, session lifetime logic, route protection, and Supabase RLS all need to work together.
+- A lot of the backend files evolved organically (“vibe coding”), so reviewing them is essential before continuing.
+- I need to create clear user stories to keep the security backlog scope defined, otherwise the task will balloon.
+- Testing will likely take longer than implementation because many new flows were introduced (login, logout, cookie handling, session DB interactions).
 
 #### 🗝️ Key Decisions
-- 
+- Split Deployment into two items: `Deployment Prep` (refactor, env cleanup, port simplification) and `Deployment Launch` (actual hosting).
+- Use cookie-based sessions instead of tokens: for the MVP security model.
+- Adopt HttpOnly + Secure + SameSite=Lax cookies as the standard for session cookies.
+- Store sessions in Supabase: rather than in-memory — enables revocation, TTL, auditing, and logout.
+- Remove port-swap complexity: to reduce mental overhead and break fewer tests.
+- Frontend loads config at startup using a context provider: so backend mode changes don’t require prop-drilling.
+
 
 #### 📌 Action Items
-- 
+- [ ] Review all new backend files (`auth_utils.py`, `clients.py`, `routes.py`, `db_setup.sql`, `cj.txt`)
+- [ ] Complete both quizzes for `Deployment Setup`
+- [ ] Finalize `session` table design (revocation + TTL + last_seen)
+- [ ] Add new user stories to `user_stories.md` under `Security Setup`
+- [ ] Implement a middleware decorator (@require_auth) to guard protected routes
+- [ ] Implement sliding TTL refresh logic
+- [ ] Clean out unused cookie/token files from early experiments
+- [ ] Begin writing tests for login, logout, and session expiration behavior
 
 ---
 
