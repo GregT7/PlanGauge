@@ -525,61 +525,86 @@ The good news: this is very normal at this stage. You’ve laid the foundation �
 - Frontend loads config at startup using a context provider: so backend mode changes don’t require prop-drilling.
 
 #### 📌 Action Items
-- [ ] Review all new backend files (`auth_utils.py`, `clients.py`, `routes.py`, `db_setup.sql`, `cj.txt`)
-- [ ] Complete both quizzes for `Deployment Setup`
-- [ ] Finalize `session` table design (revocation + TTL + last_seen)
-- [ ] Add new user stories to `user_stories.md` under `Security Setup`
-- [ ] Implement a middleware decorator (@require_auth) to guard protected routes
-- [ ] Implement sliding TTL refresh logic
-- [ ] Clean out unused cookie/token files from early experiments
+- [x] Review all new backend files (`auth_utils.py`, `clients.py`, `routes.py`, `db_setup.sql`, `cj.txt`)
+- [x] Complete both quizzes for `Deployment Setup`
+- [x] Finalize `session` table design (revocation + TTL + last_seen)
+- [x] Add new user stories to `user_stories.md` under `Security Setup`
+- [x] Implement a middleware decorator (@require_auth) to guard protected routes
+- [x] Implement sliding TTL refresh logic
+- [x] Clean out unused cookie/token files from early experiments
 - [ ] Begin writing tests for login, logout, and session expiration behavior
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 8 – Security Setup p2
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Thursday, November 20th (2025)
+* **Time:** 4:32 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Security Setup`
+  - `Security Design`
+  - `Penetration Check`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Created two additional backlog items to address gaps in security management
+- Finished server-side session implementation
+- Ready to start working on temporary invite links
 
 #### 📈 Previous Progress
-- 
+- Created `Security Design` for designing security diagrams to help me make sense of the changes and ensure the code is maintainable
+- Created `Penetration Check` to conduct a basic penetration test after deploying my project to see if there are any glaring issues or critical updates needed so my app is more difficult to mess with
+- Reviewed previously written code from ChatGPT to gain a better understanding
+- Appended new user stories to reflect security wishes from the perspective of a user, developer, and tester
+- Updated `session` sql table on Supabase and in the initialization sql file
+- Added and tested @require_auth decorator to sensitive routes with curl
+- Completed two quizzes, passing one and failing one
+- Generated an additional quiz covering more authorization topics/questions
+- Moved security quizzes to `Security Design` backlog item
 
 #### 🧱 Problems & Blockers
-- 
+- All code for security is being written on the main branch
+- Generated an additional quiz which increased scope creep -- should add new quizzes to the `Security Design` backlog item
 
 #### ⏳ Pending Actions
 - 
 
 #### 🔜 Next Steps
-- 
+- Update Notion: 
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- Did I not address all of the previous concerns mentioned in the last ChatGPT question regarding security (refer to yesterday's queries please)
 
-#### ❓ Question 2...
-- 
+**Answer:**  
+Yes — you addressed all previous concerns except one: *you still need to move all new security logic off the main branch.* Everything else (session TTL refresh, @require_auth decorator, SameSite guidance, cookie security flags, schema updates, and testability) has been implemented correctly.
+
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Adding two new backlog items (`Security Design`, `Penetration Check`) clarified the scope and prevented further creep  
+- Decided to treat quizzes, diagrams, audits, and penetration tests as *separate tasks* rather than bundled into `Security Setup`  
+- Realized that working directly on main is dangerous for long-lived features — security changes especially need isolation  
+- The session system is now robust and better understood, especially sliding TTL and the decorator chain  
+- Temporary invite links are the next logical milestone and will complete the authentication flow for “guest” access
 
 #### 🗝️ Key Decisions
-- 
+- Create a separate branch for security development where I will finish a pull request with documentation  
+- Also update documentation at the end of security development: requirement specifications, design specifications, and README  
+- Assign quizzes and diagrams to `Security Design` to avoid inflating the scope of `Security Setup`  
+- Treat penetration testing after deployment as a separate backlog item
 
 #### 📌 Action Items
-- 
+- [ ] Create `security-setup` feature branch  
+- [ ] Move existing security commits from main into the new feature branch  
+- [ ] Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- [ ] Add `/auth/accept-invite` endpoint logic (validate → mark used → create session)  
+- [ ] Write a small script for generating invite links (24h / 7-day options)
 
 ---
 
