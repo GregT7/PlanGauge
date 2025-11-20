@@ -356,3 +356,7 @@ def mark_submission_failed(supabase, submission_id):
         .eq("submission_id", submission_id)
         .execute()
     )
+
+def iso_utc(dt: datetime) -> str:
+    # Supabase/Postgres accept ISO8601 timestamps; ensure tz-aware UTC
+    return dt.astimezone(timezone.utc).isoformat()

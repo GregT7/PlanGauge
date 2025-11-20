@@ -4,6 +4,7 @@ venv
 research
 __pycache__
 .pytest_cache
+cookies.txt
 
 # dependencies
 /node_modules

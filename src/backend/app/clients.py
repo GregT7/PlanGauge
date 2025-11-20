@@ -39,7 +39,7 @@ def _must_get(name: str) -> str:
 def get_notion_headers() -> dict:
     """
     Build and cache the Notion headers only after an authorized call asks for them.
-    This keeps secrets out of memory until they’re actually needed.
+    This keeps secrets out of memory until they're actually needed.
     """
     # Validate required vars once (raises helpful error if misconfigured)
     for key in REQUIRED_NOTION_VARS:
