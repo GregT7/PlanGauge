@@ -1,11 +1,12 @@
 import importlib.metadata, time, os, requests, sys
-from flask import jsonify, request
+from datetime import datetime, timedelta, timezone
+from flask import jsonify, request, g
 from . import app
 from .utils import *
 from .clients import get_supabase, get_notion_headers, get_notion_ids
-from .auth_utils import verify_password, set_session_cookie, clear_session_cookie, current_session_id, SESSION_TTL_HOURS
-from .auth import require_owner
+from .auth_utils import require_session, verify_password, set_session_cookie, clear_session_cookie, current_session_id, hash_password, SESSION_TTL_HOURS
 import asyncio
+
 
 @app.route('/')
 def index():
@@ -15,7 +16,8 @@ def index():
 def log_origin():
     print("Headers:", request.headers)
 
-@app.route('/api/health', methods=['GET'])
+# @app.route('/api/health', methods=['GET'])
+@app.get('/api/health')
 def determine_health():
     start_time = time.perf_counter()
     try:
@@ -28,8 +30,8 @@ def determine_health():
         return jsonify(http_response), 500
 
 
-@app.route('/api/db/health', methods=['GET'])
-# @require_owner
+# @app.route('/api/db/health', methods=['GET'])
+@app.get('/api/db/health')
 def db_health_check():
     start_time = time.perf_counter()
     try:
@@ -56,8 +58,8 @@ def db_health_check():
                                 message="Unexpected error", details=pack_exc(e))
         return jsonify(http_response), 500
             
-@app.route('/api/notion/health', methods=['GET'])
-# @require_owner  # keep enabled in prod; comment only for local probing
+# @app.route('/api/notion/health', methods=['GET'])
+@app.get('/api/notion/health')
 def notion_health_check():
     start = time.perf_counter()
     try:
@@ -96,8 +98,8 @@ def notion_health_check():
         extra = {"version": (headers.get("Notion-Version") if "headers" in locals() else None), "checks": None}
         return jsonify(err_resp(["flask", "notion"], start, "internal_error", "Unexpected error", pack_exc(e), **extra)), 500
     
-@app.route('/api/db/stats', methods=['GET'])
-# @require_owner
+# @app.route('/api/db/stats', methods=['GET'])
+@app.get('/api/db/stats')
 def calc_stats():
     start_time = time.perf_counter()
     try:
@@ -169,8 +171,8 @@ def calc_stats():
                                 details=pack_exc(e))
         return jsonify(http_response), 500
         
-@app.route('/api/plan-submissions', methods=['POST'])
-# @require_owner
+# @app.route('/api/plan-submissions', methods=['POST'])
+@app.post('/api/plan-submissions')
 def submit_plans():
     start_time = time.perf_counter()
     try:
@@ -326,24 +328,9 @@ def submit_plans():
                                     details=pack_exc(e))
         return jsonify(http_response), 500
     
-
-
-
-
-def _iso_utc(dt: datetime) -> str:
-    # Supabase/Postgres accept ISO8601 timestamps; ensure tz-aware UTC
-    return dt.astimezone(timezone.utc).isoformat()
-
-# at top of your file (if not already present)
-from datetime import datetime, timedelta, timezone
-import os
-
-SESSION_TTL_HOURS = int(os.getenv("SESSION_TTL_HOURS", "12"))
-
-def _iso_utc(dt: datetime) -> str:
-    # if you already have this helper, keep yours and remove this one
-    return dt.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
-
+# curl -i -X POST "http://127.0.0.1:5000/auth/login" -H "Content-Type: application/json"
+# -d "{\"email\":\"insert_email_here\",\"password\":\"insert_password_here\"}"
+# add in '-c cookies.txt' to create a local cookie jar for local testing if so desired
 @app.post("/auth/login")
 def auth_login():
     data = request.get_json(silent=True) or {}
@@ -377,7 +364,7 @@ def auth_login():
     sess_resp = supabase.table("session").insert(
         {
             "user_id": user["id"],
-            "expires_at": _iso_utc(expires_at),
+            "expires_at": iso_utc(expires_at),
             "revoked": False,
         },
         returning="representation",   # works on PostgREST; python client passes it through
@@ -406,9 +393,11 @@ def auth_login():
     resp = jsonify({"ok": True, "user": {"email": user["email"], "role": user["role"]}})
     return set_session_cookie(resp, sid), 200
 
-
-
+# curl -i -X POST "http://127.0.0.1:5000/auth/logout" -H "Content-Type: application/json" -b cookies.txt
+# OR
+# curl -i -X POST "http://127.0.0.1:5000/auth/logout" -H "Content-Type: application/json" -H "Cookie: pg_session=insert_session_id_here"
 @app.post("/auth/logout")
+@require_session
 def auth_logout():
     sid = current_session_id()
     supabase = get_supabase()
@@ -419,3 +408,12 @@ def auth_logout():
 
     resp = jsonify({"ok": True})
     return clear_session_cookie(resp), 200
+
+# curl -i "http://127.0.0.1:5000/auth/me" -H "Cookie: pg_session=insert_session_id_here"
+# OR
+# curl -i "http://127.0.0.1:5000/auth/me" -b cookies.txt
+@app.get("/auth/me")
+@require_session
+def auth_me():
+    # At this point g.user is guaranteed to be present
+    return jsonify({"ok": True, "user": g.user}), 200

@@ -122,11 +122,13 @@ CREATE TABLE app_user (
   created_at timestamptz not null default now()
 );
 
+-- user_id, role, created_at, expires_at, revoked, last_seen.
 -- Sessions
 CREATE TABLE session (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references app_user(id) on delete cascade,
   created_at timestamptz not null default now(),
   expires_at timestamptz not null,
-  revoked boolean not null default false
+  revoked boolean not null default false,
+  last_seen TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

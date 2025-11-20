@@ -524,7 +524,6 @@ The good news: this is very normal at this stage. You’ve laid the foundation �
 - Remove port-swap complexity: to reduce mental overhead and break fewer tests.
 - Frontend loads config at startup using a context provider: so backend mode changes don’t require prop-drilling.
 
-
 #### 📌 Action Items
 - [ ] Review all new backend files (`auth_utils.py`, `clients.py`, `routes.py`, `db_setup.sql`, `cj.txt`)
 - [ ] Complete both quizzes for `Deployment Setup`
