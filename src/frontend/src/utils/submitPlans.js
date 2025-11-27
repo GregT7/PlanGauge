@@ -17,6 +17,7 @@ export default async function submitPlans(tasks, filter_start_date, filter_end_d
   if (is_valid_payload) {
     const submit_response = await fetch(url, {
       method: "POST",
+      credentials: 'include',
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(payload),
     });

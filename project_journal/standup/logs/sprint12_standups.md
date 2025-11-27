@@ -570,10 +570,14 @@ The good news: this is very normal at this stage. You’ve laid the foundation �
 - Generated an additional quiz which increased scope creep -- should add new quizzes to the `Security Design` backlog item
 
 #### ⏳ Pending Actions
-- 
+- Finish implementing the temporary invite link system
 
 #### 🔜 Next Steps
-- Update Notion: 
+- Create `security-setup` feature branch  
+- Move existing security commits from main into the new feature branch  
+- Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- Add `/auth/accept-invite` endpoint logic (validate → mark used → create session)  
+- Write a small script for generating invite links (24h / 7-day options)
 
 ### 🤖 ChatGPT Reflection
 
@@ -582,7 +586,6 @@ The good news: this is very normal at this stage. You’ve laid the foundation �
 
 **Answer:**  
 Yes — you addressed all previous concerns except one: *you still need to move all new security logic off the main branch.* Everything else (session TTL refresh, @require_auth decorator, SameSite guidance, cookie security flags, schema updates, and testability) has been implemented correctly.
-
 
 ### 🧾 Results
 
@@ -600,105 +603,163 @@ Yes — you addressed all previous concerns except one: *you still need to move 
 - Treat penetration testing after deployment as a separate backlog item
 
 #### 📌 Action Items
-- [ ] Create `security-setup` feature branch  
-- [ ] Move existing security commits from main into the new feature branch  
-- [ ] Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
-- [ ] Add `/auth/accept-invite` endpoint logic (validate → mark used → create session)  
-- [ ] Write a small script for generating invite links (24h / 7-day options)
+- [x] Create `security-setup` feature branch  
+- [x] Move existing security commits from main into the new feature branch  
+- [x] Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- [x] Add `/auth/invite` endpoint logic (validate → mark used → create session)  
+- [x] Write a small script for generating invite links (24h / 7-day options)
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 9 – Security Setup p2
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, November 22 (2025)
+* **Time:** 5:02 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Security Setup`
+  - `Security Design`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Created a new branch, added the invite table, the invite api route, and a token generating script
+- Want to focus more on the security design aspects prior to implementation -- don't want to be too reliant on gen ai
 
 #### 📈 Previous Progress
-- 
+- Added a new user record for guest accounts
+- Add `/auth/invite` endpoint logic (validate → mark used → create session)
+- Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- Write a small script for generating invite links (24h / 7-day options)
 
 #### 🧱 Problems & Blockers
-- 
+- `Security Design` is not fully designed
+- Already implemented code with gen ai without designing things first
 
 #### ⏳ Pending Actions
-- 
+- Finish diagramming logic for previous code implementations before moving on
 
 #### 🔜 Next Steps
-- 
+- Define `Security Design` backlog (subtasks, DoD, description, etc)
+- Create diagrams for authentication and cookie management:
+  - invite logic
+  - login logic
+  - logout logic
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- What do you think of designing the system logic with diagrams prior to implementation
 
-#### ❓ Question 2...
-- 
+**Answer:**  
+Designing the system logic with diagrams *before coding* is especially valuable for security-sensitive features. Diagrams force you to think about the data flow, trust boundaries, state transitions, and error cases *without* hiding behind abstractions in code. For invite systems, session lifecycles, token expiry, and potential attack vectors, diagrams make hidden assumptions explicit. They also reduce reliance on gen-AI because once the design is clear, the implementation becomes mechanical. You also gain confidence that your design is internally consistent, easier to test, and easier to reason about later — especially for pentesting, debugging, or future refactoring.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Diagrams will help reveal whether invite tokens are single-use, how expiry is enforced, and how sessions behave after acceptance  
+- Understanding the end-to-end flow (invite → accept → create session → permissions) is essential before expanding features  
+- Realized that security design should ideally be done *before* coding—reflecting on how to rebalance implementation vs. design moving forward  
+- Noticed potential areas where the invite logic, session logic, and cookie behavior may overlap or conflict, so diagrams will help clarify these boundaries  
+- Reaffirmed desire to minimize over-reliance on AI for conceptual design and instead use it only to validate or refine architecture
 
 #### 🗝️ Key Decisions
-- 
+- Decided to pause new authentication-related implementation until the Security Design diagrams are complete  
+- Invite tokens will remain single-use objects tied to a hashed value stored server-side  
+- Session creation will occur only after invite validation and state marking (`used = true`)  
+- Security Design will be split into discrete diagrams: invite flow, login, logout, cookie lifecycle, and session refresh  
+- Will not expand invite logic or add additional access levels until the design diagrams are finished
 
 #### 📌 Action Items
-- 
+- [x] Build the invite system flow diagram
+- [x] Build the login & session-creation flow diagram
+- [x] Build the logout & session-revocation flow diagram
+- [ ] Finalize a dedicated `Security Design` backlog item with subtasks, DoD, and acceptance criteria
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 10 – Shifting Scope
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Thursday, November 27th (2025)
+* **Time:** 2:23 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Invitation System`
+  - `Security Setup`
+  - `Security Design`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Moved invitation related features to its own backlog item
+  - Too much work in one backlog item for `Security Setup`
+- Login features roughly work locally
+- Tech debt is starting to compile and cause problems
 
 #### 📈 Previous Progress
-- 
+- Finished 4 swimlane diagrams for sending an invite, accepting an invite, logging in, and logging out
+- Created two route decorators for requiring a session and for requiring the logged in user to be the owner
+- Tested login & logout features: was able to login as the owner and submit plan data
+- Created an .env.prod for prod so I can easily copy and paste content into render or vercels env management
+- Moved invite items to new backlog item `Invitation System`
+  - Moved invite routes to
 
 #### 🧱 Problems & Blockers
-- 
+- Spaghetti code/tech debt is making designing things hard
+- "Demo" mode is outdated -- might want to just remove it completely
+- connectionTest and retrieveStats no longer works
+- Frontend needs a rework
+- Hard coded in password and email info when conducting rough tests -- need to remove before committing anything
 
 #### ⏳ Pending Actions
-- 
+- Define `Security Design` backlog item
 
 #### 🔜 Next Steps
-- 
+- Define `Security Design` backlog item
+- Define `Invitation System` backlog item
+- Rethink "demo" mode implementation
+  - Make demo mode the default, how to manage different modes?
+- Define all the changes that need to be done for the frontend
+- Delete sensitive login info and push to github
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- Briefly describe how you would approach debugging a complex software system with interdependencies?
 
-#### ❓ Question 2...
-- 
+**Answer:**
+To debug a complex system, I would start by isolating components and verifying each layer independently (frontend, backend routes, database, external APIs, environment configuration). I’d use instrumented logging to trace control flow and identify failure boundaries. Next, I would attempt to reproduce the issue in the smallest environment possible, ideally with controlled mock data or demo mode. After narrowing down the source of the bug, I would perform iterative hypothesis testing—changing one thing at a time and validating assumptions. Finally, once the root cause is confirmed, I’d apply the fix, add a regression test, and refactor related areas to reduce future complexity.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Moving invite features out of Security Setup immediately reduced mental overhead and clarified the remaining responsibilities of that backlog item.
+- “Demo mode” is causing confusion because its behavior is outdated compared to the current authentication system and invite system, making it hard to reason about request flows and CORS/preflight behavior.
+- The current codebase lacks clear modular boundaries between authentication, sessions, and invitations—this is contributing to confusion when reading or debugging route logic.
+- Tech debt accumulated from rapid experimentation is now interfering with productive development, especially in areas tied to origin checks, session handling, and multi-mode behavior.
+- The frontend needs a fundamental restructuring to align with the new API structure (session-dependent flows, invite acceptance flow, secure fetch with credentials, origin checks).
+- Need a single source of truth for environment variables—right now .env, .env.local, and .env.prod create overlapping responsibilities.
+- Hard-coded email/password used for ad-hoc tests should be removed soon to avoid accidental leakage when committing.
+- The sprint extension makes sense given upcoming relocation; it keeps context intact and avoids splitting the security flow work across two incomplete sprints.
 
 #### 🗝️ Key Decisions
-- 
+- Moved invitation related tasks + features to a separate backlog item to improve modularity and scope management
+- Deleted invite related code from `routes.py` and stored in Notion backlog item
+- Extend this sprint to December 6th which is when I leave for Texas, no reason to start an entirely new sprint now
+- Decided to refactor the backend into feature-based modules (auth/, sessions/, invites/, utils/) and will insert this work into an already existing item or into a new separate backlog item
+- Will remove or redesign “Demo Mode” so its behavior does not diverge from real authentication logic.
+- Will consolidate environment variables into a pattern: .env (local), .env.prod (production copy/paste), reducing ambiguity and simplifying deployment.
 
 #### 📌 Action Items
-- 
+- [ ] Define `Security Design` backlog item
+- [ ] Define `Invitation System` backlog item
+- [ ] Rethink "demo" mode implementation
+  - Make demo mode the default? how to manage different modes?
+- [ ] Define all the changes that need to be done for the frontend
+- [ ] Delete sensitive login info and push to github
+- [ ] Move backend refactoring into a new or existing backlog item
 
 ---
 
