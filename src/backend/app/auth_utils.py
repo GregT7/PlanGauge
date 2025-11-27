@@ -162,3 +162,13 @@ def require_session(f):
         return f(*args, **kwargs)
 
     return wrapper
+
+def require_owner(f):
+    @wraps(f)
+    @require_session
+    def wrapper(*args, **kwargs):
+        user = getattr(g, "user", None)
+        if not user or user.get("role") != "owner":
+            return jsonify({"error": "forbidden", "reason": "owner_only"}), 403
+        return f(*args, **kwargs)
+    return wrapper
