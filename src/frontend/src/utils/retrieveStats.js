@@ -12,7 +12,6 @@ export default async function retrieveStats(url) {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            // "Authorization": `Bearer ${import.meta.env.VITE_OWNER_TOKEN}`
         }
     })
     if (dbResp === null) {

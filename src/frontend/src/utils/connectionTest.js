@@ -6,8 +6,7 @@ import { timedFetch } from './persistentFetch';
 export default async function connectionTest(config) {
     try {
         const fetchHeaders = {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${config.ownerToken}`
+            "Content-Type": "application/json"
         }
 
         const flask_response = await timedFetch(config.flaskUrl.health, fetchHeaders, "Flask", 12000)
