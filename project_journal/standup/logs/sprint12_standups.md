@@ -751,61 +751,112 @@ To debug a complex system, I would start by isolating components and verifying e
 - Decided to refactor the backend into feature-based modules (auth/, sessions/, invites/, utils/) and will insert this work into an already existing item or into a new separate backlog item
 - Will remove or redesign “Demo Mode” so its behavior does not diverge from real authentication logic.
 - Will consolidate environment variables into a pattern: .env (local), .env.prod (production copy/paste), reducing ambiguity and simplifying deployment.
+- Delay `Invitation System` implementation, instead manually send people guest account info or create guest accounts myself
 
 #### 📌 Action Items
-- [ ] Define `Security Design` backlog item
-- [ ] Define `Invitation System` backlog item
-- [ ] Rethink "demo" mode implementation
+- [x] Define `Security Design` backlog item
+- [x] Rethink "demo" mode implementation
   - Make demo mode the default? how to manage different modes?
-- [ ] Define all the changes that need to be done for the frontend
-- [ ] Delete sensitive login info and push to github
-- [ ] Move backend refactoring into a new or existing backlog item
+- [x] Define some changes that need to be done for refactoring the frontend
+- [x] Delete sensitive login info and push to github
+- [x] Move backend refactoring into a new or existing backlog item
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 11 – Creating Security Modes
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Friday, November 28th (2025)
+* **Time:** 3:41 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Security Setup`
+  - `Security Design`
+  - `Refactoring`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Moved refactoring work for frontend and backend into a separate backlog item `Refactoring`
+- Need to update `Security Setup` to account for new modes
+- Will start removing "demo" mode and implementing the mode
+- Getting closer to re-deploying
 
 #### 📈 Previous Progress
-- 
+- Moved refactoring work into backlog item `Refactoring`
+- Figured out an approach to the different modes problem
+- Defined `Security Design` backlog item
 
 #### 🧱 Problems & Blockers
-- 
+- Not sure how much time to spend on testing -- will take a long time
+- Pull request & documentation will take some time
+- Have to introduce a new context which may make things more crowded
 
 #### ⏳ Pending Actions
-- 
+- None
 
 #### 🔜 Next Steps
-- 
+- Update `Security Setup` to account for different modes
+- Complete RBAC Matrix
+- Ensure all frontend fetches include { credentials: 'include' }.
+- Frontend refactoring
+  - Remove "demo" mode
+  - Create one top-level context/provider
+  - Build a MODE_CONFIG object like (visitor, guest, owner)
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- Do you think its fair to add the mode swap refactoring to the `Security Setup` backlog item or would this be scope creep.
+
+**Answer:**  
+It’s fair to include *mode swapping logic* in `Security Setup` **only if** the mode system directly affects security (auth, RBAC, access patterns, read/write separation).  
+But UI cleanup, context consolidation, and old “demo mode” removal belong under `Refactoring`.  
+So the correct split is:  
+- **Security Setup:** define what each mode can access, enforce access, configure routes, guard logic.  
+- **Refactoring:** reorganize contexts, remove old demo logic, reorganize providers, improve code clarity.
+
+This is *not* scope creep as long as you keep it to *security-related mode logic*, not UI restructuring.
 
 #### ❓ Question 2...
-- 
+- Am I making any incorrect assumptions?
+
+**Answer:**  
+Your assumptions are correct overall. The only thing to keep in mind:  
+- You do **not** need three totally separate subsystems. All three modes can be powered by a single `MODE_CONFIG` and your RBAC decorators.  
+- You are also not required to maintain a “demo mode” at all — visitor mode fully replaces it.  
+- You don’t need three different *contexts*. One top-level `AuthContext` (or `ModeContext`) is enough.  
+- You are correct that you should avoid letting mode logic bleed into components; centralizing it is the right assumption.  
+
+So no incorrect assumptions, just a reminder that your design can stay lean.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Mode logic naturally intersects with security, so part of the refactor *must* be under `Security Setup`.
+- Separating “designing modes” from “implementing UI contexts” will prevent scope creep.
+- Adding a `MODE_CONFIG` object will make role-based access predictable and reduce hard-coded checks.
+- Visitor vs guest vs owner does not require three separate UI branches—just a single provider with feature flags.
+- Testing will expand because each mode will need tests for capabilities + restrictions.
+- Removing the old `DEMO_MODE` will reduce confusion and eliminate conditional backend logic.
 
 #### 🗝️ Key Decisions
-- 
+- Add **mode enforcement logic** to `Security Setup`, but keep **UI refactoring** in the separate `Refactoring` backlog item.
+- Remove the "demo" mode code now even though it should be delegated to the refactoring backlog item
+- Create a single `ModeProvider` or `AuthContext` instead of multiple mode contexts.
+- Replace the old boolean `DEMO_MODE` with a structured `currentMode` derived from session + role + invitation status.
+- Use a centralized `MODE_CONFIG` to drive read/write protection and UI availability checks.
+- The backend will decide the role; the frontend will decide the mode-based UI behavior.
+- Testing effort will be scoped *after* functionality is implemented, not during.
+
 
 #### 📌 Action Items
-- 
+- [x] Update `Security Setup` to account for different modes
+- [x] Complete RBAC Matrix
+- [ ] Ensure all frontend fetches include { credentials: 'include' }.
+- [ ] Frontend refactoring
+  - [ ] Remove "demo" mode
+  - [ ] Create one top-level context/provider
+  - [ ] Build a MODE_CONFIG object like (visitor, guest, owner)
 
 ---
