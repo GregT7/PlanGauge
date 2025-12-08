@@ -849,14 +849,262 @@ So no incorrect assumptions, just a reminder that your design can stay lean.
 - The backend will decide the role; the frontend will decide the mode-based UI behavior.
 - Testing effort will be scoped *after* functionality is implemented, not during.
 
-
 #### 📌 Action Items
 - [x] Update `Security Setup` to account for different modes
 - [x] Complete RBAC Matrix
-- [ ] Ensure all frontend fetches include { credentials: 'include' }.
-- [ ] Frontend refactoring
-  - [ ] Remove "demo" mode
-  - [ ] Create one top-level context/provider
-  - [ ] Build a MODE_CONFIG object like (visitor, guest, owner)
+- [x] Ensure all frontend fetches include { credentials: 'include' }.
+- [x] Frontend refactoring
+  - [x] Remove "demo" mode
+  - [x] Create one top-level context/provider
+  - [x] Build a MODE_CONFIG object like (visitor, guest, owner)
+
+---
+
+## 🗓️ Standup 12 – Security + Mode Refactor Momentum
+
+### 🧾 Overview
+* **Date:** Saturday, November 29th (2025)
+* **Time:** 12:13 PM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Security Setup`
+  - `Security Design`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Will continue working on login/logout functionality (adding ui components) + designing diagrams + taking some quizzes
+- Getting a lot closer to being deploy ready
+- Thinking about moving more thorough testing work into separate backlog for security -- don't want to spend too much time testing; it's annoying!
+
+#### 📈 Previous Progress
+- Found isDemo code and commented it out (haven't deleted anything yet)
+- Created a top-level context provider and implemented into code
+- Built a mode_config object for scalable/modular permission restriction
+- Ensured all fetches include { credentials: 'include' }
+- Completed RBAC Matrix
+
+#### 🧱 Problems & Blockers
+- Created new backlog items without pasting them in the `Icebox` section on Notion
+  - Don't want to impulsively create new backlog items, needlessly expanding scope
+  - Want to decide at the end of each sprint whether or not to add a new backlog item
+
+#### ⏳ Pending Actions
+- None
+
+#### 🔜 Next Steps
+- Design Session Lifecycle (State Machine) Diagram
+- Modify quizzes
+- Take quizzes
+  - devops quiz
+  - auth quiz
+- Authentication Work
+  - Create login function
+  - Create popup form when login pressed
+  - Create logout function
+  - Create login button with styling
+  - Create logout button with styling
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- Do you think penetration testing should be done before or after refactoring the frontend and backend? Also should I refactor the frontend/backend before re-deploying?
+
+**Answer:**  
+Penetration testing should be performed **after** refactoring and **after** redeploying the updated system. Testing before refactoring wastes effort because:
+
+- The attack surface changes after code structure changes  
+- Findings become outdated or invalid  
+- New security logic (RBAC, session lifecycle, CSRF/origin rules) won’t be included in the test  
+
+Correct order:
+
+1. Complete refactoring (auth, sessions, origin checks, folder structure, mode system)  
+2. Re-deploy development environment  
+3. Conduct penetration testing  
+4. Patch findings  
+5. Promote to production 
+
+And yes—**refactor before redeploying** to minimize migration cost and testing confusion.
+
+### 🧾 Results
+Design-
+#### 🧠 Discussion Notes
+- Testing should follow refactors to ensure the evaluated attack surface is accurate  
+- Diagrams will clarify threat surfaces and guide smoother implementation  
+- Security testing is large enough to justify its own backlog item  
+- Backlog item creation should be gated by sprint boundaries  
+- Login/logout UI work belongs under the `Security Setup` backlog  
+- Deploy readiness is improving
+- Session lifecycle diagram will help prevent rework when implementing session expiration logic  
+
+#### 🗝️ Key Decisions
+- Add login/logout UI subtasks back into `Security Setup`  
+- Perform refactor **before** penetration testing and redeployment   
+- Restrict new backlog additions to sprint boundaries  
+
+#### 📌 Action Items
+- [x] Add login/logout UI subtasks to `Security Setup` backlog
+- [x] Design Session Lifecycle (State Machine) Diagram
+- [x] Modify quizzes
+- [x] Take quizzes
+  - [x] devops quiz
+  - [x] auth quiz
+  - [x] web quiz
+- [ ] Authentication Work
+  - [ ] Create login function
+  - [x] Create popup form when login pressed
+  - [ ] Create logout function
+  - [ ] Create login button with styling
+  - [ ] Create logout button with styling
+
+---
+
+## 🗓️ Standup 13 – Login UI Implementation
+
+### 🧾 Overview
+* **Date:** Sunday, November 30th (2025)
+* **Time:** 10:23 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Security Setup`
+  - `Security Design`
+  - `Refactoring`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Retook the quizzes and failed most of them -- need to keep learning + reviewing
+- Quickly vibe coded the login dialog component -- need to review/revise
+- Want to hopefully get login and logout functionality working today
+
+#### 📈 Previous Progress
+- Quizzes
+  - Revised quiz questions to be more up-to-date
+  - Took 3 quizzes (auth, web app, devops), passed one
+- Finished designing the session lifecycle state machine diagram
+- Add login/logout UI subtasks to `Security Setup` backlog
+
+#### 🧱 Problems & Blockers
+- Added helper functions to react components section -- not sure if this storage approach makes sense
+  - Want helper functions and react components to be completely separated
+- Quickly vibe coded PasswordField.jsx and LoginModal.jsx components -- need to review code
+- `Security Setup` needs to be updated again
+  - AuthContext is not incorporated
+  - AuthenticationSystem is not incorporated
+  - DoD is not updated
+- bug: login function attached to the DialogModal does not work
+
+#### ⏳ Pending Actions
+- [ ] Authentication Work
+  - [ ] Create login function w/ toast
+  - [ ] Create logout function w/ toast
+  - [ ] Create login button with styling
+  - [ ] Create logout button with styling
+
+#### 🔜 Next Steps
+- Update `Security Setup` again
+  - Subtasks: AuthContext
+  - Subtasks: AuthenticationSystem (responsible for displaying login and logout buttons at the right time)
+  - Make DoD reflect all subtasks
+- Consider moving javascript functions from react component folder into utils folder
+- Review vibe coded components (PasswordField.jsx + LoginModal.jsx)
+- Retake quizzes
+  - Web app security
+  - Devops
+- Authentication Work
+  - Create login function w/ toast
+  - Create logout function w/ toast
+  - Create login button with styling
+  - Create logout button with styling
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- What do you recommend: completely separating all javascript files from react component files or keep script files packaged together with relevant react files?
+
+**Answer:**  
+If a function is general-purpose and not tied to a specific component’s behavior → **place it in `utils/`**.  
+If the function exists *only* to support one specific component → **keep it colocated** with that component.
+
+This hybrid approach keeps components clean while avoiding fragmented logic.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- You are beginning to see that the `Security Setup` backlog item needs restructuring to match your evolving design (AuthContext + AuthenticationSystem separation).  
+- Helper functions probably shouldn't live inside the components directory unless they are component-specific; general helpers should live in `utils/` to keep React tree clean.  
+- LoginModal + PasswordField “vibe coded” approach worked for unblocking progress, but both need refactoring to match project conventions (props handling, state isolation, error display).  
+- The broken login function is likely caused by the dialog not forwarding the correct callback or the fetch call not including `credentials: "include"`.  
+- Incorporating AuthContext early will simplify AuthenticationSystem state & UI visibility logic.
+
+#### 🗝️ Key Decisions
+- Move general-purpose JavaScript helper functions out of `components/` and into `utils/` to maintain separation of concerns.
+- Keep component-specific logic co-located with components to avoid fragmentation.
+- Add moving scripts into more logical/organized locations as a task to the refactoring backlog item
+- AuthenticationSystem becomes the single source of truth for “should user see login or logout UI?”.
+- Continue using vibe-coded UI for rapid prototyping but refactor before merging.
+
+#### 📌 Action Items
+- [ ] Update `Security Setup` again
+  - [ ] Subtasks: AuthContext
+  - [ ] Subtasks: AuthenticationSystem (responsible for displaying login and logout buttons at the right time)
+  - [ ] Make DoD reflect all subtasks
+- [ ] Review vibe coded components (PasswordField.jsx + LoginModal.jsx)
+- [ ] Retake quizzes
+  - [ ] Auth
+  - [ ] Deveops
+- [ ] Authentication Work
+  - [ ] Create login function w/ toast
+  - [ ] Create logout function w/ toast
+  - [ ] Create login button with styling
+  - [ ] Create logout button with styling
+- [ ] Add new items to `Refactoring` for moving around util scripts
+
+---
+
+## 🗓️ Standup [#] – [Standup Title]
+
+### 🧾 Overview
+* **Date:** 
+* **Time:** 
+* **Attendees:** 
+* **Discussed Backlog Items:**  
+  - 
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- 
+
+#### 📈 Previous Progress
+- 
+
+#### 🧱 Problems & Blockers
+- 
+
+#### ⏳ Pending Actions
+- 
+
+#### 🔜 Next Steps
+- 
+
+### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+
+#### ❓ Question 1 (OPTIONAL)
+- 
+
+
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- 
+
+#### 🗝️ Key Decisions
+- 
+
+#### 📌 Action Items
+- 
 
 ---

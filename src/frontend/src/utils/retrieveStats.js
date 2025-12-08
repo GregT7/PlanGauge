@@ -10,9 +10,8 @@ export default async function retrieveStats(url) {
 
     const dbResp = await fetch(url, {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        }
+        headers: {"Content-Type": "application/json"},
+        credentials: "include"
     })
     if (dbResp === null) {
         console.log(resp.message)

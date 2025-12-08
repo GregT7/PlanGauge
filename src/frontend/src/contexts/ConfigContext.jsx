@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 import config from "@/utils/config";
 
 export const ConfigContext = createContext(config);
