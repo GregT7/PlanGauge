@@ -1,53 +1,30 @@
-import { createContext, useState, useMemo, useContext } from 'react';
+import { createContext, useState, useEffect, useMemo, useContext } from 'react';
 import toLocalMidnight from '@/utils/toLocalMidnight';
 import emptyTasks from "@/utils/emptyTasks.json" with { type: 'json' }
 import demoTasks from "@/utils/demoTasks.json" with { type: 'json' }
-import { genDaysOfCurrentWeek, parseDate } from "@/utils/genDefaultCardData"
-import { ConfigContext } from "@/contexts/ConfigContext"
+
+import { AuthContext } from './AuthContext';
+import { reformatTasks, parseTaskDates } from '@/utils/modeUtils';
+import { determineCapabilities } from './modeConfig';
+
 export const TaskContext = createContext(undefined);
 
-function reformat(tasks) {
-    return tasks.map(task => (
-        {
-            ...task, 
-            "start_date": toLocalMidnight(task["start_date"]),
-            "due_date": toLocalMidnight(task["due_date"])
-        }
-    ))
-}
-
-
-function parseTaskDates(tasks) {
-    const days = genDaysOfCurrentWeek()
-
-    // parse the task date from "Monday" to "2025-10-13"
-    return tasks.map(task => {
-        const startDate = parseDate(task["start_date"], days)
-        const dueDate = parseDate(task["due_date"], days)
-
-        return {
-            ...task,
-            "start_date": toLocalMidnight(startDate),
-            "due_date": toLocalMidnight(dueDate)
-        }
-    })
-
-}
-
-export default function TaskContextProvider({children, starting_tasks}) {
-    let reformattedTasks
-    const config = useContext(ConfigContext)
-    if (config.isDemo) {
-        const parsedTasks = parseTaskDates(demoTasks)
-        reformattedTasks = reformat(parsedTasks)
-    } else {
-        if (starting_tasks == null) reformattedTasks = emptyTasks
-        else {
-            reformattedTasks = reformat(starting_tasks)
-        }
-    }
-    
+export function TaskContextProvider({children}) {
+    const { authLoaded, mode } = useContext(AuthContext)
+    let reformattedTasks = reformatTasks(emptyTasks)
     const [tasks, setTasks] = useState(reformattedTasks);
+
+    // useEffect(() => {
+    //     const capabilities = determineCapabilities(mode);
+    //     if (capabilities?.taskSource === "dummy") {
+    //         const parsedTasks = parseTaskDates(demoTasks)
+    //         reformattedTasks = reformatTasks(parsedTasks)
+    //         setTasks(reformattedTasks)
+    //     } else {
+    //         reformattedTasks = reformatTasks(emptyTasks)
+    //         setTasks(reformattedTasks)
+    //     }
+    // }, [authLoaded, mode])
 
     const timeSum = useMemo(() =>
         tasks.reduce((sum, task) => sum + task.time_estimation , 0), 
