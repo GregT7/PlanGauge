@@ -10,11 +10,12 @@ import { ConfigContext } from "@/contexts/ConfigContext"
 import { handleSubmit } from "@/utils/modeUtils";
 import { AuthContext } from "@/contexts/AuthContext";
 import { determineCapabilities } from "@/contexts/modeConfig";
+import { MODES } from "@/contexts/modeConfig";
 
 function SubmissionButton({status = "neutral"}) {
   const { tasks } = useContext(TaskContext);
   const { feasibility } = useContext(processingContext);
-  const { mode } = useContext(AuthContext);
+  const { mode, setUser, setMode } = useContext(AuthContext);
   const config = useContext(ConfigContext)
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -37,9 +38,12 @@ function SubmissionButton({status = "neutral"}) {
   formatDates(tasksCopy);
   const capabilities = determineCapabilities(mode);
   async function handleOnClick() {
-    await handleSubmit(config, capabilities, tasksCopy, setIsDisabled)
+    const resp = await handleSubmit(config, capabilities, tasksCopy, setIsDisabled)
+    if (resp?.ok === false && resp.message === "UNAUTHORIZED") {
+      setUser(null)
+      setMode(MODES.VISITOR)
+    }
   }
-
 
   const style = "text-xl p-6 " + handleStyling(feasibility?.status)
 

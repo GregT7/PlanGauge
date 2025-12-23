@@ -14,17 +14,17 @@ export function TaskContextProvider({children}) {
     let reformattedTasks = reformatTasks(emptyTasks)
     const [tasks, setTasks] = useState(reformattedTasks);
 
-    // useEffect(() => {
-    //     const capabilities = determineCapabilities(mode);
-    //     if (capabilities?.taskSource === "dummy") {
-    //         const parsedTasks = parseTaskDates(demoTasks)
-    //         reformattedTasks = reformatTasks(parsedTasks)
-    //         setTasks(reformattedTasks)
-    //     } else {
-    //         reformattedTasks = reformatTasks(emptyTasks)
-    //         setTasks(reformattedTasks)
-    //     }
-    // }, [authLoaded, mode])
+    useEffect(() => {
+        const capabilities = determineCapabilities(mode);
+        if (capabilities?.taskSource === "dummy") {
+            const parsedTasks = parseTaskDates(demoTasks)
+            reformattedTasks = reformatTasks(parsedTasks)
+            setTasks(reformattedTasks)
+        } else {
+            reformattedTasks = reformatTasks(emptyTasks)
+            setTasks(reformattedTasks)
+        }
+    }, [authLoaded, mode])
 
     const timeSum = useMemo(() =>
         tasks.reduce((sum, task) => sum + task.time_estimation , 0), 
