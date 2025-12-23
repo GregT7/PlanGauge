@@ -29,10 +29,7 @@ export default function LogoutButton() {
         try {
             setIsDisabled(true)
             const loginResp = await submitLogout(url);
-            if (loginResp?.ok) {
-                setUser(null)
-                setMode(MODES.VISITOR)
-            } else {
+            if (!loginResp?.ok) {
                 const defaultErrorMsg = "Error: There was an error while logging out, please try again..."
                 toast.error(loginResp?.message ?? defaultErrorMsg)
             }
@@ -40,6 +37,8 @@ export default function LogoutButton() {
             console.log(`Logout error: ${e.message}`)
         } finally {
             setIsDisabled(false)
+            setUser(null)
+            setMode(MODES.VISITOR)
         }
     }
 

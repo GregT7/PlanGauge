@@ -14,7 +14,7 @@ export const MODE_CONFIG = {
     canGenerateInvites: false
   },
   [MODES.GUEST]: {
-    taskSource: "empty", // they can play with the table
+    taskSource: "dummy", // they can play with the table
     statsSource: "real",           // see your real stats
     canTestConnections: false,
     canLogin: false,

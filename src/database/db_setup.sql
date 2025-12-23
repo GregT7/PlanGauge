@@ -119,7 +119,6 @@ CREATE TABLE app_user (
   email text not null unique,
   password_hash text,
   role text not null check (role in ('owner','guest')) default 'guest',
-  password_login_enabled boolean not null default false,
   created_at timestamptz not null default now()
 );
 
@@ -132,17 +131,3 @@ CREATE TABLE session (
   revoked boolean not null default false,
   last_seen TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
-
--- Invites (table + index)
-CREATE TABLE invite (
-  id uuid primary key default uuid_generate_v4(),
-  token_hash text not null unique,
-  email text NOT NULL,
-  role text not null default 'guest'
-    check (role in ('guest')),
-  expires_at timestamptz not null,
-  used boolean not null default false,
-  created_at timestamptz not null default now()
-);
-
-create index invite_token_hash_idx on public.invite (token_hash);

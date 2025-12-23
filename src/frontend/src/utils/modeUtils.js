@@ -143,6 +143,7 @@ export const handleClickDemo = async () => {
 
 
 async function handleRealSubmit(config, capabilities, tasks, setIsDisabled) {
+    setIsDisabled(true)
     const filter_start_date = config?.filter_start_date
     const filter_end_date = config?.filter_end_date
     const url = config?.flaskUrl?.plan_submissions
@@ -157,35 +158,56 @@ async function handleRealSubmit(config, capabilities, tasks, setIsDisabled) {
         return respPromise
     }
 
+    let resp = {ok: null, message: null, details: null}
     try {
-        setIsDisabled(true)
-        const submitResp = await submitToast(tasks, filter_start_date, filter_end_date, url);
+        resp = await submitToast(tasks, filter_start_date, filter_end_date, url);
     } catch (e) {
         console.log(`Submission error: ${e.message}`)
+        resp.ok = false
+        resp.message = e.message
+        resp.details = e;
     } finally {
         setIsDisabled(false)
+        return resp
     }
 }
 
+async function handleDummySubmit(setIsDisabled) {
+    setIsDisabled(true)
 
-async function handleDummySubmit() {
-    const demoPromise = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({message: "Simulated plan submission susscessfully!"})
-        }, 3000)
-    })
+    const submitToast = async () => {
+        const demoPromise = new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({message: "Simulated plan submission susscessfully!"})
+            }, 3000)
+        })
+        await toast.promise(demoPromise, {
+            loading: "Simulating plan submission",
+            success: (resp) => resp.message,
+            error: "Demo failed (this should never happen)",
+        })
+    }
 
-    await toast.promise(demoPromise, {
-        loading: "Simulating plan submission",
-        success: (resp) => resp.message,
-        error: "Demo failed (this should never happen)",
-    })
+    let resp = {ok: true, message: "Dummy plan submission was successful", details: "Submission successful"}
+    try {
+        await submitToast();
+    } catch (e) {
+        console.log(`Submission error: ${e.message}`)
+        resp.ok = false
+        resp.message = e.message
+        resp.details = e;
+    } finally {
+        setIsDisabled(false)
+        return resp;
+    }
 }
 
 export async function handleSubmit(config, capabilities, tasks, setIsDisabled) {
+    let resp = {ok: null, message: null, details: null}
     if (capabilities?.canSubmitPlans) {
-        await handleRealSubmit(config, capabilities, tasks, setIsDisabled)
+        resp = await handleRealSubmit(config, capabilities, tasks, setIsDisabled)
     } else {
-        await handleDummySubmit();
+        resp = await handleDummySubmit(setIsDisabled);
     }
+    return resp;
 }
