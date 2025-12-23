@@ -147,3 +147,60 @@ _Description:_ Demonstrates terminal outputs from curling the Flask stats API us
 _Description:_ Showcases an end-to-end test verifying the full stats retrieval workflow—from frontend request initiation to backend response and UI feedback—confirming that valid data updates visual elements and toast notifications as expected.
 
 ![feedback_e2e](https://github.com/user-attachments/assets/708ef933-3a19-484e-90b6-fac08093284f)
+
+## R-8 Authentication
+### Security DB Design (R-8.4, R-8.5)
+_Description:_ Shows the db schema for the newly created tables `session` and `app_user`. Sessions are for temporary instances that allow users to gain access based on their allowed permissions while app users are linked to sessions and determine the role and degree of permissions a person has. 
+
+![db_auth](https://github.com/user-attachments/assets/e65b2976-7bd6-4501-b60b-d210349c2763)
+
+### Session Lifecycle (R-8.3, R-8.4, R-8.5)
+_Description:_ State diagram that describes the session lifecycle including the creation, expiration, and revocation of access for a user.
+
+![session_life](https://github.com/user-attachments/assets/09196ef9-046a-4bb8-b2d3-69b92bf1dd46)
+
+### Login Process (R-8.1, R-8.3)
+_Description:_ Swimlane diagram used to show the cross-system process of a user authenticating into the system
+
+![login_swimlane](https://github.com/user-attachments/assets/604868b8-11a6-4f6e-8493-2ba37da72e3c)
+
+### Login Modal (R-8.1, R-8.3)
+_Description:_ The popup component used to collect login credentials from the user and to attempt authentication. Created using shadcn dialog component.
+
+![login_modal](https://github.com/user-attachments/assets/6b01b68a-83f4-40f1-bc0d-57019b66c924)
+
+### Login Demo (R-8.1, R-8.3)
+_Description:_ Shows an instance of the login process: person clicks the login button, dialog popup spawns, user inputs the wrong credentials, submit is clicked, loading toast is launched, toast is resolved to show an error, user inputs the correct credentials, loading toast is launched, toast resolves to show success, visitor modal updates to "guest"
+
+![login_demo](https://github.com/user-attachments/assets/f3f1042f-7417-48de-8f83-0732d49db8f2)
+
+### Logout Process (R-8.2, R-8.3)
+_Description:_ Swimlane diagram used to show the cross-system process of a user logging out of the system
+
+![logout_swimlane](https://github.com/user-attachments/assets/8297325e-a057-45c5-b9b1-1c936d48e985)
+
+### Logout Button (R-8.2, R-8.3)
+_Description:_ Simple logout button with a logout api requesting function attached. Included for thoroughness.
+
+![logout_button](https://github.com/user-attachments/assets/8abce149-650c-4158-8a64-21d912900e31)
+
+### Logout Demo (R-8.2, R-8.3)
+_Description:_ Shows an instance of the logout process: user clicks logout button, loading toast spawns and resolves to success, mode display updates to 'visitor' which is the role of a logged out user.
+
+![logout_demo](https://github.com/user-attachments/assets/322db104-bf28-4fb2-a804-d05f1d533215)
+
+## R-9 Role Based Access Control 
+### RBAC Matrix (R-9.1, R-9.2, R-9.3)
+_Description:_ Shows the permissions allowed to the three user roles: "owner" (most permissions), "guest" (almost all permissions aside from record storage), and "visitor" (least privileges, uses mock data/toasts)
+
+![rbac_mtrx](https://github.com/user-attachments/assets/9d12555e-e4a7-495e-9571-589c3f3582ea)
+
+### Mode Display (R-9.2)
+_Description:_ Displays the role of the currently logged in user ("owner"|"guest"|"visitor")
+
+![mode_display](https://github.com/user-attachments/assets/f88b9aa5-3b24-4196-b38d-ab057ee68f4c)
+
+### Mock Processes (R-9.3)
+_Description:_ Shows the mock plan submission, stat retrieval, and connection test launched with mock task data loaded when a logged out user visits the app (role is "visitor"). The mock stat retrieval function retrieves a static json object from the frontend that represents old, derived data. The connection test and plan submission functions simply wait on a timeout function and the mock task data is also retrieved from the frontend. These features are intended to give visitors to the app a brief idea of what's going on without granting them unnecessary functionality (ie they can't submit plan data to my Notion database or make API calls to retrieve and derive up-to-date stat values). This limits the usage of free tier deployment services I am utilizing which will improve the longevity of personal usage each month without paying additional fees.
+
+![mock_process](https://github.com/user-attachments/assets/4fa7203f-851a-428d-bdc6-fb1ba340a765)
