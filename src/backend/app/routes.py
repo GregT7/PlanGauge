@@ -11,7 +11,6 @@ import asyncio
 
 
 @app.route('/')
-@require_session
 def index():
     return 'PlanGauge Flask App'
 
