@@ -1,5 +1,5 @@
 # PlanGauge - Planning Assistance Tool
-_Description_: PlanGauge is a full-stack planning assistant that helps users create, evaluate, and submit weekly plans through a clean, Notion-style interface. It visualizes plan feasibility using statistical metrics and dynamic color-coded feedback, then syncs finalized plans to connected Notion and Supabase databases via a Flask API.
+_Description_: PlanGauge is a full-stack planning assistant application that helps users create, evaluate, and submit weekly plans through a clean, Notion-style interface. It visualizes plan feasibility using statistical metrics and dynamic color-coded feedback, then syncs finalized plans to connected a connected Notion table (database) where todo tasks for the week can be managed. The app has an authentication feature that permits role-based access to users granting them the capacity to submit real plan data, retrieve real statistical data, and test connections to peripheral systems. The app is currently deployed to the cloud and is accessible via this link: https://plan-gauge.vercel.app/. If you would like a temporary login which would grant you access to some additional privileges/features, email me: gregterrelga@gmail.com
 
 
 <details>
@@ -10,13 +10,18 @@ _Description_: PlanGauge is a full-stack planning assistant that helps users cre
   - [How to Install](#how-to-install)
   - [How to Use Tool](#how-to-use-tool)
   - [Other](#other)
+    - [Testing](#testing)
+    - [Limitations](#limitations)
+    - [Assets Relocation](#assets-relocation)
+    - [Acknowledgements](#-acknowledgements)
 </details>
 
 ---
 
 ## Overview
 ### Use Cases
-_Description:_ The system allows users to create, evaluate, and submit weekly plans through an interactive task table that provides real-time feedback on workload and feasibility. It automatically calculates and displays plan feasibility using statistical metrics, then syncs finalized plans to external systems like Notion and Supabase. On launch, it verifies connections and loads stored data to ensure accurate, up-to-date feedback.
+_Description:_ The system allows users to create, evaluate, and submit weekly plans through an interactive task table that provides real-time feedback on workload and feasibility. It automatically calculates and displays plan feasibility using statistical metrics, then conditionally syncs finalized plans to external systems such as Notion and Supabase based on the user’s authenticated role. On launch, the application verifies backend and integration connectivity, loads stored feasibility data, and determines the user’s authentication state and role to establish the appropriate system mode (visitor, guest, or owner). Throughout the session, role-based access controls govern available features, substituting mock data and processes when permissions are restricted, while secure sessions preserve authentication state across refreshes until logout, expiration, or revocation.
+
 <details>
     <summary>
         More Details
@@ -26,11 +31,14 @@ _Description:_ The system allows users to create, evaluate, and submit weekly pl
 - UC-2: Evaluate Plan Feasibility — The user views live feedback through the Stat Card System and Evaluation Section, which compute daily and weekly feasibility using Z-scores (R-1.22–R-1.23). The Evaluation Section provides a summary score and detailed breakdown of contributing metrics. (Ref: design.md – “Populated State,” “Evaluation Section,” “Details Accordion”)
 - UC-3: Submit Plan to External Systems — The user clicks the Submit button to send plan data to Notion and Supabase via Flask (R-5.10). A toast confirms success or failure, and the button color reflects the plan’s overall feasibility. (Ref: design.md – “Submission Swimlane Diagram,” “Submission Demo”)
 - UC-4: System Launch and Data Retrieval — On startup, the app runs connectivity checks for Flask, Supabase, and Notion (R-7.40–R-7.41) and retrieves stored stats to initialize feasibility data. Toasts indicate success or failure of retrieval operations. (Ref: design.md – “Startup Process Swimlane Diagram,” “Stats Retrieval API Endpoint”)
+- UC-5: Authenticate User and Manage Session Lifecycle — The user clicks the Login button to open the Login Modal, submits email and password credentials, and receives loading and success/error toast feedback while the system searches for a matching user record by email and compares the hashed password input to the stored password hash (R-8.10–R-8.18, R-8.50–R-8.52). On success, the system creates a session, issues a secure cookie, and preserves authentication state across refreshes until logout, expiration, or revocation (R-8.20–R-8.23, R-8.42–R-8.44). (Ref: design.md – “Login Process Swimlane,” “Login Modal,” “Session Lifecycle”)
+- UC-6: Enforce Role-Based Access and Conditional System Behavior — After authentication, the system retrieves the user’s role attribute from the database record and applies it as the active application role (“owner” or “guest”), while unauthenticated users retain the default “visitor” role (R-9.10–R-9.15). Based on the retrieved role, the application enables or restricts features such as plan submission, real data retrieval, and system health checks, substituting mock data and mock processes where permissions are limited (R-9.11–R-9.36). (Ref: design.md – “RBAC Matrix,” “Mode Display,” “Mock Processes”)
+
 </details>
 
 ### System Demo
 
-_Description_: This demo shows the app launching, performing API health checks, retrieving stats, and updating its UI from “unknown” to “good.” As the user enters plans, metrics and statuses update in real time, and new records are successfully synced to Supabase and Notion upon submission.
+_Description_: This demo shows the app launching, performing API health checks, retrieving stats, and updating its UI from “unknown” to “good.” As the user enters plans, metrics and statuses update in real time, and new records are successfully synced to Supabase and Notion upon submission. Demo does not include any authentication/role-based-access features.
 
 ![system_demo](https://github.com/user-attachments/assets/23625c7a-682c-43c6-a5a8-9ebac076261f)
 
@@ -50,7 +58,7 @@ The demo continues with the user scrolling through the updated interface, showin
 
 ### Architecture
 #### Teck Stack
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white) ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![Render](https://img.shields.io/badge/Render-000000?style=for-the-badge&logo=render&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 <details>
     <summary>
@@ -58,37 +66,39 @@ The demo continues with the user scrolling through the updated interface, showin
     </summary>
 
 - Frontend:
-    - ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-        - Manages the application’s dynamic UI and state, allowing real-time updates as users modify their weekly plans.
-    - ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-        - Provides a responsive and modern utility-based styling framework for consistent, adaptive layouts.
-    - ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
-        - Offers a good looking library for aesthetically pleasing dark mode styling design
+  - ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+    - Manages the application’s dynamic UI and state, allowing real-time updates as users modify their weekly plans.
+  - ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+    - Provides a responsive and modern utility-based styling framework for consistent, adaptive layouts.
+  - ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
+    - Offers a good looking library for aesthetically pleasing dark mode styling design
 - Backend:
-    - ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
-        - Implements the backend logic and HTTP endpoints that process feasibility calculations, manage plan submissions, and connect to external services.
-    - ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
-        - Enables two-way synchronization of plan data between PlanGauge and the user’s Notion workspace.
+  - ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+      - Implements the backend logic and HTTP endpoints that process feasibility calculations, manage plan submissions, and connect to external services.
+  - ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
+      - Enables two-way synchronization of plan data between PlanGauge and the user’s Notion workspace.
 - Database:
-    - ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) 
-        - Stores plan submissions and plan records created using this app. Also stores previous work/productivity records that are used for statistical metric calculations. The statistical metrics are then used to compare the current plan to previous performances.
-    - ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-        - Supabase uses PostgreSQL
+  - ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) 
+      - Stores plan submissions and plan records created using this app. Also stores previous work/productivity records that are used for statistical metric calculations. The statistical metrics are then used to compare the current plan to previous performances.
+  - ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+    - Supabase uses PostgreSQL
+- Deployment:
+  - ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+    - Hosts the frontend, react app.
+  - ![Render](https://img.shields.io/badge/Render-000000?style=for-the-badge&logo=render&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+    - Hosts the backend flask app containerized with docker and running with gunnicorn
+  - ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+    - Containerizes the flask app
+  
 </details>
 
 #### System Architecture Diagram
 
 _Description:_ The system architecture connects a React-based frontend to a Flask backend that interfaces with Supabase and the Notion API, enabling real-time plan evaluation, data synchronization, and dynamic UI feedback.
 
-![sys_architect](https://github.com/user-attachments/assets/a2dceaf5-68dd-4d71-98f7-460ba8fe95a9)
+![sys_architect](https://github.com/user-attachments/assets/4076d756-7bc9-474c-aed8-64a156406570)
 
-#### Dependencies
-**Demo Mode**
-
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pip](https://img.shields.io/badge/pip-3775A9?style=for-the-badge&logo=pypi&logoColor=white)
-
-**Full Mode**
-
+#### Dependencies (for local setup)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![pip](https://img.shields.io/badge/pip-3775A9?style=for-the-badge&logo=pypi&logoColor=white) ![Google](https://img.shields.io/badge/Google-4285F4?style=for-the-badge&logo=google&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
 
 <details>
@@ -112,7 +122,6 @@ _Description:_ The system architecture connects a React-based frontend to a Flas
 - Google Account  
   A Google account is required to access Notion authentication setup and any integrated cloud services (if applicable).  
   - Used for identity verification, environment configuration syncing, and potential API access (e.g., Google Drive or OAuth).  
- 
 
 - Supabase Account (Free Tier)
   A Supabase account is needed to store and retrieve data.  
@@ -132,7 +141,6 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
         <code>/project_journal</code>: solo-Scrum documents showing my evolution through implementing an agile environment
     </summary>
 
-- `/assets`: stores diagrams, mockups, quiz docs, demo gifs, and other docs created during sprints
 - `/backlog`: backlog item documentation for features implemented in this project
 - `/professional_review`: presentation and notes from project pitch to CS professor
 - `/pull_requests`: docs for completed pull requests demoing the features developed and merged
@@ -165,13 +173,17 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
 - `/backend`: Implements the Flask API server responsible for handling data transactions, performing validation, and bridging between the React frontend and Supabase database.
     - `/app/__init__.py`: Initializes the Flask app instance and loads configuration (e.g., environment variables, API keys).
+    - `/app/auth_utils.py`: Utility functions used for enforcing authentication when making api requests to the flask app.
+    - `/app/clients.py`: Helper functions used to retrieve a temporary supabase object or attach headers for notion requests.
     - `/app/routes.py`: Defines RESTful API endpoints for CRUD operations, plan submission, and Notion synchronization.
     - `/app/utils.py`: Contains helper functions for validation, data formatting, and Notion API communication.
     - `/tests/`: Houses backend unit and integration tests written with pytest.
+    - `Dockerfile`: Containerizes flask, installs python dependencies, and starts flask app with gunnicorn
     - `pytest.ini`: Configures test discovery paths and environment markers for pytest.
     - `run.py`: Entry point to launch the Flask development server.
 - `/database`: Contains SQL scripts and schema configuration for the project’s Supabase (PostgreSQL) layer.
     - `db_setup.sql`: Creates database tables, relations, and constraints aligned with the BCNF-compliant schema defined in the design specs.
+    - `init_records.sql`: Script to initialize most of the relational tables with sample data, helpful if you want to create your own supabase account.
     - `row_security.sql`: Defines row-level security policies to control user access and protect plan submission records.
 - `/frontend`: Implements the React + Tailwind + Shadcn/UI interface that allows users to input, visualize, and submit their weekly plans.
     - `/e2e/`: End-to-end tests using Playwright to verify full-stack functionality.
@@ -189,13 +201,11 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 
 ---
 
-## How to Install
-
-> Note: The steps in this section are all that’s required to demo and run PlanGauge locally without setting up Notion or Supabase integration. If you want to fully connect external services and enable plan synchronization, continue to the Full Mode section below.
+## How to Install Locally
+> Note: Complete setup for cloning the repo, installing dependencies, integrating Notion + Supabase, and setting up environment files.
 
 <details>
   <summary>More Details</summary>
-
 
 1️⃣ Clone the repository
    ```
@@ -217,40 +227,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
    pip install -r requirements.txt
    ```
 
-4️⃣ Setup necessary environment files
-  1. Create general env file (`/PlanGauge/src/.env`)
-      1. Navigate to `/PlanGauge/src/.env`
-      ```
-      cd /PlanGauge/src
-      ```
-
-      2. Copy & paste into new .env file
-      ```
-      VITE_FLASK_BASE_ROUTE=http://127.0.0.1:
-      VITE_FLASK_DEFAULT_PORT=5000
-      VITE_FLASK_TESTING_PORT=5001
-      VITE_FLASK_HEALTH_ROUTE=/api/health
-      VITE_FLASK_STATS_ROUTE=/api/db/stats
-      VITE_FLASK_DEMO_STATS_ROUTE =/api/demo/stats
-      VITE_BASE_ROUTE=http://localhost:
-      VITE_DEFAULT_PORT=5173
-      VITE_TESTING_PORT=4173
-      VITE_DEFAULT_PLAN_START=2025-06-01
-      VITE_DEFAULT_PLAN_END=2025-06-30
-      VITE_NOTION_HEALTH_ROUTE=/api/notion/health
-      VITE_SUPABASE_HEALTH_ROUTE=/api/db/health
-      VITE_SUBMISSION_ROUTE=/api/plan-submissions
-      ```
-
-</details>
-
-### Full Mode
-> Note: Complete setup for integrating Notion, Supabase, and environment configuration.
-
-<details>
-  <summary>More Details</summary>
-
-1️⃣ Setup Notion
+4️⃣ Setup Notion
    1. Create or log into your Notion account.
    2. Create a new page.
    3. Add a database within that page.
@@ -258,7 +235,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
    5. Grant the integration full access to your database.
    6. Copy and store your Notion API key for later use.
 
-2️⃣ Setup Supabase
+5️⃣ Setup Supabase
    1. Create a free account at [https://app.supabase.com](https://app.supabase.com).
    2. Run the SQL scripts in `/PlanGauge/src/database/` in order:
       1. `db_setup.sql` — Initializes database tables.  
@@ -266,7 +243,7 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
       3. `init_records.sql` — Populates dummy records (optional).
    3. Note your Project URL and anon public key for the `.env` file.
 
-3️⃣ Setup environment files
+6️⃣ Setup environment files
   1. Ensure the general env files are already setup
   2. Create backend .env file (for api keys)
       1. Navigate to `/PlanGauge/src/backend`
@@ -352,77 +329,38 @@ PlanGauge was developed using an adapted Agile methodology called Solo-Scrum, ta
 ---
 
 ## How to Use Tool
-<details>
-  <summary>Demo Mode</summary>
+### 1️⃣ Navigate to website
+1. Navigate to this website: `https://plan-gauge.vercel.app/`
 
+### 2️⃣ Login
+1. Click the login button to spawn the dialogue input form
+2. Locate guest user credentials (email and password)
+3. Enter in user credentials and hit submit
+4. A loading toast will appear and resolve indicating either failure or success
+5. If successful, there will be a display with text: "Mode: Guest" at the top of the app.
 
-#### 1️⃣ Launch the Application  
-```bash
-cd PlanGauge/src/frontend  
-npm run start:demo
-```  
-The app will open automatically in your default browser and begin connecting to the Flask API. Toast messages will indicate connection and launch status.
-
-#### 2️⃣ Load Demo Data  
-Default, hardcoded statistical metrics are fetched from a demo API route. The task table is automatically populated with sample tasks representing a plan created just before submission.
-
-#### 3️⃣ Observe Feasibility Analysis  
-Once the backend connection is established, the feasibility analysis begins. The UI styling updates in real time to reflect the plan’s evaluation and feasibility results.
-
-#### 4️⃣ Experiment with the Task Table  
-Modify tasks to see how the feasibility and UI respond dynamically.  
-> Note: The Start Date must match one of the Stat Card dates for table changes to impact feasibility.
-
-#### 5️⃣ Submit the Plan  
-Click the Submit button to view a toast confirmation message.  
-*(No data will be sent since Notion and Supabase integrations are disabled in demo mode.)*
-
-#### 6️⃣ Review Evaluation Details  
-Scroll to the Evaluation Section to explore how the system calculates feasibility metrics and interprets results for each day and overall plan.
-
-</details>
-
-
-
-<details>
-  <summary>Full Mode</summary>
-
-
-
-#### 1️⃣ Launch the Application
-
-1. Start the app & wait for browser to open
-   ```
-   cd PlanGauge/src/frontend
-   npm run start
-   ```
-
-#### 2️⃣ Create or Edit Weekly Tasks
-
+### 3️⃣ Create or Edit Weekly Tasks
 1. Use the Notion-like task table to enter your weekly goals.  
    Each row represents a task with the following fields:
    - Task Name – Short description of your task.
    - Category – Choose from pre-defined options (e.g., Health, Career, School).
    - Start / Due Date – Select using the date picker.
    - Estimated Time – Enter manually or let the backend predict time (future feature).
-
 2. Add new tasks using the “+ New Page” button at the bottom of the table.
-
 3. Tasks update automatically as you edit fields — no need to manually save.
 
-#### 3️⃣ Review Daily and Weekly Feasibility
-
+### 4️⃣ Review Daily and Weekly Feasibility
+**Note**: Guest users will get up to date statistical data loaded
 - Each day displays a stat card showing:
   - The total planned time for that day.
   - A color-coded status:
     - 🟢 Good – Within target range.
     - 🟡 Moderate – Under or near threshold.
     - 🔴 Poor – Exceeds predicted workload limit.
-
 - At the bottom, a Plan Summary indicator shows the overall feasibility rating for the week.
 
-#### 4️⃣ Submit Your Plan
-
+### 5️⃣ Submit Your Plan
+**Note:** Restricted to owner only, for guest users a mock plan submission will occur which only renders a loading toast
 When satisfied with your plan, click the Submit button.  
 This will:
 1. Send your plan data to the Flask backend.  
@@ -431,13 +369,11 @@ This will:
    - Sync your updated plan to Notion, ensuring your Notion workspace stays up-to-date.
 3. A temporary status message will confirm if the sync succeeded or failed.
 
-#### 5️⃣ Adjust, Track, and Improve
-
+### 6️⃣ Adjust, Track, and Improve
 - You can adjust your plan anytime; simply edit the table and re-submit.
 - Future versions will incorporate your Supabase data to refine time predictions for similar task types.
 - Use color trends and stats to track planning consistency week-to-week.
-
-</details>
+>Note: If running locally launch both flask and vite servers and then access the app via the browser. Ensure the database has app_user records seeded so authentication is possible.
 
 ---
 
@@ -469,8 +405,6 @@ _Description:_ This section provides additional project details, including testi
   <summary>How to Run Tests</summary>
 
 #### 1️⃣ Frontend (Vitest)
-> Note: This does not include Playwright E2E tests — see the next section for setup.
-
 ```
 cd PlanGauge/src/frontend  
 npm run test
@@ -504,7 +438,6 @@ Uses nodejs to launch frontend + backend servers and then launch playwright test
     - However, the ground work is laid for editing/viewing/deleting previous plan submissions & corresponding plan records alongside other stats processing
     - work is not being differentiated into assigned_work and general_work, same thing with plans
     - assignment records aren't being used for anything and there is no way to assign plan records to them
-- Not Deployed: Using flask & vite servers
 
 ### Assets Relocation
 _Description:_ Assets stored on the repo were taking up too much memory so they were moved to a public google drive folder.
