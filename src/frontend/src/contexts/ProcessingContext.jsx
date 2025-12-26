@@ -10,15 +10,18 @@ import { genDefaultCardsData } from "@/utils/genDefaultCardData";
 import { eval_status } from "@/utils/evaluateFeasibility";
 import { toast } from 'sonner';
 import updateCardStats from "@/utils/updateCardStats";
-import { DEFAULT_PLAN_START, DEFAULT_PLAN_END } from "@/utils/planningRange";
 import { ConfigContext } from "@/contexts/ConfigContext"
 import demoStats from "@/utils/demoStats.json" with { type: 'json' }
+import { launchStatRetrieval } from "@/utils/modeUtils";
+import { determineCapabilities } from "./modeConfig";
+import { AuthContext } from "./AuthContext";
 
 export const processingContext = createContext(undefined);
 
 export function ProcessingContextProvider({children, starting_stats = default_stats, thresholds = defaultThresholds}) {
     const {tasks, timeSum} = useContext(TaskContext)
     const config = useContext(ConfigContext)
+    const { mode, authLoaded } = useContext(AuthContext)
 
     // Generate starting card data for each day of the week
     let cardData = genDefaultCardsData()
@@ -27,61 +30,15 @@ export function ProcessingContextProvider({children, starting_stats = default_st
     const [stats, setStats] = useState(starting_stats);
 
     useEffect(() => {
+        if (!authLoaded) return;
         let cancelled = false;
-            (async () => {
-                try {
-                    if (config.isDemo) {
-                        const demoPromise = new Promise((resolve) => {
-                        setTimeout(() => {
-                            resolve({ message: "Mock statistical data retrieved!",
-                                data: demoStats
-                             });
-                        }, 2000);
-                        });
-
-                        await toast.promise(demoPromise, {
-                        loading: "Simulating statistical data retrieval...",
-                        success: (resp) => {
-                            setStats(resp.data)
-                            return resp.message},
-                        error: "Demo failed (this should never happen)",
-                        });
-                        return
-                    }
-                    let flaskURL = config.flaskUrl.db.stats
-                    const regex = /^\d{4}-\d{2}-\d{2}$/
-                    const start_ok = regex.test(DEFAULT_PLAN_START)
-                    const end_ok = regex.test(DEFAULT_PLAN_END)
-                    if (!start_ok || !end_ok) {
-                        throw new Error("Invalid arguments passed to retrieveStats")
-                    }
-
-                    const query_str = `start=${DEFAULT_PLAN_START}&end=${DEFAULT_PLAN_END}`
-                    flaskURL += `?${query_str}`
-                    
-
-                    const promise = retrieveStats(flaskURL); // resolves to { message, details, data }
-
-                    // bind toast to the same promise (don’t await the toast)
-                    toast.promise(promise, {
-                        loading: 'Retrieving statistical data...',
-                        success: (r) => r?.message ?? 'Stats loaded',
-                        error:   (err) => "Error: Stats Retrieval Failure!",
-                    });
-
-                    const res = await promise; // get full object back
-                    if (!cancelled && res?.data) setStats(res.data);
-                } catch (err) {
-                    console.error('Stats init error:', err);
-                }
-            })();
+        const capabilities = determineCapabilities(mode);
+        launchStatRetrieval(config, capabilities, demoStats, setStats, cancelled)
     return () => { cancelled = true; };
-    }, []);
+    }, [authLoaded, mode]);
 
     // Update Card Data
     const statsUpdated = updateCardStats(cardData, stats?.day)
-
-    
 
     // On stat retrieval/update or task table update
     // 1. Process Card Data
@@ -108,10 +65,8 @@ export function ProcessingContextProvider({children, starting_stats = default_st
         [cardData]
     );
 
-
     //      C. Count the number of statuses
     const statusCount = useMemo(() => {
-        
         const regex = /^(good|moderate|poor|neutral|unknown)$/;
 
         return cardData.reduce((statObj, task) => {
@@ -133,7 +88,7 @@ export function ProcessingContextProvider({children, starting_stats = default_st
         return evaluateFeasibility(timeSum, stats?.week, statusCount, thresholds)
     }, [cardData, statusCount])
 
-    const initialDates = {start: DEFAULT_PLAN_START, end: DEFAULT_PLAN_END}
+    const initialDates = {start: config.filter_start_date, end: config.filter_end_date}
     const [filterDates, setFilterDates] = useState(initialDates)
 
     //   const value = useMemo(() => ({ stats, setStats }), [stats]);

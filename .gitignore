@@ -5,6 +5,7 @@ research
 __pycache__
 .pytest_cache
 cookies.txt
+curl.txt
 
 # dependencies
 /node_modules

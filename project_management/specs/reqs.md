@@ -111,11 +111,9 @@
 - R-5.11: Upon submission, the application shall display a temporary toast or visual indicator showing the API request status (e.g., Success or Failure).
 - R-5.12: The submission button shall implement a cooldown period immediately after activation to prevent duplicate or rapid submissions.
 - R-5.13: During the cooldown period, the button’s styling and interactivity shall change to indicate that submission is temporarily disabled.
-
 ### R-5.2 Visual Feedback and Real-Time Updates
 - R-5.14: The button’s default styling shall reflect the current overall plan feasibility status (e.g., green for Good, yellow/orange for Moderate, red for Poor).
 - R-5.15: The button styling shall update dynamically in real time whenever the overall plan feasibility status changes.
-
 ### R-5.3 Synchronization and Record Tracking
 - R-5.16: The connected database schema shall include a synchronization field (sync) for tracking plan submission records.
 - R-5.17: The sync field shall be initialized to False by default and updated to True only when the corresponding plan data has been successfully stored in both Notion and the database.
@@ -146,3 +144,55 @@
 ### R-7.4 Connectivity Health Check
 - R-7.40: On application launch, the system shall initiate a connectivity test targeting the Flask API, the database (Supabase), and the Notion API.
 - R-7.41: Each unreachable service shall be retried up to 3 times with a bounded backoff before being marked Failure.
+
+## R-8 Authentication
+### R-8.1 Login UI
+- R-8.10: There shall be a login button that spawns a dialog input form.
+- R-8.11: The dialog input form shall have two text input fields for email and password.
+- R-8.12: The password field shall have an "eye" toggle button that hides/shows the contents within the input field.
+- R-8.13: The dialog input form shall have a submit button that makes an authentication api call to the backend.
+- R-8.14: The dialog submission button shall be disabled after being clicked.
+- R-8.15: The dialog submission button shall be re-enabled once the api call is resolved.
+- R-8.16: The authentication api call shall spawn a loading toast while requests wait to be resolved.
+- R-8.17: The loading toast shall resolve to an error or success toast depending on authentication api call status.
+- R-8.18: If the authentication api call fails, change the label above the password input field with red text indicating the password didn't match.
+### R-8.2 Logout UI
+- R-8.20: There shall be a logout button that launches a logout authentication request when clicked.
+- R-8.21: Clicking the logout button shall launch a loading toast to reflect the logout request status.
+- R-8.22: The loading toast shall resolve to a success or fail toast depending on the logout request resolution.
+- R-8.23: The user shall have access revoked when successfully logged out
+### R-8.3 Authentication System
+- R-8.30: The authentication system shall be composed of the login modal, mode display, and logout button.
+- R-8.31: The login button shall only be displayed or visible when no user is currently logged in.
+- R-8.32: The logout button shall only be displayed or visible when a user is currently logged in.
+### R-8.4 Restricted API Routes
+- R-8.40: API routes for submitting plan data, launching health checks on connected systems, and retrieving real statistical data shall require a valid cookie to be processed.
+- R-8.41: API requests with an invalid cookie attached in the request shall be rejected.
+- R-8.42: Cookie's shall have an expiration time set upon creation.
+- R-8.43: Cookie's expiration time shall be updated to 24 hours past the most recently time of recorded activity.
+- R-8.44: A cookie is considered invalid if the current time recorded at the time of the api request exceeds the expiration time OR if the cookie has been revoked.
+### R-8.5 User & Session Storage
+- R-8.50: Users information shall be stored including their email, password hash, and creation time.
+- R-8.51: Password hashes will be stored instead of plaintext.
+- R-8.52: Authentication shall be tested by hashing the password input and comparing it with the password hash associated with the email input.
+
+## R-9 Role Based Access Control
+### R-9.1 Roles
+- R-9.10: There shall be three different roles, each with a different set of permissions: "owner", "guest", and "visitor"
+- R-9.11: The "owner" role shall have the capacity to submit plan records, retrieve real stats data, launch real tests checking if all systems are online, and populate the task table with empty tasks for easy entry
+- R-9.12: The "guest" role shall not be able to submit plan records or launch real connection tests but can access real stats data and will populate the task table with mock data 
+- R-9.13: The "visitor" role shall have access to mock plan submissions, mock connection tests, mock statistical data, and mock task data
+- R-9.14: Each application user record shall have an assigned role of either "guest" or "owner"
+- R-9.15: Unauthenticated users shall have a role of "visitor"
+### R-9.2 Mode Display
+- R-9.20: There shall be a text display that shows the current user's role.
+- R-9.21: The text display shall update whenever the role changes.
+- R-9.22: The styling of the display shall fit the overall theme of the application.
+### R-9.3 Mocks
+- R-9.30: The serving of mock vs real data shall depend on role permissions.
+- R-9.31: Fake or mock data shall be stored on the frontend for easy retrieval.
+- R-9.32: The following datasets have the potential to be served as mocks: task data, statistical data
+- R-9.33: The serving of mock vs real functions shall depend on role permissions.
+- R-9.34: Mock functions shall launch a loading toast followed by resolving to success
+- R-9.35: The message within the loading toast shall indicate function is being mocked.
+- R-9.36: The following functions have the potential to be mocked: statistical data retrieval, system health connection tests, and plan submission

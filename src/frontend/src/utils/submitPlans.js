@@ -17,6 +17,7 @@ export default async function submitPlans(tasks, filter_start_date, filter_end_d
   if (is_valid_payload) {
     const submit_response = await fetch(url, {
       method: "POST",
+      credentials: 'include',
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify(payload),
     });
@@ -24,7 +25,8 @@ export default async function submitPlans(tasks, filter_start_date, filter_end_d
     resp.details = submit_response
 
     if (!submit_response?.ok) {
-      resp.message = "Submission Failed"
+      resp.message = submit_response?.statusText
+      resp.details = submit_response
       return Promise.reject(resp)
     } else {
       resp.message = "Submission was successful"
