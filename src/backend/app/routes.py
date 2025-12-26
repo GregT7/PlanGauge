@@ -19,7 +19,6 @@ def log_origin():
     print("Headers:", request.headers)
 
 @app.get('/api/health')
-@require_session
 def determine_health():
     start_time = time.perf_counter()
     try:
