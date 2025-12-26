@@ -570,10 +570,14 @@ The good news: this is very normal at this stage. You’ve laid the foundation �
 - Generated an additional quiz which increased scope creep -- should add new quizzes to the `Security Design` backlog item
 
 #### ⏳ Pending Actions
-- 
+- Finish implementing the temporary invite link system
 
 #### 🔜 Next Steps
-- Update Notion: 
+- Create `security-setup` feature branch  
+- Move existing security commits from main into the new feature branch  
+- Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- Add `/auth/accept-invite` endpoint logic (validate → mark used → create session)  
+- Write a small script for generating invite links (24h / 7-day options)
 
 ### 🤖 ChatGPT Reflection
 
@@ -582,7 +586,6 @@ The good news: this is very normal at this stage. You’ve laid the foundation �
 
 **Answer:**  
 Yes — you addressed all previous concerns except one: *you still need to move all new security logic off the main branch.* Everything else (session TTL refresh, @require_auth decorator, SameSite guidance, cookie security flags, schema updates, and testability) has been implemented correctly.
-
 
 ### 🧾 Results
 
@@ -600,105 +603,463 @@ Yes — you addressed all previous concerns except one: *you still need to move 
 - Treat penetration testing after deployment as a separate backlog item
 
 #### 📌 Action Items
-- [ ] Create `security-setup` feature branch  
-- [ ] Move existing security commits from main into the new feature branch  
-- [ ] Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
-- [ ] Add `/auth/accept-invite` endpoint logic (validate → mark used → create session)  
-- [ ] Write a small script for generating invite links (24h / 7-day options)
+- [x] Create `security-setup` feature branch  
+- [x] Move existing security commits from main into the new feature branch  
+- [x] Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- [x] Add `/auth/invite` endpoint logic (validate → mark used → create session)  
+- [x] Write a small script for generating invite links (24h / 7-day options)
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 9 – Security Setup p2
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Saturday, November 22 (2025)
+* **Time:** 5:02 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Security Setup`
+  - `Security Design`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Created a new branch, added the invite table, the invite api route, and a token generating script
+- Want to focus more on the security design aspects prior to implementation -- don't want to be too reliant on gen ai
 
 #### 📈 Previous Progress
-- 
+- Added a new user record for guest accounts
+- Add `/auth/invite` endpoint logic (validate → mark used → create session)
+- Implement invites table (`token_hash`, `role`, `expires_at`, `used`)  
+- Write a small script for generating invite links (24h / 7-day options)
 
 #### 🧱 Problems & Blockers
-- 
+- `Security Design` is not fully designed
+- Already implemented code with gen ai without designing things first
 
 #### ⏳ Pending Actions
-- 
+- Finish diagramming logic for previous code implementations before moving on
 
 #### 🔜 Next Steps
-- 
+- Define `Security Design` backlog (subtasks, DoD, description, etc)
+- Create diagrams for authentication and cookie management:
+  - invite logic
+  - login logic
+  - logout logic
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- What do you think of designing the system logic with diagrams prior to implementation
 
-#### ❓ Question 2...
-- 
+**Answer:**  
+Designing the system logic with diagrams *before coding* is especially valuable for security-sensitive features. Diagrams force you to think about the data flow, trust boundaries, state transitions, and error cases *without* hiding behind abstractions in code. For invite systems, session lifecycles, token expiry, and potential attack vectors, diagrams make hidden assumptions explicit. They also reduce reliance on gen-AI because once the design is clear, the implementation becomes mechanical. You also gain confidence that your design is internally consistent, easier to test, and easier to reason about later — especially for pentesting, debugging, or future refactoring.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Diagrams will help reveal whether invite tokens are single-use, how expiry is enforced, and how sessions behave after acceptance  
+- Understanding the end-to-end flow (invite → accept → create session → permissions) is essential before expanding features  
+- Realized that security design should ideally be done *before* coding—reflecting on how to rebalance implementation vs. design moving forward  
+- Noticed potential areas where the invite logic, session logic, and cookie behavior may overlap or conflict, so diagrams will help clarify these boundaries  
+- Reaffirmed desire to minimize over-reliance on AI for conceptual design and instead use it only to validate or refine architecture
 
 #### 🗝️ Key Decisions
-- 
+- Decided to pause new authentication-related implementation until the Security Design diagrams are complete  
+- Invite tokens will remain single-use objects tied to a hashed value stored server-side  
+- Session creation will occur only after invite validation and state marking (`used = true`)  
+- Security Design will be split into discrete diagrams: invite flow, login, logout, cookie lifecycle, and session refresh  
+- Will not expand invite logic or add additional access levels until the design diagrams are finished
 
 #### 📌 Action Items
-- 
+- [x] Build the invite system flow diagram
+- [x] Build the login & session-creation flow diagram
+- [x] Build the logout & session-revocation flow diagram
+- [ ] Finalize a dedicated `Security Design` backlog item with subtasks, DoD, and acceptance criteria
 
 ---
 
-## 🗓️ Standup [#] – [Standup Title]
+## 🗓️ Standup 10 – Shifting Scope
 
 ### 🧾 Overview
-* **Date:** 
-* **Time:** 
-* **Attendees:** 
+* **Date:** Thursday, November 27th (2025)
+* **Time:** 2:23 PM
+* **Attendees:** Self (Solo)
 * **Discussed Backlog Items:**  
-  - 
+  - `Invitation System`
+  - `Security Setup`
+  - `Security Design`
 
 ### 📋 Contents
 
 #### ✅ Planned Agenda
-- 
+- Moved invitation related features to its own backlog item
+  - Too much work in one backlog item for `Security Setup`
+- Login features roughly work locally
+- Tech debt is starting to compile and cause problems
 
 #### 📈 Previous Progress
-- 
+- Finished 4 swimlane diagrams for sending an invite, accepting an invite, logging in, and logging out
+- Created two route decorators for requiring a session and for requiring the logged in user to be the owner
+- Tested login & logout features: was able to login as the owner and submit plan data
+- Created an .env.prod for prod so I can easily copy and paste content into render or vercels env management
+- Moved invite items to new backlog item `Invitation System`
+  - Moved invite routes to
 
 #### 🧱 Problems & Blockers
-- 
+- Spaghetti code/tech debt is making designing things hard
+- "Demo" mode is outdated -- might want to just remove it completely
+- connectionTest and retrieveStats no longer works
+- Frontend needs a rework
+- Hard coded in password and email info when conducting rough tests -- need to remove before committing anything
 
 #### ⏳ Pending Actions
-- 
+- Define `Security Design` backlog item
 
 #### 🔜 Next Steps
-- 
+- Define `Security Design` backlog item
+- Define `Invitation System` backlog item
+- Rethink "demo" mode implementation
+  - Make demo mode the default, how to manage different modes?
+- Define all the changes that need to be done for the frontend
+- Delete sensitive login info and push to github
 
-### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
+### 🤖 ChatGPT Reflection
 
 #### ❓ Question 1
-- 
+- Briefly describe how you would approach debugging a complex software system with interdependencies?
 
-#### ❓ Question 2...
-- 
+**Answer:**
+To debug a complex system, I would start by isolating components and verifying each layer independently (frontend, backend routes, database, external APIs, environment configuration). I’d use instrumented logging to trace control flow and identify failure boundaries. Next, I would attempt to reproduce the issue in the smallest environment possible, ideally with controlled mock data or demo mode. After narrowing down the source of the bug, I would perform iterative hypothesis testing—changing one thing at a time and validating assumptions. Finally, once the root cause is confirmed, I’d apply the fix, add a regression test, and refactor related areas to reduce future complexity.
 
 ### 🧾 Results
 
 #### 🧠 Discussion Notes
-- 
+- Moving invite features out of Security Setup immediately reduced mental overhead and clarified the remaining responsibilities of that backlog item.
+- “Demo mode” is causing confusion because its behavior is outdated compared to the current authentication system and invite system, making it hard to reason about request flows and CORS/preflight behavior.
+- The current codebase lacks clear modular boundaries between authentication, sessions, and invitations—this is contributing to confusion when reading or debugging route logic.
+- Tech debt accumulated from rapid experimentation is now interfering with productive development, especially in areas tied to origin checks, session handling, and multi-mode behavior.
+- The frontend needs a fundamental restructuring to align with the new API structure (session-dependent flows, invite acceptance flow, secure fetch with credentials, origin checks).
+- Need a single source of truth for environment variables—right now .env, .env.local, and .env.prod create overlapping responsibilities.
+- Hard-coded email/password used for ad-hoc tests should be removed soon to avoid accidental leakage when committing.
+- The sprint extension makes sense given upcoming relocation; it keeps context intact and avoids splitting the security flow work across two incomplete sprints.
 
 #### 🗝️ Key Decisions
-- 
+- Moved invitation related tasks + features to a separate backlog item to improve modularity and scope management
+- Deleted invite related code from `routes.py` and stored in Notion backlog item
+- Extend this sprint to December 6th which is when I leave for Texas, no reason to start an entirely new sprint now
+- Decided to refactor the backend into feature-based modules (auth/, sessions/, invites/, utils/) and will insert this work into an already existing item or into a new separate backlog item
+- Will remove or redesign “Demo Mode” so its behavior does not diverge from real authentication logic.
+- Will consolidate environment variables into a pattern: .env (local), .env.prod (production copy/paste), reducing ambiguity and simplifying deployment.
+- Delay `Invitation System` implementation, instead manually send people guest account info or create guest accounts myself
 
 #### 📌 Action Items
-- 
+- [x] Define `Security Design` backlog item
+- [x] Rethink "demo" mode implementation
+  - Make demo mode the default? how to manage different modes?
+- [x] Define some changes that need to be done for refactoring the frontend
+- [x] Delete sensitive login info and push to github
+- [x] Move backend refactoring into a new or existing backlog item
+
+---
+
+## 🗓️ Standup 11 – Creating Security Modes
+
+### 🧾 Overview
+* **Date:** Friday, November 28th (2025)
+* **Time:** 3:41 PM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Security Setup`
+  - `Security Design`
+  - `Refactoring`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Moved refactoring work for frontend and backend into a separate backlog item `Refactoring`
+- Need to update `Security Setup` to account for new modes
+- Will start removing "demo" mode and implementing the mode
+- Getting closer to re-deploying
+
+#### 📈 Previous Progress
+- Moved refactoring work into backlog item `Refactoring`
+- Figured out an approach to the different modes problem
+- Defined `Security Design` backlog item
+
+#### 🧱 Problems & Blockers
+- Not sure how much time to spend on testing -- will take a long time
+- Pull request & documentation will take some time
+- Have to introduce a new context which may make things more crowded
+
+#### ⏳ Pending Actions
+- None
+
+#### 🔜 Next Steps
+- Update `Security Setup` to account for different modes
+- Complete RBAC Matrix
+- Ensure all frontend fetches include { credentials: 'include' }.
+- Frontend refactoring
+  - Remove "demo" mode
+  - Create one top-level context/provider
+  - Build a MODE_CONFIG object like (visitor, guest, owner)
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- Do you think its fair to add the mode swap refactoring to the `Security Setup` backlog item or would this be scope creep.
+
+**Answer:**  
+It’s fair to include *mode swapping logic* in `Security Setup` **only if** the mode system directly affects security (auth, RBAC, access patterns, read/write separation).  
+But UI cleanup, context consolidation, and old “demo mode” removal belong under `Refactoring`.  
+So the correct split is:  
+- **Security Setup:** define what each mode can access, enforce access, configure routes, guard logic.  
+- **Refactoring:** reorganize contexts, remove old demo logic, reorganize providers, improve code clarity.
+
+This is *not* scope creep as long as you keep it to *security-related mode logic*, not UI restructuring.
+
+#### ❓ Question 2...
+- Am I making any incorrect assumptions?
+
+**Answer:**  
+Your assumptions are correct overall. The only thing to keep in mind:  
+- You do **not** need three totally separate subsystems. All three modes can be powered by a single `MODE_CONFIG` and your RBAC decorators.  
+- You are also not required to maintain a “demo mode” at all — visitor mode fully replaces it.  
+- You don’t need three different *contexts*. One top-level `AuthContext` (or `ModeContext`) is enough.  
+- You are correct that you should avoid letting mode logic bleed into components; centralizing it is the right assumption.  
+
+So no incorrect assumptions, just a reminder that your design can stay lean.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- Mode logic naturally intersects with security, so part of the refactor *must* be under `Security Setup`.
+- Separating “designing modes” from “implementing UI contexts” will prevent scope creep.
+- Adding a `MODE_CONFIG` object will make role-based access predictable and reduce hard-coded checks.
+- Visitor vs guest vs owner does not require three separate UI branches—just a single provider with feature flags.
+- Testing will expand because each mode will need tests for capabilities + restrictions.
+- Removing the old `DEMO_MODE` will reduce confusion and eliminate conditional backend logic.
+
+#### 🗝️ Key Decisions
+- Add **mode enforcement logic** to `Security Setup`, but keep **UI refactoring** in the separate `Refactoring` backlog item.
+- Remove the "demo" mode code now even though it should be delegated to the refactoring backlog item
+- Create a single `ModeProvider` or `AuthContext` instead of multiple mode contexts.
+- Replace the old boolean `DEMO_MODE` with a structured `currentMode` derived from session + role + invitation status.
+- Use a centralized `MODE_CONFIG` to drive read/write protection and UI availability checks.
+- The backend will decide the role; the frontend will decide the mode-based UI behavior.
+- Testing effort will be scoped *after* functionality is implemented, not during.
+
+#### 📌 Action Items
+- [x] Update `Security Setup` to account for different modes
+- [x] Complete RBAC Matrix
+- [x] Ensure all frontend fetches include { credentials: 'include' }.
+- [x] Frontend refactoring
+  - [x] Remove "demo" mode
+  - [x] Create one top-level context/provider
+  - [x] Build a MODE_CONFIG object like (visitor, guest, owner)
+
+---
+
+## 🗓️ Standup 12 – Security + Mode Refactor Momentum
+
+### 🧾 Overview
+* **Date:** Saturday, November 29th (2025)
+* **Time:** 12:13 PM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Security Setup`
+  - `Security Design`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Will continue working on login/logout functionality (adding ui components) + designing diagrams + taking some quizzes
+- Getting a lot closer to being deploy ready
+- Thinking about moving more thorough testing work into separate backlog for security -- don't want to spend too much time testing; it's annoying!
+
+#### 📈 Previous Progress
+- Found isDemo code and commented it out (haven't deleted anything yet)
+- Created a top-level context provider and implemented into code
+- Built a mode_config object for scalable/modular permission restriction
+- Ensured all fetches include { credentials: 'include' }
+- Completed RBAC Matrix
+
+#### 🧱 Problems & Blockers
+- Created new backlog items without pasting them in the `Icebox` section on Notion
+  - Don't want to impulsively create new backlog items, needlessly expanding scope
+  - Want to decide at the end of each sprint whether or not to add a new backlog item
+
+#### ⏳ Pending Actions
+- None
+
+#### 🔜 Next Steps
+- Design Session Lifecycle (State Machine) Diagram
+- Modify quizzes
+- Take quizzes
+  - devops quiz
+  - auth quiz
+- Authentication Work
+  - Create login function
+  - Create popup form when login pressed
+  - Create logout function
+  - Create login button with styling
+  - Create logout button with styling
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- Do you think penetration testing should be done before or after refactoring the frontend and backend? Also should I refactor the frontend/backend before re-deploying?
+
+**Answer:**  
+Penetration testing should be performed **after** refactoring and **after** redeploying the updated system. Testing before refactoring wastes effort because:
+
+- The attack surface changes after code structure changes  
+- Findings become outdated or invalid  
+- New security logic (RBAC, session lifecycle, CSRF/origin rules) won’t be included in the test  
+
+Correct order:
+
+1. Complete refactoring (auth, sessions, origin checks, folder structure, mode system)  
+2. Re-deploy development environment  
+3. Conduct penetration testing  
+4. Patch findings  
+5. Promote to production 
+
+And yes—**refactor before redeploying** to minimize migration cost and testing confusion.
+
+### 🧾 Results
+Design-
+#### 🧠 Discussion Notes
+- Testing should follow refactors to ensure the evaluated attack surface is accurate  
+- Diagrams will clarify threat surfaces and guide smoother implementation  
+- Security testing is large enough to justify its own backlog item  
+- Backlog item creation should be gated by sprint boundaries  
+- Login/logout UI work belongs under the `Security Setup` backlog  
+- Deploy readiness is improving
+- Session lifecycle diagram will help prevent rework when implementing session expiration logic  
+
+#### 🗝️ Key Decisions
+- Add login/logout UI subtasks back into `Security Setup`  
+- Perform refactor **before** penetration testing and redeployment   
+- Restrict new backlog additions to sprint boundaries  
+
+#### 📌 Action Items
+- [x] Add login/logout UI subtasks to `Security Setup` backlog
+- [x] Design Session Lifecycle (State Machine) Diagram
+- [x] Modify quizzes
+- [x] Take quizzes
+  - [x] devops quiz
+  - [x] auth quiz
+  - [x] web quiz
+- [ ] Authentication Work
+  - [ ] Create login function
+  - [x] Create popup form when login pressed
+  - [ ] Create logout function
+  - [ ] Create login button with styling
+  - [ ] Create logout button with styling
+
+---
+
+## 🗓️ Standup 13 – Login UI Implementation
+
+### 🧾 Overview
+* **Date:** Sunday, November 30th (2025)
+* **Time:** 10:23 AM
+* **Attendees:** Self (Solo)
+* **Discussed Backlog Items:**  
+  - `Security Setup`
+  - `Security Design`
+  - `Refactoring`
+
+### 📋 Contents
+
+#### ✅ Planned Agenda
+- Retook the quizzes and failed most of them -- need to keep learning + reviewing
+- Quickly vibe coded the login dialog component -- need to review/revise
+- Want to hopefully get login and logout functionality working today
+
+#### 📈 Previous Progress
+- Quizzes
+  - Revised quiz questions to be more up-to-date
+  - Took 3 quizzes (auth, web app, devops), passed one
+- Finished designing the session lifecycle state machine diagram
+- Add login/logout UI subtasks to `Security Setup` backlog
+
+#### 🧱 Problems & Blockers
+- Added helper functions to react components section -- not sure if this storage approach makes sense
+  - Want helper functions and react components to be completely separated
+- Quickly vibe coded PasswordField.jsx and LoginModal.jsx components -- need to review code
+- `Security Setup` needs to be updated again
+  - AuthContext is not incorporated
+  - AuthenticationSystem is not incorporated
+  - DoD is not updated
+- bug: login function attached to the DialogModal does not work
+
+#### ⏳ Pending Actions
+- [ ] Authentication Work
+  - [ ] Create login function w/ toast
+  - [ ] Create logout function w/ toast
+  - [ ] Create login button with styling
+  - [ ] Create logout button with styling
+
+#### 🔜 Next Steps
+- Update `Security Setup` again
+  - Subtasks: AuthContext
+  - Subtasks: AuthenticationSystem (responsible for displaying login and logout buttons at the right time)
+  - Make DoD reflect all subtasks
+- Consider moving javascript functions from react component folder into utils folder
+- Review vibe coded components (PasswordField.jsx + LoginModal.jsx)
+- Retake quizzes
+  - Web app security
+  - Devops
+- Authentication Work
+  - Create login function w/ toast
+  - Create logout function w/ toast
+  - Create login button with styling
+  - Create logout button with styling
+
+### 🤖 ChatGPT Reflection
+
+#### ❓ Question 1
+- What do you recommend: completely separating all javascript files from react component files or keep script files packaged together with relevant react files?
+
+**Answer:**  
+If a function is general-purpose and not tied to a specific component’s behavior → **place it in `utils/`**.  
+If the function exists *only* to support one specific component → **keep it colocated** with that component.
+
+This hybrid approach keeps components clean while avoiding fragmented logic.
+
+### 🧾 Results
+
+#### 🧠 Discussion Notes
+- You are beginning to see that the `Security Setup` backlog item needs restructuring to match your evolving design (AuthContext + AuthenticationSystem separation).  
+- Helper functions probably shouldn't live inside the components directory unless they are component-specific; general helpers should live in `utils/` to keep React tree clean.  
+- LoginModal + PasswordField “vibe coded” approach worked for unblocking progress, but both need refactoring to match project conventions (props handling, state isolation, error display).  
+- The broken login function is likely caused by the dialog not forwarding the correct callback or the fetch call not including `credentials: "include"`.  
+- Incorporating AuthContext early will simplify AuthenticationSystem state & UI visibility logic.
+
+#### 🗝️ Key Decisions
+- Move general-purpose JavaScript helper functions out of `components/` and into `utils/` to maintain separation of concerns.
+- Keep component-specific logic co-located with components to avoid fragmentation.
+- Add moving scripts into more logical/organized locations as a task to the refactoring backlog item
+- AuthenticationSystem becomes the single source of truth for “should user see login or logout UI?”.
+- Continue using vibe-coded UI for rapid prototyping but refactor before merging.
+
+#### 📌 Action Items
+- [ ] Update `Security Setup` again
+  - [ ] Subtasks: AuthContext
+  - [ ] Subtasks: AuthenticationSystem (responsible for displaying login and logout buttons at the right time)
+  - [ ] Make DoD reflect all subtasks
+- [ ] Review vibe coded components (PasswordField.jsx + LoginModal.jsx)
+- [ ] Retake quizzes
+  - [ ] Auth
+  - [ ] Deveops
+- [ ] Authentication Work
+  - [ ] Create login function w/ toast
+  - [ ] Create logout function w/ toast
+  - [ ] Create login button with styling
+  - [ ] Create logout button with styling
+- [ ] Add new items to `Refactoring` for moving around util scripts
 
 ---
 
@@ -730,11 +1091,10 @@ Yes — you addressed all previous concerns except one: *you still need to move 
 
 ### 🤖 ChatGPT Reflection (Insert questions recently asked with answers here and delete this line of text enclosed in parenthesis)
 
-#### ❓ Question 1
+#### ❓ Question 1 (OPTIONAL)
 - 
 
-#### ❓ Question 2...
-- 
+
 
 ### 🧾 Results
 

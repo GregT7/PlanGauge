@@ -8,7 +8,7 @@ export async function timedFetch(url, fetchHeaders, service_str, timeoutDuration
       method: "GET",
       signal,
       headers: fetchHeaders,
-      // mode: "cors" // optional; browser default is fine
+      credentials: "include"
     }).then((response) => {
         console.log(`${service_str}: fetch response received...`, response);
         return response;

@@ -1,23 +1,26 @@
-import importlib.metadata, time, os, requests, sys
+import importlib.metadata, time, os, requests, sys, hashlib, uuid
 from datetime import datetime, timedelta, timezone
 from flask import jsonify, request, g
 from . import app
 from .utils import *
 from .clients import get_supabase, get_notion_headers, get_notion_ids
-from .auth_utils import require_session, verify_password, set_session_cookie, clear_session_cookie, current_session_id, hash_password, SESSION_TTL_HOURS
+from .auth_utils import require_session, require_owner, verify_password, set_session_cookie, \
+clear_session_cookie, current_session_id, hash_password, SESSION_TTL_HOURS
+
 import asyncio
 
 
 @app.route('/')
+@require_session
 def index():
-    return 'Home Web Page'
+    return 'PlanGauge Flask App'
 
 @app.before_request
 def log_origin():
     print("Headers:", request.headers)
 
-# @app.route('/api/health', methods=['GET'])
 @app.get('/api/health')
+@require_session
 def determine_health():
     start_time = time.perf_counter()
     try:
@@ -30,8 +33,8 @@ def determine_health():
         return jsonify(http_response), 500
 
 
-# @app.route('/api/db/health', methods=['GET'])
 @app.get('/api/db/health')
+@require_session
 def db_health_check():
     start_time = time.perf_counter()
     try:
@@ -58,8 +61,8 @@ def db_health_check():
                                 message="Unexpected error", details=pack_exc(e))
         return jsonify(http_response), 500
             
-# @app.route('/api/notion/health', methods=['GET'])
 @app.get('/api/notion/health')
+@require_session
 def notion_health_check():
     start = time.perf_counter()
     try:
@@ -98,8 +101,8 @@ def notion_health_check():
         extra = {"version": (headers.get("Notion-Version") if "headers" in locals() else None), "checks": None}
         return jsonify(err_resp(["flask", "notion"], start, "internal_error", "Unexpected error", pack_exc(e), **extra)), 500
     
-# @app.route('/api/db/stats', methods=['GET'])
 @app.get('/api/db/stats')
+@require_session
 def calc_stats():
     start_time = time.perf_counter()
     try:
@@ -171,8 +174,8 @@ def calc_stats():
                                 details=pack_exc(e))
         return jsonify(http_response), 500
         
-# @app.route('/api/plan-submissions', methods=['POST'])
 @app.post('/api/plan-submissions')
+@require_owner
 def submit_plans():
     start_time = time.perf_counter()
     try:
@@ -371,18 +374,6 @@ def auth_login():
     ).execute()
 
     sid_rows = (sess_resp.data or [])
-
-    # Fallback: if insert didn't return data, fetch newest session for this user
-    if not sid_rows:
-        sid_resp = (
-            supabase.table("session")
-            .select("id")
-            .eq("user_id", user["id"])
-            .order("created_at", desc=True)  # requires a created_at column
-            .limit(1)
-            .execute()
-        )
-        sid_rows = sid_resp.data or []
 
     if not sid_rows:
         return jsonify({"error": "failed to create session"}), 500
