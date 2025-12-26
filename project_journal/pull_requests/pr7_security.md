@@ -133,13 +133,75 @@ _Description:_ Shows the mock plan submission, stat retrieval, and connection te
 ---
 
 ## 👀 ChatGPT Review
-I'd appreciate feedback on:
 
-- 🧪 Test coverage
-- 🧱 Component or logic design
-- ⏱️ Pacing of work
-- 🚧 Scope creep analysis
-- 🧠 Overall quality — score 1–10 with reasoning
+### 🧪 Test coverage
+Current coverage is primarily manual smoke testing with screenshots, which is acceptable for an early security iteration but risky given the critical nature of authentication, sessions, and RBAC logic.
+
+**Recommended next steps (minimal but high-value):**
+
+**Backend (pytest)**
+- Test `/auth/login`
+  - Valid owner credentials → 200, secure cookie set, session row created
+  - Invalid email or password → 401, no cookie, no session row
+- Test `/auth/logout`
+  - Valid session → session marked revoked, cookie cleared
+  - Revoked or expired session → idempotent response (consistent 200/401)
+- Test session enforcement decorators
+  - Protected route with no cookie → 401
+  - Protected route with expired cookie → 401
+  - Owner-only route accessed by guest → 403
+- Test Origin validation on state-changing routes
+
+**Frontend (Vitest + React Testing Library)**
+- `AuthContext` initializes by calling `/auth/me` and sets mode correctly (visitor, guest, owner)
+- `AuthorizationSystem` renders correct controls per mode
+- Login submit is disabled while a request is in flight to prevent multi-submit issues
+
+**E2E (Playwright – single happy path)**
+- Login as guest → UI shows “User: Guest”
+- Refresh → session persists
+- Logout → mode returns to visitor
+
+### 🧱 Component / logic design
+**Strengths**
+- Centralized `MODE_CONFIG` cleanly defines capability differences between visitor, guest, and owner
+- Clear separation between real and mock processes protects external systems and simplifies RBAC logic
+- `AuthContext` and `AppProviders` provide a solid foundation for predictable global state
+
+**Areas to tighten**
+- Ensure all role-dependent logic is gated behind an `authLoaded` flag to avoid double-firing real and mock flows
+- Enforce a single role-resolution utility everywhere role is consumed to prevent capability drift
+- Add UI concurrency guards (disable buttons and forms during requests)
+- Origin checks are a lightweight CSRF defense and may need strengthening as the system grows
+
+### ⏱️ Pacing of work
+The pacing is fast and effective for a security-focused sprint. Backend schema changes, session lifecycle management, frontend UX, RBAC enforcement, and documentation were all delivered together. The trade-off is increased regression risk without automated tests, but the velocity itself is appropriate.
+
+### 🚧 Scope creep analysis
+**Clearly in scope**
+- Authentication and session lifecycle
+- RBAC enforcement
+- Frontend mode refactor to support role-based behavior
+- Supporting diagrams tied directly to implemented flows
+
+**Scope creep observed**
+- Docker and deployment preparation bundled into the same PR
+- Invite system diagrams without full implementation
+
+This creep is reasonable but increases review surface area. Future PRs would benefit from tighter separation (auth/RBAC vs deployment vs future features).
+
+### 🧠 Overall quality — **7.5 / 10**
+**Why this scores well**
+- Strong system-level thinking around RBAC, sessions, and mock vs real execution paths
+- Clear documentation and visual artifacts
+- Modular, scalable design choices
+
+**What keeps it below 9–10**
+- High-risk security logic lacks automated test coverage
+- Broad PR scope
+- Known edge cases (auth initialization ordering, request concurrency) need guardrails
+
+Adding a small, focused test suite would quickly elevate this to a **9/10**.
 
 ---
 
@@ -148,3 +210,78 @@ I'd appreciate feedback on:
 - **Feature branch**: `security`
 
 This merge accounts for two backlog items: `Security Design`, `Security Setup`
+---
+# 📋 ChatGPT PR Review – Security, Authentication & RBAC
+
+This PR represents a major step forward in PlanGauge’s security and access-control maturity. The end-to-end authentication flow, session lifecycle management, and role-based access controls are thoughtfully designed and coherently integrated across the backend and frontend. The introduction of secure sessions, conditional system behavior, and mock-vs-real execution paths demonstrates strong system-level thinking and an awareness of real-world deployment constraints. Clear diagrams, structured documentation, and a well-organized PR narrative make the implementation easy to reason about despite its scope.
+
+## 👀 ChatGPT Review
+
+### 🧪 Test coverage
+Current coverage is primarily manual smoke testing with screenshots, which is acceptable for an early security iteration but risky given the critical nature of authentication, sessions, and RBAC logic.
+
+**Recommended next steps (minimal but high-value):**
+
+**Backend (pytest)**
+- Test `/auth/login`
+  - Valid owner credentials → 200, secure cookie set, session row created
+  - Invalid email or password → 401, no cookie, no session row
+- Test `/auth/logout`
+  - Valid session → session marked revoked, cookie cleared
+  - Revoked or expired session → idempotent response (consistent 200/401)
+- Test session enforcement decorators
+  - Protected route with no cookie → 401
+  - Protected route with expired cookie → 401
+  - Owner-only route accessed by guest → 403
+- Test Origin validation on state-changing routes
+
+**Frontend (Vitest + React Testing Library)**
+- `AuthContext` initializes by calling `/auth/me` and sets mode correctly (visitor, guest, owner)
+- `AuthorizationSystem` renders correct controls per mode
+- Login submit is disabled while a request is in flight to prevent multi-submit issues
+
+**E2E (Playwright – single happy path)**
+- Login as guest → UI shows “User: Guest”
+- Refresh → session persists
+- Logout → mode returns to visitor
+
+### 🧱 Component / logic design
+**Strengths**
+- Centralized `MODE_CONFIG` cleanly defines capability differences between visitor, guest, and owner
+- Clear separation between real and mock processes protects external systems and simplifies RBAC logic
+- `AuthContext` and `AppProviders` provide a solid foundation for predictable global state
+
+**Areas to tighten**
+- Ensure all role-dependent logic is gated behind an `authLoaded` flag to avoid double-firing real and mock flows
+- Enforce a single role-resolution utility everywhere role is consumed to prevent capability drift
+- Add UI concurrency guards (disable buttons and forms during requests)
+- Origin checks are a lightweight CSRF defense and may need strengthening as the system grows
+
+### ⏱️ Pacing of work
+The pacing is fast and effective for a security-focused sprint. Backend schema changes, session lifecycle management, frontend UX, RBAC enforcement, and documentation were all delivered together. The trade-off is increased regression risk without automated tests, but the velocity itself is appropriate.
+
+### 🚧 Scope creep analysis
+**Clearly in scope**
+- Authentication and session lifecycle
+- RBAC enforcement
+- Frontend mode refactor to support role-based behavior
+- Supporting diagrams tied directly to implemented flows
+
+**Scope creep observed**
+- Docker and deployment preparation bundled into the same PR
+- Invite system diagrams without full implementation
+
+This creep is reasonable but increases review surface area. Future PRs would benefit from tighter separation (auth/RBAC vs deployment vs future features).
+
+### 🧠 Overall quality — **7.5 / 10**
+**Why this scores well**
+- Strong system-level thinking around RBAC, sessions, and mock vs real execution paths
+- Clear documentation and visual artifacts
+- Modular, scalable design choices
+
+**What keeps it below 9–10**
+- High-risk security logic lacks automated test coverage
+- Broad PR scope
+- Known edge cases (auth initialization ordering, request concurrency) need guardrails
+
+Adding a small, focused test suite would quickly elevate this to a **9/10**.

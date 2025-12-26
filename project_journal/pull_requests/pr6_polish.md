@@ -110,8 +110,6 @@ This merges the completed end-to-end testing framework, demo mode, and updated d
 
 E2E coverage and demo mode setup represent a strong progression in PlanGauge’s testing maturity. The PR demonstrates a working orchestration flow between Vite preview, Flask test server, and Playwright specs — a meaningful milestone that validates your full-stack interactions visually and logically. The demo mode integration is lightweight and safe for presentation use. Excellent clarity in the PR description and supporting GIFs.
 
----
-
 ## 🧪 Test Coverage
 
 **What’s good**
